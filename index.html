@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARTHA Craft — The Deliberate Alternative to Vibe Coding</title>
+<meta name="description" content="ARTHA Craft is a structured approach to building software with AI coding agents — where every session starts from a known state, every decision is documented before it is executed, and nothing is ever left to the agent's interpretation.">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+
+/* ───────────────────────────── HERO ───────────────────────────── */
+.hero{padding:160px 0 110px;position:relative;overflow:hidden;}
+.hero::before{content:"";position:absolute;inset:0;background:
+  radial-gradient(ellipse at 20% 0%,rgba(139,26,26,0.10) 0%,transparent 50%),
+  radial-gradient(ellipse at 80% 100%,rgba(184,145,42,0.03) 0%,transparent 45%);
+  pointer-events:none;}
+.hero::after{content:"ARTHA";position:absolute;right:-30px;top:50%;transform:translateY(-55%);font-family:var(--display);font-size:260px;font-weight:700;color:rgba(255,255,255,0.015);pointer-events:none;letter-spacing:-8px;user-select:none;}
+.hero-inner{max-width:1200px;margin:0 auto;padding:0 52px;position:relative;z-index:1;}
+
+.hero-badge{display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(212,71,44,0.2);border-radius:100px;padding:6px 18px 6px 10px;margin-bottom:36px;background:rgba(212,71,44,0.05);}
+.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--red-light);animation:pulse-dot 2s infinite;}
+@keyframes pulse-dot{0%,100%{opacity:1;}50%{opacity:0.3;}}
+.hero-badge-text{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--red-light);}
+
+.hero-headline{font-family:var(--display);font-size:74px;font-weight:600;line-height:1.02;color:var(--white);margin-bottom:36px;letter-spacing:-2px;max-width:800px;}
+.hero-headline .line{display:block;overflow:hidden;}
+.hero-headline .line-inner{display:block;transform:translateY(100%);animation:slide-up 0.8s cubic-bezier(0.16,1,0.3,1) forwards;}
+.hero-headline .line:nth-child(2) .line-inner{animation-delay:0.1s;}
+@keyframes slide-up{to{transform:translateY(0);}}
+.hero-headline em{color:var(--red-light);font-style:italic;font-weight:400;}
+
+.hero-body{font-size:18px;line-height:1.9;color:var(--mist);margin-bottom:40px;max-width:660px;font-weight:300;opacity:0;animation:fade-in 0.8s 0.35s ease forwards;}
+@keyframes fade-in{to{opacity:1;}}
+
+.hero-principle{font-family:var(--display);font-size:21px;font-style:italic;font-weight:400;color:var(--fog);max-width:620px;line-height:1.45;padding-top:32px;border-top:1px solid var(--dv);margin-bottom:40px;opacity:0;animation:fade-in 0.8s 0.5s ease forwards;letter-spacing:-0.2px;}
+
+.hero-btns{display:flex;gap:16px;opacity:0;animation:fade-in 0.8s 0.6s ease forwards;}
+.btn{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:14px 32px;border-radius:3px;transition:all 0.25s;display:inline-flex;align-items:center;gap:8px;}
+.btn-red{background:var(--red);color:var(--white);box-shadow:0 4px 24px rgba(139,26,26,0.3);}
+.btn-red:hover{background:var(--red-warm);transform:translateY(-1px);box-shadow:0 8px 32px rgba(139,26,26,0.4);}
+.btn-ghost{border:1px solid rgba(255,255,255,0.12);color:rgba(245,240,232,0.5);}
+.btn-ghost:hover{border-color:rgba(255,255,255,0.3);color:var(--paper);background:rgba(255,255,255,0.03);}
+
+/* ───────────────────────────── THE PROBLEM ─────────────────────── */
+.problem{padding:100px 0;border-top:1px solid var(--dv);}
+.problem-inner{max-width:1200px;margin:0 auto;padding:0 52px;display:grid;grid-template-columns:280px 1fr;gap:60px;align-items:start;}
+.section-label{font-family:var(--mono);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--ash);padding-top:8px;}
+.problem-body{}
+.problem-body h2{font-family:var(--display);font-size:42px;font-weight:500;color:var(--paper);line-height:1.12;margin-bottom:28px;letter-spacing:-0.5px;}
+.problem-body p{font-size:17px;line-height:1.9;color:var(--mist);margin-bottom:20px;font-weight:300;max-width:700px;}
+.problem-body p strong{color:var(--paper);font-weight:400;}
+
+.failure-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--dv);border:1px solid var(--dv);margin-top:40px;}
+.failure-card{background:var(--void);padding:28px 24px;transition:background 0.3s;}
+.failure-card:hover{background:rgba(255,255,255,0.015);}
+.failure-icon{font-family:var(--display);font-size:48px;font-weight:600;color:rgba(255,255,255,0.04);line-height:1;margin-bottom:12px;}
+.failure-heading{font-family:var(--heading);font-size:16px;color:var(--fog);margin-bottom:8px;line-height:1.3;}
+.failure-text{font-size:13px;color:var(--ash);line-height:1.65;}
+
+/* ───────────────────────────── THE FRAMEWORK ──────────────────── */
+.framework{padding:100px 0;background:var(--ink);border-top:1px solid var(--dv);border-bottom:1px solid var(--dv);}
+.framework-inner{max-width:1200px;margin:0 auto;padding:0 52px;}
+.framework-header{display:grid;grid-template-columns:280px 1fr;gap:60px;margin-bottom:56px;padding-bottom:28px;border-bottom:1px solid var(--dv);}
+.framework-header-body h2{font-family:var(--display);font-size:42px;font-weight:500;color:var(--paper);line-height:1.12;margin-bottom:12px;letter-spacing:-0.5px;}
+.framework-header-body p{font-size:15px;color:var(--ash);line-height:1.7;font-weight:300;max-width:560px;}
+
+.layers{display:flex;flex-direction:column;gap:0;}
+.layer{display:grid;grid-template-columns:80px 1fr;gap:0;border-bottom:1px solid var(--dv);transition:background 0.25s;}
+.layer:last-child{border-bottom:none;}
+.layer:hover{background:rgba(255,255,255,0.015);}
+.layer-left{display:flex;flex-direction:column;align-items:center;padding:28px 0;position:relative;}
+.layer-num{font-family:var(--display);font-size:32px;font-weight:300;color:var(--red-light);line-height:1;margin-bottom:12px;}
+.layer-line{width:1px;flex:1;background:var(--dv);}
+.layer:last-child .layer-line{display:none;}
+.layer-dot{width:8px;height:8px;border-radius:50%;border:2px solid var(--red);background:var(--ink);position:absolute;top:36px;left:50%;transform:translateX(-50%);z-index:1;}
+.layer-right{padding:28px 32px;}
+.layer-name{font-family:var(--heading);font-size:19px;color:var(--paper);margin-bottom:6px;line-height:1.3;}
+.layer-desc{font-size:14px;color:var(--ash);line-height:1.75;font-weight:300;max-width:600px;}
+
+/* ───────────────────────────── 12-PART SERIES ─────────────────── */
+.series{padding:100px 0;border-bottom:1px solid var(--dv);}
+.series-inner{max-width:1200px;margin:0 auto;padding:0 52px;}
+.series-header{display:grid;grid-template-columns:280px 1fr;gap:60px;margin-bottom:48px;padding-bottom:28px;border-bottom:1px solid var(--dv);}
+.series-header-body h2{font-family:var(--display);font-size:42px;font-weight:500;color:var(--paper);line-height:1.12;margin-bottom:12px;letter-spacing:-0.5px;}
+.series-header-body p{font-size:15px;color:var(--ash);line-height:1.7;font-weight:300;max-width:560px;}
+
+.series-act-label{padding:20px 0 10px;font-family:var(--mono);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.18);}
+
+.s-row{display:grid;grid-template-columns:56px 1fr auto;align-items:center;border-bottom:1px solid var(--dv);transition:background 0.2s;padding:0;}
+.s-row:hover{background:rgba(255,255,255,0.02);}
+.s-row-num{font-family:var(--display);font-size:18px;font-weight:300;color:rgba(255,255,255,0.12);text-align:center;padding:18px 0;transition:color 0.2s;}
+.s-row:hover .s-row-num{color:var(--red-light);}
+.s-row-body{padding:18px 20px;border-left:1px solid var(--dv);}
+.s-row-title{font-family:var(--heading);font-size:16px;color:var(--fog);line-height:1.35;transition:color 0.2s;}
+.s-row:hover .s-row-title{color:var(--paper);}
+.s-row-status{padding:18px 20px;border-left:1px solid var(--dv);}
+.s-badge{font-family:var(--mono);font-size:8px;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:1px;white-space:nowrap;}
+.s-badge-live{color:#70b880;border:1px solid rgba(80,170,100,0.3);background:rgba(80,170,100,0.06);}
+.s-badge-soon{color:var(--ash);border:1px solid var(--dv);background:transparent;}
+
+.s-row.locked{opacity:0.45;pointer-events:none;}
+.s-row.locked .s-row-title{color:var(--ash);}
+
+.series-cta{margin-top:36px;display:flex;align-items:center;gap:20px;}
+.series-cta p{font-size:14px;color:var(--ash);font-weight:300;}
+
+/* ───────────────────────────── WHO IT'S FOR ────────────────────── */
+.audience{padding:80px 0;background:var(--ink);border-bottom:1px solid var(--dv);}
+.audience-inner{max-width:1200px;margin:0 auto;padding:0 52px;}
+.audience-header{display:grid;grid-template-columns:280px 1fr;gap:60px;margin-bottom:40px;padding-bottom:24px;border-bottom:1px solid var(--dv);}
+.audience-header-body h2{font-family:var(--display);font-size:38px;font-weight:500;color:var(--paper);letter-spacing:-0.3px;}
+
+.audience-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--dv);border:1px solid var(--dv);}
+.aud-card{background:var(--ink);padding:32px 24px;transition:background 0.3s;}
+.aud-card:hover{background:rgba(255,255,255,0.02);}
+.aud-icon{font-family:var(--display);font-size:36px;font-weight:600;color:rgba(255,255,255,0.04);line-height:1;margin-bottom:14px;}
+.aud-title{font-family:var(--heading);font-size:16px;color:var(--fog);margin-bottom:6px;}
+.aud-desc{font-size:12px;color:var(--ash);line-height:1.6;}
+
+/* ───────────────────────────── THE AUTHOR ──────────────────────── */
+.author{padding:100px 0;border-bottom:1px solid var(--dv);}
+.author-inner{max-width:1200px;margin:0 auto;padding:0 52px;display:grid;grid-template-columns:280px 1fr;gap:60px;align-items:start;}
+.author-body{}
+.author-body h2{font-family:var(--display);font-size:42px;font-weight:500;color:var(--paper);line-height:1.12;margin-bottom:24px;letter-spacing:-0.5px;}
+.author-name-block{margin-bottom:20px;}
+.author-full-name{font-family:var(--display);font-size:28px;font-weight:500;color:var(--paper);margin-bottom:4px;}
+.author-title{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mist);margin-bottom:2px;}
+.author-org{font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--ash);}
+.author-bio{font-size:16px;line-height:1.85;color:var(--mist);margin-bottom:16px;font-weight:300;max-width:640px;}
+.author-links{display:flex;gap:20px;margin-top:24px;}
+.author-link{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--red-light);transition:opacity 0.2s;}
+.author-link:hover{opacity:0.7;}
+
+/* ───────────────────────────── SUBSCRIBE CTA ──────────────────── */
+.subscribe{padding:100px 0;background:var(--ink);border-bottom:1px solid var(--dv);position:relative;overflow:hidden;}
+.subscribe::before{content:"\201C";position:absolute;left:50%;top:-20px;transform:translateX(-50%);font-family:var(--display);font-size:360px;font-weight:700;color:rgba(139,26,26,0.04);pointer-events:none;line-height:1;}
+.subscribe-inner{max-width:720px;margin:0 auto;padding:0 52px;text-align:center;position:relative;z-index:1;}
+.subscribe-kicker{font-family:var(--mono);font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--red-light);margin-bottom:24px;}
+.subscribe-headline{font-family:var(--display);font-size:44px;font-weight:500;color:var(--paper);line-height:1.15;margin-bottom:20px;letter-spacing:-0.5px;}
+.subscribe-body{font-size:16px;color:var(--ash);line-height:1.8;margin-bottom:12px;font-weight:300;}
+.subscribe-tagline{font-family:var(--display);font-size:20px;font-style:italic;font-weight:400;color:var(--fog);margin-bottom:36px;}
+.subscribe-btns{display:flex;gap:16px;justify-content:center;}
+
+/* ───────────────────────────── FOOTER ─────────────────────────── */
+.site-footer{background:var(--void);border-top:1px solid var(--dv);padding:48px 0 36px;}
+.site-footer-inner{max-width:1200px;margin:0 auto;padding:0 52px;}
+.site-footer-top{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:32px;border-bottom:1px solid var(--dv);margin-bottom:28px;}
+.footer-brand{font-family:var(--display);font-size:24px;font-weight:500;color:var(--paper);}
+.footer-brand em{color:var(--red-light);font-style:italic;}
+.footer-tagline{font-size:12px;color:var(--ash);margin-top:4px;font-weight:300;}
+.footer-links{display:flex;gap:24px;align-items:center;padding-top:6px;}
+.footer-link{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--ash);transition:color 0.2s;position:relative;}
+.footer-link:hover{color:var(--paper);}
+.footer-link:not(:last-child)::after{content:"";position:absolute;right:-12px;top:50%;transform:translateY(-50%);width:1px;height:14px;background:var(--dv);}
+.site-footer-bottom{display:flex;justify-content:space-between;align-items:center;}
+.footer-copy{font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--coal);}
+
+/* ───────────────────────────── RESPONSIVE ─────────────────────── */
+@media(max-width:1024px){
+  .audience-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:900px){
+  .hero{padding:120px 0 80px;}
+  .hero-headline{font-size:48px;}
+  .problem-inner,.framework-header,.series-header,.audience-header,.author-inner{grid-template-columns:1fr;gap:16px;}
+  .section-label{padding-top:0;margin-bottom:8px;}
+  .failure-grid{grid-template-columns:1fr;}
+  .audience-grid{grid-template-columns:1fr;}
+  .s-row{grid-template-columns:44px 1fr auto;}
+  .site-footer-top{flex-direction:column;gap:20px;}
+}
+@media(max-width:600px){
+  .hero-inner,.problem-inner,.framework-inner,.series-inner,.audience-inner,.author-inner,.subscribe-inner,.site-footer-inner{padding:0 24px;}
+  .hero-headline{font-size:38px;}
+  .hero-principle{font-size:18px;}
+  .subscribe-headline{font-size:32px;}
+  .subscribe-btns{flex-direction:column;align-items:center;}
+  .hero-btns{flex-direction:column;}
+  .s-row{grid-template-columns:36px 1fr;}
+  .s-row-status{display:none;}
+  .framework-header{grid-template-columns:1fr;}
+  .series-header{grid-template-columns:1fr;}
+  .audience-header{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- ── Nav ── -->
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-logo"><em>ARTHA</em> Craft</a>
+  <div class="nav-links">
+    <a href="index.html" class="active">Home</a>
+    <a href="articles.html">Series</a>
+    <a href="about.html">About</a>
+    <a href="https://substack.com/@jitanderchauhan" target="_blank" class="nav-follow">Subscribe</a>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════════════════════════════ -->
+<!-- HERO                                                            -->
+<!-- ════════════════════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      <span class="hero-badge-text">A Methodology &middot; 12-Part Series</span>
+    </div>
+    <h1 class="hero-headline">
+      <span class="line"><span class="line-inner">Stop Vibe Coding.</span></span>
+      <span class="line"><span class="line-inner">Start Building <em>Deliberately.</em></span></span>
+    </h1>
+    <p class="hero-body">Most developers using AI agents experience extraordinary speed in week one and compounding chaos by week six. Decisions lost when sessions close. Features rebuilt because agents have no memory of what was already decided. ARTHA Craft is the structural solution &mdash; built from 25 years of architecture and SDLC experience across multiple real projects.</p>
+    <p class="hero-principle">The human holds the decisions. The agent holds the keyboard. Nothing falls through the cracks between them.</p>
+    <div class="hero-btns">
+      <a href="#series" class="btn btn-red">Read the Series &rarr;</a>
+      <a href="https://substack.com/@jitanderchauhan" target="_blank" class="btn btn-ghost">Subscribe on Substack</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════ -->
+<!-- THE PROBLEM                                                     -->
+<!-- ════════════════════════════════════════════════════════════════ -->
+<section class="problem">
+  <div class="problem-inner">
+    <p class="section-label">The Problem</p>
+    <div class="problem-body reveal">
+      <h2>Week one: extraordinary speed.<br>Week six: compounding chaos.</h2>
+      <p>Every team using AI coding agents experiences the same arc. The first week feels like a superpower. By week six, the codebase is full of decisions nobody remembers making, features rebuilt because the agent had no memory of what was already decided, and standups consumed by reconstruction instead of progress.</p>
+      <p><strong>This is not a prompting problem. It is a structural one.</strong></p>
+      <div class="failure-grid">
+        <div class="failure-card">
+          <span class="failure-icon">01</span>
+          <h3 class="failure-heading">Lost decisions</h3>
+          <p class="failure-text">Every decision made inside a chat session vanishes when that session closes. No trace. No record. No way to recover it.</p>
+        </div>
+        <div class="failure-card">
+          <span class="failure-icon">02</span>
+          <h3 class="failure-heading">Rebuilt features</h3>
+          <p class="failure-text">Agents have no memory of what was already decided. Features get rebuilt, patterns get contradicted, architecture drifts silently.</p>
+        </div>
+        <div class="failure-card">
+          <span class="failure-icon">03</span>
+          <h3 class="failure-heading">Reconstruction standups</h3>
+          <p class="failure-text">Every standup becomes an archaeology exercise. Teams spend more time reconstructing context than building forward.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════ -->
+<!-- THE FRAMEWORK — FIVE LAYERS                                     -->
+<!-- ════════════════════════════════════════════════════════════════ -->
+<section class="framework">
+  <div class="framework-inner">
+    <div class="framework-header">
+      <p class="section-label">The Framework</p>
+      <div class="framework-header-body">
+        <h2>Five layers. Zero gaps.</h2>
+        <p>A structured approach where every session starts from a known state, every decision is documented before it is executed, and nothing is ever left to the agent's interpretation.</p>
+      </div>
+    </div>
+    <div class="layers">
+      <div class="layer reveal">
+        <div class="layer-left">
+          <span class="layer-num">01</span>
+          <div class="layer-line"></div>
+        </div>
+        <div class="layer-right">
+          <h3 class="layer-name">Context Seed</h3>
+          <p class="layer-desc">The document that gives every agent session a known starting state. No cold starts. No guessing. The agent knows what has been built, what has been decided, and what it is not allowed to touch.</p>
+        </div>
+      </div>
+      <div class="layer reveal" style="transition-delay:0.06s">
+        <div class="layer-left">
+          <span class="layer-num">02</span>
+          <div class="layer-line"></div>
+        </div>
+        <div class="layer-right">
+          <h3 class="layer-name">Step Sequence</h3>
+          <p class="layer-desc">Every decision documented before execution begins. The full trace from requirement to implementation &mdash; so any decision can be walked back to its origin.</p>
+        </div>
+      </div>
+      <div class="layer reveal" style="transition-delay:0.12s">
+        <div class="layer-left">
+          <span class="layer-num">03</span>
+          <div class="layer-line"></div>
+        </div>
+        <div class="layer-right">
+          <h3 class="layer-name">Task Files</h3>
+          <p class="layer-desc">A complete, locked brief before the agent writes a single line. Ten sections. No interpretation needed. The agent executes &mdash; it does not decide.</p>
+        </div>
+      </div>
+      <div class="layer reveal" style="transition-delay:0.18s">
+        <div class="layer-left">
+          <span class="layer-num">04</span>
+          <div class="layer-line"></div>
+        </div>
+        <div class="layer-right">
+          <h3 class="layer-name">Handoff</h3>
+          <p class="layer-desc">Written before every session closes. Makes the next session entirely self-contained. No reconstruction. No archaeology. No lost context.</p>
+        </div>
+      </div>
+      <div class="layer reveal" style="transition-delay:0.24s">
+        <div class="layer-left">
+          <span class="layer-num">05</span>
+        </div>
+        <div class="layer-right">
+          <h3 class="layer-name">Ten Rules</h3>
+          <p class="layer-desc">Non-negotiable governance for every agent, every session, every team. No exceptions. Each one earned from a specific failure on a real project.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════ -->
+<!-- THE 12-PART SERIES                                              -->
+<!-- ════════════════════════════════════════════════════════════════ -->
+<section class="series">
+  <div class="series-inner">
+    <div class="series-header">
+      <p class="section-label">The Series</p>
+      <div class="series-header-body">
+        <h2>12 articles. One methodology.</h2>
+        <p>From the problem through the system to the methodology. Read in order. One article unlocks per day. Subscribe on Substack to get each one in your inbox.</p>
+      </div>
+    </div>
+
+    <!--
+      ┌─────────────────────────────────────────────────────┐
+      │  HOW TO ENABLE AN ARTICLE                           │
+      │                                                     │
+      │  1. Find the article's <div> below                  │
+      │  2. Change  data-live="false"  to  data-live="true" │
+      │  3. Save and deploy. That's it.                     │
+      │                                                     │
+      │  The script at the bottom converts live articles     │
+      │  into clickable <a> links automatically.             │
+      └─────────────────────────────────────────────────────┘
+    -->
+
+    <p class="series-act-label">Act I &mdash; The Problem</p>
+    <div class="s-row locked reveal" data-href="articles/article-1.html" data-live="false">
+      <span class="s-row-num">01</span>
+      <div class="s-row-body"><p class="s-row-title">25 Years of Experience. 6 Weeks of Vibe Coding. One Expensive Lesson.</p></div>
+      <div class="s-row-status"><span class="s-badge s-badge-soon">Coming soon</span></div>
+    </div>
+    <div class="s-row locked reveal" data-href="coming-soon.html" data-live="false">
+      <span class="s-row-num">02</span>
+      <div class="s-row-body"><p class="s-row-title">Every AI Session Starts From Zero. That's Not a Bug. It's the Constraint.</p></div>
+      <div class="s-row-status"><span class="s-badge s-badge-soon">Coming soon</span></div>
+    </div>
+    <div class="s-row locked reveal" data-href="coming-soon.html" data-live="false">
+      <span class="s-row-num">03</span>
+      <div class="s-row-body"><p class="s-row-title">My AI Agent Gave Me a Sports Car With No Brakes.</p></div>
+      <div class="s-row-status"><span class="s-badge s-badge-soon">Coming soon</span></div>
+    </div>
+
+    <p class="series-act-label">Act II &mdash; The Insight</p>
+    <div class="s-row locked reveal" data-href="coming-soon.html" data-live="false">
+      <span class="s-row-num">04</span>
+      <div class="s-row-body"><p class="s-row-title">The Conversation Ends. The Document Survives.</p></div>
+      <div class="s-row-status"><span class="s-badge s-badge-soon">Coming soon</span></div>
+    </div>
+    <div class="s-row locked reveal" data-href="coming-soon.html" data-live="false">
+      <span class="s-row-num">05</span>
+      <div class="s-row-body"><p class="s-row-title">I Stopped Asking the Agent What to Build. I Started Telling It.</p></div>
+      <div class="s-row-status"><span class="s-badge s-badge-soon">Coming soon</span></div>
+    </div>
+
+    <p class="series-act-label">Act III &mdash; The System</p>
+    <div class="s-row locked reveal" data-href="coming-soon.html" data-live="false">
+      <span class="s-row-num">06</span>
+      <div class="s-row-body"><p class="s-row-title">I Replaced My Entire Chat History With 5 Documents.</p></div>
+      <div class="s-row-status"><span class="s-badge s-badge-soon">Coming soon</span></div>
+    </div>
+    <div class="s-row locked reveal" data-href="coming-soon.html" data-live="false">
+      <span class="s-row-num">07</span>
+      <div class="s-row-body"><p class="s-row-title">My AI Agent Was Guessing. This One Document Made It Surgical.</p></div>
+      <div class="s-row-status"><span class="s-badge s-badge-soon">Coming soon</span></div>
+    </div>
+    <div class="s-row locked reveal" data-href="coming-soon.html" data-live="false">
+      <span class="s-row-num">08</span>
+      <div class="s-row-body"><p class="s-row-title">A Developer Left. The Project Was Live. Nobody Knew Where We Were.</p></div>
+      <div class="s-row-status"><span class="s-badge s-badge-soon">Coming soon</span></div>
+    </div>
+
+    <p class="series-act-label">Act IV &mdash; Execution</p>
+    <div class="s-row locked reveal" data-href="coming-soon.html" data-live="false">
+      <span class="s-row-num">09</span>
+      <div class="s-row-body"><p class="s-row-title">The Three Registers That Replaced "I'll Remember That."</p></div>
+      <div class="s-row-status"><span class="s-badge s-badge-soon">Coming soon</span></div>
+    </div>
+    <div class="s-row locked reveal" data-href="coming-soon.html" data-live="false">
+      <span class="s-row-num">10</span>
+      <div class="s-row-body"><p class="s-row-title">Your AI Agent Isn't Undisciplined. You Haven't Given It Rules.</p></div>
+      <div class="s-row-status"><span class="s-badge s-badge-soon">Coming soon</span></div>
+    </div>
+
+    <p class="series-act-label">Act V &mdash; Scale &amp; Reveal</p>
+    <div class="s-row locked reveal" data-href="coming-soon.html" data-live="false">
+      <span class="s-row-num">11</span>
+      <div class="s-row-body"><p class="s-row-title">Multiple Projects. Multiple Teams. One Methodology That Finally Held.</p></div>
+      <div class="s-row-status"><span class="s-badge s-badge-soon">Coming soon</span></div>
+    </div>
+    <div class="s-row locked reveal" data-href="coming-soon.html" data-live="false">
+      <span class="s-row-num">12</span>
+      <div class="s-row-body"><p class="s-row-title">12 Articles. One Methodology. It Finally Has a Name.</p></div>
+      <div class="s-row-status"><span class="s-badge s-badge-soon">Coming soon</span></div>
+    </div>
+
+    <div class="series-cta">
+      <a href="https://substack.com/@jitanderchauhan" target="_blank" class="btn btn-red">Subscribe on Substack &rarr;</a>
+      <p>Get each article in your inbox as it unlocks.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════ -->
+<!-- WHO IT'S FOR                                                    -->
+<!-- ════════════════════════════════════════════════════════════════ -->
+<section class="audience">
+  <div class="audience-inner">
+    <div class="audience-header">
+      <p class="section-label">Who it's for</p>
+      <div class="audience-header-body">
+        <h2>Built for practitioners.</h2>
+      </div>
+    </div>
+    <div class="audience-grid">
+      <div class="aud-card reveal">
+        <span class="aud-icon">EA</span>
+        <h3 class="aud-title">Enterprise Architects</h3>
+        <p class="aud-desc">Who need AI-assisted development to produce governed, traceable, production-grade systems.</p>
+      </div>
+      <div class="aud-card reveal" style="transition-delay:0.08s">
+        <span class="aud-icon">SD</span>
+        <h3 class="aud-title">Senior Developers</h3>
+        <p class="aud-desc">Who have felt the speed and the chaos &mdash; and want a system that makes the speed sustainable.</p>
+      </div>
+      <div class="aud-card reveal" style="transition-delay:0.16s">
+        <span class="aud-icon">TL</span>
+        <h3 class="aud-title">Technical Leads</h3>
+        <p class="aud-desc">Who are responsible for team output and need repeatable process across multiple agent users.</p>
+      </div>
+      <div class="aud-card reveal" style="transition-delay:0.24s">
+        <span class="aud-icon">++</span>
+        <h3 class="aud-title">Anyone feeling the cracks</h3>
+        <p class="aud-desc">Building serious software with AI agents and starting to notice the decisions are not sticking.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════ -->
+<!-- THE AUTHOR                                                      -->
+<!-- ════════════════════════════════════════════════════════════════ -->
+<section class="author">
+  <div class="author-inner">
+    <p class="section-label">The Author</p>
+    <div class="author-body reveal">
+      <h2>Built from wreckage,<br>not theory.</h2>
+      <div class="author-name-block">
+        <p class="author-full-name">Jitander Singh Chauhan</p>
+        <p class="author-title">Lead AI &amp; Data Technologist &nbsp;|&nbsp; Enterprise Architect</p>
+        <p class="author-org">Haystream &mdash; AI Advisory &amp; Consulting</p>
+      </div>
+      <p class="author-bio">25 years building enterprise systems across financial services, energy, healthcare, insurance, education, and beverage distribution. Every article in this series is a hard lesson from a real project. Every document in the framework exists because the absence of it cost real time and real money.</p>
+      <p class="author-bio">ARTHA Craft is not a framework designed in advance. It is a methodology built from wreckage &mdash; one rule earned from each thing that broke without it.</p>
+      <div class="author-links">
+        <a href="https://www.linkedin.com/in/jitander-chauhan/" target="_blank" class="author-link">LinkedIn &rarr;</a>
+        <a href="https://substack.com/@jitanderchauhan" target="_blank" class="author-link">Substack &rarr;</a>
+        <a href="about.html" class="author-link">Full bio &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════ -->
+<!-- SUBSCRIBE CTA                                                   -->
+<!-- ════════════════════════════════════════════════════════════════ -->
+<section class="subscribe">
+  <div class="subscribe-inner reveal">
+    <p class="subscribe-kicker">ARTHA Craft &middot; The Series</p>
+    <h2 class="subscribe-headline">One article at a time.<br>Starting now.</h2>
+    <p class="subscribe-body">12 articles publishing the full framework for structured AI-assisted development. No hype. No theory. Hard lessons from real projects.</p>
+    <p class="subscribe-tagline">The deliberate alternative to vibe coding.</p>
+    <div class="subscribe-btns">
+      <a href="https://substack.com/@jitanderchauhan" target="_blank" class="btn btn-red">Subscribe on Substack &rarr;</a>
+      <a href="https://www.linkedin.com/in/jitander-chauhan/" target="_blank" class="btn btn-ghost">Connect on LinkedIn</a>
+      <a href="https://haystream.com" target="_blank" class="btn btn-ghost">Haystream.com</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════ -->
+<!-- FOOTER                                                          -->
+<!-- ════════════════════════════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="site-footer-top">
+      <div>
+        <p class="footer-brand"><em>ARTHA</em> Craft</p>
+        <p class="footer-tagline">The deliberate alternative to vibe coding.</p>
+      </div>
+      <div class="footer-links">
+        <a href="articles.html" class="footer-link">Series</a>
+        <a href="about.html" class="footer-link">About</a>
+        <a href="https://www.linkedin.com/in/jitander-chauhan/" target="_blank" class="footer-link">LinkedIn</a>
+        <a href="https://substack.com/@jitanderchauhan" target="_blank" class="footer-link">Substack</a>
+      </div>
+    </div>
+    <div class="site-footer-bottom">
+      <p class="footer-copy">&copy; 2025 Jitander Singh Chauhan. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Sticky nav
+  var n=document.getElementById('nav');
+  window.addEventListener('scroll',function(){n.classList.toggle('scrolled',window.scrollY>40);});
+
+  // Reveal on scroll
+  var rs=document.querySelectorAll('.reveal');
+  var ob=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){e.target.classList.add('in');ob.unobserve(e.target);}
+    });
+  },{threshold:0.08});
+  rs.forEach(function(r){ob.observe(r);});
+
+  // Article unlock system
+  // To enable an article: change data-live="false" to data-live="true" on its <div>
+  document.querySelectorAll('.s-row[data-live]').forEach(function(row){
+    if(row.dataset.live==='true'){
+      // Convert locked div into a clickable link
+      var a=document.createElement('a');
+      a.href=row.dataset.href;
+      a.className=row.className.replace(' locked','');
+      a.innerHTML=row.innerHTML;
+      // Swap badge to "Live"
+      var badge=a.querySelector('.s-badge');
+      if(badge){badge.className='s-badge s-badge-live';badge.textContent='Live';}
+      row.parentNode.replaceChild(a,row);
+    }
+  });
+</script>
+</body>
+</html>

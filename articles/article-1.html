@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Article 1 — 25 Years of Experience. 6 Weeks of Vibe Coding. One ... — ARTHA Craft</title>
+<meta name="description" content="Vibe coding is the most productive way to build software — right up until the moment it becomes the most expensive mistake you have ever made.">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+/* ══════════════════════════════════════════════════════════════════
+   ARTICLE 1 — 25 Years of Experience. 6 Weeks of Vibe Coding.
+   Color identity: Red (#c0392b)
+   ══════════════════════════════════════════════════════════════════ */
+
+:root{
+  --art:#c0392b;
+  --art2:#d4574a;
+  --art-glow:rgba(192,57,43,0.06);
+  --art-border:rgba(192,57,43,0.18);
+  --art-ink:#1a1916;
+  --art-text:#2c2a25;
+  --art-muted:#6a6860;
+  --art-light:#4a4840;
+}
+
+/* ── Header ── */
+.art-header{background:linear-gradient(180deg,#0c0b09 0%,#100f0d 100%)!important;}
+.art-header-bgnum{color:rgba(192,57,43,0.06)!important;}
+.art-series::before{background:var(--art)!important;}
+.art-series{color:var(--art)!important;}
+.art-header::after{background:linear-gradient(90deg,var(--art),var(--art2))!important;height:2px!important;}
+.art-title{letter-spacing:-0.5px!important;}
+.art-subtitle{color:var(--art2)!important;opacity:0.7;}
+
+/* ── Lead & sub-lead ── */
+.lead{
+  font-family:"Cormorant Garamond","Times New Roman",serif;
+  font-size:24px;line-height:1.7;color:var(--art-ink);
+  font-weight:400;margin-bottom:8px;letter-spacing:-0.2px;
+}
+.sub-lead{
+  font-size:17px;font-style:italic;color:var(--art-muted);
+  margin-bottom:32px;padding-bottom:28px;
+  border-bottom:1px solid rgba(0,0,0,0.08);font-weight:300;line-height:1.8;
+}
+
+/* ── Body typography ── */
+.art-body p{font-size:18px;line-height:1.9;color:var(--art-text);font-weight:300;margin-bottom:22px;}
+.art-body p strong{color:var(--art-ink);font-weight:500;}
+.art-body em{color:var(--art-text);}
+.art-body sup{
+  color:var(--art)!important;font-size:10px;font-weight:500;
+  background:var(--art-glow);padding:1px 5px;border-radius:8px;
+  margin-left:1px;vertical-align:super;line-height:0;
+}
+
+/* ── Section headings ── */
+.art-body h2{
+  font-family:"Cormorant Garamond","Times New Roman",serif!important;
+  font-size:30px!important;font-weight:600!important;
+  color:var(--art-ink)!important;margin:56px 0 20px!important;
+  line-height:1.2!important;letter-spacing:-0.3px;
+}
+.art-body h2::before{
+  background:var(--art)!important;width:32px!important;height:3px!important;
+  margin-bottom:16px!important;border-radius:2px;
+}
+
+/* ── Divider line ── */
+.art-body .divider-line,.art-body hr{
+  border:none!important;height:1px;
+  background:linear-gradient(90deg,var(--art-border),transparent)!important;
+  margin:48px 0!important;
+}
+
+/* ── Pullquote ── */
+.art-body .pullquote{
+  border-left:4px solid var(--art2)!important;
+  background:transparent!important;
+  padding:8px 0 8px 32px!important;
+  margin:40px 0!important;
+  font-family:"Cormorant Garamond","Times New Roman",serif;
+  font-size:25px!important;font-weight:400;font-style:italic;
+  line-height:1.4!important;color:var(--art-ink)!important;
+  letter-spacing:-0.2px;
+}
+
+/* ── Callout — dark card ── */
+body .art-body .callout{
+  background:#1a1916!important;
+  border:1px solid rgba(255,255,255,0.05)!important;
+  border-left:4px solid var(--art)!important;
+  border-radius:6px!important;
+  padding:28px 32px!important;
+  margin:36px 0!important;
+  color:rgba(245,240,232,0.7)!important;
+  font-size:16px!important;line-height:1.85!important;
+}
+body .art-body .callout strong{color:#f5f0e8!important;font-weight:500!important;}
+body .art-body .callout sup{background:transparent!important;padding:0!important;color:var(--art2)!important;}
+
+/* ── Stacked paragraphs ── */
+.art-body .stacked{
+  padding-left:20px;
+  border-left:3px solid rgba(192,57,43,0.15);
+  margin:32px 0;
+}
+.art-body .stacked p{margin-bottom:6px;}
+
+/* ── Closing box ── */
+body .art-body .closing{
+  background:#1a1916!important;border-radius:6px!important;
+  border-left:4px solid var(--art)!important;
+  padding:32px 36px!important;margin-top:56px!important;
+}
+body .art-body .closing p{color:rgba(245,240,232,0.65)!important;font-size:15px!important;line-height:1.75!important;}
+body .art-body .closing .next-up{color:var(--art)!important;margin-top:16px!important;}
+
+/* ── References ── */
+.refs-bg{background:var(--cream)!important;}
+.refs h3{color:var(--art)!important;letter-spacing:4px!important;}
+.ref-num{color:var(--art)!important;}
+.refs a{color:var(--art)!important;}
+.ref-type{background:var(--art-glow)!important;color:var(--art2)!important;border:1px solid var(--art-border)!important;}
+.ref-list li{font-size:13px;line-height:1.7;color:#4a4840;}
+
+/* ── Prev/Next nav ── */
+.art-nav-link{transition:border-color 0.25s,transform 0.25s!important;}
+.art-nav-link:hover{border-color:var(--art)!important;transform:translateY(-2px)!important;}
+.art-nav-dir{color:var(--art)!important;}
+
+/* ── Responsive ── */
+@media(max-width:700px){
+  .lead{font-size:20px!important;}
+  .art-body h2{font-size:24px!important;margin:40px 0 16px!important;}
+  .art-body .pullquote{font-size:20px!important;}
+}
+</style>
+</head>
+<body>
+<nav class="nav" id="nav">
+  <a href="../index.html" class="nav-logo"><em>ARTHA</em> Craft</a>
+  <div class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="../articles.html">Series</a>
+    <a href="../about.html">About</a>
+    <a href="https://substack.com" target="_blank" class="nav-follow">Subscribe</a>
+  </div>
+</nav>
+<div class="art-header">
+  <div class="art-header-bgnum">01</div>
+  <div class="art-header-inner">
+    <p class="art-series">Article 1 of 12 · ARTHA Craft</p>
+    <h1 class="art-title">25 Years of Experience. 6 Weeks of Vibe Coding. One Expensive Lesson No Textbook Ever Taught Me.</h1>
+    <p class="art-subtitle">Vibe coding is the most productive way to build software — right up until the moment it becomes the most expensive mistake you have ever made.</p>
+    <div class="art-meta">
+      <p class="art-meta-name">Jitander Singh Chauhan</p>
+      <div class="art-meta-sep"></div>
+      <p class="art-meta-role">Lead AI &amp; Data Technologist · Haystream</p>
+    </div>
+  </div>
+</div>
+<div class="art-body-bg">
+  <div class="art-body">
+    <p class="lead">The gap between those two moments is exactly 6 weeks.</p>
+
+    <p>I have spent 25 years in the trenches of software. Architected systems that had to survive enterprise scale. Ran Agile sprints where failure had consequences. Navigated SDLC cycles where "we'll fix it later" had a real price tag attached to it.</p>
+
+    <p>I have seen hype cycles come and go like seasons. <sup>[1]</sup></p>
+
+    <div class="stacked">
+      <p>Object-oriented was going to change everything.</p>
+      <p>Then SOA. Then microservices. Then blockchain.</p>
+      <p>Each one real. Each one overhyped. Each one eventually finding its right-sized place.</p>
+    </div>
+
+    <p>AI coding agents are different. They are not hype. They are genuinely, breathtakingly capable. I have watched them write in minutes what would have taken a senior developer a day. I have felt the acceleration. I have lived it across multiple projects.</p>
+
+    <p>And I am here to tell you — with 25 years of scar tissue behind that statement — that most people using them right now are building a time bomb.</p>
+
+    <div class="callout">
+      Not because the agents are bad.<br>
+      <strong>Because of what happens when you close the chat.</strong>
+    </div>
+
+    <h2>Picture This. And Be Honest — You've Lived Some Version of It.</h2>
+
+    <p>Week 1. You open a chat. You describe the feature. The agent builds it. It actually works. You feel like you've unlocked something.</p>
+    <p>Week 2. New session. More features. Lightning fast. You're unstoppable.</p>
+    <p>Week 3. You open a new chat. Start describing the next piece. The agent starts building. Something looks wrong.</p>
+    <p>You dig in — and there it is. The agent has re-implemented a decision you explicitly made two weeks ago. The decision you spent 45 minutes debating. The one where you chose approach A over approach B for very specific architectural reasons.</p>
+
+    <div class="pullquote">The agent built approach B. Confidently. Cleanly. Completely wrong for your system.</div>
+
+    <p>You fix it. You move on. You tell yourself it won't happen again.</p>
+
+    <h2>Week 6 Is When the Real Reckoning Arrives.</h2>
+
+    <p>You are no longer building.</p>
+
+    <div class="stacked">
+      <p>You are re-debating decisions that were already made.</p>
+      <p>You are re-building features that were already built.</p>
+      <p>You are untangling three sessions worth of contradictory assumptions baked into the same module.</p>
+    </div>
+
+    <p>Your codebase — the one that felt so alive and fast just weeks ago — has quietly become something else entirely.</p>
+
+    <div class="pullquote">A conversation log with a UI on top. Not a product. A graveyard of chat sessions dressed up as software.</div>
+
+    <h2>The Uncomfortable Truth That 25 Years of Architecture Taught Me.</h2>
+
+    <p>The most expensive thing in software is never bad code. <sup>[2]</sup> Bad code gets refactored.</p>
+
+    <div class="callout"><strong>The most expensive thing is a lost decision.</strong><br><br>
+    Decisions that aren't recorded don't disappear — they get re-made. Badly. By something that doesn't know they were already settled. And every re-make costs compounding time, compounding drift, compounding chaos.</div>
+
+    <p>Vibe coding loses every decision the moment you close the chat. That's not a prompting problem. That's not a model quality problem. That's not something that gets fixed by switching tools.</p>
+    <p>It is a structural problem — and it demands a structural solution.</p>
+
+    <h2>But What About Project Memory?</h2>
+
+    <p>I can already hear the counterargument: <em>"But the tools have project memory now. Claude remembers context. Cursor tracks your codebase. The problem is being solved."</em></p>
+    <p>And yes — project memory is a genuine step forward. I use it. I respect it.</p>
+    <p>But here's the distinction that matters:</p>
+
+    <div class="callout">
+      <strong>Memory of conversations is not the same as memory of decisions.</strong><br><br>
+      Project memory tells the agent what you talked about. It recalls facts, preferences, snippets of context.<br><br>
+      It does not know which modules are frozen and must not be touched. It does not know that you chose approach A over approach B for three specific architectural reasons documented after 45 minutes of debate. It does not know what is deliberate tech debt, what is a scope boundary, what has been approved and locked versus what is still open for discussion.
+    </div>
+
+    <p>That second kind of memory — structured architectural memory — doesn't build itself. It has to be deliberately constructed, maintained, and handed to the agent at the start of every session. Just like every other thing worth building in software.</p>
+
+    <div class="pullquote">Recall is not architecture. <sup>[3]</sup> And mistaking one for the other is exactly how month 3 becomes a crisis.</div>
+
+    <hr class="divider-line">
+
+    <p>The agents aren't failing you. Their memory structure is. And that distinction — once you see it clearly — changes everything about how you build.</p>
+    <p>There's a name for what's missing. And it's not better prompts. It's not a smarter model. It's not a new tool.</p>
+    <p><strong>It's a methodology.</strong></p>
+  </div>
+</div>
+<div class="refs-bg">
+  <div class="refs">
+    <h3>Research &amp; Further Reading</h3>
+    
+      
+      <ul class="ref-list">
+        <li id="ref-1">
+          <span class="ref-num">[1]</span>
+          <span>Harding &amp; Kloster, <a href="https://www.gitclear.com/ai_assistant_code_quality_2025_research" target="_blank">"AI Copilot Code Quality: 2025 Data Suggests 4x Growth in Code Clones"</a>, GitClear, January 2025 — Analysis of 211 million changed lines of code finding refactoring collapsed 60% while code duplication grew fourfold under AI-assisted development.</span>
+          <span class="ref-type">Industry Report</span>
+        </li>
+        <li id="ref-2">
+          <span class="ref-num">[2]</span>
+          <span>Brooks, F.P., <a href="https://www.amazon.com/Mythical-Man-Month-Software-Engineering-Anniversary/dp/0201835959" target="_blank"><em>The Mythical Man-Month: Essays on Software Engineering</em></a>, Anniversary Edition, Addison-Wesley, 1995 — "Conceptual integrity is the most important consideration in system design." Coding accounts for only one-sixth of total project effort; testing and debugging consume the rest.</span>
+          <span class="ref-type">Book</span>
+        </li>
+        <li id="ref-3">
+          <span class="ref-num">[3]</span>
+          <span>Anthropic, <a href="https://code.claude.com/docs/en/best-practices" target="_blank">"Best Practices for Claude Code"</a>, Anthropic Official Documentation, 2025 — Anthropic's own guidance recommends structured context management and warns: "Without research and planning steps, Claude tends to jump straight to coding."</span>
+          <span class="ref-type">Official Docs</span>
+        </li>
+      </ul>
+    
+  </div>
+</div>
+<div class="art-nav-bg">
+  <div class="art-nav">
+    <span></span>
+    <a href="../coming-soon.html" class="art-nav-link right"><p class="art-nav-dir">Next →</p><p class="art-nav-title">Article 2 — Coming Soon</p></a>
+  </div>
+</div>
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <p class="footer-brand">ARTHA Craft</p>
+      <p class="footer-desc">A 12-part series on structured AI-assisted development.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Series</h5>
+      <a href="../articles.html">All 12 articles</a>
+      <a href="article-1.html">Start with Article 1</a>
+    </div>
+    <div class="footer-col">
+      <h5>Author</h5>
+      <a href="../about.html">Jitander Singh Chauhan</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Jitander Singh Chauhan. All rights reserved.</p>
+    <p class="footer-tag">ARTHA Craft</p>
+  </div>
+</footer>
+<script>
+  var nav=document.getElementById('nav');
+  window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>40);});
+</script>
+</body>
+</html>

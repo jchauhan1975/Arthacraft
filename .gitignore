@@ -1,0 +1,16 @@
+# Unpublished articles (2-12) — enable one at a time
+articles/article-2.html
+articles/article-3.html
+articles/article-4.html
+articles/article-5.html
+articles/article-6.html
+articles/article-7.html
+articles/article-8.html
+articles/article-9.html
+articles/article-10.html
+articles/article-11.html
+articles/article-12.html
+
+# Print versions (not for web)
+articles/*-Print.html
+articles/LinkedIn-*.html

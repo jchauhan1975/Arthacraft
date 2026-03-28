@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Jitander Singh Chauhan — ARTHA Craft</title>
+<meta name="description" content="25 years cutting through the noise. From expensive theater to real outcomes. Lead AI & Data Technologist and Enterprise Architect at Haystream.">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+
+/* ── Header ── */
+.about-header{background:linear-gradient(180deg,#0c0b09 0%,#100f0d 100%);padding:140px 0 80px;border-bottom:1px solid var(--dv);position:relative;overflow:hidden;}
+.about-header::after{content:"";position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--red),var(--red-warm),var(--gold));}
+.about-header-inner{max-width:1200px;margin:0 auto;padding:0 52px;}
+.about-kicker{font-family:var(--mono);font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--red-light);margin-bottom:28px;display:flex;align-items:center;gap:14px;}
+.about-kicker::before{content:"";width:24px;height:1px;background:var(--red-light);}
+.about-h1{font-family:var(--display);font-size:72px;font-weight:600;line-height:1;color:var(--white);margin-bottom:16px;letter-spacing:-2px;}
+.about-title{font-family:var(--mono);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--mist);margin-bottom:8px;}
+.about-location{font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--ash);margin-bottom:32px;}
+.about-tagline{font-family:var(--display);font-size:28px;font-weight:400;font-style:italic;line-height:1.35;color:var(--fog);max-width:600px;padding-top:28px;border-top:1px solid var(--dv);letter-spacing:-0.2px;}
+
+/* ── Intro section ── */
+.intro-section{padding:80px 0;border-bottom:1px solid var(--dv);}
+.intro-inner{max-width:1200px;margin:0 auto;padding:0 52px;display:grid;grid-template-columns:200px 1fr;gap:60px;align-items:start;}
+.section-label{font-family:var(--mono);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--ash);padding-top:8px;}
+.intro-body p{font-size:17px;line-height:1.9;color:var(--mist);margin-bottom:20px;font-weight:300;max-width:700px;}
+.intro-body p strong{color:var(--paper);font-weight:400;}
+
+/* ── Three pillars ── */
+.pillars-section{padding:80px 0;background:var(--ink);border-bottom:1px solid var(--dv);}
+.pillars-inner{max-width:1200px;margin:0 auto;padding:0 52px;}
+.pillars-header{margin-bottom:48px;padding-bottom:24px;border-bottom:1px solid var(--dv);}
+.pillars-kicker{font-family:var(--mono);font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--red-light);margin-bottom:12px;display:flex;align-items:center;gap:12px;}
+.pillars-kicker::before{content:"";width:20px;height:1px;background:var(--red-light);}
+.pillars-title{font-family:var(--display);font-size:38px;font-weight:500;color:var(--paper);letter-spacing:-0.3px;}
+.pillars-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--dv);border:1px solid var(--dv);}
+.pillar{background:var(--ink);padding:36px 28px;transition:background 0.3s;}
+.pillar:hover{background:rgba(255,255,255,0.02);}
+.pillar-num{font-family:var(--display);font-size:64px;font-weight:600;color:rgba(255,255,255,0.04);line-height:1;margin-bottom:14px;}
+.pillar-heading{font-family:var(--heading);font-size:19px;color:var(--paper);line-height:1.3;margin-bottom:12px;}
+.pillar-body{font-size:14px;line-height:1.8;color:var(--ash);font-weight:300;}
+
+/* ── Haystream section ── */
+.haystream-section{padding:80px 0;border-bottom:1px solid var(--dv);}
+.haystream-inner{max-width:1200px;margin:0 auto;padding:0 52px;display:grid;grid-template-columns:200px 1fr;gap:60px;align-items:start;}
+.haystream-body h2{font-family:var(--display);font-size:42px;font-weight:500;color:var(--paper);line-height:1.15;margin-bottom:24px;letter-spacing:-0.5px;}
+.haystream-body p{font-size:17px;line-height:1.9;color:var(--mist);margin-bottom:20px;font-weight:300;max-width:700px;}
+.haystream-body a.inline-link{color:var(--red-light);border-bottom:1px dotted rgba(212,71,44,0.4);transition:border-color 0.2s;}
+.haystream-body a.inline-link:hover{border-color:var(--red-light);}
+
+/* ── Track record / stats ── */
+.stats-section{padding:80px 0;background:var(--ink);border-bottom:1px solid var(--dv);}
+.stats-inner{max-width:1200px;margin:0 auto;padding:0 52px;}
+.stats-header{margin-bottom:48px;padding-bottom:24px;border-bottom:1px solid var(--dv);}
+.stats-kicker{font-family:var(--mono);font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--red-light);margin-bottom:12px;display:flex;align-items:center;gap:12px;}
+.stats-kicker::before{content:"";width:20px;height:1px;background:var(--red-light);}
+.stats-title{font-family:var(--display);font-size:38px;font-weight:500;color:var(--paper);letter-spacing:-0.3px;}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--dv);border:1px solid var(--dv);margin-bottom:40px;}
+.stat-card{background:var(--ink);padding:36px 24px;text-align:center;transition:background 0.3s;}
+.stat-card:hover{background:rgba(255,255,255,0.02);}
+.stat-num{font-family:var(--display);font-size:52px;font-weight:300;color:var(--red-light);line-height:1;margin-bottom:10px;}
+.stat-label{font-size:13px;color:var(--ash);line-height:1.55;}
+.stat-label strong{display:block;font-size:14px;color:var(--fog);font-weight:400;margin-bottom:4px;}
+.industries-label{font-family:var(--mono);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--ash);margin-bottom:14px;}
+.industries-list{font-size:15px;color:var(--mist);line-height:1.8;font-weight:300;}
+
+/* ── Client strip ── */
+.clients-section{padding:48px 0;border-bottom:1px solid var(--dv);}
+.clients-inner{max-width:1200px;margin:0 auto;padding:0 52px;}
+.clients-label{font-family:var(--mono);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.15);margin-bottom:24px;text-align:center;}
+.clients-strip{display:flex;flex-wrap:wrap;justify-content:center;gap:0;}
+.client-name{font-family:var(--mono);font-size:11px;letter-spacing:1px;color:var(--ash);padding:10px 24px;position:relative;transition:color 0.2s;}
+.client-name:hover{color:var(--fog);}
+.client-name:not(:last-child)::after{content:"\00B7";position:absolute;right:-2px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,0.1);font-size:16px;}
+
+/* ── ARTHA Craft / Newsletter section ── */
+.newsletter-section{padding:80px 0;background:var(--ink);border-bottom:1px solid var(--dv);position:relative;overflow:hidden;}
+.newsletter-section::before{content:"\201C";position:absolute;right:80px;top:-20px;font-family:var(--display);font-size:360px;font-weight:700;color:rgba(139,26,26,0.03);line-height:1;pointer-events:none;}
+.newsletter-inner{max-width:1200px;margin:0 auto;padding:0 52px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.newsletter-left h2{font-family:var(--display);font-size:44px;font-weight:600;color:var(--paper);line-height:1.08;margin-bottom:10px;letter-spacing:-0.5px;}
+.newsletter-left h2 em{color:var(--red-light);font-style:italic;font-weight:400;}
+.newsletter-left .nl-subtitle{font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--ash);margin-bottom:24px;}
+.newsletter-left p{font-size:16px;line-height:1.85;color:var(--mist);margin-bottom:14px;font-weight:300;max-width:460px;}
+.newsletter-left .nl-tagline{font-family:var(--display);font-size:20px;font-style:italic;font-weight:400;color:var(--fog);margin:20px 0 24px;}
+.btn{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:14px 32px;border-radius:3px;transition:all 0.25s;display:inline-flex;align-items:center;gap:8px;}
+.btn-red{background:var(--red);color:var(--white);box-shadow:0 4px 24px rgba(139,26,26,0.3);}
+.btn-red:hover{background:var(--red-warm);transform:translateY(-1px);box-shadow:0 8px 32px rgba(139,26,26,0.4);}
+.newsletter-right{background:rgba(255,255,255,0.02);border:1px solid var(--dv);border-radius:4px;padding:36px 32px;position:relative;}
+.newsletter-right::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red),var(--red-warm),var(--gold));}
+.nl-series-label{font-family:var(--mono);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--red-light);margin-bottom:16px;}
+.nl-article{display:flex;gap:14px;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--dv);transition:background 0.2s;}
+.nl-article:last-child{border-bottom:none;}
+.nl-article:hover .nl-article-title{color:var(--paper);}
+.nl-article:hover .nl-article-num{color:var(--red-light);}
+.nl-article-num{font-family:var(--display);font-size:16px;font-weight:300;color:rgba(255,255,255,0.12);flex-shrink:0;width:24px;transition:color 0.2s;}
+.nl-article-title{font-size:13px;color:var(--fog);line-height:1.45;transition:color 0.2s;}
+
+/* ── Connect section ── */
+.connect-section{padding:60px 0;border-bottom:1px solid var(--dv);}
+.connect-inner{max-width:1200px;margin:0 auto;padding:0 52px;display:flex;justify-content:center;gap:32px;}
+.connect-link{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--ash);transition:color 0.2s;position:relative;padding:8px 0;}
+.connect-link:hover{color:var(--red-light);}
+.connect-link:not(:last-child)::after{content:"";position:absolute;right:-16px;top:50%;transform:translateY(-50%);width:1px;height:16px;background:var(--dv);}
+
+/* ── Reach out section ── */
+.reach-section{padding:80px 0;background:var(--ink);border-bottom:1px solid var(--dv);text-align:center;}
+.reach-inner{max-width:640px;margin:0 auto;padding:0 52px;}
+.reach-kicker{font-family:var(--mono);font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--red-light);margin-bottom:16px;}
+.reach-title{font-family:var(--display);font-size:36px;font-weight:500;color:var(--paper);margin-bottom:16px;letter-spacing:-0.3px;}
+.reach-body{font-size:16px;color:var(--ash);line-height:1.75;margin-bottom:28px;font-weight:300;}
+.reach-links{display:flex;gap:16px;justify-content:center;}
+.btn-ghost{border:1px solid rgba(255,255,255,0.12);color:rgba(245,240,232,0.5);}
+.btn-ghost:hover{border-color:rgba(255,255,255,0.3);color:var(--paper);background:rgba(255,255,255,0.03);}
+
+/* ── Footer override (match site footer) ── */
+.site-footer{background:var(--void);border-top:1px solid var(--dv);padding:48px 0 36px;}
+.site-footer-inner{max-width:1200px;margin:0 auto;padding:0 52px;}
+.site-footer-top{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:32px;border-bottom:1px solid var(--dv);margin-bottom:24px;}
+.footer-brand{font-family:var(--display);font-size:24px;font-weight:500;color:var(--paper);}
+.footer-brand em{color:var(--red-light);font-style:italic;}
+.footer-tagline{font-size:12px;color:var(--ash);margin-top:4px;font-weight:300;}
+.footer-links{display:flex;gap:24px;align-items:center;padding-top:6px;}
+.footer-link{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--ash);transition:color 0.2s;position:relative;}
+.footer-link:hover{color:var(--paper);}
+.footer-link:not(:last-child)::after{content:"";position:absolute;right:-12px;top:50%;transform:translateY(-50%);width:1px;height:14px;background:var(--dv);}
+.site-footer-bottom{display:flex;justify-content:space-between;align-items:center;}
+.footer-copy{font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--coal);}
+
+/* ── Responsive ── */
+@media(max-width:900px){
+  .about-h1{font-size:48px;}
+  .about-tagline{font-size:22px;}
+  .intro-inner,.haystream-inner{grid-template-columns:1fr;gap:20px;}
+  .pillars-grid{grid-template-columns:1fr;}
+  .stats-grid{grid-template-columns:repeat(2,1fr);}
+  .newsletter-inner{grid-template-columns:1fr;gap:48px;}
+  .site-footer-top{flex-direction:column;gap:20px;}
+}
+@media(max-width:600px){
+  .about-header-inner,.intro-inner,.pillars-inner,.haystream-inner,.stats-inner,.clients-inner,.newsletter-inner,.connect-inner,.site-footer-inner{padding:0 24px;}
+  .about-h1{font-size:38px;}
+  .stats-grid{grid-template-columns:1fr;}
+  .connect-inner{flex-direction:column;align-items:center;gap:16px;}
+  .connect-link:not(:last-child)::after{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- ── Nav ── -->
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-logo"><em>ARTHA</em> Craft</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="articles.html">Series</a>
+    <a href="about.html" class="active">About</a>
+    <a href="https://substack.com/@jitanderchauhan" target="_blank" class="nav-follow">Subscribe</a>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════════════════════════════ -->
+<!-- HEADER                                                          -->
+<!-- ════════════════════════════════════════════════════════════════ -->
+<div class="about-header">
+  <div class="about-header-inner" style="max-width:1200px;margin:0 auto;padding:0 52px;">
+    <p class="about-kicker">Haystream &mdash; AI Advisory &amp; Consulting</p>
+    <h1 class="about-h1">Jitander Singh<br>Chauhan</h1>
+    <p class="about-title">Lead AI &amp; Data Technologist &nbsp;|&nbsp; Enterprise Architect</p>
+    <p class="about-location">Prosper, TX &middot; Dallas Metro</p>
+    <p class="about-tagline">25 years cutting through the noise.<br>From expensive theater to real outcomes.</p>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════ -->
+<!-- INTRO                                                           -->
+<!-- ════════════════════════════════════════════════════════════════ -->
+<section class="intro-section reveal">
+  <div class="intro-inner">
+    <p class="section-label">About</p>
+    <div class="intro-body">
+      <p>I have spent two and a half decades solving the hardest data and technology problems for Fortune 500 and mid-tier companies &mdash; the kind of work that now sits at the heart of every serious AI initiative.</p>
+      <p>In that time I have seen digital transformation done right. And I have seen it become <strong>expensive theater</strong> &mdash; the carefully choreographed slide decks, the vendor-led roadmaps, the initiatives that consume millions and change nothing.</p>
+      <p>The difference is almost never the technology. It is the <strong>strategic rigor</strong> &mdash; or lack of it &mdash; behind every decision.</p>
+      <p>That is the gap I built my practice around.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════ -->
+<!-- THREE PILLARS                                                   -->
+<!-- ════════════════════════════════════════════════════════════════ -->
+<section class="pillars-section">
+  <div class="pillars-inner">
+    <div class="pillars-header">
+      <p class="pillars-kicker">What I do</p>
+      <h2 class="pillars-title">Three pillars.</h2>
+    </div>
+    <div class="pillars-grid">
+      <div class="pillar reveal">
+        <span class="pillar-num">01</span>
+        <h3 class="pillar-heading">AI Strategy &amp; Architecture</h3>
+        <p class="pillar-body">Defining the North Star for AI that aligns with P&amp;L goals, not technology trends. Scalable data ecosystems, cloud architectures, and AI roadmaps built for regulated industries.</p>
+      </div>
+      <div class="pillar reveal" style="transition-delay:0.1s">
+        <span class="pillar-num">02</span>
+        <h3 class="pillar-heading">Framework Development</h3>
+        <p class="pillar-body">I have developed comprehensive end-to-end AI development frameworks that reduce time-to-value and minimise architectural debt. Currently formalising these into a structured methodology &mdash; publishing soon.</p>
+      </div>
+      <div class="pillar reveal" style="transition-delay:0.2s">
+        <span class="pillar-num">03</span>
+        <h3 class="pillar-heading">Education &amp; Mentorship</h3>
+        <p class="pillar-body">I build self-sufficiency &mdash; not dependency. Through research, teaching, and hands-on engagement, I help teams and clients navigate the AI transition independently.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════ -->
+<!-- HAYSTREAM                                                       -->
+<!-- ════════════════════════════════════════════════════════════════ -->
+<section class="haystream-section reveal">
+  <div class="haystream-inner">
+    <p class="section-label">Current role</p>
+    <div class="haystream-body">
+      <h2>Haystream.</h2>
+      <p>At Haystream, I serve as Lead AI &amp; Data Technologist and Enterprise Architect &mdash; bringing institutional-grade AI and data strategy to organisations that are serious about outcomes, not optics.</p>
+      <p>Haystream is an innovative AI advisory and consulting firm helping mid-tier and global organisations cut through the AI noise to build data and AI capabilities that deliver sustainable, measurable business outcomes.</p>
+      <p>I am also developing a structured AI-Assisted Development methodology &mdash; and publishing the full framework in a 12-part series on <a href="https://substack.com/@jitanderchauhan" target="_blank" class="inline-link">ARTHA Craft</a>, my Substack newsletter.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════ -->
+<!-- TRACK RECORD                                                    -->
+<!-- ════════════════════════════════════════════════════════════════ -->
+<section class="stats-section">
+  <div class="stats-inner">
+    <div class="stats-header">
+      <p class="stats-kicker">Track record</p>
+      <h2 class="stats-title">Numbers and industries.</h2>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card reveal">
+        <span class="stat-num">25+</span>
+        <p class="stat-label"><strong>Years</strong>Across six industries at enterprise scale.</p>
+      </div>
+      <div class="stat-card reveal" style="transition-delay:0.08s">
+        <span class="stat-num">$1B+</span>
+        <p class="stat-label"><strong>Economic impact</strong>Across programmes delivered.</p>
+      </div>
+      <div class="stat-card reveal" style="transition-delay:0.16s">
+        <span class="stat-num">7,000+</span>
+        <p class="stat-label"><strong>Store network</strong>Platforms architected and deployed.</p>
+      </div>
+      <div class="stat-card reveal" style="transition-delay:0.24s">
+        <span class="stat-num">6</span>
+        <p class="stat-label"><strong>Industries served</strong>Financial Services, Energy, Healthcare, Insurance, Education, Beverage Distribution.</p>
+      </div>
+    </div>
+    <p class="industries-label">Industries</p>
+    <p class="industries-list">Financial Services &middot; Energy &middot; Healthcare &middot; Insurance &middot; Education &middot; Beverage Distribution</p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════ -->
+<!-- CLIENT STRIP                                                    -->
+<!-- ════════════════════════════════════════════════════════════════ -->
+<section class="clients-section">
+  <div class="clients-inner">
+    <p class="clients-label">Past engagements</p>
+    <div class="clients-strip reveal">
+      <span class="client-name">Citi</span>
+      <span class="client-name">Wells Fargo</span>
+      <span class="client-name">Chevron</span>
+      <span class="client-name">Baker Hughes</span>
+      <span class="client-name">Southern Glazer's</span>
+      <span class="client-name">PHLY Insurance</span>
+      <span class="client-name">Independent Health</span>
+      <span class="client-name">VisionWorks</span>
+      <span class="client-name">Educational Testing Services</span>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════ -->
+<!-- ARTHA CRAFT / NEWSLETTER                                        -->
+<!-- ════════════════════════════════════════════════════════════════ -->
+<section class="newsletter-section">
+  <div class="newsletter-inner">
+    <div class="newsletter-left reveal">
+      <h2>ARTHA<br><em>Craft</em></h2>
+      <p class="nl-subtitle">12-Part Series &middot; Substack</p>
+      <p>A 12-part series publishing the framework I developed for building software with AI agents &mdash; without the chaos, without the lost decisions, without the expensive theater.</p>
+      <p>One article at a time. Starting now.</p>
+      <p class="nl-tagline">The deliberate alternative to vibe coding.</p>
+      <div class="contact-cta" style="margin-top:8px;">
+        <a href="https://substack.com/@jitanderchauhan" target="_blank" class="btn btn-red">Subscribe on Substack &rarr;</a>
+      </div>
+    </div>
+    <div class="newsletter-right reveal" style="transition-delay:0.15s">
+      <p class="nl-series-label">The Series</p>
+      <a href="articles/article-1.html" class="nl-article">
+        <span class="nl-article-num">01</span>
+        <span class="nl-article-title">25 Years of Experience. 6 Weeks of Vibe Coding. One Expensive Lesson.</span>
+      </a>
+      <a href="coming-soon.html" class="nl-article">
+        <span class="nl-article-num">02</span>
+        <span class="nl-article-title">Every AI Session Starts From Zero. That's Not a Bug.</span>
+      </a>
+      <a href="coming-soon.html" class="nl-article">
+        <span class="nl-article-num">03</span>
+        <span class="nl-article-title">My AI Agent Gave Me a Sports Car With No Brakes.</span>
+      </a>
+      <a href="coming-soon.html" class="nl-article">
+        <span class="nl-article-num">04</span>
+        <span class="nl-article-title">The Conversation Ends. The Document Survives.</span>
+      </a>
+      <a href="coming-soon.html" class="nl-article">
+        <span class="nl-article-num">05</span>
+        <span class="nl-article-title">I Stopped Asking the Agent What to Build.</span>
+      </a>
+      <a href="articles.html" class="nl-article">
+        <span class="nl-article-num">&rarr;</span>
+        <span class="nl-article-title" style="color:var(--red-light);">View all 12 articles</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════ -->
+<!-- REACH OUT                                                       -->
+<!-- ════════════════════════════════════════════════════════════════ -->
+<section class="reach-section">
+  <div class="reach-inner">
+    <p class="reach-kicker">Get in touch</p>
+    <h2 class="reach-title">Questions? Want to connect?</h2>
+    <p class="reach-body">Reach out directly on LinkedIn or visit Haystream for advisory and consulting engagements.</p>
+    <div class="reach-links">
+      <a href="https://www.linkedin.com/in/jitander-chauhan/" target="_blank" class="btn btn-red">Connect on LinkedIn &rarr;</a>
+      <a href="https://haystream.com" target="_blank" class="btn btn-ghost">Visit Haystream.com</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════ -->
+<!-- FOOTER                                                          -->
+<!-- ════════════════════════════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="site-footer-top">
+      <div>
+        <p class="footer-brand"><em>ARTHA</em> Craft</p>
+        <p class="footer-tagline">The deliberate alternative to vibe coding.</p>
+      </div>
+      <div class="footer-links">
+        <a href="articles.html" class="footer-link">Series</a>
+        <a href="about.html" class="footer-link">About</a>
+        <a href="https://www.linkedin.com/in/jitander-chauhan/" target="_blank" class="footer-link">LinkedIn</a>
+        <a href="https://substack.com/@jitanderchauhan" target="_blank" class="footer-link">Substack</a>
+      </div>
+    </div>
+    <div class="site-footer-bottom">
+      <p class="footer-copy">&copy; 2025 Jitander Singh Chauhan. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  var n=document.getElementById('nav');
+  window.addEventListener('scroll',function(){n.classList.toggle('scrolled',window.scrollY>40);});
+  var rs=document.querySelectorAll('.reveal');
+  var ob=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');ob.unobserve(e.target);}});},{threshold:0.08});
+  rs.forEach(function(r){ob.observe(r);});
+</script>
+</body>
+</html>
