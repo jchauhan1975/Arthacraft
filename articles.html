@@ -178,5 +178,6 @@
   var ob=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');ob.unobserve(e.target);}});},{threshold:0.08});
   rs.forEach(function(r){ob.observe(r);});
 </script>
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
