@@ -84,22 +84,22 @@
 .series-header-body h2{font-family:var(--display);font-size:42px;font-weight:500;color:var(--paper);line-height:1.12;margin-bottom:12px;letter-spacing:-0.5px;}
 .series-header-body p{font-size:15px;color:var(--ash);line-height:1.7;font-weight:300;max-width:560px;}
 
-.series-act-label{padding:20px 0 10px;font-family:var(--mono);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.18);}
+.series-act-label{padding:20px 0 10px;font-family:var(--mono);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.3);}
 
 .s-row{display:grid;grid-template-columns:56px 1fr auto;align-items:center;border-bottom:1px solid var(--dv);transition:background 0.2s;padding:0;}
 .s-row:hover{background:rgba(255,255,255,0.02);}
-.s-row-num{font-family:var(--display);font-size:18px;font-weight:300;color:rgba(255,255,255,0.12);text-align:center;padding:18px 0;transition:color 0.2s;}
+.s-row-num{font-family:var(--display);font-size:18px;font-weight:300;color:rgba(255,255,255,0.3);text-align:center;padding:18px 0;transition:color 0.2s;}
 .s-row:hover .s-row-num{color:var(--red-light);}
 .s-row-body{padding:18px 20px;border-left:1px solid var(--dv);}
-.s-row-title{font-family:var(--heading);font-size:16px;color:var(--fog);line-height:1.35;transition:color 0.2s;}
-.s-row:hover .s-row-title{color:var(--paper);}
+.s-row-title{font-family:var(--heading);font-size:16px;color:var(--paper);line-height:1.35;transition:color 0.2s;}
+.s-row:hover .s-row-title{color:var(--white);}
 .s-row-status{padding:18px 20px;border-left:1px solid var(--dv);}
 .s-badge{font-family:var(--mono);font-size:8px;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:1px;white-space:nowrap;}
 .s-badge-live{color:#70b880;border:1px solid rgba(80,170,100,0.3);background:rgba(80,170,100,0.06);}
-.s-badge-soon{color:var(--ash);border:1px solid var(--dv);background:transparent;}
+.s-badge-soon{color:var(--mist);border:1px solid rgba(255,255,255,0.12);background:transparent;}
 
-.s-row.locked{opacity:0.45;pointer-events:none;}
-.s-row.locked .s-row-title{color:var(--ash);}
+.s-row.locked{opacity:0.75;pointer-events:none;}
+.s-row.locked .s-row-title{color:var(--fog);}
 
 .series-cta{margin-top:36px;display:flex;align-items:center;gap:20px;}
 .series-cta p{font-size:14px;color:var(--ash);font-weight:300;}
