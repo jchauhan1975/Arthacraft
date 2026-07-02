@@ -343,12 +343,12 @@
     -->
 
     <p class="series-act-label">Act I &mdash; The Problem</p>
-    <div class="s-row locked reveal" data-href="articles/article-1.html" data-live="false">
+    <div class="s-row locked reveal" data-href="articles/article-1.html" data-live="true">
       <span class="s-row-num">01</span>
       <div class="s-row-body"><p class="s-row-title">25 Years of Experience. 6 Weeks of Vibe Coding. One Expensive Lesson.</p></div>
       <div class="s-row-status"><span class="s-badge s-badge-soon">Coming soon</span></div>
     </div>
-    <div class="s-row locked reveal" data-href="coming-soon.html" data-live="false">
+    <div class="s-row locked reveal" data-href="articles/article-2.html" data-live="true">
       <span class="s-row-num">02</span>
       <div class="s-row-body"><p class="s-row-title">Every AI Session Starts From Zero. That's Not a Bug. It's the Constraint.</p></div>
       <div class="s-row-status"><span class="s-badge s-badge-soon">Coming soon</span></div>
@@ -524,16 +524,9 @@
   var n=document.getElementById('nav');
   window.addEventListener('scroll',function(){n.classList.toggle('scrolled',window.scrollY>40);});
 
-  // Reveal on scroll
-  var rs=document.querySelectorAll('.reveal');
-  var ob=new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){e.target.classList.add('in');ob.unobserve(e.target);}
-    });
-  },{threshold:0.08});
-  rs.forEach(function(r){ob.observe(r);});
-
-  // Article unlock system
+  // Article unlock system — must run BEFORE the reveal observer,
+  // because it replaces live rows with new <a> elements the observer
+  // would otherwise never see (leaving them stuck hidden).
   // To enable an article: change data-live="false" to data-live="true" on its <div>
   document.querySelectorAll('.s-row[data-live]').forEach(function(row){
     if(row.dataset.live==='true'){
@@ -548,6 +541,15 @@
       row.parentNode.replaceChild(a,row);
     }
   });
+
+  // Reveal on scroll
+  var rs=document.querySelectorAll('.reveal');
+  var ob=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){e.target.classList.add('in');ob.unobserve(e.target);}
+    });
+  },{threshold:0.08});
+  rs.forEach(function(r){ob.observe(r);});
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>

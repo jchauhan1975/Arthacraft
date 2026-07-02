@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Article 2 — Every AI Session Starts From Zero. That's Not a Bug.... — ARTHA Craft</title>
+<meta name="description" content="The AI agent's statelessness is not a bug. It's the most important design constraint nobody talks about.">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+/* ══════════════════════════════════════════════════════════════════
+   ARTICLE 2 — Every AI Session Starts From Zero
+   Color identity: Green (#1a6b3c)
+   Body design matches the master article file (light paper theme)
+   ══════════════════════════════════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;600&display=swap');
+
+:root{
+  --art:#1a6b3c;
+  --art2:#2ecc71;
+  --art-ink:#1a1a2e;
+  --art-muted:#6b6b7b;
+  --art-divider:#dde2ea;
+}
+
+/* ── Header ── */
+.art-header{background:linear-gradient(180deg,#0c0b09 0%,#100f0d 100%)!important;}
+.art-header-bgnum{color:rgba(26,107,60,0.08)!important;}
+.art-series::before{background:var(--art)!important;}
+.art-series{color:var(--art2)!important;}
+.art-header::after{background:linear-gradient(90deg,var(--art),var(--art2))!important;height:2px!important;}
+.art-title{letter-spacing:-0.5px!important;}
+.art-subtitle{color:var(--art2)!important;opacity:0.7;}
+
+/* ── Body canvas — light paper like the master file ── */
+.art-body-bg{background:#f5f7fa!important;}
+.art-body{max-width:860px!important;padding:56px 64px 72px!important;}
+
+/* ── Typography ── */
+.art-body p{
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:16px;line-height:1.85;color:#2c2c3e;
+  margin-bottom:16px;font-weight:400;
+}
+.art-body p strong{color:var(--art-ink);font-weight:600;}
+.art-body em{color:#2c2c3e;}
+
+.art-body .article-hook{
+  font-size:19px;font-weight:600;line-height:1.6;
+  color:var(--art-ink);margin-bottom:12px;
+}
+.art-body .article-hook-sub{
+  font-size:15px;font-style:italic;color:var(--art-muted);
+  margin-bottom:40px;padding-bottom:32px;
+  border-bottom:1px solid var(--art-divider);
+}
+
+.art-body h2{
+  font-family:'Playfair Display',Georgia,serif!important;
+  font-size:22px!important;font-weight:700!important;
+  color:var(--art-ink)!important;margin:40px 0 16px!important;
+  line-height:1.3!important;letter-spacing:0!important;
+}
+.art-body h2::before{display:none!important;}
+
+/* ── Pullquote ── */
+.art-body .pullquote{
+  border-left:4px solid var(--art2)!important;
+  background:#edfaf3!important;
+  padding:20px 28px!important;margin:32px 0!important;
+  font-family:'Source Serif 4',Georgia,serif!important;
+  font-size:18px!important;font-style:italic;
+  line-height:1.6!important;color:var(--art-ink)!important;
+}
+
+/* ── Callout — light green card ── */
+body .art-body .callout{
+  background:#eaf7ef!important;
+  border:1px solid #b8e8cc!important;
+  border-left:5px solid var(--art)!important;
+  border-radius:0!important;
+  padding:20px 24px!important;margin:32px 0!important;
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:15px!important;line-height:1.7!important;
+  color:var(--art-ink)!important;
+}
+body .art-body .callout strong{color:var(--art)!important;font-weight:600!important;}
+
+/* ── Analogy box — light card ── */
+body .art-body .analogy-box{
+  background:#faf9f5!important;
+  border:1px solid #e9e2d6!important;
+  border-left:4px solid var(--art)!important;
+  border-radius:6px!important;
+  padding:32px 36px!important;margin:32px 0!important;
+}
+body .art-body .analogy-box p{
+  color:#3f3f4d!important;
+  font-size:15px!important;line-height:1.8!important;margin-bottom:12px!important;
+}
+body .art-body .analogy-box strong{color:var(--art-ink)!important;}
+body .art-body .analogy-title{
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:10px!important;letter-spacing:3px!important;
+  text-transform:uppercase;color:var(--art)!important;
+  font-weight:600!important;margin-bottom:16px!important;display:block;
+}
+body .art-body .analogy-arrow{
+  display:flex;align-items:center;gap:12px;margin:16px 0;
+  font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--art)!important;
+}
+body .art-body .analogy-arrow span{
+  flex:1;padding:8px 12px;background:rgba(26,107,60,0.06);
+  border-radius:4px;text-align:center;font-size:11px;letter-spacing:1px;
+  color:#3f3f4d;
+}
+body .art-body .analogy-arrow .arrow{
+  font-size:18px;flex-shrink:0;background:none;padding:0;flex:0 0 auto;
+  color:var(--art);
+}
+
+/* ── Two-col — red/green tinted cards ── */
+body .art-body .two-col{
+  background:transparent!important;border:none!important;
+  padding:0!important;margin:28px 0!important;
+  display:grid!important;grid-template-columns:1fr 1fr;gap:16px;
+}
+body .art-body .col-box{
+  padding:20px;border-radius:6px;
+  font-size:14px;line-height:1.7;
+}
+body .art-body .col-box.before{
+  background:#fdf0ef!important;
+  border:1px solid #f5c6c2!important;
+  border-top:4px solid #c0392b!important;
+}
+body .art-body .col-box.after{
+  background:#eaf7ef!important;
+  border:1px solid #b8e8cc!important;
+  border-top:4px solid var(--art)!important;
+}
+body .art-body .col-label{
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:10px!important;letter-spacing:3px!important;
+  text-transform:uppercase;margin-bottom:10px!important;font-weight:600;
+  display:block;
+}
+body .art-body .col-box.before .col-label{color:#c0392b!important;}
+body .art-body .col-box.after .col-label{color:var(--art)!important;}
+body .art-body .col-box p{font-size:14px!important;line-height:1.7!important;color:#2c2c3e!important;margin-bottom:0!important;}
+
+/* ── Divider ── */
+.art-body .divider-line,.art-body hr{
+  border:none!important;height:1px;
+  background:var(--art-divider)!important;
+  margin:40px 0!important;
+}
+
+/* ── Citation superscripts ── */
+.art-body .cite{
+  display:inline;font-size:11px;vertical-align:super;line-height:0;
+  font-family:'JetBrains Mono',monospace;font-weight:700;
+}
+.art-body .cite a{
+  color:var(--art);text-decoration:none;
+  background:var(--art-divider);padding:0 3px;border-radius:2px;
+}
+.art-body .cite a:hover{opacity:0.7;}
+
+/* ── References — inside the article, master file style ── */
+.art-body .references-section{
+  margin:40px 0 0;padding:32px 0 0;
+  border-top:2px solid var(--art-divider);
+}
+.art-body .references-section h3{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--art-muted);margin-bottom:20px;
+}
+.art-body .ref-list{
+  list-style:none;padding:0;margin:0;
+  display:flex;flex-direction:column;gap:10px;
+}
+.art-body .ref-list li{
+  display:flex;gap:12px;align-items:flex-start;
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:13px;line-height:1.6;color:#444;
+}
+.art-body .ref-num{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;font-weight:700;color:var(--art);
+  flex-shrink:0;width:28px;padding-top:2px;
+}
+.art-body .ref-list a{
+  color:var(--art);text-decoration:none;
+  border-bottom:1px dotted var(--art);transition:opacity 0.15s;
+}
+.art-body .ref-list a:hover{opacity:0.7;}
+.art-body .ref-type{
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;letter-spacing:1px;text-transform:uppercase;
+  background:var(--art-divider);color:var(--art-muted);
+  padding:1px 6px;border-radius:3px;margin-left:6px;
+  flex-shrink:0;align-self:flex-start;margin-top:2px;
+}
+
+/* ── Prev/Next nav ── */
+.art-nav-link{transition:border-color 0.25s,transform 0.25s!important;}
+.art-nav-link:hover{border-color:var(--art)!important;transform:translateY(-2px)!important;}
+.art-nav-dir{color:var(--art)!important;}
+
+/* ── Responsive ── */
+@media(max-width:700px){
+  .art-body{padding:32px 24px 48px!important;}
+  .art-body .two-col{grid-template-columns:1fr!important;}
+  .art-body h2{font-size:20px!important;}
+  .art-body .analogy-arrow{flex-direction:column;}
+  .art-body .analogy-arrow span{width:100%;}
+}
+</style>
+</head>
+<body>
+<nav class="nav" id="nav">
+  <a href="../index.html" class="nav-logo"><em>ARTHA</em> Craft</a>
+  <div class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="../articles.html">Series</a>
+    <a href="../about.html">About</a>
+    <a href="https://substack.com" target="_blank" class="nav-follow">Subscribe</a>
+  </div>
+</nav>
+<div class="art-header">
+  <div class="art-header-bgnum">02</div>
+  <div class="art-header-inner">
+    <p class="art-series">Article 2 of 12 · ARTHA Craft</p>
+    <h1 class="art-title">Every AI Session Starts From Zero. That's Not a Bug. It's the Most Important Design Constraint Nobody Talks About.</h1>
+    <p class="art-subtitle">The AI agent's statelessness is not a bug. It's the most important design constraint nobody talks about.</p>
+    <div class="art-meta">
+      <p class="art-meta-name">Jitander Singh Chauhan</p>
+      <div class="art-meta-sep"></div>
+      <p class="art-meta-role">Lead AI &amp; Data Technologist · Haystream</p>
+    </div>
+  </div>
+</div>
+<div class="art-body-bg">
+  <div class="art-body">
+    <p class="article-hook">For weeks, my entire team was frustrated with our AI coding agent.</p>
+    <p class="article-hook-sub">It kept forgetting things. Important things. Architecture decisions. Module boundaries. The reason we chose this approach over that one. Developers re-explaining the same constraints in every session. Standups turning into "wait, didn't we already decide this?" The frustration wasn't mine alone — it was sitting across the whole team. Then I stopped being frustrated — not because the problem went away. Because I finally understood what the problem actually was.</p>
+
+    <p>We tried longer prompts. Better prompts. More detailed prompts. We tried pasting previous conversations in. We tried summarising decisions at the start of each session. It helped. A little. For a while. Then it didn't.</p>
+
+    <p>The team was losing hours every week not to bad code — but to repetition. Re-briefing. Re-aligning. Re-explaining history to a tool that had none.</p>
+
+    <p>And eventually — after enough wasted sessions, enough rebuilt decisions, enough tension in standups — something shifted. Not the tool. Not the model. My understanding of what we were actually working with.</p>
+
+    <h2>The Agent Was Never Going to Remember.</h2>
+
+    <p>Not because the technology is immature. Not because the model is limited. Not because the tool needs a better memory feature.</p>
+
+    <div class="callout">
+      Because <strong>statelessness is the architecture.</strong> <span class="cite"><a href="#ref-1">[1]</a></span><br><br>
+      Every session starts from zero by design. The context window opens, fills, closes, disappears. What happened in the last chat is not available in this one — not reliably, not structurally, not in the way a software system needs to rely on.
+    </div>
+
+    <p>This is not a bug waiting to be fixed. It is a constraint. A hard, deliberate, fundamental constraint — as real as the laws of physics in the domain of software.</p>
+
+    <p>And here is what 25 years of architecture has taught me about constraints:</p>
+
+    <div class="pullquote">You do not fight them. You design around them.</div>
+
+    <h2>We Have Solved This Problem Before.</h2>
+
+    <div class="analogy-box">
+      <p class="analogy-title">The HTTP Analogy</p>
+      <p>The internet is stateless. HTTP has no memory between requests. Every call arrives without history, without context, without any knowledge of what came before it.</p>
+      <p>Did we declare HTTP broken and wait for someone to fix it? No. We built sessions. We built tokens. We built cookies. We built databases. We designed an entire layer of infrastructure whose sole job was to carry state across a stateless protocol.</p>
+      <p>And the web works. Not despite statelessness — because we stopped fighting it and started engineering around it.</p>
+      <div class="analogy-arrow">
+        <span>HTTP — stateless protocol</span>
+        <span class="arrow">→</span>
+        <span>Session layer carries state</span>
+      </div>
+      <div class="analogy-arrow">
+        <span>AI Agent — stateless by design</span>
+        <span class="arrow">→</span>
+        <span>Your docs carry state</span>
+      </div>
+      <p>The agent is the stateless protocol. Your documentation is the session layer. <span class="cite"><a href="#ref-2">[2]</a></span> The context you hand it at the start of each session is the token that carries state across the gap.</p>
+    </div>
+
+    <p>The question was never <em>"how do I make the agent remember?"</em></p>
+    <p>The question was always <em>"how do I carry the right context across a stateless boundary?"</em></p>
+
+    <div class="pullquote">That reframe — once it lands — changes everything.</div>
+
+    <h2>What a Session Looks Like Before and After the Reframe.</h2>
+
+    <div class="two-col">
+      <div class="col-box before">
+        <p class="col-label">❌ Without the reframe</p>
+        <p>Open a chat. Re-explain the architecture. Re-explain the constraints. Re-explain the decision from last Tuesday. Spend 20 minutes getting the agent back to where you were. Build on a fragile foundation held together by a single conversation window that disappears when you close the tab.</p>
+      </div>
+      <div class="col-box after">
+        <p class="col-label">✅ With the reframe</p>
+        <p>Open a chat. Hand the agent a structured document — what the platform is, what was built last session, where you stopped, what is locked, what is frozen, what is next. The agent reads it. Reports position. Executes. Zero re-explaining. Zero drift. Zero "didn't we already settle this?"</p>
+      </div>
+    </div>
+
+    <p>Same agent. Same stateless architecture. Completely different outcome.</p>
+    <p>The difference is not the tool. It is the discipline of the architect sitting in front of it.</p>
+
+    <h2>The Agent Is Not Your Colleague.</h2>
+
+    <p>This is the hardest mindset shift — and the most important one.</p>
+
+    <p>A colleague carries shared context. They were in the meeting. They remember the decision. They know what you mean when you say "the module we froze last month." History is shared. You do not re-explain it.</p>
+
+    <p>The AI agent is not that. And once you accept what it actually is — you can work with it at a level that the colleague mindset never allows.</p>
+
+    <div class="callout">
+      <strong>The agent is the most capable contractor you have ever worked with.</strong><br><br>
+      Extraordinary at execution. Tireless. Fast. Frighteningly good at implementation when the brief is right.<br><br>
+      But it walks in the door each morning having never met you. No shared history. No memory of the decision made on Tuesday or the constraint agreed on Thursday.<br><br>
+      Your job — as the architect — is to write the brief. Not once. Every session. Structured. Precise. Complete.
+    </div>
+
+    <p>The architects who have accepted this are building faster than anyone around them. <span class="cite"><a href="#ref-3">[3]</a></span> Not because they have a better agent. Because they have stopped expecting the agent to do the job that only the architect can do.</p>
+
+    <hr class="divider-line">
+
+    <p>The memory problem was never the agent's problem to solve.</p>
+    <p>It was always yours.</p>
+    <p>And the moment you own that — really own it — you stop being frustrated with the tool and start building the system around it.</p>
+
+    <div class="pullquote">There is a name for that system. And it is simpler than you think.</div>
+
+    <div class="references-section" id="references">
+      <h3>Research &amp; Further Reading</h3>
+      <ul class="ref-list">
+        <li id="ref-1">
+          <span class="ref-num">[1]</span>
+          <span>Modarressi et al., <a href="https://arxiv.org/abs/2502.05167" target="_blank">"NoLiMa: Long-Context Evaluation Beyond Literal Matching"</a>, ICML 2025 — Tested 13 frontier LLMs: at 32,000 tokens, 11 of 12 models dropped below 50% of their short-context performance. GPT-4o fell from 99.3% to 69.7% accuracy. Advertised context windows dramatically overstate usable capacity.</span>
+          <span class="ref-type">Academic Paper</span>
+        </li>
+        <li id="ref-2">
+          <span class="ref-num">[2]</span>
+          <span>Hutchins, E., <a href="https://mitpress.mit.edu/9780262581462/cognition-in-the-wild/" target="_blank"><em>Cognition in the Wild</em></a>, MIT Press, 1995 — Demonstrated that cognition is distributed across people, artifacts, and tools: "A person in interaction with a tool has cognitive properties that are radically different from the cognitive properties of the person alone."</span>
+          <span class="ref-type">Book</span>
+        </li>
+        <li id="ref-3">
+          <span class="ref-num">[3]</span>
+          <span>Anthropic, <a href="https://code.claude.com/docs/en/best-practices" target="_blank">"Best Practices for Claude Code"</a>, Anthropic Official Documentation, 2025 — Recommends treating context as infrastructure and using structured planning before coding: "Without [planning], Claude tends to jump straight to coding."</span>
+          <span class="ref-type">Official Docs</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="art-nav-bg">
+  <div class="art-nav">
+    <a href="article-1.html" class="art-nav-link"><p class="art-nav-dir">← Previous</p><p class="art-nav-title">Article 1</p></a>
+    <a href="../coming-soon.html" class="art-nav-link right"><p class="art-nav-dir">Next →</p><p class="art-nav-title">Article 3 — Coming Soon</p></a>
+  </div>
+</div>
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <p class="footer-brand">ARTHA Craft</p>
+      <p class="footer-desc">A 12-part series on structured AI-assisted development.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Series</h5>
+      <a href="../articles.html">All 12 articles</a>
+      <a href="article-1.html">Start with Article 1</a>
+    </div>
+    <div class="footer-col">
+      <h5>Author</h5>
+      <a href="../about.html">Jitander Singh Chauhan</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Jitander Singh Chauhan. All rights reserved.</p>
+    <p class="footer-tag">ARTHA Craft</p>
+  </div>
+</footer>
+<script>
+  var nav=document.getElementById('nav');
+  window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>40);});
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
