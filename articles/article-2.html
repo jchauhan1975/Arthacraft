@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Article 2 — Every AI Session Starts From Zero. That's Not a Bug.... — ARTHA Craft</title>
+<title>Article 2: Every AI Session Starts From Zero. That's Not a Bug.... | ARTHA Craft</title>
 <meta name="description" content="The AI agent's statelessness is not a bug. It's the most important design constraint nobody talks about.">
 <link rel="stylesheet" href="../assets/style.css">
 <style>
 /* ══════════════════════════════════════════════════════════════════
-   ARTICLE 2 — Every AI Session Starts From Zero
+   ARTICLE 2 - Every AI Session Starts From Zero
    Color identity: Green (#1a6b3c)
    Body design matches the master article file (light paper theme)
    ══════════════════════════════════════════════════════════════════ */
@@ -31,7 +31,7 @@
 .art-title{letter-spacing:-0.5px!important;}
 .art-subtitle{color:var(--art2)!important;opacity:0.7;}
 
-/* ── Body canvas — light paper like the master file ── */
+/* ── Body canvas - light paper like the master file ── */
 .art-body-bg{background:#f5f7fa!important;}
 .art-body{max-width:860px!important;padding:56px 64px 72px!important;}
 
@@ -72,7 +72,7 @@
   line-height:1.6!important;color:var(--art-ink)!important;
 }
 
-/* ── Callout — light green card ── */
+/* ── Callout - light green card ── */
 body .art-body .callout{
   background:#eaf7ef!important;
   border:1px solid #b8e8cc!important;
@@ -85,7 +85,7 @@ body .art-body .callout{
 }
 body .art-body .callout strong{color:var(--art)!important;font-weight:600!important;}
 
-/* ── Analogy box — light card ── */
+/* ── Analogy box - light card ── */
 body .art-body .analogy-box{
   background:#faf9f5!important;
   border:1px solid #e9e2d6!important;
@@ -118,7 +118,7 @@ body .art-body .analogy-arrow .arrow{
   color:var(--art);
 }
 
-/* ── Two-col — red/green tinted cards ── */
+/* ── Two-col - red/green tinted cards ── */
 body .art-body .two-col{
   background:transparent!important;border:none!important;
   padding:0!important;margin:28px 0!important;
@@ -166,7 +166,7 @@ body .art-body .col-box p{font-size:14px!important;line-height:1.7!important;col
 }
 .art-body .cite a:hover{opacity:0.7;}
 
-/* ── References — inside the article, master file style ── */
+/* ── References - inside the article, master file style ── */
 .art-body .references-section{
   margin:40px 0 0;padding:32px 0 0;
   border-top:2px solid var(--art-divider);
@@ -244,13 +244,13 @@ body .art-body .col-box p{font-size:14px!important;line-height:1.7!important;col
 <div class="art-body-bg">
   <div class="art-body">
     <p class="article-hook">For weeks, my entire team was frustrated with our AI coding agent.</p>
-    <p class="article-hook-sub">It kept forgetting things. Important things. Architecture decisions. Module boundaries. The reason we chose this approach over that one. Developers re-explaining the same constraints in every session. Standups turning into "wait, didn't we already decide this?" The frustration wasn't mine alone — it was sitting across the whole team. Then I stopped being frustrated — not because the problem went away. Because I finally understood what the problem actually was.</p>
+    <p class="article-hook-sub">It kept forgetting things. Important things. Architecture decisions. Module boundaries. The reason we chose this approach over that one. Developers re-explaining the same constraints in every session. Standups turning into "wait, didn't we already decide this?" The frustration wasn't mine alone, it was sitting across the whole team. Then I stopped being frustrated, not because the problem went away. Because I finally understood what the problem actually was.</p>
 
     <p>We tried longer prompts. Better prompts. More detailed prompts. We tried pasting previous conversations in. We tried summarising decisions at the start of each session. It helped. A little. For a while. Then it didn't.</p>
 
-    <p>The team was losing hours every week not to bad code — but to repetition. Re-briefing. Re-aligning. Re-explaining history to a tool that had none.</p>
+    <p>The team was losing hours every week not to bad code, but to repetition. Re-briefing. Re-aligning. Re-explaining history to a tool that had none.</p>
 
-    <p>And eventually — after enough wasted sessions, enough rebuilt decisions, enough tension in standups — something shifted. Not the tool. Not the model. My understanding of what we were actually working with.</p>
+    <p>And eventually, after enough wasted sessions, enough rebuilt decisions, enough tension in standups, something shifted. Not the tool. Not the model. My understanding of what we were actually working with.</p>
 
     <h2>The Agent Was Never Going to Remember.</h2>
 
@@ -258,10 +258,10 @@ body .art-body .col-box p{font-size:14px!important;line-height:1.7!important;col
 
     <div class="callout">
       Because <strong>statelessness is the architecture.</strong> <span class="cite"><a href="#ref-1">[1]</a></span><br><br>
-      Every session starts from zero by design. The context window opens, fills, closes, disappears. What happened in the last chat is not available in this one — not reliably, not structurally, not in the way a software system needs to rely on.
+      Every session starts from zero by design. The context window opens, fills, closes, disappears. What happened in the last chat is not available in this one, not reliably, not structurally, not in the way a software system needs to rely on.
     </div>
 
-    <p>This is not a bug waiting to be fixed. It is a constraint. A hard, deliberate, fundamental constraint — as real as the laws of physics in the domain of software.</p>
+    <p>This is not a bug waiting to be fixed. It is a constraint. A hard, deliberate, fundamental constraint, as real as the laws of physics in the domain of software.</p>
 
     <p>And here is what 25 years of architecture has taught me about constraints:</p>
 
@@ -273,14 +273,14 @@ body .art-body .col-box p{font-size:14px!important;line-height:1.7!important;col
       <p class="analogy-title">The HTTP Analogy</p>
       <p>The internet is stateless. HTTP has no memory between requests. Every call arrives without history, without context, without any knowledge of what came before it.</p>
       <p>Did we declare HTTP broken and wait for someone to fix it? No. We built sessions. We built tokens. We built cookies. We built databases. We designed an entire layer of infrastructure whose sole job was to carry state across a stateless protocol.</p>
-      <p>And the web works. Not despite statelessness — because we stopped fighting it and started engineering around it.</p>
+      <p>And the web works. Not despite statelessness, because we stopped fighting it and started engineering around it.</p>
       <div class="analogy-arrow">
-        <span>HTTP — stateless protocol</span>
+        <span>HTTP: stateless protocol</span>
         <span class="arrow">→</span>
         <span>Session layer carries state</span>
       </div>
       <div class="analogy-arrow">
-        <span>AI Agent — stateless by design</span>
+        <span>AI Agent: stateless by design</span>
         <span class="arrow">→</span>
         <span>Your docs carry state</span>
       </div>
@@ -290,7 +290,7 @@ body .art-body .col-box p{font-size:14px!important;line-height:1.7!important;col
     <p>The question was never <em>"how do I make the agent remember?"</em></p>
     <p>The question was always <em>"how do I carry the right context across a stateless boundary?"</em></p>
 
-    <div class="pullquote">That reframe — once it lands — changes everything.</div>
+    <div class="pullquote">That reframe, once it lands, changes everything.</div>
 
     <h2>What a Session Looks Like Before and After the Reframe.</h2>
 
@@ -301,7 +301,7 @@ body .art-body .col-box p{font-size:14px!important;line-height:1.7!important;col
       </div>
       <div class="col-box after">
         <p class="col-label">✅ With the reframe</p>
-        <p>Open a chat. Hand the agent a structured document — what the platform is, what was built last session, where you stopped, what is locked, what is frozen, what is next. The agent reads it. Reports position. Executes. Zero re-explaining. Zero drift. Zero "didn't we already settle this?"</p>
+        <p>Open a chat. Hand the agent a structured document: what the platform is, what was built last session, where you stopped, what is locked, what is frozen, what is next. The agent reads it. Reports position. Executes. Zero re-explaining. Zero drift. Zero "didn't we already settle this?"</p>
       </div>
     </div>
 
@@ -310,17 +310,17 @@ body .art-body .col-box p{font-size:14px!important;line-height:1.7!important;col
 
     <h2>The Agent Is Not Your Colleague.</h2>
 
-    <p>This is the hardest mindset shift — and the most important one.</p>
+    <p>This is the hardest mindset shift, and the most important one.</p>
 
     <p>A colleague carries shared context. They were in the meeting. They remember the decision. They know what you mean when you say "the module we froze last month." History is shared. You do not re-explain it.</p>
 
-    <p>The AI agent is not that. And once you accept what it actually is — you can work with it at a level that the colleague mindset never allows.</p>
+    <p>The AI agent is not that. And once you accept what it actually is, you can work with it at a level that the colleague mindset never allows.</p>
 
     <div class="callout">
       <strong>The agent is the most capable contractor you have ever worked with.</strong><br><br>
       Extraordinary at execution. Tireless. Fast. Frighteningly good at implementation when the brief is right.<br><br>
       But it walks in the door each morning having never met you. No shared history. No memory of the decision made on Tuesday or the constraint agreed on Thursday.<br><br>
-      Your job — as the architect — is to write the brief. Not once. Every session. Structured. Precise. Complete.
+      Your job, as the architect, is to write the brief. Not once. Every session. Structured. Precise. Complete.
     </div>
 
     <p>The architects who have accepted this are building faster than anyone around them. <span class="cite"><a href="#ref-3">[3]</a></span> Not because they have a better agent. Because they have stopped expecting the agent to do the job that only the architect can do.</p>
@@ -329,7 +329,7 @@ body .art-body .col-box p{font-size:14px!important;line-height:1.7!important;col
 
     <p>The memory problem was never the agent's problem to solve.</p>
     <p>It was always yours.</p>
-    <p>And the moment you own that — really own it — you stop being frustrated with the tool and start building the system around it.</p>
+    <p>And the moment you own that, really own it, you stop being frustrated with the tool and start building the system around it.</p>
 
     <div class="pullquote">There is a name for that system. And it is simpler than you think.</div>
 
@@ -338,17 +338,17 @@ body .art-body .col-box p{font-size:14px!important;line-height:1.7!important;col
       <ul class="ref-list">
         <li id="ref-1">
           <span class="ref-num">[1]</span>
-          <span>Modarressi et al., <a href="https://arxiv.org/abs/2502.05167" target="_blank">"NoLiMa: Long-Context Evaluation Beyond Literal Matching"</a>, ICML 2025 — Tested 13 frontier LLMs: at 32,000 tokens, 11 of 12 models dropped below 50% of their short-context performance. GPT-4o fell from 99.3% to 69.7% accuracy. Advertised context windows dramatically overstate usable capacity.</span>
+          <span>Modarressi et al., <a href="https://arxiv.org/abs/2502.05167" target="_blank">"NoLiMa: Long-Context Evaluation Beyond Literal Matching"</a>, ICML 2025: Tested 13 frontier LLMs: at 32,000 tokens, 11 of 12 models dropped below 50% of their short-context performance. GPT-4o fell from 99.3% to 69.7% accuracy. Advertised context windows dramatically overstate usable capacity.</span>
           <span class="ref-type">Academic Paper</span>
         </li>
         <li id="ref-2">
           <span class="ref-num">[2]</span>
-          <span>Hutchins, E., <a href="https://mitpress.mit.edu/9780262581462/cognition-in-the-wild/" target="_blank"><em>Cognition in the Wild</em></a>, MIT Press, 1995 — Demonstrated that cognition is distributed across people, artifacts, and tools: "A person in interaction with a tool has cognitive properties that are radically different from the cognitive properties of the person alone."</span>
+          <span>Hutchins, E., <a href="https://mitpress.mit.edu/9780262581462/cognition-in-the-wild/" target="_blank"><em>Cognition in the Wild</em></a>, MIT Press, 1995: Demonstrated that cognition is distributed across people, artifacts, and tools: "A person in interaction with a tool has cognitive properties that are radically different from the cognitive properties of the person alone."</span>
           <span class="ref-type">Book</span>
         </li>
         <li id="ref-3">
           <span class="ref-num">[3]</span>
-          <span>Anthropic, <a href="https://code.claude.com/docs/en/best-practices" target="_blank">"Best Practices for Claude Code"</a>, Anthropic Official Documentation, 2025 — Recommends treating context as infrastructure and using structured planning before coding: "Without [planning], Claude tends to jump straight to coding."</span>
+          <span>Anthropic, <a href="https://code.claude.com/docs/en/best-practices" target="_blank">"Best Practices for Claude Code"</a>, Anthropic Official Documentation, 2025: Recommends treating context as infrastructure and using structured planning before coding: "Without [planning], Claude tends to jump straight to coding."</span>
           <span class="ref-type">Official Docs</span>
         </li>
       </ul>
@@ -358,7 +358,7 @@ body .art-body .col-box p{font-size:14px!important;line-height:1.7!important;col
 <div class="art-nav-bg">
   <div class="art-nav">
     <a href="article-1.html" class="art-nav-link"><p class="art-nav-dir">← Previous</p><p class="art-nav-title">Article 1</p></a>
-    <a href="../coming-soon.html" class="art-nav-link right"><p class="art-nav-dir">Next →</p><p class="art-nav-title">Article 3 — Coming Soon</p></a>
+    <a href="../coming-soon.html" class="art-nav-link right"><p class="art-nav-dir">Next →</p><p class="art-nav-title">Article 3 · Coming Soon</p></a>
   </div>
 </div>
 <footer class="footer">
