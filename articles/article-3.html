@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Article 3: My AI Agent Gave Me a Sports Car With No Brakes. I W... | ARTHA Craft</title>
+<meta name="description" content="Tests passing. UI broken. The agent did exactly what I asked. That was the entire problem.">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+/* ══════════════════════════════════════════════════════════════════
+   ARTICLE 3 - My AI Agent Gave Me a Sports Car With No Brakes
+   Color identity: Gold (#b8860b)
+   Body design matches the master article file (light paper theme)
+   ══════════════════════════════════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;600&display=swap');
+
+:root{
+  --art:#b8860b;
+  --art2:#d4a030;
+  --art-ink:#1a1a2e;
+  --art-muted:#6b6b7b;
+  --art-divider:#dde2ea;
+}
+
+/* ── Header ── */
+.art-header{background:linear-gradient(180deg,#0c0b09 0%,#100f0d 100%)!important;}
+.art-header-bgnum{color:rgba(184,134,11,0.06)!important;}
+.art-series::before{background:var(--art)!important;}
+.art-series{color:var(--art)!important;}
+.art-header::after{background:linear-gradient(90deg,var(--art),var(--art2))!important;height:2px!important;}
+.art-title{letter-spacing:-0.5px!important;}
+.art-subtitle{color:var(--art2)!important;opacity:0.7;}
+
+/* ── Body canvas - light paper like the master file ── */
+.art-body-bg{background:#f5f7fa!important;}
+.art-body{max-width:860px!important;padding:56px 64px 72px!important;}
+
+/* ── Typography ── */
+.art-body p{
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:16px;line-height:1.85;color:#2c2c3e;
+  margin-bottom:16px;font-weight:400;
+}
+.art-body p strong{color:var(--art-ink);font-weight:600;}
+.art-body em{color:#2c2c3e;}
+
+.art-body h2{
+  font-family:'Playfair Display',Georgia,serif!important;
+  font-size:22px!important;font-weight:700!important;
+  color:var(--art-ink)!important;margin:40px 0 16px!important;
+  line-height:1.3!important;letter-spacing:0!important;
+}
+.art-body h2::before{display:none!important;}
+
+/* ── Pullquote ── */
+.art-body .pullquote{
+  border-left:4px solid var(--art2)!important;
+  background:#faf5e6!important;
+  padding:20px 28px!important;margin:32px 0!important;
+  font-family:'Source Serif 4',Georgia,serif!important;
+  font-size:18px!important;font-style:italic;
+  line-height:1.6!important;color:var(--art-ink)!important;
+}
+
+/* ── Callout - light gold card ── */
+body .art-body .callout{
+  background:#faf5e6!important;
+  border:1px solid #ecdfb8!important;
+  border-left:5px solid var(--art)!important;
+  border-radius:0!important;
+  padding:20px 24px!important;margin:32px 0!important;
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:15px!important;line-height:1.7!important;
+  color:var(--art-ink)!important;
+}
+body .art-body .callout strong{color:var(--art)!important;font-weight:600!important;}
+
+/* ── Irony box - light confession card ── */
+body .art-body .irony-box{
+  background:#faf9f5!important;
+  border:1px solid #e9e2d6!important;
+  border-left:4px solid var(--art)!important;
+  border-radius:6px!important;
+  padding:28px 32px!important;margin:0 0 40px!important;
+  position:relative;box-shadow:none!important;
+}
+body .art-body .irony-box::before{
+  content:'"';
+  font-family:'Playfair Display',serif;
+  font-size:80px;color:var(--art2);opacity:0.3;
+  position:absolute;top:-10px;left:16px;line-height:1;
+}
+body .art-body .irony-box .irony-label{
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:10px!important;letter-spacing:3px!important;
+  text-transform:uppercase;color:var(--art)!important;
+  font-weight:600!important;margin-bottom:14px!important;
+}
+body .art-body .irony-box p{
+  color:#3f3f4d!important;
+  font-size:15px!important;line-height:1.8!important;margin-bottom:10px!important;
+}
+body .art-body .irony-box p:last-child{margin-bottom:0!important;}
+body .art-body .irony-box strong{color:var(--art-ink)!important;}
+
+/* ── Timeline - light, dotted spine ── */
+body .art-body .timeline{
+  margin:32px 0;position:relative;padding-left:32px;
+}
+body .art-body .timeline::before{
+  content:'';position:absolute;left:10px;top:8px;bottom:8px;width:2px;
+  background:linear-gradient(to bottom,var(--art2),var(--art));
+}
+body .art-body .timeline-item{position:relative;margin-bottom:24px;}
+body .art-body .timeline-item:last-child{margin-bottom:0;}
+body .art-body .timeline-item::before{
+  content:'';position:absolute;left:-26px;top:6px;
+  width:10px;height:10px;border-radius:50%;
+  background:var(--art2);border:2px solid #f5f7fa;
+  box-shadow:0 0 0 2px var(--art2);
+}
+body .art-body .timeline-item.danger::before{
+  background:#c0392b;box-shadow:0 0 0 2px #c0392b;
+}
+body .art-body .timeline-item .t-label{
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:10px!important;letter-spacing:2px!important;
+  text-transform:uppercase;color:var(--art)!important;
+  font-weight:600!important;margin-bottom:4px!important;
+}
+body .art-body .timeline-item.danger .t-label{color:#c0392b!important;}
+body .art-body .timeline-item p{
+  font-size:15px!important;margin-bottom:0!important;
+  line-height:1.7!important;color:#2c2c3e!important;
+}
+
+/* ── Breakdown - light table-like card ── */
+body .art-body .breakdown{
+  background:#fffdf7!important;
+  border:1px solid var(--art-divider)!important;
+  border-radius:6px!important;overflow:hidden;
+  margin:32px 0!important;padding:0!important;
+}
+body .art-body .breakdown-header{
+  background:var(--art)!important;color:#fff!important;
+  padding:12px 20px!important;
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:11px!important;letter-spacing:2px!important;
+  text-transform:uppercase;font-weight:600;
+}
+body .art-body .breakdown-row{
+  display:flex!important;
+  background:#fffdf7!important;
+  border:none!important;
+  border-bottom:1px solid var(--art-divider)!important;
+  border-radius:0!important;
+  padding:0!important;margin:0!important;
+  font-size:14px;
+}
+body .art-body .breakdown-row:last-child{border-bottom:none!important;}
+body .art-body .breakdown-row .b-layer{
+  width:140px;flex-shrink:0;padding:14px 16px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;font-weight:600;
+  background:#faf5e6!important;color:var(--art)!important;
+  border-right:1px solid var(--art-divider);
+  display:flex;align-items:center;
+}
+body .art-body .breakdown-row .b-desc{
+  padding:14px 16px;line-height:1.6;
+  color:#2c2c3e!important;flex:1;
+  font-family:'Source Serif 4',Georgia,serif;
+}
+body .art-body .breakdown-row .b-status{
+  width:100px;flex-shrink:0;padding:14px 12px;
+  text-align:center;
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;letter-spacing:1px;text-transform:uppercase;
+  display:flex;align-items:center;justify-content:center;
+  border-left:1px solid var(--art-divider);
+}
+body .art-body .b-status.pass{color:#1e8a4a!important;background:#edfaf3!important;}
+body .art-body .b-status.broken{color:#c0392b!important;background:#fdf0ef!important;}
+
+/* ── System steps - numbered gold circles ── */
+body .art-body .system-steps{margin:28px 0;}
+body .art-body .system-step{
+  display:flex;gap:16px;margin-bottom:20px;align-items:flex-start;
+}
+body .art-body .system-step:last-child{margin-bottom:0;}
+body .art-body .system-step-num{
+  width:32px;height:32px;
+  background:var(--art)!important;color:#fff!important;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;font-weight:700;font-size:15px;
+  flex-shrink:0;
+}
+body .art-body .system-step-content{flex:1;padding-top:4px;}
+body .art-body .system-step-content strong{
+  display:block;font-size:15px;margin-bottom:4px;
+  color:var(--art-ink)!important;font-weight:600;
+  font-family:'Source Serif 4',Georgia,serif;
+}
+body .art-body .system-step-content p{
+  font-size:14px!important;margin-bottom:0!important;
+  color:#555!important;line-height:1.6!important;
+}
+
+/* ── Divider ── */
+.art-body .divider-line,.art-body hr{
+  border:none!important;height:1px;
+  background:var(--art-divider)!important;
+  margin:40px 0!important;
+}
+
+/* ── Citation superscripts ── */
+.art-body .cite{
+  display:inline;font-size:11px;vertical-align:super;line-height:0;
+  font-family:'JetBrains Mono',monospace;font-weight:700;
+}
+.art-body .cite a{
+  color:var(--art);text-decoration:none;
+  background:var(--art-divider);padding:0 3px;border-radius:2px;
+}
+.art-body .cite a:hover{opacity:0.7;}
+
+/* ── References - inside the article, master file style ── */
+.art-body .references-section{
+  margin:40px 0 0;padding:32px 0 0;
+  border-top:2px solid var(--art-divider);
+}
+.art-body .references-section h3{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--art-muted);margin-bottom:20px;
+}
+.art-body .ref-list{
+  list-style:none;padding:0;margin:0;
+  display:flex;flex-direction:column;gap:10px;
+}
+.art-body .ref-list li{
+  display:flex;gap:12px;align-items:flex-start;
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:13px;line-height:1.6;color:#444;
+}
+.art-body .ref-num{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;font-weight:700;color:var(--art);
+  flex-shrink:0;width:28px;padding-top:2px;
+}
+.art-body .ref-list a{
+  color:var(--art);text-decoration:none;
+  border-bottom:1px dotted var(--art);transition:opacity 0.15s;
+}
+.art-body .ref-list a:hover{opacity:0.7;}
+.art-body .ref-type{
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;letter-spacing:1px;text-transform:uppercase;
+  background:var(--art-divider);color:var(--art-muted);
+  padding:1px 6px;border-radius:3px;margin-left:6px;
+  flex-shrink:0;align-self:flex-start;margin-top:2px;
+}
+
+/* ── Prev/Next nav ── */
+.art-nav-link{transition:border-color 0.25s,transform 0.25s!important;}
+.art-nav-link:hover{border-color:var(--art)!important;transform:translateY(-2px)!important;}
+.art-nav-dir{color:var(--art)!important;}
+
+/* ── Responsive ── */
+@media(max-width:700px){
+  .art-body{padding:32px 24px 48px!important;}
+  .art-body h2{font-size:20px!important;}
+  body .art-body .breakdown-row{flex-direction:column!important;}
+  body .art-body .breakdown-row .b-layer,
+  body .art-body .breakdown-row .b-status{
+    width:100%!important;border-left:none!important;border-right:none!important;
+    justify-content:flex-start;text-align:left;
+  }
+  body .art-body .timeline{padding-left:28px;}
+}
+</style>
+</head>
+<body>
+<nav class="nav" id="nav">
+  <a href="../index.html" class="nav-logo"><em>ARTHA</em> Craft</a>
+  <div class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="../articles.html">Series</a>
+    <a href="../about.html">About</a>
+    <a href="https://substack.com" target="_blank" class="nav-follow">Subscribe</a>
+  </div>
+</nav>
+<div class="art-header">
+  <div class="art-header-bgnum">03</div>
+  <div class="art-header-inner">
+    <p class="art-series">Article 3 of 12 · ARTHA Craft</p>
+    <h1 class="art-title">My AI Agent Gave Me a Sports Car With No Brakes. I Was Shipping Fast and Breaking Faster. Here's How I Built the Brakes.</h1>
+    <p class="art-subtitle">Tests passing. UI broken. The agent did exactly what I asked. That was the entire problem.</p>
+    <div class="art-meta">
+      <p class="art-meta-name">Jitander Singh Chauhan</p>
+      <div class="art-meta-sep"></div>
+      <p class="art-meta-role">Lead AI &amp; Data Technologist · Haystream</p>
+    </div>
+  </div>
+</div>
+<div class="art-body-bg">
+  <div class="art-body">
+    <div class="irony-box">
+      <p class="irony-label">⚡ A confession before the story</p>
+      <p>Earlier in writing this series, I asked my AI assistant a question it had already answered. Context from earlier in our session: gone. Had to be re-explained. Time wasted.</p>
+      <p>I am writing a 12-part series about exactly that problem. The irony was not subtle. And it was the perfect reminder that this isn't theoretical. It happens to everyone working with AI, including the person writing the methodology to fix it.</p>
+    </div>
+
+    <h2>Three Weeks In. I Had Never Moved Faster.</h2>
+
+    <p>Features were shipping in hours that would have taken days. The stack was growing. The demo was looking sharp. The team was energised. There was a genuine sense that we had found something: a way of working that compressed timelines in a way I hadn't experienced in 25 years of building software.</p>
+
+    <p>Then I ran the tests. <span class="cite"><a href="#ref-1">[1]</a></span></p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <p class="t-label">The test run</p>
+        <p>Green. Every single one. Unit tests passing. Component tests passing. The suite smiled back at me with clean results across the board.</p>
+      </div>
+      <div class="timeline-item danger">
+        <p class="t-label">The stakeholder demo: same day</p>
+        <p>The UI was broken. Not a cosmetic issue. Not a minor edge case. The actual end-to-end user journey, the flow a real user would take through the product, was silently, completely broken. No error thrown. No alarm raised. Just the wrong thing happening, quietly, while the test suite had given us a clean bill of health.</p>
+      </div>
+      <div class="timeline-item danger">
+        <p class="t-label">What followed: half a day</p>
+        <p>Back and forth. Layer by layer. The API looked fine in isolation. The worker looked fine in isolation. Every individual component, examined on its own terms, appeared to be working correctly. The system as a whole was not working.</p>
+      </div>
+    </div>
+
+    <h2>What I Was Looking At Had a Name. <span class="cite"><a href="#ref-2">[2]</a></span> I Just Didn't Know It Yet.</h2>
+
+    <div class="breakdown">
+      <div class="breakdown-header">Cross-Layer Breakage: What the Tests Didn't See</div>
+      <div class="breakdown-row">
+        <div class="b-layer">UI Layer</div>
+        <div class="b-desc">Built in session 4. Assumed the API response shape from session 2. Nobody told it the shape had changed in session 3.</div>
+        <div class="b-status broken">Broken</div>
+      </div>
+      <div class="breakdown-row">
+        <div class="b-layer">API Layer</div>
+        <div class="b-desc">Updated in session 3. Technically correct for its own brief. Had no knowledge of what the UI was depending on.</div>
+        <div class="b-status pass">Passed</div>
+      </div>
+      <div class="breakdown-row">
+        <div class="b-layer">Worker Layer</div>
+        <div class="b-desc">Still reading the schema from session 1. The schema had been updated twice since. Tests verified the worker's logic, not the schema contract.</div>
+        <div class="b-status broken">Silent</div>
+      </div>
+      <div class="breakdown-row">
+        <div class="b-layer">Test Suite</div>
+        <div class="b-desc">Written per-layer. Tested what each piece did in isolation. Did not test how the layers talked to each other across the full journey.</div>
+        <div class="b-status pass">All Green ✓</div>
+      </div>
+    </div>
+
+    <p>The agent had not made mistakes. Every individual implementation was technically correct for the brief it had been given. The briefs just hadn't known about each other.</p>
+
+    <div class="pullquote">The agent was doing exactly what I asked. That was the entire problem.</div>
+
+    <p>Session after session of a stateless agent executing brilliantly, with no memory of what any other session had decided, built, or changed. No shared picture. No cross-layer awareness. Just speed. Clean, fast, isolated speed. That was quietly accumulating invisible debt between the layers.</p>
+
+    <h2>The End-to-End Journey Test Was the Moment Everything Became Clear.</h2>
+
+    <p>Not a unit test. Not a component test. A full user journey, from first action to final outcome, touching every layer the product had. It failed. And as I traced the failure backwards through the stack, session by session, decision by decision, I saw the pattern with complete clarity for the first time.</p>
+
+    <p>I had given the team speed. I had not given it coherence. I had given the agent execution. I had not given it the full picture. I had handed a sports car to a driver who could only see the ten metres directly in front of them, and I had been surprised when it left the road.</p>
+
+    <div class="callout">
+      <strong>The brakes were never the agent's job to build.</strong><br><br>
+      They were mine. The architect's job is not just to design the features. It is to maintain the coherent picture of how the layers connect, and hand that picture to every session, every agent, every time.
+    </div>
+
+    <h2>Here Is What I Changed After That Day.</h2>
+
+    <div class="system-steps">
+      <div class="system-step">
+        <div class="system-step-num">1</div>
+        <div class="system-step-content">
+          <strong>Full platform state: read before every session</strong>
+          <p>Before any session starts, the agent reads a structured document that tells it what exists, what is connected, what has changed recently, and what must not be touched. Not just today's feature. The whole picture.</p>
+        </div>
+      </div>
+      <div class="system-step">
+        <div class="system-step-num">2</div>
+        <div class="system-step-content">
+          <strong>Cross-layer dependencies: documented in the task file</strong>
+          <p>Before any feature is built, the cross-layer dependencies are written down explicitly. What does the layer above expect? What does the layer below provide? The agent does not infer these. They are stated.</p>
+        </div>
+      </div>
+      <div class="system-step">
+        <div class="system-step-num">3</div>
+        <div class="system-step-content">
+          <strong>End-to-end check: part of the definition of done</strong>
+          <p>Before any code is merged, the full user journey is verified. Not "does this unit pass." Does the whole journey still work end to end across every layer it touches.</p>
+        </div>
+      </div>
+      <div class="system-step">
+        <div class="system-step-num">4</div>
+        <div class="system-step-content">
+          <strong>Context handoff: written before every session closes</strong>
+          <p>What changed this session. What the next session needs to know. What is now different in the layer contract. Written down before the chat is closed. Never lost.</p>
+        </div>
+      </div>
+    </div>
+
+    <p>The agent still moves fast. <span class="cite"><a href="#ref-3">[3]</a></span> The sports car still has the engine. But now it has brakes.</p>
+
+    <p>And the difference, in stability, in team confidence, in the hours not lost to half-day debugging sessions, is not incremental. It is the difference between a product and a graveyard of chat sessions dressed up as software.</p>
+
+    <hr class="divider-line">
+
+    <div class="pullquote">The speed was never the problem. Unstructured speed was the problem. Speed without a system that carries context across layers, sessions, and decisions. Once the system exists, the speed becomes something you can actually trust.</div>
+
+    <div class="references-section" id="references">
+      <h3>Research &amp; Further Reading</h3>
+      <ul class="ref-list">
+        <li id="ref-1">
+          <span class="ref-num">[1]</span>
+          <span>Harding &amp; Kloster, <a href="https://www.gitclear.com/ai_assistant_code_quality_2025_research" target="_blank">"AI Copilot Code Quality: 2025 Data Suggests 4x Growth in Code Clones"</a>, GitClear, January 2025: Code churn (lines revised within two weeks) nearly doubled from 3.1% to 5.7%. Google's 2024 DORA report found a 7.2% decrease in delivery stability for every 25% increase in AI adoption.</span>
+          <span class="ref-type">Industry Report</span>
+        </li>
+        <li id="ref-2">
+          <span class="ref-num">[2]</span>
+          <span>Perrow, C., <a href="https://press.princeton.edu/books/paperback/9780691004129/normal-accidents" target="_blank"><em>Normal Accidents: Living with High-Risk Technologies</em></a>, Princeton University Press, 1984: In systems combining interactive complexity with tight coupling, cascading failures are inevitable: "Major accidents almost always have very small beginnings before unpredictably cascading through the system."</span>
+          <span class="ref-type">Book</span>
+        </li>
+        <li id="ref-3">
+          <span class="ref-num">[3]</span>
+          <span>METR, <a href="https://arxiv.org/abs/2507.09089" target="_blank">"Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity"</a>, arXiv:2507.09089, July 2025: Randomized controlled trial: experienced developers predicted AI would speed them up 24%. Actual result: they were 19% slower. Three-quarters of participants saw reduced performance.</span>
+          <span class="ref-type">Academic Paper</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="art-nav-bg">
+  <div class="art-nav">
+    <a href="article-2.html" class="art-nav-link"><p class="art-nav-dir">← Previous</p><p class="art-nav-title">Article 2</p></a>
+    <a href="article-4.html" class="art-nav-link right"><p class="art-nav-dir">Next →</p><p class="art-nav-title">Article 4: The Conversation Ends. The Document Survives.</p></a>
+  </div>
+</div>
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <p class="footer-brand">ARTHA Craft</p>
+      <p class="footer-desc">A 12-part series on structured AI-assisted development.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Series</h5>
+      <a href="../articles.html">All 12 articles</a>
+      <a href="article-1.html">Start with Article 1</a>
+    </div>
+    <div class="footer-col">
+      <h5>Author</h5>
+      <a href="../about.html">Jitander Singh Chauhan</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Jitander Singh Chauhan. All rights reserved.</p>
+    <p class="footer-tag">ARTHA Craft</p>
+  </div>
+</footer>
+<script>
+  var nav=document.getElementById('nav');
+  window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>40);});
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
