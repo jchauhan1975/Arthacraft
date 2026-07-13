@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Article 5: I Stopped Asking the Agent What to Build. I Started ... | ARTHA Craft</title>
+<meta name="description" content="The code was correct. The UI was complete. Even I could not use it.">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+/* ══════════════════════════════════════════════════════════════════
+   ARTICLE 5 - I Stopped Asking the Agent What to Build
+   Color identity: Purple (#7030a0)
+   Body design matches the master article file (light paper theme)
+   ══════════════════════════════════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;600&display=swap');
+
+:root{
+  --art:#7030a0;
+  --art2:#9060c0;
+  --art-ink:#1a1a2e;
+  --art-muted:#6b6b7b;
+  --art-divider:#dde2ea;
+  --art-tint:#f3edfb;
+  --art-tint-border:#d4b8f0;
+}
+
+/* ── Header ── */
+.art-header{background:linear-gradient(180deg,#0c0b09 0%,#100f0d 100%)!important;}
+.art-header-bgnum{color:rgba(112,48,160,0.08)!important;}
+.art-series::before{background:var(--art)!important;}
+.art-series{color:var(--art2)!important;}
+.art-header::after{background:linear-gradient(90deg,var(--art),var(--art2))!important;height:2px!important;}
+.art-title{letter-spacing:-0.5px!important;}
+.art-subtitle{color:var(--art2)!important;opacity:0.7;}
+
+/* ── Body canvas - light paper like the master file ── */
+.art-body-bg{background:#f5f7fa!important;}
+.art-body{max-width:860px!important;padding:56px 64px 72px!important;}
+
+/* ── Typography ── */
+.art-body p{
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:16px;line-height:1.85;color:#2c2c3e;
+  margin-bottom:16px;font-weight:400;
+}
+.art-body p strong{color:var(--art-ink);font-weight:600;}
+.art-body em{color:#2c2c3e;}
+
+.art-body h2{
+  font-family:'Playfair Display',Georgia,serif!important;
+  font-size:22px!important;font-weight:700!important;
+  color:var(--art-ink)!important;margin:40px 0 16px!important;
+  line-height:1.3!important;letter-spacing:0!important;
+}
+.art-body h2::before{display:none!important;}
+
+/* ── Pullquote ── */
+.art-body .pullquote{
+  border-left:4px solid var(--art2)!important;
+  background:var(--art-tint)!important;
+  padding:20px 28px!important;margin:32px 0!important;
+  font-family:'Source Serif 4',Georgia,serif!important;
+  font-size:18px!important;font-style:italic;
+  line-height:1.6!important;color:var(--art-ink)!important;
+}
+
+/* ── Callout - light purple card ── */
+body .art-body .callout{
+  background:var(--art-tint)!important;
+  border:1px solid var(--art-tint-border)!important;
+  border-left:5px solid var(--art)!important;
+  border-radius:0!important;
+  padding:20px 24px!important;margin:32px 0!important;
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:15px!important;line-height:1.7!important;
+  color:var(--art-ink)!important;
+}
+body .art-body .callout strong{color:var(--art)!important;font-weight:600!important;}
+
+/* ── Planning flow - three light step cards ── */
+body .art-body .planning-flow{
+  display:flex!important;align-items:stretch;gap:0;
+  margin:32px 0!important;padding:0!important;
+  background:transparent!important;
+  border:1px solid var(--art-divider)!important;
+  border-radius:8px!important;overflow:hidden;
+}
+body .art-body .flow-step{
+  flex:1;padding:20px 18px!important;text-align:center;
+  background:#fff!important;position:relative;
+  border:none!important;border-radius:0!important;margin:0!important;
+}
+body .art-body .flow-step + .flow-step{border-left:1px solid var(--art-divider)!important;}
+body .art-body .flow-step::after{
+  content:'→';position:absolute;right:-10px;top:50%;
+  transform:translateY(-50%);color:var(--art2);
+  font-size:16px;z-index:1;background:#fff;padding:2px 0;
+}
+body .art-body .flow-step:last-child::after{display:none;}
+body .art-body .flow-icon{font-size:24px!important;margin-bottom:8px!important;}
+body .art-body .flow-title{
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:10px!important;letter-spacing:2px!important;
+  text-transform:uppercase;color:var(--art)!important;
+  margin-bottom:6px!important;font-weight:600!important;
+}
+body .art-body .flow-desc{
+  font-size:12px!important;color:var(--art-muted)!important;line-height:1.5!important;
+}
+
+/* ── Three-role model - numbered light cards ── */
+body .art-body .three-roles{
+  margin:32px 0!important;padding:0!important;
+  display:flex!important;flex-direction:column;gap:0;
+  background:transparent!important;
+  border:1px solid var(--art-divider)!important;
+  border-radius:8px!important;overflow:hidden;
+}
+body .art-body .role-card{
+  display:flex!important;gap:0;padding:0!important;
+  background:transparent!important;border:none!important;
+}
+body .art-body .role-card + .role-card{border-top:1px solid var(--art-divider)!important;}
+body .art-body .role-num{
+  width:56px;flex-shrink:0;display:flex;
+  align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif!important;
+  font-size:22px!important;font-weight:900!important;color:#fff!important;
+}
+body .art-body .role-card:nth-child(1) .role-num{background:var(--art)!important;}
+body .art-body .role-card:nth-child(2) .role-num{background:#d4a017!important;}
+body .art-body .role-card:nth-child(3) .role-num{background:#2d4a8a!important;}
+body .art-body .role-body{padding:22px 24px!important;flex:1;background:#fff!important;}
+body .art-body .role-title{
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:11px!important;letter-spacing:2px!important;
+  text-transform:uppercase;margin-bottom:6px!important;font-weight:600!important;
+}
+body .art-body .role-card:nth-child(1) .role-title{color:var(--art)!important;}
+body .art-body .role-card:nth-child(2) .role-title{color:#9a7010!important;}
+body .art-body .role-card:nth-child(3) .role-title{color:#2d4a8a!important;}
+body .art-body .role-tag{
+  display:inline-block;
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:10px!important;padding:2px 10px!important;
+  border-radius:20px!important;margin-bottom:10px!important;
+  letter-spacing:1px!important;
+}
+body .art-body .role-card:nth-child(1) .role-tag{background:var(--art-tint)!important;color:var(--art)!important;border:1px solid var(--art-tint-border)!important;}
+body .art-body .role-card:nth-child(2) .role-tag{background:#fdf8ec!important;color:#9a7010!important;border:1px solid #e8d08a!important;}
+body .art-body .role-card:nth-child(3) .role-tag{background:#eef2fc!important;color:#2d4a8a!important;border:1px solid #c0cef5!important;}
+body .art-body .role-desc{
+  font-size:14px!important;line-height:1.7!important;
+  color:#444!important;margin-bottom:0!important;
+}
+
+/* ── Asking vs Telling - light split grid ── */
+body .art-body .ask-tell{
+  display:grid!important;grid-template-columns:1fr 1fr;gap:0;
+  margin:32px 0!important;padding:0!important;
+  background:transparent!important;
+  border:1px solid var(--art-divider)!important;
+  border-radius:8px!important;overflow:hidden;
+}
+body .art-body .ask-side,body .art-body .tell-side{
+  padding:24px!important;border:none!important;border-radius:0!important;
+}
+body .art-body .ask-side{
+  background:#fdf0e8!important;
+  border-right:1px solid var(--art-divider)!important;
+}
+body .art-body .tell-side{background:var(--art-tint)!important;}
+body .art-body .ask-tell-label{
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:10px!important;letter-spacing:3px!important;
+  text-transform:uppercase;margin-bottom:12px!important;font-weight:600!important;
+}
+body .art-body .ask-side .ask-tell-label{color:#c0392b!important;}
+body .art-body .tell-side .ask-tell-label{color:var(--art)!important;}
+body .art-body .ask-tell-example{
+  font-size:14px!important;font-style:italic;
+  line-height:1.7!important;color:#2c2c3e!important;
+  margin-bottom:12px!important;padding:12px!important;border-radius:4px!important;
+}
+body .art-body .ask-side .ask-tell-example{background:rgba(192,57,43,0.06)!important;}
+body .art-body .tell-side .ask-tell-example{background:rgba(112,48,160,0.06)!important;}
+body .art-body .ask-tell-result{
+  font-size:13px!important;color:var(--art-muted)!important;
+  line-height:1.6!important;margin-bottom:0!important;
+}
+
+/* ── Divider ── */
+.art-body .divider-line,.art-body hr{
+  border:none!important;height:1px;
+  background:var(--art-divider)!important;
+  margin:40px 0!important;
+}
+
+/* ── Citation superscripts ── */
+.art-body .cite{
+  display:inline;font-size:11px;vertical-align:super;line-height:0;
+  font-family:'JetBrains Mono',monospace;font-weight:700;
+}
+.art-body .cite a{
+  color:var(--art);text-decoration:none;
+  background:var(--art-divider);padding:0 3px;border-radius:2px;
+}
+.art-body .cite a:hover{opacity:0.7;}
+
+/* ── References - inside the article, master file style ── */
+.art-body .references-section{
+  margin:40px 0 0;padding:32px 0 0;
+  border-top:2px solid var(--art-divider);
+}
+.art-body .references-section h3{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--art-muted);margin-bottom:20px;
+}
+.art-body .ref-list{
+  list-style:none;padding:0;margin:0;
+  display:flex;flex-direction:column;gap:10px;
+}
+.art-body .ref-list li{
+  display:flex;gap:12px;align-items:flex-start;
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:13px;line-height:1.6;color:#444;
+}
+.art-body .ref-num{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;font-weight:700;color:var(--art);
+  flex-shrink:0;width:28px;padding-top:2px;
+}
+.art-body .ref-list a{
+  color:var(--art);text-decoration:none;
+  border-bottom:1px dotted var(--art);transition:opacity 0.15s;
+}
+.art-body .ref-list a:hover{opacity:0.7;}
+.art-body .ref-type{
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;letter-spacing:1px;text-transform:uppercase;
+  background:var(--art-divider);color:var(--art-muted);
+  padding:1px 6px;border-radius:3px;margin-left:6px;
+  flex-shrink:0;align-self:flex-start;margin-top:2px;
+}
+
+/* ── Prev/Next nav ── */
+.art-nav-link{transition:border-color 0.25s,transform 0.25s!important;}
+.art-nav-link:hover{border-color:var(--art)!important;transform:translateY(-2px)!important;}
+.art-nav-dir{color:var(--art)!important;}
+
+/* ── Responsive ── */
+@media(max-width:700px){
+  .art-body{padding:32px 24px 48px!important;}
+  .art-body h2{font-size:20px!important;}
+  body .art-body .ask-tell{grid-template-columns:1fr!important;}
+  body .art-body .ask-side{border-right:none!important;border-bottom:1px solid var(--art-divider)!important;}
+  body .art-body .planning-flow{flex-direction:column!important;}
+  body .art-body .flow-step::after{display:none!important;}
+  body .art-body .flow-step + .flow-step{border-left:none!important;border-top:1px solid var(--art-divider)!important;}
+}
+</style>
+</head>
+<body>
+<nav class="nav" id="nav">
+  <a href="../index.html" class="nav-logo"><em>ARTHA</em> Craft</a>
+  <div class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="../articles.html">Series</a>
+    <a href="../about.html">About</a>
+    <a href="https://substack.com" target="_blank" class="nav-follow">Subscribe</a>
+  </div>
+</nav>
+<div class="art-header">
+  <div class="art-header-bgnum">05</div>
+  <div class="art-header-inner">
+    <p class="art-series">Article 5 of 12 · ARTHA Craft</p>
+    <h1 class="art-title">I Stopped Asking the Agent What to Build. I Started Telling It. The Difference Was Everything.</h1>
+    <p class="art-subtitle">The code was correct. The UI was complete. Even I could not use it.</p>
+    <div class="art-meta">
+      <p class="art-meta-name">Jitander Singh Chauhan</p>
+      <div class="art-meta-sep"></div>
+      <p class="art-meta-role">Lead AI &amp; Data Technologist · Haystream</p>
+    </div>
+  </div>
+</div>
+<div class="art-body-bg">
+  <div class="art-body">
+    <p>There is a version of AI-assisted development that feels like collaboration.</p>
+    <p>You describe what you need. The agent interprets. It fills in the gaps, makes the calls, decides how things connect. It moves fast. It is confident. It produces something complete.</p>
+    <p>And for the first few weeks, that felt like exactly the right way to work.</p>
+    <p>Then I looked at what we had actually built.</p>
+    <p>The functionality was there. The code was correct. Every feature I had described had been implemented. But the interface, the thing a real user would sit in front of and try to use, was so technically oriented, so shaped by implementation logic rather than human logic, that even I struggled to navigate it the first few times.</p>
+    <p>Not because the agent had failed. Because I had given it the wrong brief.</p>
+
+    <div class="callout">
+      I had been asking: <strong>what should we build?</strong><br><br>
+      I should have been telling it: <strong>exactly what to build, for whom, and how it should feel to use.</strong><br><br>
+      Those are not the same thing. And the distance between them is where most AI-assisted development quietly goes wrong.
+    </div>
+
+    <h2>What I Had Misunderstood About the Agent's Role.</h2>
+
+    <p>The agent is an extraordinary executor. <span class="cite"><a href="#ref-1">[1]</a></span> Given a clear brief, it implements with speed and precision no human developer can match. Given an ambiguous brief, one that leaves design decisions open, it fills those gaps with its own judgment.</p>
+    <p>And its judgment is technical. Not wrong. Not careless. <strong>Technical.</strong></p>
+    <p>When left to decide how something should look or flow, the agent defaults to what is architecturally logical. What is clean from an implementation perspective. What makes sense if you understand the system from the inside out.</p>
+
+    <div class="pullquote">Real users do not understand the system from the inside out. They arrive from the outside. They make decisions in seconds based on what feels intuitive, not what is technically coherent.</div>
+
+    <p>The agent cannot simulate that perspective unless you give it that perspective. Explicitly. In the brief.</p>
+
+    <h2>The Go-Ahead Moment.</h2>
+
+    <p>Before any coding session, before the agent writes a single line of implementation code, the planning is done. Separately. Deliberately. In a session whose only job is to think, not to build.</p>
+
+    <div class="planning-flow">
+      <div class="flow-step">
+        <div class="flow-icon">🧠</div>
+        <div class="flow-title">Plan</div>
+        <div class="flow-desc">Design decisions locked. UI direction set. Every gap resolved.</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-icon">✅</div>
+        <div class="flow-title">Approve</div>
+        <div class="flow-desc">Architect reviews mockup. Signs off. Gives explicit go-ahead.</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-icon">⌨️</div>
+        <div class="flow-title">Execute</div>
+        <div class="flow-desc">Coding agent builds from locked brief. No invention. No gaps.</div>
+      </div>
+    </div>
+
+    <p>Two things happen in the planning session that never happened before:</p>
+    <p><strong>First: design decisions are locked.</strong> Not left open for the agent to interpret. Every decision about how the feature should work, look, and feel: answered, documented, approved before a line of code is written.</p>
+    <p><strong>Second: the UI is reviewed before the code exists.</strong> The interface is designed and mocked up as a visual artifact in a dedicated design step, and the architect reviews and approves it, or rejects it and asks for changes. Only after that approval does the go-ahead get given, and the approved design becomes an input to the brief, not something the coding agent invents while it builds. This single step eliminated an entire category of rework from every project I have run since.</p>
+
+    <h2>But Here Is What Most Teams Miss Entirely.</h2>
+
+    <p>The planning agent and the coding agent should not be the same session.</p>
+    <p>A planning session has a fundamentally different job than a coding session. Planning requires challenge, exploration, devil's advocacy, gap-surfacing. Coding requires precision and execution. The mindset that makes a great planning agent, curious, questioning, surface-every-gap, is actively unhelpful in a coding agent that needs to execute a locked brief without second-guessing it.</p>
+
+    <div class="pullquote">Most developers use one session for both, asking the same agent to think and build simultaneously. The result is an agent making design decisions while writing code, because nobody separated those responsibilities before the keyboard started moving.</div>
+
+    <h2>The Three-Role Model.</h2>
+
+    <div class="three-roles">
+      <div class="role-card">
+        <div class="role-num">1</div>
+        <div class="role-body">
+          <p class="role-title">The Deep Thinker</p>
+          <span class="role-tag">Planning Session</span>
+          <p class="role-desc">A dedicated session whose only job is to analyse the requirement, challenge assumptions, explore design options, surface every gap, and propose the UI direction. It never writes implementation code. It produces the brief: a structured document capturing every decision made and every question resolved.</p>
+        </div>
+      </div>
+      <div class="role-card">
+        <div class="role-num">2</div>
+        <div class="role-body">
+          <p class="role-title">The Architect</p>
+          <span class="role-tag">You</span>
+          <p class="role-desc">Reviews what the planning session produced. Makes the final calls. Locks the decisions. Approves the UI direction. Signs off on the brief. Only you give the go-ahead, and go-ahead means all decisions are locked, all questions are answered, all design choices have been made. Not mostly made. Completely made.</p>
+        </div>
+      </div>
+      <div class="role-card">
+        <div class="role-num">3</div>
+        <div class="role-body">
+          <p class="role-title">The Coding Agent</p>
+          <span class="role-tag">Execution Session</span>
+          <p class="role-desc">Receives the locked brief. Executes precisely. Makes no design decisions, because none remain to be made. Fills no gaps, because no gaps remain to be filled. Builds exactly what was designed. No more. No less. No interpretation required.</p>
+        </div>
+      </div>
+    </div>
+
+    <p>Three sessions. Three distinct jobs. No single session trying to think and build at the same time. This is not overhead. It is specialisation: the same principle that made human software teams better when architects were separated from developers.</p>
+
+    <h2>The Difference Between Asking and Telling.</h2>
+
+    <div class="ask-tell">
+      <div class="ask-side">
+        <p class="ask-tell-label">❌ Asking</p>
+        <p class="ask-tell-example">"Build me a user dashboard."</p>
+        <p class="ask-tell-result">An invitation to invent. The agent fills every gap with its own judgment: technically coherent, potentially misaligned with what your user actually needs.</p>
+      </div>
+      <div class="tell-side">
+        <p class="ask-tell-label">✅ Telling</p>
+        <p class="ask-tell-example">"Build a user dashboard with these specific sections, this layout, this navigation pattern, these data points in this priority order, as approved in the mockup from the planning session."</p>
+        <p class="ask-tell-result">A brief. The agent builds exactly what was designed. No more. No less. No interpretation required.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>The human holds the decisions. The agent holds the keyboard. <span class="cite"><a href="#ref-2">[2]</a></span></strong><br><br>
+      Not as a rule to follow. As a boundary to protect. Because every time that boundary blurs, the product pays for it later in rework, in confusion, in a UI that even the architect cannot immediately parse.
+    </div>
+
+    <hr class="divider-line">
+
+    <p>That gap, between asking and telling, is where most AI-assisted development goes wrong. And it goes wrong quietly, because the output looks complete. The code runs. The tests pass.</p>
+
+    <div class="pullquote">It just doesn't feel right to the person who has to use it.</div>
+
+    <div class="references-section" id="references">
+      <h3>Research &amp; Further Reading</h3>
+      <ul class="ref-list">
+        <li id="ref-1">
+          <span class="ref-num">[1]</span>
+          <span>Bridgers et al. (Google DeepMind), <a href="https://deepmindsafetyresearch.medium.com/human-ai-complementarity-a-goal-for-amplified-oversight-0ad8a44cae0a" target="_blank">"Human-AI Complementarity: A Goal for Amplified Oversight"</a>, arXiv:2510.26518, December 2024: Drawing on a meta-analysis of 106 studies (Vaccaro et al., <em>Nature Human Behaviour</em>, 2024): "On average, human-AI teams perform statistically worse than humans or AIs alone." Complementarity only emerges with explicit division of labor where humans own decisions and AI executes subtasks.</span>
+          <span class="ref-type">Academic Paper</span>
+        </li>
+        <li id="ref-2">
+          <span class="ref-num">[2]</span>
+          <span>Brooks, F.P., <a href="https://www.amazon.com/Mythical-Man-Month-Software-Engineering-Anniversary/dp/0201835959" target="_blank"><em>The Mythical Man-Month</em></a>, Addison-Wesley, 1995: "Conceptual integrity is the most important consideration in system design." Brooks argued that a single architect's vision, not committee design, is the hallmark of successful systems. In AI-assisted development, that architect is still human.</span>
+          <span class="ref-type">Book</span>
+        </li>
+        <li id="ref-3">
+          <span class="ref-num">[3]</span>
+          <span>Li et al., <a href="https://arxiv.org/abs/2305.06599" target="_blank">"Structured Chain-of-Thought Prompting for Code Generation"</a>, ACM TOSEM, 2025: Structured intermediate reasoning before code generation improved accuracy by up to 13.79% over standard prompting, confirming that separating design (planning) from execution (coding) produces measurably better output.</span>
+          <span class="ref-type">Academic Paper</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="art-nav-bg">
+  <div class="art-nav">
+    <a href="article-4.html" class="art-nav-link"><p class="art-nav-dir">← Previous</p><p class="art-nav-title">Article 4</p></a>
+    <a href="article-6.html" class="art-nav-link right"><p class="art-nav-dir">Next →</p><p class="art-nav-title">Article 6: I Replaced My Chat History With 5 Documents</p></a>
+  </div>
+</div>
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <p class="footer-brand">ARTHA Craft</p>
+      <p class="footer-desc">A 12-part series on structured AI-assisted development.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Series</h5>
+      <a href="../articles.html">All 12 articles</a>
+      <a href="article-1.html">Start with Article 1</a>
+    </div>
+    <div class="footer-col">
+      <h5>Author</h5>
+      <a href="../about.html">Jitander Singh Chauhan</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Jitander Singh Chauhan. All rights reserved.</p>
+    <p class="footer-tag">ARTHA Craft</p>
+  </div>
+</footer>
+<script>
+  var nav=document.getElementById('nav');
+  window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>40);});
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
