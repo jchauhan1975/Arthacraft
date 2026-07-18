@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Article 6: I Replaced My Entire Chat History With 5 Documents. ... | ARTHA Craft</title>
+<meta name="description" content="Not a wiki. Not a README. Five documents with specific jobs.">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+/* ══════════════════════════════════════════════════════════════════
+   ARTICLE 6 - I Replaced My Entire Chat History With 5 Documents
+   Color identity: Dark Green (#1a6b3a)
+   Body design matches the master article file (light paper theme)
+   ══════════════════════════════════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;600&display=swap');
+
+:root{
+  --art:#1a6b3a;
+  --art2:#2a9058;
+  --art-ink:#1a1a2e;
+  --art-muted:#6b6b7b;
+  --art-divider:#dde2ea;
+}
+
+/* ── Header ── */
+.art-header{background:linear-gradient(180deg,#0c0b09 0%,#100f0d 100%)!important;}
+.art-header-bgnum{color:rgba(26,107,58,0.08)!important;}
+.art-series::before{background:var(--art)!important;}
+.art-series{color:var(--art2)!important;}
+.art-header::after{background:linear-gradient(90deg,var(--art),var(--art2))!important;height:2px!important;}
+.art-title{letter-spacing:-0.5px!important;}
+.art-subtitle{color:var(--art2)!important;opacity:0.7;}
+
+/* ── Body canvas - light paper like the master file ── */
+.art-body-bg{background:#f5f7fa!important;}
+.art-body{max-width:860px!important;padding:56px 64px 72px!important;}
+
+/* ── Typography ── */
+.art-body p{
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:16px;line-height:1.85;color:#2c2c3e;
+  margin-bottom:16px;font-weight:400;
+}
+.art-body p strong{color:var(--art-ink);font-weight:600;}
+.art-body em{color:#2c2c3e;}
+
+.art-body h2{
+  font-family:'Playfair Display',Georgia,serif!important;
+  font-size:22px!important;font-weight:700!important;
+  color:var(--art-ink)!important;margin:40px 0 16px!important;
+  line-height:1.3!important;letter-spacing:0!important;
+}
+.art-body h2::before{display:none!important;}
+
+/* ── Pullquote ── */
+.art-body .pullquote{
+  border-left:4px solid var(--art2)!important;
+  background:#edfaf3!important;
+  padding:20px 28px!important;margin:32px 0!important;
+  font-family:'Source Serif 4',Georgia,serif!important;
+  font-size:18px!important;font-style:italic;
+  line-height:1.6!important;color:var(--art-ink)!important;
+}
+
+/* ── Callout - light green card ── */
+body .art-body .callout{
+  background:#eaf7ef!important;
+  border:1px solid #b8e8cc!important;
+  border-left:5px solid var(--art)!important;
+  border-radius:0!important;
+  padding:20px 24px!important;margin:32px 0!important;
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:15px!important;line-height:1.7!important;
+  color:var(--art-ink)!important;
+}
+body .art-body .callout strong{color:var(--art)!important;font-weight:600!important;}
+
+/* ── Layers Stack - five colored layer rows (from master, light) ── */
+body .art-body .layers-stack{
+  background:transparent!important;border:none!important;
+  padding:0!important;margin:32px 0!important;
+  display:flex;flex-direction:column;gap:8px;
+}
+body .art-body .layer-row{
+  display:flex;gap:0;
+  border-radius:6px;overflow:hidden;
+  border:1px solid var(--art-divider)!important;
+  background:white!important;
+  transition:transform 0.15s;
+}
+body .art-body .layer-row:hover{transform:translateX(4px);}
+body .art-body .layer-badge{
+  width:100px;flex-shrink:0;padding:16px 12px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+}
+body .art-body .layer-row:nth-child(1) .layer-badge{background:#f3edfb!important;}
+body .art-body .layer-row:nth-child(2) .layer-badge{background:#eef2fc!important;}
+body .art-body .layer-row:nth-child(3) .layer-badge{background:#fff8ec!important;}
+body .art-body .layer-row:nth-child(4) .layer-badge{background:#fdf0e8!important;}
+body .art-body .layer-row:nth-child(5) .layer-badge{background:#fdf5e8!important;}
+body .art-body .layer-l{
+  font-family:'JetBrains Mono',monospace;font-size:9px;
+  letter-spacing:2px;text-transform:uppercase;color:var(--art-muted);
+}
+body .art-body .layer-n{
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:26px;font-weight:900;line-height:1;
+}
+body .art-body .layer-row:nth-child(1) .layer-n{color:#6b3fa0;}
+body .art-body .layer-row:nth-child(2) .layer-n{color:#2d4a8a;}
+body .art-body .layer-row:nth-child(3) .layer-n{color:#c0392b;}
+body .art-body .layer-row:nth-child(4) .layer-n{color:#b5451b;}
+body .art-body .layer-row:nth-child(5) .layer-n{color:#9a7010;}
+body .art-body .layer-content{flex:1;padding:16px 20px;background:white!important;}
+body .art-body .layer-name{
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:11px!important;letter-spacing:2px!important;
+  text-transform:uppercase;font-weight:600!important;
+  margin-bottom:4px!important;line-height:1.4!important;
+}
+body .art-body .layer-row:nth-child(1) .layer-name{color:#6b3fa0!important;}
+body .art-body .layer-row:nth-child(2) .layer-name{color:#2d4a8a!important;}
+body .art-body .layer-row:nth-child(3) .layer-name{color:#c0392b!important;}
+body .art-body .layer-row:nth-child(4) .layer-name{color:#b5451b!important;}
+body .art-body .layer-row:nth-child(5) .layer-name{color:#9a7010!important;}
+body .art-body .layer-desc{
+  font-size:14px!important;line-height:1.65!important;
+  color:#444!important;margin-bottom:0!important;font-weight:400!important;
+}
+body .art-body .layer-file{
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  color:var(--art-muted)!important;margin-top:6px;display:block;
+  background:transparent!important;border:none!important;padding:0!important;
+}
+
+/* ── Seq Hero - light card (master LIGHT BOX OVERRIDES) ── */
+body .art-body .seq-hero{
+  background:#faf9f5!important;
+  border:1px solid #e9e2d6!important;
+  border-left:4px solid var(--art)!important;
+  border-radius:8px!important;box-shadow:none!important;
+  padding:0!important;margin:32px 0!important;
+  overflow:hidden;
+}
+body .art-body .seq-hero-header{
+  padding:20px 28px 16px!important;
+  border-bottom:1px solid #e9e2d6!important;
+}
+body .art-body .seq-hero-label{
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:10px!important;letter-spacing:3px!important;
+  text-transform:uppercase;color:var(--art)!important;
+  font-weight:600!important;margin-bottom:8px!important;
+}
+body .art-body .seq-hero-title{
+  font-family:'Playfair Display',Georgia,serif!important;
+  font-size:20px!important;font-weight:700!important;
+  color:var(--art-ink)!important;line-height:1.3!important;
+  margin-bottom:0!important;
+}
+body .art-body .seq-hero-body{padding:20px 28px!important;}
+body .art-body .seq-hero-body>p{
+  font-size:14px!important;line-height:1.75!important;
+  color:#3f3f4d!important;margin-bottom:12px!important;
+}
+body .art-body .seq-hero strong{color:var(--art-ink)!important;}
+
+/* ── Flow Diagram (inside seq-hero) - light ── */
+body .art-body .flow-diagram{
+  background:rgba(26,107,58,0.05)!important;
+  border:none!important;border-radius:6px!important;
+  padding:20px!important;margin:16px 0 0!important;
+}
+body .art-body .flow-step-row{
+  display:flex;align-items:flex-start;gap:12px;margin-bottom:12px;
+}
+body .art-body .flow-step-row:last-child{margin-bottom:0;}
+body .art-body .flow-arrow{
+  font-size:14px;color:var(--art)!important;
+  flex-shrink:0;margin-top:2px;width:20px;
+}
+body .art-body .flow-step-content{flex:1;}
+body .art-body .flow-step-title{
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:11px!important;letter-spacing:1px!important;
+  color:var(--art)!important;font-weight:600!important;
+  margin-bottom:2px!important;line-height:1.5!important;
+}
+body .art-body .flow-step-desc{
+  font-size:13px!important;line-height:1.5!important;
+  color:#3f3f4d!important;margin-bottom:0!important;
+}
+
+/* ── Before/After - red/green tinted cards ── */
+body .art-body .before-after{
+  background:transparent!important;border:none!important;
+  padding:0!important;margin:32px 0!important;
+  display:grid!important;grid-template-columns:1fr 1fr;gap:16px;
+}
+body .art-body .ba-card{padding:22px;border-radius:6px;}
+body .art-body .ba-card.before{
+  background:#fdf0e8!important;
+  border:1px solid #f0cdb0!important;
+  border-top:4px solid #c0392b!important;
+}
+body .art-body .ba-card.after{
+  background:#eaf7ef!important;
+  border:1px solid #b8e8cc!important;
+  border-top:4px solid var(--art)!important;
+}
+body .art-body .ba-label{
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:10px!important;letter-spacing:3px!important;
+  text-transform:uppercase;margin-bottom:12px!important;
+  font-weight:600!important;display:block;
+}
+body .art-body .ba-card.before .ba-label{color:#c0392b!important;}
+body .art-body .ba-card.after .ba-label{color:var(--art)!important;}
+body .art-body .ba-items{list-style:none;padding:0;margin:0;}
+body .art-body .ba-items li{
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:13px;line-height:1.6;color:#2c2c3e!important;
+  padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.06);
+  display:flex;gap:8px;align-items:flex-start;
+}
+body .art-body .ba-items li:last-child{border-bottom:none;}
+body .art-body .ba-items li .bi{flex-shrink:0;font-size:12px;margin-top:2px;}
+body .art-body .ba-card.before .bi{color:#c0392b!important;}
+body .art-body .ba-card.after .bi{color:var(--art)!important;}
+
+/* ── Divider ── */
+.art-body .divider-line,.art-body hr{
+  border:none!important;height:1px;
+  background:var(--art-divider)!important;
+  margin:40px 0!important;
+}
+
+/* ── Citation superscripts ── */
+.art-body .cite{
+  display:inline;font-size:11px;vertical-align:super;line-height:0;
+  font-family:'JetBrains Mono',monospace;font-weight:700;
+}
+.art-body .cite a{
+  color:var(--art);text-decoration:none;
+  background:var(--art-divider);padding:0 3px;border-radius:2px;
+}
+.art-body .cite a:hover{opacity:0.7;}
+
+/* ── References - inside the article, master file style ── */
+.art-body .references-section{
+  margin:40px 0 0;padding:32px 0 0;
+  border-top:2px solid var(--art-divider);
+}
+.art-body .references-section h3{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--art-muted);margin-bottom:20px;
+}
+.art-body .ref-list{
+  list-style:none;padding:0;margin:0;
+  display:flex;flex-direction:column;gap:10px;
+}
+.art-body .ref-list li{
+  display:flex;gap:12px;align-items:flex-start;
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:13px;line-height:1.6;color:#444;
+}
+.art-body .ref-num{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;font-weight:700;color:var(--art);
+  flex-shrink:0;width:28px;padding-top:2px;
+}
+.art-body .ref-list a{
+  color:var(--art);text-decoration:none;
+  border-bottom:1px dotted var(--art);transition:opacity 0.15s;
+}
+.art-body .ref-list a:hover{opacity:0.7;}
+.art-body .ref-type{
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;letter-spacing:1px;text-transform:uppercase;
+  background:var(--art-divider);color:var(--art-muted);
+  padding:1px 6px;border-radius:3px;margin-left:6px;
+  flex-shrink:0;align-self:flex-start;margin-top:2px;
+}
+
+/* ── Prev/Next nav ── */
+.art-nav-link{transition:border-color 0.25s,transform 0.25s!important;}
+.art-nav-link:hover{border-color:var(--art)!important;transform:translateY(-2px)!important;}
+.art-nav-dir{color:var(--art)!important;}
+
+/* ── Responsive ── */
+@media(max-width:700px){
+  .art-body{padding:32px 24px 48px!important;}
+  .art-body h2{font-size:20px!important;}
+  body .art-body .before-after{grid-template-columns:1fr!important;}
+  body .art-body .layer-badge{width:70px;}
+  body .art-body .seq-hero-header{padding:18px 20px 14px!important;}
+  body .art-body .seq-hero-body{padding:18px 20px!important;}
+}
+</style>
+</head>
+<body>
+<nav class="nav" id="nav">
+  <a href="../index.html" class="nav-logo"><em>ARTHA</em> Craft</a>
+  <div class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="../articles.html">Series</a>
+    <a href="../about.html">About</a>
+    <a href="https://substack.com" target="_blank" class="nav-follow">Subscribe</a>
+  </div>
+</nav>
+<div class="art-header">
+  <div class="art-header-bgnum">06</div>
+  <div class="art-header-inner">
+    <p class="art-series">Article 6 of 12 · ARTHA Craft</p>
+    <h1 class="art-title">I Replaced My Entire Chat History With 5 Documents. Nothing Has Fallen Through the Cracks Since.</h1>
+    <p class="art-subtitle">Not a wiki. Not a README. Five documents with specific jobs.</p>
+    <div class="art-meta">
+      <p class="art-meta-name">Jitander Singh Chauhan</p>
+      <div class="art-meta-sep"></div>
+      <p class="art-meta-role">Lead AI &amp; Data Technologist · Haystream</p>
+    </div>
+  </div>
+</div>
+<div class="art-body-bg">
+  <div class="art-body">
+    <p>At some point in every AI-assisted project, you hit the same wall.</p>
+    <p>You need to know what was built last week. You scroll back through chat history. You scan through sessions trying to find the decision. You piece together context from fragments of conversations that were never designed to be a record.</p>
+    <p>It works. Barely. Slowly. With no confidence that you found everything.</p>
+    <p>I spent weeks working that way. Then I stopped. Not because I found a better tool. Because I built a better system.</p>
+
+    <div class="callout">
+      Five documents. Specific jobs. Nothing duplicated. Nothing missed.<br><br>
+      And at the centre of all of it, <strong>one layer that makes the other four work.</strong>
+    </div>
+
+    <h2>Why Most Documentation Fails.</h2>
+    <p>Before the system, let me explain why people try documentation and give up.</p>
+    <p>They build a wiki. It grows. Nobody maintains it. It gets stale. They stop trusting it. They go back to chat history. Or they build a README. It captures the starting state. The project evolves. The README doesn't. Six months later it describes a system that no longer exists.</p>
+
+    <div class="pullquote">The problem is not documentation. The problem is documentation without a job. <span class="cite"><a href="#ref-1">[1]</a></span></div>
+
+    <p>Every document in this system has a job. A specific layer. A specific owner. A specific moment in the workflow where it is read, updated, and acted on. That is the difference between a wiki nobody trusts and a system that runs the project.</p>
+
+    <h2>The Five Layers.</h2>
+
+    <div class="layers-stack">
+      <div class="layer-row">
+        <div class="layer-badge"><span class="layer-l">Layer</span><span class="layer-n">1</span></div>
+        <div class="layer-content">
+          <p class="layer-name">The Constitution</p>
+          <p class="layer-desc">What the platform is and what it cannot be. Non-negotiables governing every decision system-wide. Module inventory. Architectural boundaries. The first thing any agent reads. Changes rarely, and only with an explicit decision, never a casual edit.</p>
+          <span class="layer-file">ContextSeed.MD</span>
+        </div>
+      </div>
+      <div class="layer-row">
+        <div class="layer-badge"><span class="layer-l">Layer</span><span class="layer-n">2</span></div>
+        <div class="layer-content">
+          <p class="layer-name">The Current State</p>
+          <p class="layer-desc">What has been built recently. What is partially done. What is in progress right now. Not a history, a rolling snapshot. Keeps the constitution lean while capturing the living reality of where the product actually is today.</p>
+          <span class="layer-file">SecondaryContextFeed.MD</span>
+        </div>
+      </div>
+      <div class="layer-row">
+        <div class="layer-badge"><span class="layer-l">Layer</span><span class="layer-n">3</span></div>
+        <div class="layer-content">
+          <p class="layer-name">The Session Bridge</p>
+          <p class="layer-desc">Written at the end of every session. Read at the start of the next one. Exact stop point. Locked decisions. Open questions. Standing reminders. And a paste-ready prompt: the architect pastes it verbatim into a new chat. No typing. No improvising. No blank slate.</p>
+          <span class="layer-file">CONTEXT-HANDOFF.MD</span>
+        </div>
+      </div>
+      <div class="layer-row">
+        <div class="layer-badge"><span class="layer-l">Layer</span><span class="layer-n">4</span></div>
+        <div class="layer-content">
+          <p class="layer-name">The Task Files</p>
+          <p class="layer-desc">One document per feature. Background, design decisions, cross-layer dependencies, scope boundary, gap resolution, go-ahead prompt. The coding agent executes from this, not from memory, not from chat, not from an improvised brief. Written in the planning session, locked before the coding session opens.</p>
+          <span class="layer-file">STEP-XXXX-name.MD</span>
+        </div>
+      </div>
+      <div class="layer-row">
+        <div class="layer-badge"><span class="layer-l">Layer</span><span class="layer-n">5</span></div>
+        <div class="layer-content">
+          <p class="layer-name">The Registers</p>
+          <p class="layer-desc">Three live documents: bugs, enhancements, deployment issues. Nothing gets fixed without a register entry first. Nothing gets forgotten because it lived only in a chat. Every item has an ID, severity, status, and traceable path to resolution. Reviewed at every sprint start.</p>
+          <span class="layer-file">BUGS.MD · ENHANCEMENTS.MD · DEPLOYMENT-ISSUES.MD</span>
+        </div>
+      </div>
+    </div>
+
+    <h2>Now: The Layer That Makes All the Others Work.</h2>
+
+    <p>Every layer above is valuable on its own. But without one specific layer, they are five useful documents that don't quite form a system.</p>
+
+    <div class="seq-hero">
+      <div class="seq-hero-header">
+        <p class="seq-hero-label">The Traceability Spine</p>
+        <p class="seq-hero-title">The Step Sequence: REQCHAIN-STEP-SEQUENCE.MD</p>
+      </div>
+      <div class="seq-hero-body">
+        <p>Every step ever designed lives here. Every step ever completed lives here. Status visible at a glance: done, in progress, pending design, blocked. History never lost: completed steps stay permanently. Nothing is ever removed.</p>
+        <p>But its job is bigger than a status tracker. Much bigger. The Step Sequence is the traceability spine of the entire methodology. Every other layer connects through it.</p>
+        <div class="flow-diagram">
+          <div class="flow-step-row">
+            <span class="flow-arrow">→</span>
+            <div class="flow-step-content">
+              <p class="flow-step-title">Planning Agent reads Step Sequence</p>
+              <p class="flow-step-desc">Sees what has been built, what is planned, where the next feature fits. Designs from position, not from a blank slate.</p>
+            </div>
+          </div>
+          <div class="flow-step-row">
+            <span class="flow-arrow">→</span>
+            <div class="flow-step-content">
+              <p class="flow-step-title">Design work produces a Task File</p>
+              <p class="flow-step-desc">Locked to a specific step ID. The ID is the traceability link: every decision traceable back to the step that created it.</p>
+            </div>
+          </div>
+          <div class="flow-step-row">
+            <span class="flow-arrow">→</span>
+            <div class="flow-step-content">
+              <p class="flow-step-title">Coding Agent executes against Task File</p>
+              <p class="flow-step-desc">Builds from a locked brief. No design decisions to make. No gaps to fill. No invention required.</p>
+            </div>
+          </div>
+          <div class="flow-step-row">
+            <span class="flow-arrow">→</span>
+            <div class="flow-step-content">
+              <p class="flow-step-title">Step marked DONE. Handoff written.</p>
+              <p class="flow-step-desc">History preserved. Context Handoff references the step ID. Next session opens, reads sequence, confirms position, picks up exactly.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pullquote">This is traceability. Not as a compliance exercise. As a working practice. <span class="cite"><a href="#ref-2">[2]</a></span> Every decision, every feature, every fix: traceable. Not because you went looking for it. Because the system never lost it.</div>
+
+    <h2>What This System Actually Gives You.</h2>
+
+    <div class="before-after">
+      <div class="ba-card before">
+        <p class="ba-label">Before the system</p>
+        <ul class="ba-items">
+          <li><span class="bi">→</span>New session starts with re-explaining</li>
+          <li><span class="bi">→</span>New developer starts with questions</li>
+          <li><span class="bi">→</span>New agent starts with assumptions</li>
+          <li><span class="bi">→</span>Decisions live in chat, or nowhere</li>
+          <li><span class="bi">→</span>Bugs fixed, refixed, unfixed</li>
+          <li><span class="bi">→</span>Speed without coherence</li>
+        </ul>
+      </div>
+      <div class="ba-card after">
+        <p class="ba-label">After the system</p>
+        <ul class="ba-items">
+          <li><span class="bi">→</span>New session reads 5 docs, reports position, executes</li>
+          <li><span class="bi">→</span>New developer reads same 5 docs: zero questions</li>
+          <li><span class="bi">→</span>New agent gets consistent structured context every time</li>
+          <li><span class="bi">→</span>Every decision traceable to a step ID</li>
+          <li><span class="bi">→</span>Every bug has a register entry and a fix path</li>
+          <li><span class="bi">→</span>Speed with coherence</li>
+        </ul>
+      </div>
+    </div>
+
+    <p>The speed does not come from the agent. <span class="cite"><a href="#ref-3">[3]</a></span> It comes from the system that feeds the agent. An agent with a clear, structured, complete brief moves faster and makes fewer mistakes than an agent trying to infer its brief from a chat history.</p>
+
+    <div class="callout">
+      <strong>The reading order matters.</strong><br><br>
+      Constitution → Current State → Session Bridge → Step Sequence → Task File<br><br>
+      Platform constraints before tactical instructions. An agent that reads the task file before the constitution will invent solutions that violate the architecture.
+    </div>
+
+    <hr class="divider-line">
+
+    <div class="pullquote">Five documents. Specific jobs. Connected by a traceability spine that never loses anything. That is the system.</div>
+
+    <div class="references-section" id="references">
+      <h3>Research &amp; Further Reading</h3>
+      <ul class="ref-list">
+        <li id="ref-1">
+          <span class="ref-num">[1]</span>
+          <span>Nygard, M., <a href="https://www.cognitect.com/blog/2011/11/15/documenting-architecture-decisions" target="_blank">"Documenting Architecture Decisions"</a>, Cognitect Blog, 2011: Introduced Architecture Decision Records (ADRs) with the insight that documentation only survives when it has a specific, daily job. Endorsed by <a href="https://martinfowler.com/bliki/ArchitectureDecisionRecord.html" target="_blank">Martin Fowler</a> (martinfowler.com, 2026).</span>
+          <span class="ref-type">Industry Article</span>
+        </li>
+        <li id="ref-2">
+          <span class="ref-num">[2]</span>
+          <span>Hutchins, E., <a href="https://mitpress.mit.edu/9780262581462/cognition-in-the-wild/" target="_blank"><em>Cognition in the Wild</em></a>, MIT Press, 1995: Studied distributed cognition in naval navigation teams. Found that documents and artifacts are not aids to cognition. They are part of the cognitive system itself. The document system described here is a distributed cognitive architecture for human-AI teams.</span>
+          <span class="ref-type">Book</span>
+        </li>
+        <li id="ref-3">
+          <span class="ref-num">[3]</span>
+          <span>Forsgren, Humble &amp; Kim, <a href="https://itrevolution.com/product/accelerate/" target="_blank"><em>Accelerate: The Science of Lean Software and DevOps</em></a>, IT Revolution Press, 2018: Based on 23,000+ data points from 2,000+ organizations, found that information flow and structured practices, not raw speed, predict software delivery performance. "High performers understand they don't have to trade speed for stability."</span>
+          <span class="ref-type">Book</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="art-nav-bg">
+  <div class="art-nav">
+    <a href="article-5.html" class="art-nav-link"><p class="art-nav-dir">← Previous</p><p class="art-nav-title">Article 5</p></a>
+    <a href="article-7.html" class="art-nav-link right"><p class="art-nav-dir">Next →</p><p class="art-nav-title">Article 7: This One Document Made It Surgical</p></a>
+  </div>
+</div>
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <p class="footer-brand">ARTHA Craft</p>
+      <p class="footer-desc">A 12-part series on structured AI-assisted development.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Series</h5>
+      <a href="../articles.html">All 12 articles</a>
+      <a href="article-1.html">Start with Article 1</a>
+    </div>
+    <div class="footer-col">
+      <h5>Author</h5>
+      <a href="../about.html">Jitander Singh Chauhan</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Jitander Singh Chauhan. All rights reserved.</p>
+    <p class="footer-tag">ARTHA Craft</p>
+  </div>
+</footer>
+<script>
+  var nav=document.getElementById('nav');
+  window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>40);});
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
