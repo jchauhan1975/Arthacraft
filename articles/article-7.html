@@ -144,7 +144,7 @@ body .art-body .pivot-card:last-child .pivot-label{color:var(--art)!important;}
 }
 .art-body .pivot-desc{font-size:13px!important;line-height:1.65!important;color:#555!important;margin-bottom:0!important;}
 
-/* ── Sections stack - numbered 10-section grid ── */
+/* ── Sections stack - numbered 12-section grid ── */
 body .art-body .sections-stack{
   background:transparent!important;border:none!important;
   padding:0!important;margin:32px 0!important;
@@ -176,7 +176,7 @@ body .art-body .sec-row.hero .sec-body{background:#fdf8f2!important;}
   font-size:11px!important;letter-spacing:2px!important;
   text-transform:uppercase;color:var(--art)!important;
   margin-bottom:4px!important;font-weight:600!important;
-  display:flex;align-items:center;gap:8px;
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
 }
 .art-body .sec-badge{
   font-family:'JetBrains Mono',monospace!important;
@@ -187,6 +187,65 @@ body .art-body .sec-row.hero .sec-body{background:#fdf8f2!important;}
   display:inline-block;
 }
 .art-body .sec-desc{font-size:13px!important;line-height:1.65!important;color:#444!important;margin-bottom:0!important;}
+.art-body .sec-prevent{
+  display:block;font-family:'JetBrains Mono',monospace!important;
+  font-size:9px!important;letter-spacing:0.5px!important;
+  text-transform:uppercase;color:var(--art)!important;
+  font-weight:500!important;margin-top:3px;
+}
+.art-body .sec-prevent-inline{
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:10px!important;letter-spacing:0.3px!important;
+  text-transform:uppercase;color:var(--art)!important;
+  font-weight:600!important;
+}
+
+/* ── Appendix pair - light card ── */
+body .art-body .appendix-pair{
+  margin:28px 0!important;
+  border:1px solid #e0dcd4!important;
+  border-radius:8px!important;
+  padding:20px 24px!important;
+  background:#faf9f5!important;
+}
+.art-body .appendix-label{
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:10px!important;letter-spacing:3px!important;
+  text-transform:uppercase;color:var(--art)!important;
+  font-weight:600!important;margin-bottom:16px!important;
+}
+.art-body .appendix-row{margin-bottom:16px;}
+.art-body .appendix-row:last-child{margin-bottom:0;}
+.art-body .appendix-name{
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:12px!important;font-weight:600!important;
+  letter-spacing:1px!important;color:var(--art-ink)!important;
+  margin-bottom:4px!important;
+}
+.art-body .appendix-desc{font-size:14px!important;line-height:1.7!important;color:#4a4a5a!important;margin-bottom:0!important;}
+.art-body .appendix-desc em{color:#4a4a5a!important;}
+
+/* ── Rules pair - two light cards ── */
+body .art-body .rules-pair{
+  display:grid!important;grid-template-columns:1fr 1fr;gap:16px;
+  margin:26px 0!important;background:transparent!important;
+  border:none!important;padding:0!important;
+}
+body .art-body .rule-item{
+  border:1px solid #e0dcd4!important;
+  border-left:4px solid var(--art)!important;
+  border-radius:8px!important;
+  padding:18px 20px!important;margin:0!important;
+  background:#faf9f5!important;
+}
+.art-body .rule-name{
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:11px!important;font-weight:600!important;
+  letter-spacing:1px!important;text-transform:uppercase;
+  color:var(--art)!important;margin-bottom:8px!important;
+}
+.art-body .rule-desc{font-size:14px!important;line-height:1.7!important;color:#3f3f4d!important;margin-bottom:0!important;}
+.art-body .rule-desc strong{color:var(--art-ink)!important;}
 
 /* ── Scope spotlight - light warm gradient card ── */
 body .art-body .scope-box{
@@ -323,6 +382,7 @@ body .art-body .combined-flow{
   .art-body{padding:32px 24px 48px!important;}
   .art-body h2{font-size:20px!important;}
   .art-body .two-pivots{grid-template-columns:1fr!important;}
+  body .art-body .rules-pair{grid-template-columns:1fr!important;}
   .art-body .origin-box{padding:24px 20px!important;}
   .art-body .scope-box{padding:24px 20px!important;}
   .art-body .flow-outcome{display:none!important;}
@@ -407,91 +467,138 @@ body .art-body .combined-flow{
 
     <h2>What Goes Inside a Task File.</h2>
 
-    <p>The task file has ten sections. Each one exists for a specific reason. None of them is optional.</p>
+    <p>The task file has twelve sections, a header, and two appendices. But the count is not the point, and getting fixated on it is how templates turn into bureaucracy.</p>
+
+    <div class="pullquote">The section set is derived from the distinct failure modes a task file must prevent, not from a target number. Every section exists to stop something specific that has actually gone wrong.</div>
+
+    <p>That is the test for whether a section earns its place: name the failure it prevents. If you cannot, delete it. Here is what each one stops.</p>
 
     <div class="sections-stack">
 
       <div class="sec-row">
         <div class="sec-num">01</div>
         <div class="sec-body">
-          <p class="sec-name">Background</p>
-          <p class="sec-desc">Why this step exists. What problem it solves. How it fits into the larger product. An agent that understands why something is being built makes better implementation decisions than one that only knows what to build.</p>
+          <p class="sec-name">Why <span class="sec-prevent">Prevents: a locally-sensible choice that is globally wrong</span></p>
+          <p class="sec-desc">What problem this solves and how it fits the larger product. An agent that understands why makes better implementation decisions than one that only knows what. Every claim carries evidence: a file and line, a count, measured output. "The console is dead" is an assertion. The failing call and the missing error handler is evidence. Keep it short: this is the section most likely to become decoration.</p>
         </div>
       </div>
 
       <div class="sec-row">
         <div class="sec-num">02</div>
         <div class="sec-body">
-          <p class="sec-name">Current State</p>
-          <p class="sec-desc">What already exists that this step builds on or modifies. Which files, APIs, modules. The agent is not starting from zero. It is extending a system. This section tells it exactly what that system looks like before this step begins.</p>
+          <p class="sec-name">Current State &amp; Re-Verify at Claim <span class="sec-prevent">Prevents: building on a tree that moved</span></p>
+          <p class="sec-desc">What already exists that this step extends, and then an executable gate the coder runs <em>before</em> building, because upstream work lands between authoring and claiming. Assert the negative too. Any mismatch is a blocker that stops the work and raises it, never something to adapt around silently.</p>
         </div>
       </div>
 
       <div class="sec-row">
         <div class="sec-num">03</div>
         <div class="sec-body">
-          <p class="sec-name">Design Decisions</p>
-          <p class="sec-desc">Every significant decision about how this feature should work, and, for anything with a UI, the approved interface design itself. Not left open for the agent to interpret. Answered. Documented. Locked: with the design attached as an input, not described in prose. The architect designs. The agent executes.</p>
+          <p class="sec-name">Decisions: Locked and Delegated <span class="sec-prevent">Prevents: the agent inventing what the architect should have decided</span></p>
+          <p class="sec-desc">Every significant decision already made, numbered so reports can cite them. For anything with a UI, the approved design is attached as an input. A pointer is not a design. Then the part most templates miss: what the coder may decide <em>alone, within stated bounds</em>. That is the legitimate third state between "architect decided" and "blocked". Without it, every micro-decision escalates. Bounded, never a dumping ground.</p>
         </div>
       </div>
 
-      <div class="sec-row hero">
+      <div class="sec-row">
         <div class="sec-num">04</div>
         <div class="sec-body">
-          <p class="sec-name">Scope Boundary <span class="sec-badge">Most Critical</span></p>
-          <p class="sec-desc">The explicit list of what this step does, and what it deliberately does not do. Every adjacent thing the agent might logically extend into, named and excluded. Without this the agent expands. With it, the agent builds exactly this, stops exactly here, and the adjacent feature stays intact for its own designed step.</p>
+          <p class="sec-name">Gaps &amp; Resolutions <span class="sec-prevent">Prevents: open questions discovered during coding</span></p>
+          <p class="sec-desc">Every open question found during planning <em>and its answer</em>. Blocking by default: resolved before go-ahead, not during. The real value is as an anti-complacency check: it forces the author to show they went looking. If nothing was found, say so explicitly. A silent gap and a closed one look identical on the page and mean opposite things.</p>
         </div>
       </div>
 
       <div class="sec-row">
         <div class="sec-num">05</div>
         <div class="sec-body">
-          <p class="sec-name">Cross-Layer Dependencies</p>
-          <p class="sec-desc">What the layer above expects. What the layer below provides. Which other modules this step touches. This section exists because of cross-layer breakage: the silent failures that happen when two sessions build against each other's assumptions without knowing it.</p>
+          <p class="sec-name">Scope Boundary <span class="sec-badge">Most Critical</span></p>
+          <p class="sec-desc"><span class="sec-prevent-inline">Prevents: the agent expanding into the neighbouring feature.</span> Two axes, and both are needed. The capability axis names every adjacent thing the agent might logically extend into, and excludes it. The file axis is the explicit path list bounding blast radius. Two axes because file scope is mechanically checkable and capability scope is not.</p>
         </div>
       </div>
 
       <div class="sec-row">
         <div class="sec-num">06</div>
         <div class="sec-body">
-          <p class="sec-name">Gap List</p>
-          <p class="sec-desc">Every open question identified during the planning session. Things that need answers before coding can start. The gap list is resolved before go-ahead, not discovered during coding.</p>
+          <p class="sec-name">Cross-Layer Contracts &amp; Composition <span class="sec-prevent">Prevents: silent breakage between sessions</span></p>
+          <p class="sec-desc">Distinct from scope: scope is a <em>permission</em> boundary, this is an <em>interface</em> obligation. What the layer above expects, what the layer below provides, and for every seam its signature and what is bound where. Then the part almost everyone forgets: state how this step is reached from a running entrypoint. A component nothing can reach is not delivered, however green its tests.</p>
         </div>
       </div>
 
       <div class="sec-row">
         <div class="sec-num">07</div>
         <div class="sec-body">
-          <p class="sec-name">Gap Resolution</p>
-          <p class="sec-desc">The answers to every item on the gap list. Filled in during the planning session between planning agent and architect. By the time go-ahead is given, this section is complete. No open questions remain.</p>
+          <p class="sec-name">Guardrails &amp; Laws <span class="sec-prevent">Prevents: quietly violating a product-wide invariant</span></p>
+          <p class="sec-desc">The non-negotiable rules of the system, written out <em>in full, in every task file</em>. Deny-by-default is code, not policy. An unrun check is a gap, never an implied pass. A degraded state must never be indistinguishable from a healthy one. The reader is a cold-start agent: it has not read your other files.</p>
         </div>
       </div>
 
       <div class="sec-row">
         <div class="sec-num">08</div>
         <div class="sec-body">
-          <p class="sec-name">Test Expectations</p>
-          <p class="sec-desc">What does passing look like for this step? Not just unit tests: what is the end-to-end behaviour that confirms the step is done? Written before the code, not after. Defines done before execution starts.</p>
+          <p class="sec-name">Execution Mode &amp; Stop Conditions <span class="sec-prevent">Prevents: silent workarounds</span></p>
+          <p class="sec-desc">How this runs, solo, parallel, backend-first, and the named conditions under which the agent must <em>stop and raise</em> rather than proceed: two locked instructions conflict, an upstream contract does not match the delivered code, a law cannot be honoured without weakening it. None of these is ever resolved by weakening a test, padding an allowlist, or relabelling a failure. When several agents work one branch, this section also carries the ownership map and commit discipline.</p>
         </div>
       </div>
 
       <div class="sec-row">
         <div class="sec-num">09</div>
         <div class="sec-body">
-          <p class="sec-name">Onboarding Impact</p>
-          <p class="sec-desc">Which documentation changes when this step is complete? Which file paths, API routes, or behaviours are different after this step? The agent updates these docs in the same commit. Not in a follow-up. Not later. The same commit.</p>
+          <p class="sec-name">Waves, TODO Board &amp; Checkpoints <span class="sec-prevent">Prevents: big-bang delivery and invisible progress</span></p>
+          <p class="sec-desc">Work split into independently committable, independently verifiable chunks. A live TODO board the agent maintains <em>while work is in flight</em>, not reconstructed at the end, so progress is visible rather than reported. And a checkpoint printed at the end of every wave: what was built, what proved it, the evidence, and any surprise. Naming "surprise" as a required field is what surfaces the second root cause instead of burying it.</p>
         </div>
       </div>
 
       <div class="sec-row">
         <div class="sec-num">10</div>
         <div class="sec-body">
-          <p class="sec-name">Go-Ahead Prompt</p>
-          <p class="sec-desc">The exact prompt the architect pastes into the coding agent session to begin execution. Written during planning, reviewed, locked. Go-ahead means: all decisions made, all gaps resolved, all designs approved. Execute precisely.</p>
+          <p class="sec-name">Acceptance: Static <span class="sec-prevent">Prevents: "done" being a claim rather than a state</span></p>
+          <p class="sec-desc">What proves it <em>without a running stack</em>, as a ticked checklist written before the code. Named tests, the exact test function, so "did they write the load-bearing test?" is a lookup, not an opinion. Clean type-check, lint and build. Proof the diff stayed inside the declared file scope. Docs and registers updated in the <em>same</em> commit, not a follow-up.</p>
+        </div>
+      </div>
+
+      <div class="sec-row">
+        <div class="sec-num">11</div>
+        <div class="sec-body">
+          <p class="sec-name">Acceptance: Runtime <span class="sec-prevent">Prevents: static proof standing in for runtime proof</span></p>
+          <p class="sec-desc">What requires the artifact <em>actually running</em>: real journeys on a production build, live data through the real API. Never merged into the static section. Each item is observed, or explicitly marked deferred with its reason, never implied to have passed. This exists because screens passed their unit tests and then rendered an endless loading skeleton in a browser. "I proved the code" kept standing in for "I proved the running thing."</p>
+        </div>
+      </div>
+
+      <div class="sec-row">
+        <div class="sec-num">12</div>
+        <div class="sec-body">
+          <p class="sec-name">Report Contract <span class="sec-prevent">Prevents: verification resting on trust</span></p>
+          <p class="sec-desc">The exact evidence handed back, named in advance so the agent knows before it starts what it will be asked to show. Not "it works": the commit and its diff, the before/after impact, the re-verification output pasted in, what ran versus what was deferred, what was <em>not</em> changed and why, and every judgement call flagged rather than guessed. Lead with the observation that needs an owner decision. Never claim a green you did not observe.</p>
         </div>
       </div>
 
     </div>
+
+    <div class="appendix-pair">
+      <p class="appendix-label">And two appendices</p>
+      <div class="appendix-row">
+        <p class="appendix-name">A · Go-Ahead Prompt</p>
+        <p class="appendix-desc">The exact prompt pasted into the coding session: written during planning, reviewed, locked, self-contained. It is an appendix rather than a section because it is <em>derived</em> from the twelve, not a peer of them. When this drifted into something improvised at send time, it produced an instruction that made its own task impossible.</p>
+      </div>
+      <div class="appendix-row">
+        <p class="appendix-name">B · Amendments</p>
+        <p class="appendix-desc">Spec changes made before the work is claimed, recorded with a version bump and a date, so the spec can evolve without rewriting history. Once an agent is running, changes go to the ledger, never silently into the file underneath it.</p>
+      </div>
+    </div>
+
+    <h2>Two Rules That Override Convenience.</h2>
+
+    <div class="rules-pair">
+      <div class="rule-item">
+        <p class="rule-name">Every task file is self-contained</p>
+        <p class="rule-desc">Each one goes to a fresh agent with no shared context. Never replace content with a pointer to another document: referenced files get loaded partially, or not at all. Repeating the guardrails across every file is <strong>correct, not waste</strong>. DRY is a source-code principle, and it is wrong here.</p>
+      </div>
+      <div class="rule-item">
+        <p class="rule-name">One file per step</p>
+        <p class="rule-desc">An earlier version split the brief from its pre-implementation research. They drifted, and newer files silently dropped whole sections. One file means one place to drift, and drift you can see.</p>
+      </div>
+    </div>
+
+    <p>Sections may be brief when a step is small. But an omission has to carry its reason, "none, searched, none found", because a silent gap and a closed one look identical in a file and mean opposite things.</p>
 
     <h2>The Scope Boundary Deserves Its Own Moment.</h2>
 
@@ -517,7 +624,7 @@ body .art-body .combined-flow{
         </div>
         <div class="flow-row">
           <div class="flow-step-tag">Task File</div>
-          <div class="flow-detail">Planning agent designs the feature. All 10 sections completed. Gaps surfaced and resolved. UI direction approved. Scope boundary set. Go-ahead prompt written.</div>
+          <div class="flow-detail">Planning agent designs the feature. All 12 sections completed. Gaps surfaced and resolved. UI direction approved. Scope boundary set. Go-ahead prompt written.</div>
           <div class="flow-outcome">Designed</div>
         </div>
         <div class="flow-row">
@@ -554,7 +661,7 @@ body .art-body .combined-flow{
       <ul class="ref-list">
         <li id="ref-1">
           <span class="ref-num">[1]</span>
-          <span>Li et al., <a href="https://arxiv.org/abs/2305.06599" target="_blank">"Structured Chain-of-Thought Prompting for Code Generation"</a>, ACM TOSEM, 2025: Demonstrated that structuring AI reasoning using program structure before generating code improved accuracy by up to 13.79% across ChatGPT, Codex, and GPT-4-turbo. Human evaluators consistently preferred structured-prompt output. The task file is the structured brief that produces this effect at the workflow level.</span>
+          <span>Li et al., <a href="https://arxiv.org/abs/2305.06599" target="_blank">"Structured Chain-of-Thought Prompting for Code Generation"</a>, ACM TOSEM, 2025: Demonstrated that structuring AI reasoning using program structure before generating code improved accuracy by up to 13.79% across every model evaluated. Human evaluators consistently preferred structured-prompt output. The task file is the structured brief that produces this effect at the workflow level.</span>
           <span class="ref-type">Academic Paper</span>
         </li>
         <li id="ref-2">
