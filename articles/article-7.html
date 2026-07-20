@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Article 7: My AI Agent Was Guessing. This One Document Made It ... | ARTHA Craft</title>
+<meta name="description" content="A codebase full of 80% complete features. One template ended that permanently.">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+/* ══════════════════════════════════════════════════════════════════
+   ARTICLE 7 - My AI Agent Was Guessing. This One Document Made It Surgical.
+   Color identity: Saddle Brown (#8b4513)
+   Body design matches the master article file (light paper theme)
+   ══════════════════════════════════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;600&display=swap');
+
+:root{
+  --art:#8b4513;
+  --art2:#b06830;
+  --art-ink:#1a1a2e;
+  --art-muted:#6b6b7b;
+  --art-divider:#dde2ea;
+}
+
+/* ── Header ── */
+.art-header{background:linear-gradient(180deg,#0c0b09 0%,#100f0d 100%)!important;}
+.art-header-bgnum{color:rgba(139,69,19,0.08)!important;}
+.art-series::before{background:var(--art)!important;}
+.art-series{color:var(--art2)!important;}
+.art-header::after{background:linear-gradient(90deg,var(--art),var(--art2))!important;height:2px!important;}
+.art-title{letter-spacing:-0.5px!important;}
+.art-subtitle{color:var(--art2)!important;opacity:0.7;}
+
+/* ── Body canvas - light paper like the master file ── */
+.art-body-bg{background:#f5f7fa!important;}
+.art-body{max-width:860px!important;padding:56px 64px 72px!important;}
+
+/* ── Typography ── */
+.art-body p{
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:16px;line-height:1.85;color:#2c2c3e;
+  margin-bottom:16px;font-weight:400;
+}
+.art-body p strong{color:var(--art-ink);font-weight:600;}
+.art-body em{color:#2c2c3e;}
+
+.art-body h2{
+  font-family:'Playfair Display',Georgia,serif!important;
+  font-size:22px!important;font-weight:700!important;
+  color:var(--art-ink)!important;margin:40px 0 16px!important;
+  line-height:1.3!important;letter-spacing:0!important;
+}
+.art-body h2::before{display:none!important;}
+
+/* ── Pullquote ── */
+.art-body .pullquote{
+  border-left:4px solid var(--art2)!important;
+  background:#fdf0e0!important;
+  padding:20px 28px!important;margin:32px 0!important;
+  font-family:'Source Serif 4',Georgia,serif!important;
+  font-size:18px!important;font-style:italic;
+  line-height:1.6!important;color:var(--art-ink)!important;
+}
+
+/* ── Callout - light warm card ── */
+body .art-body .callout{
+  background:#fdf0e0!important;
+  border:1px solid #e8c898!important;
+  border-left:5px solid var(--art)!important;
+  border-radius:0!important;
+  padding:20px 24px!important;margin:32px 0!important;
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:15px!important;line-height:1.7!important;
+  color:var(--art-ink)!important;
+}
+body .art-body .callout strong{color:var(--art)!important;font-weight:600!important;}
+
+/* ── Origin box - three-phase origin story, light card ── */
+body .art-body .origin-box{
+  background:#faf9f5!important;
+  border:1px solid #e9e2d6!important;
+  border-left:4px solid var(--art)!important;
+  border-radius:8px!important;
+  padding:32px 36px!important;margin:32px 0!important;
+  box-shadow:none!important;
+}
+.art-body .origin-label{
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:10px!important;letter-spacing:3px!important;
+  text-transform:uppercase;color:var(--art)!important;
+  font-weight:600!important;margin-bottom:24px!important;
+}
+.art-body .origin-row{
+  display:flex;gap:16px;align-items:flex-start;
+  margin-bottom:20px;padding-bottom:20px;
+  border-bottom:1px solid #e9e2d6;
+}
+.art-body .origin-row:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none;}
+.art-body .origin-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;margin-top:5px;}
+.art-body .origin-dot.red{background:#c0392b;box-shadow:0 0 0 3px rgba(192,57,43,0.15);}
+.art-body .origin-dot.gold{background:#d4a017;box-shadow:0 0 0 3px rgba(212,160,23,0.15);}
+.art-body .origin-dot.green{background:#15803d;box-shadow:0 0 0 3px rgba(21,128,61,0.15);}
+.art-body .origin-content{flex:1;}
+.art-body .origin-title{
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:11px!important;letter-spacing:2px!important;
+  text-transform:uppercase;margin-bottom:6px!important;
+  font-weight:600!important;
+}
+.art-body .origin-title.red{color:#c0392b!important;}
+.art-body .origin-title.gold{color:#b45309!important;}
+.art-body .origin-title.green{color:#15803d!important;}
+.art-body .origin-desc{
+  font-size:14px!important;line-height:1.7!important;
+  color:#3f3f4d!important;margin-bottom:0!important;
+}
+.art-body .origin-box strong{color:var(--art-ink)!important;}
+
+/* ── Two pivots - side-by-side light cards ── */
+body .art-body .two-pivots{
+  background:transparent!important;border:none!important;
+  padding:0!important;margin:32px 0!important;
+  display:grid!important;grid-template-columns:1fr 1fr;gap:16px;
+}
+body .art-body .pivot-card{
+  padding:22px!important;border-radius:6px!important;
+  border:1px solid var(--art-divider)!important;
+  background:#fff!important;
+}
+body .art-body .pivot-card:first-child{border-top:4px solid #d4a017!important;}
+body .art-body .pivot-card:last-child{border-top:4px solid var(--art)!important;}
+.art-body .pivot-label{
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:10px!important;letter-spacing:2px!important;
+  text-transform:uppercase;margin-bottom:8px!important;font-weight:600!important;
+}
+body .art-body .pivot-card:first-child .pivot-label{color:#9a7010!important;}
+body .art-body .pivot-card:last-child .pivot-label{color:var(--art)!important;}
+.art-body .pivot-title{
+  font-family:'Playfair Display',Georgia,serif!important;
+  font-size:17px!important;font-weight:700!important;
+  margin-bottom:8px!important;color:var(--art-ink)!important;
+  line-height:1.3!important;
+}
+.art-body .pivot-desc{font-size:13px!important;line-height:1.65!important;color:#555!important;margin-bottom:0!important;}
+
+/* ── Sections stack - numbered 10-section grid ── */
+body .art-body .sections-stack{
+  background:transparent!important;border:none!important;
+  padding:0!important;margin:32px 0!important;
+  display:flex;flex-direction:column;gap:6px;
+}
+body .art-body .sec-row{
+  display:flex;gap:0;border-radius:6px;overflow:hidden;
+  border:1px solid var(--art-divider)!important;
+  background:#fff!important;
+  padding:0!important;margin:0!important;
+  transition:all 0.15s;
+}
+body .art-body .sec-row:hover{transform:translateX(3px);border-color:var(--art2)!important;}
+body .art-body .sec-row.hero{
+  border:2px solid var(--art)!important;
+  box-shadow:0 2px 16px rgba(139,69,19,0.18)!important;
+}
+.art-body .sec-num{
+  width:48px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:14px!important;font-weight:700!important;
+  color:#fff!important;background:var(--art-muted)!important;
+}
+body .art-body .sec-row.hero .sec-num{background:var(--art)!important;width:56px;font-size:17px!important;}
+.art-body .sec-body{flex:1;padding:14px 18px;background:transparent!important;}
+body .art-body .sec-row.hero .sec-body{background:#fdf8f2!important;}
+.art-body .sec-name{
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:11px!important;letter-spacing:2px!important;
+  text-transform:uppercase;color:var(--art)!important;
+  margin-bottom:4px!important;font-weight:600!important;
+  display:flex;align-items:center;gap:8px;
+}
+.art-body .sec-badge{
+  font-family:'JetBrains Mono',monospace!important;
+  background:var(--art)!important;color:#fff!important;
+  font-size:9px!important;padding:2px 8px!important;
+  border-radius:20px!important;letter-spacing:1px!important;
+  font-weight:600!important;border:none!important;
+  display:inline-block;
+}
+.art-body .sec-desc{font-size:13px!important;line-height:1.65!important;color:#444!important;margin-bottom:0!important;}
+
+/* ── Scope spotlight - light warm gradient card ── */
+body .art-body .scope-box{
+  background:linear-gradient(135deg,#fdf0e0,#fdf8f2)!important;
+  border:2px solid var(--art)!important;
+  border-radius:8px!important;
+  padding:28px 32px!important;margin:32px 0!important;
+}
+.art-body .scope-label{
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:10px!important;letter-spacing:3px!important;
+  text-transform:uppercase;color:var(--art)!important;
+  font-weight:600!important;margin-bottom:10px!important;
+}
+.art-body .scope-title{
+  font-family:'Playfair Display',Georgia,serif!important;
+  font-size:21px!important;font-weight:700!important;
+  color:var(--art-ink)!important;margin-bottom:16px!important;
+  line-height:1.3!important;
+}
+body .art-body .scope-box p{font-size:15px!important;line-height:1.75!important;color:#2c2c3e!important;margin-bottom:12px!important;}
+body .art-body .scope-box p:last-child{margin-bottom:0!important;}
+body .art-body .scope-box p strong{color:var(--art)!important;font-weight:600!important;}
+
+/* ── Combined flow - light table layout ── */
+body .art-body .combined-flow{
+  background:#fff!important;
+  border:1px solid var(--art-divider)!important;
+  border-radius:8px!important;overflow:hidden;
+  padding:0!important;margin:32px 0!important;
+}
+.art-body .flow-header{
+  background:var(--art)!important;color:#fff!important;
+  padding:12px 20px!important;margin:0!important;
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:11px!important;letter-spacing:2px!important;
+  text-transform:uppercase;border-bottom:none!important;
+}
+.art-body .flow-rows{background:#fff!important;padding:0!important;}
+.art-body .flow-row{
+  display:flex;align-items:flex-start;gap:0;
+  padding:0!important;margin:0!important;
+  border-bottom:1px solid var(--art-divider)!important;
+}
+.art-body .flow-row:last-child{border-bottom:none!important;}
+.art-body .flow-step-tag{
+  width:130px;flex-shrink:0;padding:14px 16px!important;
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:10px!important;letter-spacing:1px!important;
+  text-transform:uppercase;color:var(--art)!important;
+  background:#fdf8f2!important;
+  border-right:1px solid var(--art-divider)!important;
+  font-weight:600!important;
+  display:flex;align-items:center;
+}
+.art-body .flow-detail{
+  flex:1;padding:14px 18px!important;
+  font-size:13px!important;line-height:1.6!important;
+  color:#2c2c3e!important;margin:0!important;
+}
+.art-body .flow-outcome{
+  width:120px;flex-shrink:0;padding:14px 12px!important;
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:10px!important;letter-spacing:1px!important;
+  text-transform:uppercase;text-align:center;
+  border-left:1px solid var(--art-divider)!important;
+  display:flex;align-items:center;justify-content:center;
+  background:#fdf8f2!important;color:#15803d!important;
+  font-weight:600!important;
+}
+
+/* ── Divider ── */
+.art-body .divider-line,.art-body hr{
+  border:none!important;height:1px;
+  background:var(--art-divider)!important;
+  margin:40px 0!important;
+}
+
+/* ── Citation superscripts ── */
+.art-body .cite{
+  display:inline;font-size:11px;vertical-align:super;line-height:0;
+  font-family:'JetBrains Mono',monospace;font-weight:700;
+}
+.art-body .cite a{
+  color:var(--art);text-decoration:none;
+  background:var(--art-divider);padding:0 3px;border-radius:2px;
+}
+.art-body .cite a:hover{opacity:0.7;}
+
+/* ── References - inside the article, master file style ── */
+.art-body .references-section{
+  margin:40px 0 0;padding:32px 0 0;
+  border-top:2px solid var(--art-divider);
+}
+.art-body .references-section h3{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--art-muted);margin-bottom:20px;
+}
+.art-body .ref-list{
+  list-style:none;padding:0;margin:0;
+  display:flex;flex-direction:column;gap:10px;
+}
+.art-body .ref-list li{
+  display:flex;gap:12px;align-items:flex-start;
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:13px;line-height:1.6;color:#444;
+}
+.art-body .ref-num{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;font-weight:700;color:var(--art);
+  flex-shrink:0;width:28px;padding-top:2px;
+}
+.art-body .ref-list a{
+  color:var(--art);text-decoration:none;
+  border-bottom:1px dotted var(--art);transition:opacity 0.15s;
+}
+.art-body .ref-list a:hover{opacity:0.7;}
+.art-body .ref-type{
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;letter-spacing:1px;text-transform:uppercase;
+  background:var(--art-divider);color:var(--art-muted);
+  padding:1px 6px;border-radius:3px;margin-left:6px;
+  flex-shrink:0;align-self:flex-start;margin-top:2px;
+}
+
+/* ── Prev/Next nav ── */
+.art-nav-link{transition:border-color 0.25s,transform 0.25s!important;}
+.art-nav-link:hover{border-color:var(--art)!important;transform:translateY(-2px)!important;}
+.art-nav-dir{color:var(--art)!important;}
+
+/* ── Responsive ── */
+@media(max-width:700px){
+  .art-body{padding:32px 24px 48px!important;}
+  .art-body h2{font-size:20px!important;}
+  .art-body .two-pivots{grid-template-columns:1fr!important;}
+  .art-body .origin-box{padding:24px 20px!important;}
+  .art-body .scope-box{padding:24px 20px!important;}
+  .art-body .flow-outcome{display:none!important;}
+  .art-body .flow-step-tag{width:100px;}
+}
+</style>
+</head>
+<body>
+<nav class="nav" id="nav">
+  <a href="../index.html" class="nav-logo"><em>ARTHA</em> Craft</a>
+  <div class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="../articles.html">Series</a>
+    <a href="../about.html">About</a>
+    <a href="https://substack.com" target="_blank" class="nav-follow">Subscribe</a>
+  </div>
+</nav>
+<div class="art-header">
+  <div class="art-header-bgnum">07</div>
+  <div class="art-header-inner">
+    <p class="art-series">Article 7 of 12 · ARTHA Craft</p>
+    <h1 class="art-title">My AI Agent Was Guessing. This One Document Made It Surgical. Here's the Template That Did It.</h1>
+    <p class="art-subtitle">A codebase full of 80% complete features. One template ended that permanently.</p>
+    <div class="art-meta">
+      <p class="art-meta-name">Jitander Singh Chauhan</p>
+      <div class="art-meta-sep"></div>
+      <p class="art-meta-role">Lead AI &amp; Data Technologist · Haystream</p>
+    </div>
+  </div>
+</div>
+<div class="art-body-bg">
+  <div class="art-body">
+    <p>Let me tell you how this methodology actually started.</p>
+    <p>Not with a framework. Not with a plan. With a wall.</p>
+    <p>I was building with AI agents the way most people do, describing what I wanted, letting the agent build, moving fast. Features were appearing. The demo was growing. The speed was genuinely exciting.</p>
+    <p>Then progress stalled.</p>
+
+    <div class="origin-box">
+      <p class="origin-label">The Origin Story: Three Phases</p>
+
+      <div class="origin-row">
+        <div class="origin-dot red"></div>
+        <div class="origin-content">
+          <p class="origin-title red">Phase 1: Pure Vibe Coding</p>
+          <p class="origin-desc">Fast output. Features appearing in hours. Agent building confidently in every session. No structure. No design before build. No defined destination. Progress felt real.</p>
+        </div>
+      </div>
+
+      <div class="origin-row">
+        <div class="origin-dot gold"></div>
+        <div class="origin-content">
+          <p class="origin-title gold">Phase 2: The Wall</p>
+          <p class="origin-desc">Codebase full of 80% complete features. Functionality working in isolation, broken in combination. Sessions starting new things without finishing old ones. Agent guessing at destinations that hadn't been defined. Progress stalled.</p>
+        </div>
+      </div>
+
+      <div class="origin-row">
+        <div class="origin-dot green"></div>
+        <div class="origin-content">
+          <p class="origin-title green">Phase 3: Two Things at Once</p>
+          <p class="origin-desc">The Step Sequence gave visibility across everything. The Task File gave each step a complete design before coding started. Progress became measurable, predictable, and continuous. The guessing stopped.</p>
+        </div>
+      </div>
+    </div>
+
+    <h2>Two Things Changed at the Same Time.</h2>
+
+    <div class="two-pivots">
+      <div class="pivot-card">
+        <p class="pivot-label">Pivot 1: The What</p>
+        <p class="pivot-title">The Step Sequence</p>
+        <p class="pivot-desc">A complete, ordered list of every feature the product needed. Not a rough backlog. Every item a discrete, buildable unit of work with a clear status. For the first time: visibility across the whole product. What was done. What was in progress. What hadn't been started. What was blocking something else.</p>
+      </div>
+      <div class="pivot-card">
+        <p class="pivot-label">Pivot 2: The How</p>
+        <p class="pivot-title">The Task File</p>
+        <p class="pivot-desc">A structured document, one per step, that translates a feature from "here's what I want" into "here is everything the agent needs to build this exactly right, the first time." Not a prompt. A design document. Written before the coding session opens. Reviewed and locked by the architect.</p>
+      </div>
+    </div>
+
+    <div class="pullquote">The Step Sequence gave me the what. The task file gave the agent the how. Together, the stalling stopped. The breakages stopped. Progress became something I could measure and predict.</div>
+
+    <h2>What Goes Inside a Task File.</h2>
+
+    <p>The task file has ten sections. Each one exists for a specific reason. None of them is optional.</p>
+
+    <div class="sections-stack">
+
+      <div class="sec-row">
+        <div class="sec-num">01</div>
+        <div class="sec-body">
+          <p class="sec-name">Background</p>
+          <p class="sec-desc">Why this step exists. What problem it solves. How it fits into the larger product. An agent that understands why something is being built makes better implementation decisions than one that only knows what to build.</p>
+        </div>
+      </div>
+
+      <div class="sec-row">
+        <div class="sec-num">02</div>
+        <div class="sec-body">
+          <p class="sec-name">Current State</p>
+          <p class="sec-desc">What already exists that this step builds on or modifies. Which files, APIs, modules. The agent is not starting from zero. It is extending a system. This section tells it exactly what that system looks like before this step begins.</p>
+        </div>
+      </div>
+
+      <div class="sec-row">
+        <div class="sec-num">03</div>
+        <div class="sec-body">
+          <p class="sec-name">Design Decisions</p>
+          <p class="sec-desc">Every significant decision about how this feature should work, and, for anything with a UI, the approved interface design itself. Not left open for the agent to interpret. Answered. Documented. Locked: with the design attached as an input, not described in prose. The architect designs. The agent executes.</p>
+        </div>
+      </div>
+
+      <div class="sec-row hero">
+        <div class="sec-num">04</div>
+        <div class="sec-body">
+          <p class="sec-name">Scope Boundary <span class="sec-badge">Most Critical</span></p>
+          <p class="sec-desc">The explicit list of what this step does, and what it deliberately does not do. Every adjacent thing the agent might logically extend into, named and excluded. Without this the agent expands. With it, the agent builds exactly this, stops exactly here, and the adjacent feature stays intact for its own designed step.</p>
+        </div>
+      </div>
+
+      <div class="sec-row">
+        <div class="sec-num">05</div>
+        <div class="sec-body">
+          <p class="sec-name">Cross-Layer Dependencies</p>
+          <p class="sec-desc">What the layer above expects. What the layer below provides. Which other modules this step touches. This section exists because of cross-layer breakage: the silent failures that happen when two sessions build against each other's assumptions without knowing it.</p>
+        </div>
+      </div>
+
+      <div class="sec-row">
+        <div class="sec-num">06</div>
+        <div class="sec-body">
+          <p class="sec-name">Gap List</p>
+          <p class="sec-desc">Every open question identified during the planning session. Things that need answers before coding can start. The gap list is resolved before go-ahead, not discovered during coding.</p>
+        </div>
+      </div>
+
+      <div class="sec-row">
+        <div class="sec-num">07</div>
+        <div class="sec-body">
+          <p class="sec-name">Gap Resolution</p>
+          <p class="sec-desc">The answers to every item on the gap list. Filled in during the planning session between planning agent and architect. By the time go-ahead is given, this section is complete. No open questions remain.</p>
+        </div>
+      </div>
+
+      <div class="sec-row">
+        <div class="sec-num">08</div>
+        <div class="sec-body">
+          <p class="sec-name">Test Expectations</p>
+          <p class="sec-desc">What does passing look like for this step? Not just unit tests: what is the end-to-end behaviour that confirms the step is done? Written before the code, not after. Defines done before execution starts.</p>
+        </div>
+      </div>
+
+      <div class="sec-row">
+        <div class="sec-num">09</div>
+        <div class="sec-body">
+          <p class="sec-name">Onboarding Impact</p>
+          <p class="sec-desc">Which documentation changes when this step is complete? Which file paths, API routes, or behaviours are different after this step? The agent updates these docs in the same commit. Not in a follow-up. Not later. The same commit.</p>
+        </div>
+      </div>
+
+      <div class="sec-row">
+        <div class="sec-num">10</div>
+        <div class="sec-body">
+          <p class="sec-name">Go-Ahead Prompt</p>
+          <p class="sec-desc">The exact prompt the architect pastes into the coding agent session to begin execution. Written during planning, reviewed, locked. Go-ahead means: all decisions made, all gaps resolved, all designs approved. Execute precisely.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <h2>The Scope Boundary Deserves Its Own Moment.</h2>
+
+    <div class="scope-box">
+      <p class="scope-label">Section 4: Why This Changes Everything</p>
+      <p class="scope-title">The section that stopped more breakages than any other.</p>
+      <p>Before the scope boundary, every coding session had a tendency to expand. The agent would complete the feature and then, being helpful, start the adjacent one. Or add an improvement that wasn't asked for. Or create a dependency on something that hadn't been designed yet.</p>
+      <p>None of this was malicious. All of it was expensive.</p>
+      <p>The scope boundary stops it. It tells the agent: this is where this step ends. Not because the adjacent work isn't valuable, but because the adjacent work has its own step, its own design, its own go-ahead moment.</p>
+      <p><strong>Build this. Stop here. The next step will be built when it has been designed.</strong></p>
+      <p>One section. Prevents an entire category of cascading breakage.</p>
+    </div>
+
+    <h2>The Task File and Step Sequence Working Together.</h2>
+
+    <div class="combined-flow">
+      <div class="flow-header">The Full Execution Flow</div>
+      <div class="flow-rows">
+        <div class="flow-row">
+          <div class="flow-step-tag">Step Seq</div>
+          <div class="flow-detail">Planning agent reads the sequence. Sees what is done, what is in progress, what is next. Understands where the feature fits in the larger product before designing anything.</div>
+          <div class="flow-outcome">Positioned</div>
+        </div>
+        <div class="flow-row">
+          <div class="flow-step-tag">Task File</div>
+          <div class="flow-detail">Planning agent designs the feature. All 10 sections completed. Gaps surfaced and resolved. UI direction approved. Scope boundary set. Go-ahead prompt written.</div>
+          <div class="flow-outcome">Designed</div>
+        </div>
+        <div class="flow-row">
+          <div class="flow-step-tag">Architect</div>
+          <div class="flow-detail">Reviews the task file. Locks every decision. Approves the design. Signs off. Pastes the go-ahead prompt verbatim into the coding session. Not improvised.</div>
+          <div class="flow-outcome">Locked</div>
+        </div>
+        <div class="flow-row">
+          <div class="flow-step-tag">Coding Agent</div>
+          <div class="flow-detail">Reads the task file. Executes precisely. Updates documentation. Respects scope boundary: builds this, stops here. No invention. No expansion.</div>
+          <div class="flow-outcome">Executed</div>
+        </div>
+        <div class="flow-row">
+          <div class="flow-step-tag">Handoff</div>
+          <div class="flow-detail">Step marked DONE in the sequence. Context handoff written. Next session opens, reads the sequence, confirms position, picks up exactly where this one stopped.</div>
+          <div class="flow-outcome">Closed</div>
+        </div>
+      </div>
+    </div>
+
+    <p>Nothing improvised. Nothing incomplete. Nothing that breaks the adjacent feature because it expanded past its scope boundary.</p>
+
+    <div class="callout">
+      <strong>The stalling is gone. The breakages are gone.</strong><br><br>
+      Progress is measurable, predictable, and continuous. That is what a task file actually does: not just structure an instruction, but anchor an entire way of working.
+    </div>
+
+    <hr class="divider-line">
+
+    <div class="pullquote">The agent was guessing because I hadn't given it anything worth executing from. Once I did, it stopped guessing entirely. That is the difference between a prompt and a brief. Between a guesser and a surgeon.</div>
+
+    <div class="references-section" id="references">
+      <h3>Research &amp; Further Reading</h3>
+      <ul class="ref-list">
+        <li id="ref-1">
+          <span class="ref-num">[1]</span>
+          <span>Li et al., <a href="https://arxiv.org/abs/2305.06599" target="_blank">"Structured Chain-of-Thought Prompting for Code Generation"</a>, ACM TOSEM, 2025: Demonstrated that structuring AI reasoning using program structure before generating code improved accuracy by up to 13.79% across ChatGPT, Codex, and GPT-4-turbo. Human evaluators consistently preferred structured-prompt output. The task file is the structured brief that produces this effect at the workflow level.</span>
+          <span class="ref-type">Academic Paper</span>
+        </li>
+        <li id="ref-2">
+          <span class="ref-num">[2]</span>
+          <span>Anthropic, <a href="https://code.claude.com/docs/en/best-practices" target="_blank">"Best Practices for Claude Code"</a>, Anthropic, 2025: Recommends the research → plan → implement → commit workflow: "Without [research and planning], Claude tends to jump straight to coding." The task file operationalizes exactly this sequence at the feature level.</span>
+          <span class="ref-type">Official Docs</span>
+        </li>
+        <li id="ref-3">
+          <span class="ref-num">[3]</span>
+          <span>Brooks, F.P., <a href="https://www.amazon.com/Mythical-Man-Month-Software-Engineering-Anniversary/dp/0201835959" target="_blank"><em>The Mythical Man-Month</em></a>, Addison-Wesley, 1995: Established that planning must precede coding for system integrity. Brooks found that projects without clear upfront design spend 50%+ of total effort on testing and debugging the consequences of insufficient planning.</span>
+          <span class="ref-type">Book</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="art-nav-bg">
+  <div class="art-nav">
+    <a href="article-6.html" class="art-nav-link"><p class="art-nav-dir">← Previous</p><p class="art-nav-title">Article 6</p></a>
+    <a href="article-8.html" class="art-nav-link right"><p class="art-nav-dir">Next →</p><p class="art-nav-title">Article 8: A Developer Left. Nobody Knew Where We Were.</p></a>
+  </div>
+</div>
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <p class="footer-brand">ARTHA Craft</p>
+      <p class="footer-desc">A 12-part series on structured AI-assisted development.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Series</h5>
+      <a href="../articles.html">All 12 articles</a>
+      <a href="article-1.html">Start with Article 1</a>
+    </div>
+    <div class="footer-col">
+      <h5>Author</h5>
+      <a href="../about.html">Jitander Singh Chauhan</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Jitander Singh Chauhan. All rights reserved.</p>
+    <p class="footer-tag">ARTHA Craft</p>
+  </div>
+</footer>
+<script>
+  var nav=document.getElementById('nav');
+  window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>40);});
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
