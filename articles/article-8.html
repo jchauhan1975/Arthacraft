@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Article 8: A Developer Left. The Project Was Live. Nobody Knew ... | ARTHA Craft</title>
+<meta name="description" content="Not theoretical. Production system. The institutional memory walked out the door.">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+/* ══════════════════════════════════════════════════════════════════
+   ARTICLE 8 - A Developer Left. The Project Was Live.
+   Color identity: Dark Blue (#1a4080)
+   Body design matches the master article file (light paper theme)
+   ══════════════════════════════════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;600&display=swap');
+
+:root{
+  --art:#1a4080;
+  --art2:#4880d0;
+  --art-glow:rgba(26,64,128,0.06);
+  --art-border:rgba(26,64,128,0.18);
+  --art-ink:#1a1a2e;
+  --art-muted:#6b6b7b;
+  --art-divider:#dde2ea;
+}
+
+/* ── Header ── */
+.art-header{background:linear-gradient(180deg,#0c0b09 0%,#100f0d 100%)!important;}
+.art-header-bgnum{color:rgba(26,64,128,0.06)!important;}
+.art-series::before{background:var(--art)!important;}
+.art-series{color:var(--art2)!important;}
+.art-header::after{background:linear-gradient(90deg,var(--art),var(--art2))!important;height:2px!important;}
+.art-title{letter-spacing:-0.5px!important;}
+.art-subtitle{color:var(--art2)!important;opacity:0.7;}
+
+/* ── Body canvas - light paper like the master file ── */
+.art-body-bg{background:#f5f7fa!important;}
+.art-body{max-width:860px!important;padding:56px 64px 72px!important;}
+
+/* ── Typography ── */
+.art-body p{
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:16px;line-height:1.85;color:#2c2c3e;
+  margin-bottom:16px;font-weight:400;
+}
+.art-body p strong{color:var(--art-ink);font-weight:600;}
+.art-body em{color:#2c2c3e;}
+
+.art-body h2{
+  font-family:'Playfair Display',Georgia,serif!important;
+  font-size:22px!important;font-weight:700!important;
+  color:var(--art-ink)!important;margin:40px 0 16px!important;
+  line-height:1.3!important;letter-spacing:0!important;
+}
+.art-body h2::before{display:none!important;}
+
+/* ── Pullquote ── */
+.art-body .pullquote{
+  border-left:4px solid var(--art2)!important;
+  background:#e8f0fc!important;
+  padding:20px 28px!important;margin:32px 0!important;
+  font-family:'Source Serif 4',Georgia,serif!important;
+  font-size:18px!important;font-style:italic;
+  line-height:1.6!important;color:var(--art-ink)!important;
+}
+
+/* ── Callout - light blue card ── */
+body .art-body .callout{
+  background:#e8f0fc!important;
+  border:1px solid #a8c0e8!important;
+  border-left:5px solid var(--art)!important;
+  border-radius:0!important;
+  padding:20px 24px!important;margin:32px 0!important;
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:15px!important;line-height:1.7!important;
+  color:var(--art-ink)!important;
+}
+body .art-body .callout strong{color:var(--art)!important;font-weight:600!important;}
+
+/* ── Three beats - numbered story strip ── */
+body .art-body .three-beats{
+  background:transparent!important;border:1px solid var(--art-divider)!important;
+  border-radius:8px!important;overflow:hidden;
+  padding:0!important;margin:32px 0!important;
+  display:flex!important;flex-direction:column;gap:0;
+}
+.art-body .three-beats .beat{display:flex;gap:0;}
+.art-body .three-beats .beat + .beat{border-top:1px solid var(--art-divider);}
+.art-body .three-beats .beat-num{
+  width:60px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif!important;
+  font-size:28px!important;font-weight:900!important;color:#fff!important;
+}
+.art-body .three-beats .beat:nth-child(1) .beat-num{background:#c0392b;}
+.art-body .three-beats .beat:nth-child(2) .beat-num{background:#d4a017;}
+.art-body .three-beats .beat:nth-child(3) .beat-num{background:var(--art);}
+.art-body .three-beats .beat-body{flex:1;padding:20px 24px;background:#fff!important;}
+.art-body .three-beats .beat-label{
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:10px!important;letter-spacing:3px!important;
+  text-transform:uppercase;margin-bottom:6px!important;font-weight:600!important;
+}
+.art-body .three-beats .beat:nth-child(1) .beat-label{color:#c0392b!important;}
+.art-body .three-beats .beat:nth-child(2) .beat-label{color:#9a7010!important;}
+.art-body .three-beats .beat:nth-child(3) .beat-label{color:var(--art)!important;}
+.art-body .three-beats .beat-title{
+  font-family:'Playfair Display',serif!important;
+  font-size:17px!important;font-weight:700!important;
+  color:var(--art-ink)!important;margin-bottom:6px!important;line-height:1.35!important;
+}
+.art-body .three-beats .beat-desc{
+  font-size:14px!important;line-height:1.65!important;
+  color:#444!important;margin-bottom:0!important;
+}
+
+/* ── Mirror box - light card (master LIGHT BOX OVERRIDES) ── */
+body .art-body .mirror-box{
+  background:#faf9f5!important;
+  border:1px solid #e9e2d6!important;
+  border-left:4px solid var(--art)!important;
+  border-radius:8px!important;box-shadow:none!important;
+  padding:32px 36px!important;margin:32px 0!important;
+}
+body .art-body .mirror-box .mirror-label{
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:10px!important;letter-spacing:3px!important;
+  text-transform:uppercase;color:var(--art)!important;
+  font-weight:600!important;margin-bottom:16px!important;
+}
+body .art-body .mirror-box p{
+  font-size:15px!important;color:#3f3f4d!important;
+  line-height:1.8!important;margin-bottom:14px!important;
+}
+body .art-body .mirror-box p:last-child{margin-bottom:0!important;}
+body .art-body .mirror-box strong{color:#1a1a2e!important;}
+body .art-body .mirror-box .mirror-insight{
+  background:var(--art-glow)!important;
+  border:1px solid var(--art-border)!important;
+  border-radius:6px!important;
+  padding:16px 20px!important;margin-top:16px!important;
+}
+body .art-body .mirror-box .mirror-insight p{
+  font-size:14px!important;color:#3f3f4d!important;
+  font-style:italic;margin-bottom:0!important;
+}
+
+/* ── Handoff sections - 7 numbered rows ── */
+body .art-body .handoff-sections{
+  background:transparent!important;border:none!important;
+  padding:0!important;margin:32px 0!important;
+  display:flex!important;flex-direction:column;gap:6px;
+}
+.art-body .handoff-sections .hs-row{
+  display:flex;gap:0;border-radius:6px;overflow:hidden;
+  border:1px solid var(--art-divider)!important;
+  background:#fff!important;transition:all 0.15s;
+}
+.art-body .handoff-sections .hs-row:hover{transform:translateX(3px);border-color:var(--art2)!important;}
+.art-body .handoff-sections .hs-num{
+  width:52px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:14px!important;font-weight:700!important;
+  color:#fff!important;background:var(--art)!important;
+}
+.art-body .handoff-sections .hs-body{flex:1;padding:14px 20px;}
+.art-body .handoff-sections .hs-title{
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:11px!important;letter-spacing:2px!important;
+  text-transform:uppercase;color:var(--art)!important;
+  margin-bottom:4px!important;font-weight:600!important;
+}
+.art-body .handoff-sections .hs-desc{
+  font-size:13px!important;line-height:1.65!important;
+  color:#444!important;margin-bottom:0!important;
+}
+
+/* ── Self test - light gradient card with pass/fail rows ── */
+body .art-body .self-test{
+  background:linear-gradient(135deg,#e8f0fc,#f5f7fa)!important;
+  border:2px solid var(--art)!important;
+  border-radius:8px!important;
+  padding:28px 32px!important;margin:32px 0!important;
+}
+.art-body .self-test .self-test-label{
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:10px!important;letter-spacing:3px!important;
+  text-transform:uppercase;color:var(--art)!important;
+  margin-bottom:12px!important;font-weight:600!important;
+}
+.art-body .self-test .self-test-q{
+  font-family:'Playfair Display',serif!important;
+  font-size:19px!important;font-weight:700!important;
+  color:var(--art-ink)!important;line-height:1.4!important;
+  margin-bottom:20px!important;font-style:italic;
+}
+.art-body .self-test .test-rows{display:flex;flex-direction:column;gap:10px;}
+.art-body .self-test .test-row{
+  display:flex;gap:12px;align-items:flex-start;
+  padding:12px 16px!important;border-radius:6px;
+  font-size:14px;line-height:1.6;
+}
+.art-body .self-test .test-row.pass{background:#eaf7ef!important;border:1px solid #a8d8bc!important;}
+.art-body .self-test .test-row.fail{background:#fdf0e8!important;border:1px solid #f0cdb0!important;}
+.art-body .self-test .test-icon{font-size:16px;flex-shrink:0;margin-top:1px;}
+.art-body .self-test .test-text{color:#2c2c3e!important;font-size:14px!important;line-height:1.6!important;}
+.art-body .self-test .test-text strong{color:var(--art-ink)!important;}
+
+/* ── Protection grid - light cards ── */
+body .art-body .protection-grid{
+  background:transparent!important;border:none!important;
+  padding:0!important;margin:28px 0!important;
+  display:grid!important;grid-template-columns:1fr 1fr;gap:12px;
+}
+.art-body .protection-grid .protect-card{
+  background:#fff!important;
+  border:1px solid var(--art-divider)!important;
+  border-top:3px solid var(--art2)!important;
+  border-radius:6px!important;
+  padding:18px 20px!important;text-align:left!important;
+}
+.art-body .protection-grid .protect-icon{font-size:20px;margin-bottom:8px;display:block;}
+.art-body .protection-grid .protect-title{
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:11px!important;letter-spacing:2px!important;
+  text-transform:uppercase;color:var(--art)!important;
+  margin-bottom:6px!important;font-weight:600!important;
+}
+.art-body .protection-grid .protect-desc{
+  font-size:13px!important;line-height:1.6!important;
+  color:#555!important;margin-bottom:0!important;
+}
+
+/* ── Divider ── */
+.art-body .divider-line,.art-body hr{
+  border:none!important;height:1px;
+  background:var(--art-divider)!important;
+  margin:40px 0!important;
+}
+
+/* ── Citation superscripts ── */
+.art-body .cite{
+  display:inline;font-size:11px;vertical-align:super;line-height:0;
+  font-family:'JetBrains Mono',monospace;font-weight:700;
+}
+.art-body .cite a{
+  color:var(--art);text-decoration:none;
+  background:var(--art-divider);padding:0 3px;border-radius:2px;
+}
+.art-body .cite a:hover{opacity:0.7;}
+
+/* ── References - inside the article, master file style ── */
+.art-body .references-section{
+  margin:40px 0 0;padding:32px 0 0;
+  border-top:2px solid var(--art-divider);
+}
+.art-body .references-section h3{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--art-muted);margin-bottom:20px;
+}
+.art-body .ref-list{
+  list-style:none;padding:0;margin:0;
+  display:flex;flex-direction:column;gap:10px;
+}
+.art-body .ref-list li{
+  display:flex;gap:12px;align-items:flex-start;
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:13px;line-height:1.6;color:#444;
+}
+.art-body .ref-num{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;font-weight:700;color:var(--art);
+  flex-shrink:0;width:28px;padding-top:2px;
+}
+.art-body .ref-list a{
+  color:var(--art);text-decoration:none;
+  border-bottom:1px dotted var(--art);transition:opacity 0.15s;
+}
+.art-body .ref-list a:hover{opacity:0.7;}
+.art-body .ref-type{
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;letter-spacing:1px;text-transform:uppercase;
+  background:var(--art-divider);color:var(--art-muted);
+  padding:1px 6px;border-radius:3px;margin-left:6px;
+  flex-shrink:0;align-self:flex-start;margin-top:2px;
+}
+
+/* ── Prev/Next nav ── */
+.art-nav-link{transition:border-color 0.25s,transform 0.25s!important;}
+.art-nav-link:hover{border-color:var(--art)!important;transform:translateY(-2px)!important;}
+.art-nav-dir{color:var(--art)!important;}
+
+/* ── Responsive ── */
+@media(max-width:700px){
+  .art-body{padding:32px 24px 48px!important;}
+  .art-body h2{font-size:20px!important;}
+  .art-body .protection-grid{grid-template-columns:1fr!important;}
+  .art-body .three-beats .beat-num{width:48px;font-size:22px!important;}
+  .art-body .three-beats .beat-body{padding:16px 18px;}
+  .art-body .handoff-sections .hs-num{width:44px;}
+  .art-body .self-test{padding:22px 20px!important;}
+  .art-body .mirror-box{padding:24px 22px!important;}
+}
+</style>
+</head>
+<body>
+<nav class="nav" id="nav">
+  <a href="../index.html" class="nav-logo"><em>ARTHA</em> Craft</a>
+  <div class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="../articles.html">Series</a>
+    <a href="../about.html">About</a>
+    <a href="https://substack.com" target="_blank" class="nav-follow">Subscribe</a>
+  </div>
+</nav>
+<div class="art-header">
+  <div class="art-header-bgnum">08</div>
+  <div class="art-header-inner">
+    <p class="art-series">Article 8 of 12 · ARTHA Craft</p>
+    <h1 class="art-title">A Developer Left. The Project Was Live. Nobody Knew Where We Were. Here's What I Built So It Never Happens Again.</h1>
+    <p class="art-subtitle">Not theoretical. Production system. The institutional memory walked out the door.</p>
+    <div class="art-meta">
+      <p class="art-meta-name">Jitander Singh Chauhan</p>
+      <div class="art-meta-sep"></div>
+      <p class="art-meta-role">Lead AI &amp; Data Technologist · Haystream</p>
+    </div>
+  </div>
+</div>
+<div class="art-body-bg">
+  <div class="art-body">
+    <p>This is not a theoretical problem.</p>
+    <p>This is a production system. Real users. Live data. A codebase built in the vibe coding era: fast, capable, and entirely undocumented. And one day a developer left for a better opportunity. Completely normal. Completely inevitable.</p>
+    <p>What wasn't normal was what happened next.</p>
+    <p>We sat down to continue the project, and realised we didn't know where we were.</p>
+
+    <div class="callout">
+      Not "what do we build next." We knew what we wanted.<br><br>
+      <strong>What we didn't have was the answer to the most basic question in software: where are we right now?</strong><br><br>
+      What is working. What is partial. What was that developer in the middle of. What decisions had been made that weren't written down anywhere. The institutional memory had walked out the door. <span class="cite"><a href="#ref-1">[1]</a></span> And it took everything with it.
+    </div>
+
+    <h2>Three Beats. One Hard Lesson.</h2>
+
+    <div class="three-beats">
+      <div class="beat">
+        <div class="beat-num">1</div>
+        <div class="beat-body">
+          <p class="beat-label">The Crisis</p>
+          <p class="beat-title">Production system. Developer gone. No documentation.</p>
+          <p class="beat-desc">Vibe coding era. Everything built fast, nothing recorded. The team knew the destination, but had completely lost the map of where they currently stood. A paralysing position for any codebase, let alone a live production system.</p>
+        </div>
+      </div>
+      <div class="beat">
+        <div class="beat-num">2</div>
+        <div class="beat-body">
+          <p class="beat-label">The Recovery</p>
+          <p class="beat-title">AI helped, but the hard way.</p>
+          <p class="beat-desc">Asked the AI to do a deep codebase review. Reconstruct what existed. Surface what was partial. Map what had been built. It helped, genuinely. But it was painful, slow, and incomplete. The AI could read code. It could not reconstruct intent, half-finished decisions, or the architectural thinking that only existed in one person's head.</p>
+        </div>
+      </div>
+      <div class="beat">
+        <div class="beat-num">3</div>
+        <div class="beat-body">
+          <p class="beat-label">The Prevention</p>
+          <p class="beat-title">Asked AI: how do we make sure this never happens again?</p>
+          <p class="beat-desc">The AI's answer was exactly what you'd expect from a system that understands its own limitations. Document context at the end of every session. Capture decisions. Write handoffs. Preserve state. This is standard AI best practice, because the AI knows better than anyone what happens when context disappears.</p>
+        </div>
+      </div>
+    </div>
+
+    <h2>The AI Told Us What to Build. And Why.</h2>
+
+    <div class="mirror-box">
+      <p class="mirror-label">The Moment That Changed Everything</p>
+      <p>After the painful recovery exercise, after the AI had pieced together what it could from the codebase, I asked it a different question. Not "where are we." But: <strong>"How do we make sure this never happens again?"</strong></p>
+      <p>The AI's answer was immediate, structured, and completely unsurprising to anyone who understands how AI actually works. Document your sessions. Capture decisions before they close. Write a handoff at the end of every working session that tells the next session exactly where to pick up.</p>
+      <p>This is not a novel insight. This is standard best practice, and the AI recommends it because it knows its own architecture. It knows every session starts from zero. It knows context disappears when the chat closes. It knows the only way to preserve state across sessions is to write it down before the session ends.</p>
+      <div class="mirror-insight">
+        <p>The AI didn't just help us recover from the crisis. It told us exactly how to prevent it. And the methodology that came out of that conversation has not changed since.</p>
+      </div>
+    </div>
+
+    <div class="pullquote">The context handoff wasn't invented. It was recommended <span class="cite"><a href="#ref-2">[2]</a></span>, by the AI itself, because the AI understands its own limitations better than most developers who use it.</div>
+
+    <h2>What Goes in a Context Handoff.</h2>
+
+    <p>Seven sections. Each one answers a question the next session will need answered before it can do anything useful.</p>
+
+    <div class="handoff-sections">
+      <div class="hs-row">
+        <div class="hs-num">01</div>
+        <div class="hs-body">
+          <p class="hs-title">Session Date and Participants</p>
+          <p class="hs-desc">When this happened. Who was involved. Which step was active. Simple. Permanent. Traceable. The baseline record that makes every handoff a dated entry in the project's history.</p>
+        </div>
+      </div>
+      <div class="hs-row">
+        <div class="hs-num">02</div>
+        <div class="hs-body">
+          <p class="hs-title">Step Status Table</p>
+          <p class="hs-desc">Full snapshot of the step sequence at this moment. DONE, IN PROGRESS, PENDING, BLOCKED. All visible. The next session opens this and knows the full picture in thirty seconds without reading a single line of code.</p>
+        </div>
+      </div>
+      <div class="hs-row">
+        <div class="hs-num">03</div>
+        <div class="hs-body">
+          <p class="hs-title">Exact Stop Point</p>
+          <p class="hs-desc">Not "we were working on the API." Surgical. "We stopped at: the E2 prompt recreated. E3 is next. File modified was X. Decision made was Y." The next agent picks up from the exact position, not an approximation of it.</p>
+        </div>
+      </div>
+      <div class="hs-row">
+        <div class="hs-num">04</div>
+        <div class="hs-body">
+          <p class="hs-title">Locked Decisions</p>
+          <p class="hs-desc">Every design decision confirmed this session. The next agent reads these and treats them as final. Not up for debate. Not to be revisited without explicit approval. Locked: recorded here so they cannot be unintentionally undone.</p>
+        </div>
+      </div>
+      <div class="hs-row">
+        <div class="hs-num">05</div>
+        <div class="hs-body">
+          <p class="hs-title">Open Questions</p>
+          <p class="hs-desc">Anything not resolved. The next agent surfaces these at the start of the session and waits for an answer before proceeding. It does not assume. It does not invent. It asks, because the question is recorded here and cannot be quietly skipped.</p>
+        </div>
+      </div>
+      <div class="hs-row">
+        <div class="hs-num">06</div>
+        <div class="hs-body">
+          <p class="hs-title">Standing Reminders</p>
+          <p class="hs-desc">Permanent rules that carry across every session. Frozen modules. Patent considerations. Test coverage expectations. Written in every handoff until resolved, because these are the things that get forgotten in long projects and the forgetting is always expensive.</p>
+        </div>
+      </div>
+      <div class="hs-row">
+        <div class="hs-num">07</div>
+        <div class="hs-body">
+          <p class="hs-title">How to Open the Next Session</p>
+          <p class="hs-desc">A paste-ready prompt. The architect pastes it verbatim into a new chat. No typing. No improvising. No "where were we?" The agent reads the handoff, reports position, surfaces open questions, waits for go-ahead. Every session starts from a known, documented state.</p>
+        </div>
+      </div>
+    </div>
+
+    <h2>The Self-Test That Tells You If the Handoff Is Done.</h2>
+
+    <div class="self-test">
+      <p class="self-test-label">Before Closing Every Session: Ask This</p>
+      <p class="self-test-q">"If I handed this file to a new agent tomorrow with zero prior context, could it pick up exactly where we stopped?"</p>
+      <div class="test-rows">
+        <div class="test-row pass">
+          <span class="test-icon">✅</span>
+          <span class="test-text"><strong>Yes, unambiguously</strong>: close the session. The handoff is done.</span>
+        </div>
+        <div class="test-row fail">
+          <span class="test-icon">⚠️</span>
+          <span class="test-text"><strong>Uncertain</strong>: open a new chat, paste only the session-open prompt, ask "What is the next action?" If it names the correct step without prompting, done. If it asks or assumes, find what's missing and add it now.</span>
+        </div>
+        <div class="test-row fail">
+          <span class="test-icon">❌</span>
+          <span class="test-text"><strong>No</strong>: the handoff is not done. Write it now, while everything is still in your head. Not tomorrow. Not "in a minute." Now.</span>
+        </div>
+      </div>
+    </div>
+
+    <h2>What the Handoff Actually Protects You From.</h2>
+
+    <div class="protection-grid">
+      <div class="protect-card">
+        <span class="protect-icon">👤</span>
+        <p class="protect-title">A Developer Leaving</p>
+        <p class="protect-desc">The project survives. A new developer reads the handoffs, the step sequence, the context seed. In one afternoon they know everything, without asking a single question.</p>
+      </div>
+      <div class="protect-card">
+        <span class="protect-icon">🧠</span>
+        <p class="protect-title">Your Own Memory</p>
+        <p class="protect-desc">You will not remember on Monday what you were thinking on Friday. The handoff does not rely on you remembering. It relies on you writing it down before you close the laptop.</p>
+      </div>
+      <div class="protect-card">
+        <span class="protect-icon">🔄</span>
+        <p class="protect-title">Switching Tools or Models</p>
+        <p class="protect-desc">You move from one AI model to another. The handoff travels with you. The new model picks up from exactly where the old one stopped, because the state lives in the document, not the session.</p>
+      </div>
+      <div class="protect-card">
+        <span class="protect-icon">⏸️</span>
+        <p class="protect-title">Any Gap in the Work</p>
+        <p class="protect-desc">Holiday. Illness. Two weeks away. The project is exactly where you left it. No reconstruction. No "now where was I." The handoff is the bridge across any gap, of any length.</p>
+      </div>
+    </div>
+
+    <hr class="divider-line">
+
+    <div class="pullquote">The developer who left didn't take the project with them. They took their memory of the project. Those things should never have been stored only in their head. Five minutes. End of every session. That is the entire habit.</div>
+
+    <div class="callout">
+      <strong>The context handoff is not a productivity tool. <span class="cite"><a href="#ref-3">[3]</a></span></strong><br><br>
+      It is institutional memory made portable. Write the handoff. Close the session. Trust the system. The project belongs to the documentation, not to any single person's memory.
+    </div>
+
+    <div class="references-section" id="references">
+      <h3>Research &amp; Further Reading</h3>
+      <ul class="ref-list">
+        <li id="ref-1">
+          <span class="ref-num">[1]</span>
+          <span>Rigby et al., <a href="https://users.encs.concordia.ca/~pcr/paper/Rigby2016ICSE.pdf" target="_blank">"Quantifying and Mitigating Turnover-Induced Knowledge Loss"</a>, ICSE 2016: Applied financial risk models to software projects: "Projects were susceptible to knowledge losses more than three times larger than expected." Average developer tenure at major tech companies is "only slightly more than one year." Nassif &amp; Robillard (2017) replicated and confirmed: extreme knowledge loss is more common than believed.</span>
+          <span class="ref-type">Academic Paper</span>
+        </li>
+        <li id="ref-2">
+          <span class="ref-num">[2]</span>
+          <span>Anthropic, <a href="https://code.claude.com/docs/en/best-practices" target="_blank">"Best Practices for Claude Code"</a>, Anthropic, 2025: Recommends CLAUDE.md files for persistent context, noting that context is infrastructure that degrades as the window fills. The methodology's session bridge implements this recommendation as a structured, versioned document.</span>
+          <span class="ref-type">Official Docs</span>
+        </li>
+        <li id="ref-3">
+          <span class="ref-num">[3]</span>
+          <span>Hutchins, E., <a href="https://mitpress.mit.edu/9780262581462/cognition-in-the-wild/" target="_blank"><em>Cognition in the Wild</em></a>, MIT Press, 1995: Documented how institutional knowledge is distributed across artifacts and people in naval navigation teams. The context handoff document is the artifact that carries distributed knowledge across session boundaries, making the project's cognitive system independent of any individual's memory.</span>
+          <span class="ref-type">Book</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="art-nav-bg">
+  <div class="art-nav">
+    <a href="article-7.html" class="art-nav-link"><p class="art-nav-dir">← Previous</p><p class="art-nav-title">Article 7</p></a>
+    <a href="article-9.html" class="art-nav-link right"><p class="art-nav-dir">Next →</p><p class="art-nav-title">Article 9: Three Registers</p></a>
+  </div>
+</div>
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <p class="footer-brand">ARTHA Craft</p>
+      <p class="footer-desc">A 12-part series on structured AI-assisted development.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Series</h5>
+      <a href="../articles.html">All 12 articles</a>
+      <a href="article-1.html">Start with Article 1</a>
+    </div>
+    <div class="footer-col">
+      <h5>Author</h5>
+      <a href="../about.html">Jitander Singh Chauhan</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Jitander Singh Chauhan. All rights reserved.</p>
+    <p class="footer-tag">ARTHA Craft</p>
+  </div>
+</footer>
+<script>
+  var nav=document.getElementById('nav');
+  window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>40);});
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
