@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Article 9: The Three Registers That Replaced "I'll Remember Tha... | ARTHA Craft</title>
+<meta name="description" content="Said it hundreds of times across 25 years. The fix was not discipline.">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+/* ══════════════════════════════════════════════════════════════════
+   ARTICLE 9 - The Three Registers That Replaced "I'll Remember That."
+   Color identity: Dark Maroon (#8b2020)
+   Body design matches the master article file (light paper theme)
+   ══════════════════════════════════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;600&display=swap');
+
+:root{
+  --art:#8b2020;
+  --art2:#c05040;
+  --art-ink:#1a1a2e;
+  --art-muted:#6b6b7b;
+  --art-divider:#dde2ea;
+}
+
+/* ── Header ── */
+.art-header{background:linear-gradient(180deg,#0c0b09 0%,#100f0d 100%)!important;}
+.art-header-bgnum{color:rgba(139,32,32,0.06)!important;}
+.art-series::before{background:var(--art)!important;}
+.art-series{color:var(--art2)!important;}
+.art-header::after{background:linear-gradient(90deg,var(--art),var(--art2))!important;height:2px!important;}
+.art-title{letter-spacing:-0.5px!important;}
+.art-subtitle{color:var(--art2)!important;opacity:0.7;}
+
+/* ── Body canvas - light paper like the master file ── */
+.art-body-bg{background:#f5f7fa!important;}
+.art-body{max-width:860px!important;padding:56px 64px 72px!important;}
+
+/* ── Typography ── */
+.art-body p{
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:16px;line-height:1.85;color:#2c2c3e;
+  margin-bottom:16px;font-weight:400;
+}
+.art-body p strong{color:var(--art-ink);font-weight:600;}
+.art-body em{color:#2c2c3e;}
+
+.art-body h2{
+  font-family:'Playfair Display',Georgia,serif!important;
+  font-size:22px!important;font-weight:700!important;
+  color:var(--art-ink)!important;margin:40px 0 16px!important;
+  line-height:1.3!important;letter-spacing:0!important;
+}
+.art-body h2::before{display:none!important;}
+
+/* ── Pullquote ── */
+.art-body .pullquote{
+  border-left:4px solid var(--art2)!important;
+  background:#faf0ee!important;
+  padding:20px 28px!important;margin:32px 0!important;
+  font-family:'Source Serif 4',Georgia,serif!important;
+  font-size:18px!important;font-style:italic;
+  line-height:1.6!important;color:var(--art-ink)!important;
+}
+
+/* ── Callout - light maroon card ── */
+body .art-body .callout{
+  background:#faf0ee!important;
+  border:1px solid #eccac3!important;
+  border-left:5px solid var(--art)!important;
+  border-radius:0!important;
+  padding:20px 24px!important;margin:32px 0!important;
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:15px!important;line-height:1.7!important;
+  color:var(--art-ink)!important;
+}
+body .art-body .callout strong{color:var(--art)!important;font-weight:600!important;}
+
+/* ── Opening quote - light card ── */
+body .art-body .opening-quote{
+  background:#faf9f5!important;
+  border:1px solid #e9e2d6!important;
+  border-left:4px solid var(--art)!important;
+  border-radius:8px!important;box-shadow:none!important;
+  text-align:center;padding:32px 24px!important;margin:0 0 32px!important;
+}
+body .art-body .opening-quote .quote-text{
+  font-family:'Playfair Display',Georgia,serif!important;
+  font-size:28px!important;font-weight:900!important;font-style:italic;
+  color:var(--art-ink)!important;line-height:1.3!important;
+  margin-bottom:12px!important;
+}
+body .art-body .opening-quote .quote-sub{
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:11px!important;letter-spacing:3px!important;
+  text-transform:uppercase;color:var(--art)!important;
+  margin-bottom:0!important;
+}
+
+/* ── Three register cards - light cards, semantic red/green/gold coding ── */
+body .art-body .registers{
+  background:transparent!important;border:none!important;padding:0!important;
+  display:flex!important;flex-direction:column;gap:16px;margin:32px 0!important;
+}
+body .art-body .register-card{
+  background:white!important;
+  border:1px solid var(--art-divider)!important;
+  border-radius:8px!important;overflow:hidden;
+}
+body .art-body .reg-header{
+  padding:16px 24px;display:flex;align-items:center;gap:16px;
+}
+body .art-body .register-card:nth-child(1) .reg-header{background:#fdf0ef!important;border-bottom:1px solid #f5c6c2!important;}
+body .art-body .register-card:nth-child(2) .reg-header{background:#eaf7ef!important;border-bottom:1px solid #b8e8cc!important;}
+body .art-body .register-card:nth-child(3) .reg-header{background:#fdf8ec!important;border-bottom:1px solid #e8d898!important;}
+body .art-body .reg-icon{
+  width:40px;height:40px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;
+}
+body .art-body .register-card:nth-child(1) .reg-icon{background:#c0392b!important;}
+body .art-body .register-card:nth-child(2) .reg-icon{background:#1a6b4a!important;}
+body .art-body .register-card:nth-child(3) .reg-icon{background:#d4a017!important;}
+body .art-body .reg-title-group{flex:1;}
+body .art-body .reg-name{
+  font-family:'Playfair Display',Georgia,serif!important;
+  font-size:18px!important;font-weight:700!important;
+  color:var(--art-ink)!important;margin-bottom:2px!important;line-height:1.3!important;
+}
+body .art-body .reg-file{
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:11px!important;color:var(--art-muted)!important;
+  margin-bottom:0!important;
+}
+body .art-body .reg-body{padding:20px 24px;background:white!important;}
+body .art-body .reg-body p{font-size:14px!important;line-height:1.7!important;color:#444!important;margin-bottom:12px!important;}
+body .art-body .reg-body p:last-child{margin-bottom:0!important;}
+body .art-body .reg-format{
+  background:#f6f5f1!important;
+  border:1px solid var(--art-divider)!important;
+  border-radius:4px;padding:10px 14px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;color:var(--art)!important;line-height:1.6;
+}
+
+/* ── Guardrail box - light card, dark text ── */
+body .art-body .guardrail{
+  background:#faf9f5!important;
+  border:1px solid #e9e2d6!important;
+  border-left:4px solid var(--art)!important;
+  border-radius:8px!important;box-shadow:none!important;
+  overflow:hidden;margin:32px 0!important;padding:0!important;
+}
+body .art-body .guardrail-header{
+  padding:20px 28px 16px;border-bottom:1px solid #e9e2d6;
+}
+body .art-body .guardrail-label{
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:10px!important;letter-spacing:3px!important;
+  text-transform:uppercase;color:var(--art)!important;
+  font-weight:600;margin-bottom:8px!important;
+}
+body .art-body .guardrail-title{
+  font-family:'Playfair Display',Georgia,serif!important;
+  font-size:20px!important;font-weight:700!important;
+  color:var(--art-ink)!important;line-height:1.3!important;
+  margin-bottom:0!important;
+}
+body .art-body .guardrail-body{padding:20px 28px;}
+body .art-body .guardrail-body p{font-size:14px!important;color:#3f3f4d!important;line-height:1.8!important;margin-bottom:12px!important;}
+body .art-body .guardrail-body p:last-child{margin-bottom:0!important;}
+body .art-body .guardrail-body strong{color:var(--art-ink)!important;}
+body .art-body .guardrail-rows{
+  margin-top:16px;display:flex;flex-direction:column;gap:8px;
+}
+body .art-body .guardrail-row{
+  display:flex;gap:12px;align-items:flex-start;
+  background:rgba(0,0,0,0.025)!important;
+  border:1px solid rgba(0,0,0,0.06)!important;
+  border-radius:6px;padding:14px 16px;
+}
+body .art-body .gr-trigger{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;letter-spacing:1px;
+  padding:3px 10px;border-radius:20px;
+  flex-shrink:0;margin-top:1px;
+  text-transform:uppercase;font-weight:600;
+}
+body .art-body .gr-trigger.bug{background:rgba(192,57,43,0.10)!important;color:#c0392b!important;border:1px solid rgba(192,57,43,0.3)!important;}
+body .art-body .gr-trigger.enh{background:rgba(26,107,74,0.10)!important;color:#15803d!important;border:1px solid rgba(26,107,74,0.3)!important;}
+body .art-body .gr-trigger.debt{background:rgba(180,83,9,0.10)!important;color:#b45309!important;border:1px solid rgba(180,83,9,0.3)!important;}
+body .art-body .gr-desc{font-size:13px!important;color:#3f3f4d!important;line-height:1.6!important;margin-bottom:0!important;}
+body .art-body .gr-desc strong{color:var(--art-ink)!important;}
+
+/* ── What this gives you - light card grid ── */
+body .art-body .gives-you{
+  background:transparent!important;border:none!important;padding:0!important;
+  display:grid!important;grid-template-columns:1fr 1fr;gap:12px;margin:28px 0!important;
+}
+body .art-body .give-card{
+  background:white!important;
+  border:1px solid var(--art-divider)!important;
+  border-top:3px solid var(--art2)!important;
+  border-radius:6px!important;padding:16px 18px!important;
+}
+body .art-body .give-title{
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:10px!important;letter-spacing:2px!important;
+  text-transform:uppercase;color:var(--art)!important;
+  margin-bottom:6px!important;font-weight:600!important;
+}
+body .art-body .give-desc{font-size:13px!important;line-height:1.6!important;color:#555!important;margin-bottom:0!important;}
+
+/* ── Divider ── */
+.art-body .divider-line,.art-body hr{
+  border:none!important;height:1px;
+  background:var(--art-divider)!important;
+  margin:40px 0!important;
+}
+
+/* ── Citation superscripts ── */
+.art-body .cite{
+  display:inline;font-size:11px;vertical-align:super;line-height:0;
+  font-family:'JetBrains Mono',monospace;font-weight:700;
+}
+.art-body .cite a{
+  color:var(--art);text-decoration:none;
+  background:var(--art-divider);padding:0 3px;border-radius:2px;
+}
+.art-body .cite a:hover{opacity:0.7;}
+
+/* ── References - inside the article, master file style ── */
+.art-body .references-section{
+  margin:40px 0 0;padding:32px 0 0;
+  border-top:2px solid var(--art-divider);
+}
+.art-body .references-section h3{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--art-muted);margin-bottom:20px;
+}
+.art-body .ref-list{
+  list-style:none;padding:0;margin:0;
+  display:flex;flex-direction:column;gap:10px;
+}
+.art-body .ref-list li{
+  display:flex;gap:12px;align-items:flex-start;
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:13px;line-height:1.6;color:#444;
+}
+.art-body .ref-num{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;font-weight:700;color:var(--art);
+  flex-shrink:0;width:28px;padding-top:2px;
+}
+.art-body .ref-list a{
+  color:var(--art);text-decoration:none;
+  border-bottom:1px dotted var(--art);transition:opacity 0.15s;
+}
+.art-body .ref-list a:hover{opacity:0.7;}
+.art-body .ref-type{
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;letter-spacing:1px;text-transform:uppercase;
+  background:var(--art-divider);color:var(--art-muted);
+  padding:1px 6px;border-radius:3px;margin-left:6px;
+  flex-shrink:0;align-self:flex-start;margin-top:2px;
+}
+
+/* ── Prev/Next nav ── */
+.art-nav-link{transition:border-color 0.25s,transform 0.25s!important;}
+.art-nav-link:hover{border-color:var(--art)!important;transform:translateY(-2px)!important;}
+.art-nav-dir{color:var(--art)!important;}
+
+/* ── Responsive ── */
+@media(max-width:700px){
+  .art-body{padding:32px 24px 48px!important;}
+  .art-body h2{font-size:20px!important;}
+  body .art-body .opening-quote .quote-text{font-size:22px!important;}
+  body .art-body .gives-you{grid-template-columns:1fr!important;}
+  body .art-body .guardrail-row{flex-direction:column;gap:8px;}
+}
+</style>
+</head>
+<body>
+<nav class="nav" id="nav">
+  <a href="../index.html" class="nav-logo"><em>ARTHA</em> Craft</a>
+  <div class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="../articles.html">Series</a>
+    <a href="../about.html">About</a>
+    <a href="https://substack.com" target="_blank" class="nav-follow">Subscribe</a>
+  </div>
+</nav>
+<div class="art-header">
+  <div class="art-header-bgnum">09</div>
+  <div class="art-header-inner">
+    <p class="art-series">Article 9 of 12 · ARTHA Craft</p>
+    <h1 class="art-title">The Three Registers That Replaced "I'll Remember That." My AI Agent Logs to Them Too.</h1>
+    <p class="art-subtitle">Said it hundreds of times across 25 years. The fix was not discipline.</p>
+    <div class="art-meta">
+      <p class="art-meta-name">Jitander Singh Chauhan</p>
+      <div class="art-meta-sep"></div>
+      <p class="art-meta-role">Lead AI &amp; Data Technologist · Haystream</p>
+    </div>
+  </div>
+</div>
+<div class="art-body-bg">
+  <div class="art-body">
+    <div class="opening-quote">
+      <p class="quote-text">"I'll remember that."</p>
+      <p class="quote-sub">The most expensive lie in software development</p>
+    </div>
+
+    <p>I have said those words hundreds of times across 25 years of building software. About a bug I spotted while working on something else. About an enhancement idea that arrived mid-session. About a shortcut I took because the deadline was real and the proper solution was not.</p>
+    <p>And I remembered. Sometimes. For a while. Until the next session opened and the next problem arrived and the thing I was definitely going to remember quietly disappeared.</p>
+    <p>In the vibe coding era this got worse. More agents. More context switches. More things that never got picked up.</p>
+
+    <div class="callout">
+      The fix was not discipline. <strong>Discipline fails.</strong> <span class="cite"><a href="#ref-1">[1]</a></span><br><br>
+      The fix was a system. Three registers. Every discovery logged. Nothing fixed without an entry first.
+    </div>
+
+    <h2>What a Register Actually Is.</h2>
+
+    <p>Not a ticket system. Not a Jira board with seventeen custom fields. A register is a structured markdown file, a flat list with a consistent format. Lightweight enough that logging an entry takes thirty seconds. Structured enough that every entry has an ID, a severity, a status, and enough context to act on it later.</p>
+
+    <div class="pullquote">The format matters because the agent reads these files. They are not human-only documents. They are part of the system.</div>
+
+    <p>Three registers. Three jobs. Nothing duplicated.</p>
+
+    <h2>The Three Registers.</h2>
+
+    <div class="registers">
+
+      <div class="register-card">
+        <div class="reg-header">
+          <div class="reg-icon">🐛</div>
+          <div class="reg-title-group">
+            <p class="reg-name">Register 1: Bugs</p>
+            <p class="reg-file">BUGS.MD</p>
+          </div>
+        </div>
+        <div class="reg-body">
+          <p>Every bug found in testing goes into BUGS.MD before it gets fixed. No exceptions. Not because bureaucracy is valuable, because fixing a bug before it is registered means fixing it without triage. Without knowing if there are three other bugs in the same module that should be fixed together. Without a traceable record that this problem existed, was fixed, and was verified.</p>
+          <p>The register entry takes thirty seconds. The triage it enables saves hours. Even VERIFIED bugs stay in the file. Knowing a bug existed, was fixed, and stayed fixed is information worth keeping.</p>
+          <div class="reg-format">BUG-NNN | CRITICAL/HIGH/MEDIUM/LOW | OPEN/IN-FIX/FIXED/VERIFIED | Surface | Description | Fix task reference</div>
+        </div>
+      </div>
+
+      <div class="register-card">
+        <div class="reg-header">
+          <div class="reg-icon">💡</div>
+          <div class="reg-title-group">
+            <p class="reg-name">Register 2: Enhancements</p>
+            <p class="reg-file">ENHANCEMENTS.MD</p>
+          </div>
+        </div>
+        <div class="reg-body">
+          <p>Every improvement idea, UX observation, and "we should do this properly one day" goes into ENHANCEMENTS.MD before it gets built. Good ideas arrive at the wrong moment: mid-session, while building something else, when the scope boundary says stay in your lane.</p>
+          <p>Without a register the idea gets acted on immediately, breaking scope. Or it gets ignored and the moment of clarity is lost. The register is the third option: capture it now, schedule it properly later. At the start of every sprint, the list is reviewed and items that are ready get promoted to step files.</p>
+          <div class="reg-format">ENH-NNN | HIGH/MEDIUM/LOW | IDEA/SCHEDULED/IN-PROGRESS/DONE | Description</div>
+        </div>
+      </div>
+
+      <div class="register-card">
+        <div class="reg-header">
+          <div class="reg-icon">⚠️</div>
+          <div class="reg-title-group">
+            <p class="reg-name">Register 3: Tech Debt</p>
+            <p class="reg-file">08-Tech-Debt.MD</p>
+          </div>
+        </div>
+        <div class="reg-body">
+          <p>Every shortcut taken deliberately. Every stub left intentionally. Every test skipped because the deadline was real. The tech debt register exists because debt that isn't recorded becomes invisible, and invisible debt compounds. You refactor a module without knowing it had a known gap. You build on top of a stub that was never meant to be permanent.</p>
+          <p>A truth table for every module: WORKING, PARTIAL, or STUBBED. Reviewed at every major planning session. Every stub has a comment in code pointing back to the register entry. Nothing is silently promoted. A step file is required to resolve any debt item.</p>
+          <div class="reg-format">DEBT-NNN | ACTIVE/RESOLVED | Module | Description | Rationale | Resolution step</div>
+        </div>
+      </div>
+
+    </div>
+
+    <h2>The Guardrail That Makes the System Airtight.</h2>
+
+    <div class="guardrail">
+      <div class="guardrail-header">
+        <p class="guardrail-label">The Rule That Closes Every Gap</p>
+        <p class="guardrail-title">Every coding agent has one obligation beyond its scope boundary: if it finds something, it logs it.</p>
+      </div>
+      <div class="guardrail-body">
+        <p>Most teams treat registers as something humans go to after they notice a problem. That is half the system. The other half, the half that makes it airtight, is built into every task file as a standing instruction.</p>
+        <p>The agent's job does not end at <strong>"build this."</strong> <span class="cite"><a href="#ref-2">[2]</a></span> It ends at <strong>"build this and report everything you found along the way."</strong></p>
+
+        <div class="guardrail-rows">
+          <div class="guardrail-row">
+            <span class="gr-trigger bug">Bug Found</span>
+            <p class="gr-desc">Agent logs to BUGS.MD: <strong>ID, severity, description, what it was doing when it found it</strong>. Then continues with its assigned scope. Does not fix it. Does not ignore it. Logs it and stays in its lane.</p>
+          </div>
+          <div class="guardrail-row">
+            <span class="gr-trigger enh">Enhancement Spotted</span>
+            <p class="gr-desc">Agent logs to ENHANCEMENTS.MD. <strong>The moment of clarity is preserved.</strong> Sprint planning decides whether and when to act on it. The agent does not implement it. That would break scope boundary.</p>
+          </div>
+          <div class="guardrail-row">
+            <span class="gr-trigger debt">Shortcut Taken</span>
+            <p class="gr-desc">Agent logs to Tech-Debt.MD <strong>before the session closes.</strong> Comment in code points back to the entry ID. Nothing is silently incomplete. Everything deliberate is recorded and traceable.</p>
+          </div>
+        </div>
+
+        <p style="margin-top: 16px;">This means the registers are not updated when humans remember to update them. They are updated as a <strong>contractual part of every execution session.</strong></p>
+      </div>
+    </div>
+
+    <h2>What This Gives You That Memory Never Could.</h2>
+
+    <div class="gives-you">
+      <div class="give-card">
+        <p class="give-title">Complete Health Picture</p>
+        <p class="give-desc">Not just what was built: what was found, what was deferred, what was deliberately left incomplete. Every agent, every session, every sprint planning conversation starts from this picture.</p>
+      </div>
+      <div class="give-card">
+        <p class="give-title">Triage Before Fix</p>
+        <p class="give-desc">Nothing fixed in isolation. Everything reviewed in context. Related bugs grouped. Debt items sequenced. Enhancements prioritised. No more random firefighting.</p>
+      </div>
+      <div class="give-card">
+        <p class="give-title">Agent as Reporter</p>
+        <p class="give-desc">The agent doesn't just build. It discovers and logs. Every session ends with not just code but a record of what was found along the way. The system gets smarter with every execution.</p>
+      </div>
+      <div class="give-card">
+        <p class="give-title">Permanent History</p>
+        <p class="give-desc">IDs never reused. Entries never deleted. A bug that was fixed three months ago is still in the file, because knowing it existed and was resolved is information worth keeping forever.</p>
+      </div>
+    </div>
+
+    <hr class="divider-line">
+
+    <div class="pullquote">Nothing falls through the cracks because the cracks have been sealed by a system, not by memory. The registers don't rely on you remembering to log. They rely on the agent being instructed to log as part of every execution.</div>
+
+    <div class="references-section" id="references">
+      <h3>Research &amp; Further Reading</h3>
+      <ul class="ref-list">
+        <li id="ref-1">
+          <span class="ref-num">[1]</span>
+          <span>Forsgren, Humble &amp; Kim, <a href="https://itrevolution.com/product/accelerate/" target="_blank"><em>Accelerate: The Science of Lean Software and DevOps</em></a>, IT Revolution Press, 2018: Proved that high-performing teams use structured information flow, not individual discipline, as the foundation of delivery performance. "You can't achieve high performance through heroics or hoping people try harder. You need a system."</span>
+          <span class="ref-type">Book</span>
+        </li>
+        <li id="ref-2">
+          <span class="ref-num">[2]</span>
+          <span>Rigby et al., <a href="https://users.encs.concordia.ca/~pcr/paper/Rigby2016ICSE.pdf" target="_blank">"Quantifying and Mitigating Turnover-Induced Knowledge Loss"</a>, ICSE 2016: Found that issues discovered during development but not formally recorded are disproportionately lost in knowledge-loss events. The register system creates the formal record that prevents this. Separately, Avelino et al. (2016) found 65% of popular GitHub projects have a bus factor of 2 or less.</span>
+          <span class="ref-type">Academic Paper</span>
+        </li>
+        <li id="ref-3">
+          <span class="ref-num">[3]</span>
+          <span>Perrow, C., <a href="https://press.princeton.edu/books/paperback/9780691004129/normal-accidents" target="_blank"><em>Normal Accidents</em></a>, Princeton University Press, 1984: In tightly coupled systems, small unreported anomalies cascade into major failures. The register system is the "loose coupling" that makes anomalies visible before they cascade, exactly the mechanism Perrow identified as the key to preventing normal accidents.</span>
+          <span class="ref-type">Book</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="art-nav-bg">
+  <div class="art-nav">
+    <a href="article-8.html" class="art-nav-link"><p class="art-nav-dir">← Previous</p><p class="art-nav-title">Article 8</p></a>
+    <a href="article-10.html" class="art-nav-link right"><p class="art-nav-dir">Next →</p><p class="art-nav-title">Article 10: You Haven't Given It Rules</p></a>
+  </div>
+</div>
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <p class="footer-brand">ARTHA Craft</p>
+      <p class="footer-desc">A 12-part series on structured AI-assisted development.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Series</h5>
+      <a href="../articles.html">All 12 articles</a>
+      <a href="article-1.html">Start with Article 1</a>
+    </div>
+    <div class="footer-col">
+      <h5>Author</h5>
+      <a href="../about.html">Jitander Singh Chauhan</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Jitander Singh Chauhan. All rights reserved.</p>
+    <p class="footer-tag">ARTHA Craft</p>
+  </div>
+</footer>
+<script>
+  var nav=document.getElementById('nav');
+  window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>40);});
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
