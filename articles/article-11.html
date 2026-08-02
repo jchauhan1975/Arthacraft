@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Article 11: Multiple Projects. Multiple Teams. Multiple Failures... | ARTHA Craft</title>
+<meta name="description" content="This series didn't start with a framework. It started with a team and a hype cycle.">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+/* ══════════════════════════════════════════════════════════════════
+   ARTICLE 11 - Multiple Projects. Multiple Teams. Multiple Failures.
+   Color identity: Dark Purple (#5a1880)
+   Body design matches the master article file (light paper theme)
+   ══════════════════════════════════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;600&display=swap');
+
+:root{
+  --art:#5a1880;
+  --art2:#8040b0;
+  --art-ink:#1a1a2e;
+  --art-muted:#6b6b7b;
+  --art-divider:#dde2ea;
+  --art-red:#c0392b;
+  --art-gold:#b45309;
+  --art-green:#1a6b4a;
+}
+
+/* ── Header ── */
+.art-header{background:linear-gradient(180deg,#0c0b09 0%,#100f0d 100%)!important;}
+.art-header-bgnum{color:rgba(90,24,128,0.08)!important;}
+.art-series::before{background:var(--art)!important;}
+.art-series{color:var(--art2)!important;}
+.art-header::after{background:linear-gradient(90deg,var(--art),var(--art2))!important;height:2px!important;}
+.art-title{letter-spacing:-0.5px!important;}
+.art-subtitle{color:var(--art2)!important;opacity:0.7;}
+
+/* ── Body canvas - light paper like the master file ── */
+.art-body-bg{background:#f5f7fa!important;}
+.art-body{max-width:860px!important;padding:56px 64px 72px!important;}
+
+/* ── Typography ── */
+.art-body p{
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:16px;line-height:1.85;color:#2c2c3e;
+  margin-bottom:16px;font-weight:400;
+}
+.art-body p strong{color:var(--art-ink);font-weight:600;}
+.art-body em{color:#2c2c3e;}
+
+.art-body h2{
+  font-family:'Playfair Display',Georgia,serif!important;
+  font-size:22px!important;font-weight:700!important;
+  color:var(--art-ink)!important;margin:40px 0 16px!important;
+  line-height:1.3!important;letter-spacing:0!important;
+}
+.art-body h2::before{display:none!important;}
+
+/* ── Pullquote ── */
+.art-body .pullquote{
+  border-left:4px solid var(--art2)!important;
+  background:#f3edfa!important;
+  padding:20px 28px!important;margin:32px 0!important;
+  font-family:'Source Serif 4',Georgia,serif!important;
+  font-size:18px!important;font-style:italic;
+  line-height:1.6!important;color:var(--art-ink)!important;
+}
+
+/* ── Callout - light purple card ── */
+body .art-body .callout{
+  background:#f2eaf8!important;
+  border:1px solid #d9c2ee!important;
+  border-left:5px solid var(--art)!important;
+  border-radius:0!important;
+  padding:20px 24px!important;margin:32px 0!important;
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:15px!important;line-height:1.7!important;
+  color:var(--art-ink)!important;
+}
+body .art-body .callout strong{color:var(--art)!important;font-weight:600!important;}
+
+/* ── Arc box - series arc timeline, light card ── */
+body .art-body .arc-box{
+  background:#faf9f5!important;
+  border:1px solid #e9e2d6!important;
+  border-left:4px solid var(--art)!important;
+  border-radius:8px!important;
+  padding:32px 36px!important;margin:32px 0!important;
+  box-shadow:none!important;
+}
+body .art-body .arc-label{
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:10px!important;letter-spacing:3px!important;
+  text-transform:uppercase;color:var(--art)!important;
+  font-weight:600!important;margin-bottom:20px!important;
+}
+.art-body .arc-steps{display:flex;flex-direction:column;gap:0;}
+.art-body .arc-step{
+  display:flex;gap:16px;align-items:flex-start;
+  padding:14px 0;border-bottom:1px solid rgba(0,0,0,0.06);
+}
+.art-body .arc-step:last-child{border-bottom:none;padding-bottom:0;}
+.art-body .arc-dot{
+  width:10px;height:10px;border-radius:50%;
+  flex-shrink:0;margin-top:5px;
+}
+.art-body .arc-dot.red{background:var(--art-red);}
+.art-body .arc-dot.gold{background:#d4a017;}
+.art-body .arc-dot.purple{background:var(--art2);}
+.art-body .arc-dot.green{background:var(--art-green);}
+.art-body .arc-content{flex:1;}
+body .art-body .arc-project{
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:10px!important;letter-spacing:2px!important;
+  text-transform:uppercase;font-weight:600!important;
+  margin-bottom:4px!important;
+}
+body .art-body .arc-dot.red~.arc-content .arc-project{color:var(--art-red)!important;}
+body .art-body .arc-dot.gold~.arc-content .arc-project{color:var(--art-gold)!important;}
+body .art-body .arc-dot.purple~.arc-content .arc-project{color:var(--art)!important;}
+body .art-body .arc-dot.green~.arc-content .arc-project{color:#15803d!important;}
+body .art-body .arc-desc{
+  font-size:13px!important;line-height:1.6!important;
+  color:#3f3f4d!important;margin-bottom:0!important;
+}
+
+/* ── Failure modes - grid of light red cards ── */
+.art-body .failure-modes{
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:28px 0;
+}
+body .art-body .failure-card{
+  background:#fdf0ef!important;
+  border:1px solid #f5c6c2!important;
+  border-top:3px solid var(--art-red)!important;
+  border-radius:6px!important;
+  padding:16px 18px!important;
+}
+body .art-body .failure-title{
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:10px!important;letter-spacing:2px!important;
+  text-transform:uppercase;color:var(--art-red)!important;
+  margin-bottom:6px!important;font-weight:600!important;
+}
+body .art-body .failure-desc{
+  font-size:13px!important;line-height:1.6!important;
+  color:#555!important;margin-bottom:0!important;
+}
+
+/* ── Ownership table - light table ── */
+body .art-body .ownership-table{
+  margin:28px 0!important;
+  border:1px solid var(--art-divider)!important;
+  border-radius:8px!important;
+  overflow:hidden;background:#fff!important;
+}
+body .art-body .own-header{
+  background:var(--art)!important;color:#fff!important;
+  padding:12px 20px!important;
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:11px!important;letter-spacing:2px!important;
+  text-transform:uppercase;
+}
+.art-body .own-row{
+  display:flex;border-bottom:1px solid var(--art-divider);background:#fff;
+}
+.art-body .own-row:last-child{border-bottom:none;}
+body .art-body .own-role{
+  width:160px;flex-shrink:0;padding:14px 16px!important;
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:11px!important;letter-spacing:1px!important;
+  text-transform:uppercase;color:var(--art)!important;
+  background:#f3edfa!important;
+  border-right:1px solid var(--art-divider)!important;
+  font-weight:600!important;display:flex;align-items:center;
+}
+body .art-body .own-detail{
+  flex:1;padding:14px 18px!important;
+  font-size:13px!important;line-height:1.65!important;color:#2c2c3e!important;
+}
+body .art-body .own-boundary{
+  width:110px;flex-shrink:0;padding:14px 12px!important;
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:10px!important;letter-spacing:1px!important;
+  text-transform:uppercase;text-align:center;
+  border-left:1px solid var(--art-divider)!important;
+  display:flex;align-items:center;justify-content:center;
+  background:#f3edfa!important;color:var(--art2)!important;font-weight:600!important;
+}
+
+/* ── Scale grid - scales / doesn't scale ── */
+.art-body .scale-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:28px 0;
+}
+body .art-body .scale-card{padding:22px!important;border-radius:6px!important;}
+body .art-body .scale-card.yes{
+  background:#eaf7ef!important;
+  border:1px solid #a8d8bc!important;
+  border-top:4px solid var(--art-green)!important;
+}
+body .art-body .scale-card.no{
+  background:#fdf0ef!important;
+  border:1px solid #f5c6c2!important;
+  border-top:4px solid var(--art-red)!important;
+}
+body .art-body .scale-label{
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:10px!important;letter-spacing:3px!important;
+  text-transform:uppercase;margin-bottom:12px!important;font-weight:600!important;
+}
+body .art-body .scale-card.yes .scale-label{color:var(--art-green)!important;}
+body .art-body .scale-card.no .scale-label{color:var(--art-red)!important;}
+body .art-body .scale-items{list-style:none!important;padding:0!important;margin:0!important;}
+body .art-body .scale-items li{
+  font-size:13px!important;line-height:1.6!important;color:#2c2c3e!important;
+  padding:5px 0!important;border-bottom:1px solid rgba(0,0,0,0.05);
+  display:flex;gap:8px;
+}
+body .art-body .scale-items li:last-child{border-bottom:none;}
+
+/* ── Retro box - light card ── */
+body .art-body .retro-box{
+  background:#faf9f5!important;
+  border:1px solid #e9e2d6!important;
+  border-left:4px solid var(--art)!important;
+  border-radius:8px!important;
+  padding:36px 40px!important;margin:32px 0!important;
+  text-align:center;box-shadow:none!important;
+}
+body .art-body .retro-label{
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:10px!important;letter-spacing:3px!important;
+  text-transform:uppercase;color:var(--art)!important;
+  margin-bottom:16px!important;font-weight:600!important;
+}
+body .art-body .retro-box p{
+  font-size:15px!important;color:#3f3f4d!important;
+  line-height:1.8!important;margin-bottom:12px!important;
+}
+body .art-body .retro-box strong{color:var(--art-ink)!important;}
+body .art-body .retro-final{
+  font-family:'Playfair Display',Georgia,serif!important;
+  font-size:20px!important;font-weight:700!important;
+  color:var(--art-ink)!important;line-height:1.4!important;
+  margin-top:20px!important;font-style:italic;
+}
+
+/* ── Divider ── */
+.art-body .divider-line,.art-body hr{
+  border:none!important;height:1px;
+  background:var(--art-divider)!important;
+  margin:40px 0!important;
+}
+
+/* ── Citation superscripts ── */
+.art-body .cite{
+  display:inline;font-size:11px;vertical-align:super;line-height:0;
+  font-family:'JetBrains Mono',monospace;font-weight:700;
+}
+.art-body .cite a{
+  color:var(--art);text-decoration:none;
+  background:var(--art-divider);padding:0 3px;border-radius:2px;
+}
+.art-body .cite a:hover{opacity:0.7;}
+
+/* ── References - inside the article, master file style ── */
+.art-body .references-section{
+  margin:40px 0 0;padding:32px 0 0;
+  border-top:2px solid var(--art-divider);
+}
+.art-body .references-section h3{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--art-muted);margin-bottom:20px;
+}
+.art-body .ref-list{
+  list-style:none;padding:0;margin:0;
+  display:flex;flex-direction:column;gap:10px;
+}
+.art-body .ref-list li{
+  display:flex;gap:12px;align-items:flex-start;
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:13px;line-height:1.6;color:#444;
+}
+.art-body .ref-num{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;font-weight:700;color:var(--art);
+  flex-shrink:0;width:28px;padding-top:2px;
+}
+.art-body .ref-list a{
+  color:var(--art);text-decoration:none;
+  border-bottom:1px dotted var(--art);transition:opacity 0.15s;
+}
+.art-body .ref-list a:hover{opacity:0.7;}
+.art-body .ref-type{
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;letter-spacing:1px;text-transform:uppercase;
+  background:var(--art-divider);color:var(--art-muted);
+  padding:1px 6px;border-radius:3px;margin-left:6px;
+  flex-shrink:0;align-self:flex-start;margin-top:2px;
+}
+
+/* ── Prev/Next nav ── */
+.art-nav-link{transition:border-color 0.25s,transform 0.25s!important;}
+.art-nav-link:hover{border-color:var(--art)!important;transform:translateY(-2px)!important;}
+.art-nav-dir{color:var(--art)!important;}
+
+/* ── Responsive ── */
+@media(max-width:700px){
+  .art-body{padding:32px 24px 48px!important;}
+  .art-body h2{font-size:20px!important;}
+  .art-body .failure-modes,.art-body .scale-grid{grid-template-columns:1fr!important;}
+  body .art-body .own-boundary{display:none!important;}
+  body .art-body .own-role{width:130px;}
+}
+</style>
+</head>
+<body>
+<nav class="nav" id="nav">
+  <a href="../index.html" class="nav-logo"><em>ARTHA</em> Craft</a>
+  <div class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="../articles.html">Series</a>
+    <a href="../about.html">About</a>
+    <a href="https://substack.com" target="_blank" class="nav-follow">Subscribe</a>
+  </div>
+</nav>
+<div class="art-header">
+  <div class="art-header-bgnum">11</div>
+  <div class="art-header-inner">
+    <p class="art-series">Article 11 of 12 · ARTHA Craft</p>
+    <h1 class="art-title">Multiple Projects. Multiple Teams. Multiple Failures. One Methodology That Finally Held. Here's How It Scales.</h1>
+    <p class="art-subtitle">This series didn't start with a framework. It started with a team and a hype cycle.</p>
+    <div class="art-meta">
+      <p class="art-meta-name">Jitander Singh Chauhan</p>
+      <div class="art-meta-sep"></div>
+      <p class="art-meta-role">Lead AI &amp; Data Technologist · Haystream</p>
+    </div>
+  </div>
+</div>
+<div class="art-body-bg">
+  <div class="art-body">
+    <p>Let me be honest about how this series actually started.</p>
+    <p>Not with a framework. Not with a plan. With a team and a hype cycle.</p>
+    <p>The first project. I started with a full team. Everyone excited. AI agents everywhere. Features flying out. The speed was intoxicating and for a few weeks it felt like we had found something genuinely new.</p>
+    <p>Then I watched the hype run the project.</p>
+
+    <div class="arc-box">
+      <p class="arc-label">The Real Series Arc: Project by Project</p>
+      <div class="arc-steps">
+        <div class="arc-step">
+          <div class="arc-dot red"></div>
+          <div class="arc-content">
+            <p class="arc-project">Project 1: The Hype Era</p>
+            <p class="arc-desc">Full team. AI agents everywhere. Speed that felt like a superpower. Decisions in chat sessions nobody else could find. Features built in parallel that contradicted each other. Standups turning into archaeology. Took the project back.</p>
+          </div>
+        </div>
+        <div class="arc-step">
+          <div class="arc-dot gold"></div>
+          <div class="arc-content">
+            <p class="arc-project">The Transition: Building the System</p>
+            <p class="arc-desc">Slowed things down. Started writing things down. Step sequence. Task files. Handoffs. Registers. The methodology built from wreckage, one rule at a time, each one earned from something that broke without it.</p>
+          </div>
+        </div>
+        <div class="arc-step">
+          <div class="arc-dot purple"></div>
+          <div class="arc-content">
+            <p class="arc-project">Multiple Projects: Testing and Refining</p>
+            <p class="arc-desc">The system applied across projects of different sizes, different teams, different domains. Each project added a lesson. Each failure refined a rule. The methodology stopped being reactive and started being intentional.</p>
+          </div>
+        </div>
+        <div class="arc-step">
+          <div class="arc-dot green"></div>
+          <div class="arc-content">
+            <p class="arc-project">This Series: The Condensed Record</p>
+            <p class="arc-desc">10 articles. Everything learned. Not theory: the cost of learning without the system, and what it gave back when the system finally held.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h2>What Breaks When a Team Vibe Codes.</h2>
+
+    <p>One developer vibe coding creates fragmented context. <span class="cite"><a href="#ref-1">[1]</a></span> Two developers creates contradictory context. Three creates compounding contradictions that nobody can untangle without stopping the entire project.</p>
+
+    <div class="failure-modes">
+      <div class="failure-card">
+        <p class="failure-title">Lost Decisions</p>
+        <p class="failure-desc">Every developer has their own session history. Every session made its own assumptions. None of it written down. None of it visible to anyone who wasn't in that chat.</p>
+      </div>
+      <div class="failure-card">
+        <p class="failure-title">Contradictory Builds</p>
+        <p class="failure-desc">Developer A builds against one assumption. Developer B builds against a different one. Both are technically correct. Together they are broken.</p>
+      </div>
+      <div class="failure-card">
+        <p class="failure-title">Archaeology Standups</p>
+        <p class="failure-desc">Meetings that spend their time reconstructing what was built, by whom, against what brief, instead of deciding what to build next.</p>
+      </div>
+      <div class="failure-card">
+        <p class="failure-title">Unreliable Onboarding</p>
+        <p class="failure-desc">New developer asks questions for two weeks. The answers depend on who they ask and what that person remembers. The onboarding is as fragmented as the project.</p>
+      </div>
+    </div>
+
+    <h2>What the System Gives a Team.</h2>
+
+    <p>A new developer joins. In most projects they ask questions for two weeks. They interrupt the people who built things. They make cautious early contributions because they don't want to break something they don't understand.</p>
+
+    <div class="callout">
+      With this system, they read five documents in order.<br><br>
+      The constitution tells them what the platform is and cannot be. The current state tells them where the product is right now. The step sequence tells them everything planned and built. The context handoff tells them where the last session stopped. The task file tells them exactly what is being built today.<br><br>
+      <strong>In one afternoon they know more about the project than someone who has been asking questions for two weeks. <span class="cite"><a href="#ref-3">[3]</a></span> The system onboards without the team having to stop.</strong>
+    </div>
+
+    <h2>Parallel Tracks: The Hardest Thing to Coordinate.</h2>
+
+    <p>When one developer is building a feature and another is fixing bugs and a third is working on infrastructure, parallel tracks create the same cross-layer breakage problem as parallel sessions. Except now it is between people, not just between chat windows.</p>
+
+    <div class="pullquote">The system handles this because every track runs through the step sequence. Every piece of work has a step ID. Every step ID has a task file with scope boundary and cross-layer dependencies documented explicitly. The information that could cause a collision is visible before the collision happens.</div>
+
+    <p>This is not coordination by meeting. This is coordination by document. <span class="cite"><a href="#ref-2">[2]</a></span> Meetings are synchronous, interruptive, and leave no record. Documents are asynchronous, non-interruptive, and leave a permanent record that any agent can read.</p>
+
+    <h2>Who Owns What on a Team.</h2>
+
+    <div class="ownership-table">
+      <div class="own-header">Ownership: Clean Lines, Non-Negotiable Boundaries</div>
+      <div class="own-row">
+        <div class="own-role">Architect</div>
+        <div class="own-detail">Owns every design decision, every scope boundary, every go-ahead. Nobody else gives go-ahead. Single point of accountability for what gets built and why.</div>
+        <div class="own-boundary">Sole authority</div>
+      </div>
+      <div class="own-row">
+        <div class="own-role">Planning</div>
+        <div class="own-detail">Any developer can run a planning session. But the task file output is reviewed and locked by the architect before any coding begins. Planning is collaborative. Go-ahead is not.</div>
+        <div class="own-boundary">Shared carefully</div>
+      </div>
+      <div class="own-row">
+        <div class="own-role">Coding</div>
+        <div class="own-detail">Owned by whoever is executing that step. They run the session, update documentation, write the context handoff. The handoff is their accountability, the record of what they built and what the next person needs.</div>
+        <div class="own-boundary">Step executor</div>
+      </div>
+      <div class="own-row">
+        <div class="own-role">Step Sequence</div>
+        <div class="own-detail">Shared truth. Nobody updates it without reflecting a real status change. Nobody adds a step without architect approval. The sequence is the project's heartbeat. Its integrity is everyone's responsibility.</div>
+        <div class="own-boundary">Shared truth</div>
+      </div>
+    </div>
+
+    <h2>What Scales. What Doesn't.</h2>
+
+    <div class="scale-grid">
+      <div class="scale-card yes">
+        <p class="scale-label">✅ Scales to any team size</p>
+        <ul class="scale-items">
+          <li>→ The five-layer document system</li>
+          <li>→ More eyes on step sequence = fewer gaps</li>
+          <li>→ More handoffs = richer context not thinner</li>
+          <li>→ Onboarding without interrupting the team</li>
+          <li>→ Parallel tracks coordinated by document</li>
+        </ul>
+      </div>
+      <div class="scale-card no">
+        <p class="scale-label">❌ Does not scale</p>
+        <ul class="scale-items">
+          <li>→ Verbal decisions never written down</li>
+          <li>→ Work built outside the step sequence</li>
+          <li>→ Sessions closed without handoffs</li>
+          <li>→ Go-ahead given by anyone other than architect</li>
+          <li>→ Memory as the coordination mechanism</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>The Retrospective Across All the Projects.</h2>
+
+    <p>If I could go back to the first project, the one that started with a full team and a hype cycle and no system, I would do one thing differently.</p>
+    <p>Not a different tool. Not a different team. Not a different deadline.</p>
+
+    <div class="retro-box">
+      <p class="retro-label">What I Would Do From Day One</p>
+      <p>Constitution first. Step sequence second. Task file for the first feature before the first session opened. Context handoff before the first session closed.</p>
+      <p>The speed would have been the same. The output would have been the same. The breakages would not have happened. The contradictions would not have accumulated. The archaeology standups would not have been necessary.</p>
+      <p class="retro-final">The methodology does not slow the work down. It makes the work that gets done actually count. Across multiple projects. Across multiple team sizes. Across multiple failure modes that each added a rule to the list. One methodology. Finally held.</p>
+    </div>
+
+    <div class="references-section" id="references">
+      <h3>Research &amp; Further Reading</h3>
+      <ul class="ref-list">
+        <li id="ref-1">
+          <span class="ref-num">[1]</span>
+          <span>Brooks, F.P., <a href="https://www.amazon.com/Mythical-Man-Month-Software-Engineering-Anniversary/dp/0201835959" target="_blank"><em>The Mythical Man-Month</em></a>, Addison-Wesley, 1995: Communication overhead increases combinatorially with team size. In AI-assisted teams, this compounds: each developer adds their own sessions, each with different context. Shared documentation replaces exponentially growing communication channels with a single source of truth.</span>
+          <span class="ref-type">Book</span>
+        </li>
+        <li id="ref-2">
+          <span class="ref-num">[2]</span>
+          <span>Forsgren, Humble &amp; Kim, <a href="https://itrevolution.com/product/accelerate/" target="_blank"><em>Accelerate</em></a>, IT Revolution Press, 2018: The highest-performing software organizations use asynchronous, document-based information flow rather than synchronous meetings as their coordination mechanism. Documentation-based coordination scales; meeting-based coordination doesn't.</span>
+          <span class="ref-type">Book</span>
+        </li>
+        <li id="ref-3">
+          <span class="ref-num">[3]</span>
+          <span>Rigby et al., <a href="https://users.encs.concordia.ca/~pcr/paper/Rigby2016ICSE.pdf" target="_blank">"Quantifying and Mitigating Turnover-Induced Knowledge Loss"</a>, ICSE 2016: Demonstrated that structured knowledge artifacts (code reviews, decision records) are the most effective mitigation for onboarding and knowledge-loss risk, more effective than designated human successors alone.</span>
+          <span class="ref-type">Academic Paper</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="art-nav-bg">
+  <div class="art-nav">
+    <a href="article-10.html" class="art-nav-link"><p class="art-nav-dir">← Previous</p><p class="art-nav-title">Article 10</p></a>
+    <a href="article-12.html" class="art-nav-link right"><p class="art-nav-dir">Next →</p><p class="art-nav-title">Article 12: The Finale</p></a>
+  </div>
+</div>
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <p class="footer-brand">ARTHA Craft</p>
+      <p class="footer-desc">A 12-part series on structured AI-assisted development.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Series</h5>
+      <a href="../articles.html">All 12 articles</a>
+      <a href="article-1.html">Start with Article 1</a>
+    </div>
+    <div class="footer-col">
+      <h5>Author</h5>
+      <a href="../about.html">Jitander Singh Chauhan</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Jitander Singh Chauhan. All rights reserved.</p>
+    <p class="footer-tag">ARTHA Craft</p>
+  </div>
+</footer>
+<script>
+  var nav=document.getElementById('nav');
+  window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>40);});
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

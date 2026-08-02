@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Article 10: Your AI Agent Isn't Undisciplined. You Haven't Given... | ARTHA Craft</title>
+<meta name="description" content="Every problem in this series had the same root cause. Not a bad model. A missing rule.">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+/* ══════════════════════════════════════════════════════════════════
+   ARTICLE 10 - Your AI Agent Isn't Undisciplined
+   Color identity: Deep Indigo (#303070)
+   Body design matches the master article file (light paper theme)
+   ══════════════════════════════════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;600&display=swap');
+
+:root{
+  --art:#303070;
+  --art2:#6060a0;
+  --art-ink:#1a1a2e;
+  --art-muted:#6b6b7b;
+  --art-divider:#dde2ea;
+}
+
+/* ── Header ── */
+.art-header{background:linear-gradient(180deg,#0c0b09 0%,#100f0d 100%)!important;}
+.art-header-bgnum{color:rgba(48,48,112,0.08)!important;}
+.art-series::before{background:var(--art)!important;}
+.art-series{color:var(--art2)!important;}
+.art-header::after{background:linear-gradient(90deg,var(--art),var(--art2))!important;height:2px!important;}
+.art-title{letter-spacing:-0.5px!important;}
+.art-subtitle{color:var(--art2)!important;opacity:0.7;}
+
+/* ── Body canvas - light paper like the master file ── */
+.art-body-bg{background:#f5f7fa!important;}
+.art-body{max-width:860px!important;padding:56px 64px 72px!important;}
+
+/* ── Typography ── */
+.art-body p{
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:16px;line-height:1.85;color:#2c2c3e;
+  margin-bottom:16px;font-weight:400;
+}
+.art-body p strong{color:var(--art-ink);font-weight:600;}
+.art-body em{color:#2c2c3e;}
+
+.art-body h2{
+  font-family:'Playfair Display',Georgia,serif!important;
+  font-size:22px!important;font-weight:700!important;
+  color:var(--art-ink)!important;margin:40px 0 16px!important;
+  line-height:1.3!important;letter-spacing:0!important;
+}
+.art-body h2::before{display:none!important;}
+
+/* ── Pullquote ── */
+.art-body .pullquote{
+  border-left:4px solid var(--art2)!important;
+  background:#eef0f9!important;
+  padding:20px 28px!important;margin:32px 0!important;
+  font-family:'Source Serif 4',Georgia,serif!important;
+  font-size:18px!important;font-style:italic;
+  line-height:1.6!important;color:var(--art-ink)!important;
+}
+
+/* ── Callout - light indigo card ── */
+body .art-body .callout{
+  background:#eef0f9!important;
+  border:1px solid #c5cae8!important;
+  border-left:5px solid var(--art)!important;
+  border-radius:0!important;
+  padding:20px 24px!important;margin:32px 0!important;
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:15px!important;line-height:1.7!important;
+  color:var(--art-ink)!important;
+}
+body .art-body .callout strong{color:var(--art)!important;font-weight:600!important;}
+
+/* ── Rules stack - 10 numbered rule cards (light) ── */
+body .art-body .rules-stack{
+  margin:32px 0!important;
+  display:flex!important;flex-direction:column;gap:10px;
+  background:transparent!important;border:none!important;padding:0!important;
+}
+body .art-body .rule-card{
+  display:flex!important;gap:0;
+  border-radius:8px!important;overflow:hidden;
+  border:1px solid var(--art-divider)!important;
+  background:white!important;
+  padding:0!important;margin:0!important;
+  transition:all 0.15s;
+}
+body .art-body .rule-card:hover{
+  transform:translateX(4px);
+  border-color:var(--art2)!important;
+  box-shadow:0 2px 12px rgba(48,48,112,0.1);
+}
+body .art-body .rule-num{
+  width:60px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;
+  font-size:22px;font-weight:900;
+  color:white!important;
+  background:var(--art)!important;
+  padding-top:0;
+}
+/* Alternating accent colours for variety */
+body .art-body .rule-card:nth-child(1) .rule-num{background:var(--art)!important;}
+body .art-body .rule-card:nth-child(2) .rule-num{background:#1a3a6b!important;}
+body .art-body .rule-card:nth-child(3) .rule-num{background:#6b3fa0!important;}
+body .art-body .rule-card:nth-child(4) .rule-num{background:#8a4a1a!important;}
+body .art-body .rule-card:nth-child(5) .rule-num{background:var(--art2)!important;}
+body .art-body .rule-card:nth-child(6) .rule-num{background:#c0392b!important;}
+body .art-body .rule-card:nth-child(7) .rule-num{background:#1a3a6b!important;}
+body .art-body .rule-card:nth-child(8) .rule-num{background:#9a7010!important;}
+body .art-body .rule-card:nth-child(9) .rule-num{background:#6b3fa0!important;}
+body .art-body .rule-card:nth-child(10) .rule-num{background:var(--art)!important;}
+
+body .art-body .rule-body{flex:1;padding:18px 22px;}
+body .art-body .rule-text{
+  font-family:'Playfair Display',serif!important;
+  font-size:16px!important;font-weight:700!important;
+  color:var(--art-ink)!important;
+  line-height:1.4!important;margin-bottom:8px!important;
+}
+body .art-body .rule-rationale{
+  font-family:'Source Serif 4',Georgia,serif!important;
+  font-size:13px!important;line-height:1.65!important;
+  color:#555!important;font-weight:400!important;
+  margin-bottom:0!important;
+}
+body .art-body .rule-prevents{
+  display:inline-block;
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:9px!important;letter-spacing:2px!important;
+  text-transform:uppercase;
+  padding:2px 8px!important;border-radius:20px!important;
+  margin-top:8px;
+  background:#eef0f9!important;
+  color:var(--art)!important;
+  border:1px solid var(--art-divider)!important;
+}
+
+/* ── Manifesto - light card (overrides style.css parchment box) ── */
+body .art-body .manifesto{
+  background:#faf9f5!important;
+  border:1px solid #e9e2d6!important;
+  border-left:4px solid var(--art)!important;
+  border-radius:8px!important;
+  box-shadow:none!important;
+  padding:36px 40px!important;margin:40px 0 0!important;
+  text-align:center;
+}
+body .art-body .manifesto-label{
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:10px!important;letter-spacing:3px!important;
+  text-transform:uppercase;
+  color:var(--art)!important;
+  margin-bottom:16px!important;
+}
+body .art-body .manifesto p{
+  color:#3f3f4d!important;
+  font-size:15px!important;line-height:1.8!important;
+  margin-bottom:12px!important;
+}
+body .art-body .manifesto strong{color:var(--art-ink)!important;}
+body .art-body .manifesto .manifesto-final{
+  font-family:'Playfair Display',serif!important;
+  font-size:20px!important;font-weight:700!important;
+  color:var(--art-ink)!important;
+  line-height:1.4!important;margin-top:20px!important;
+}
+
+/* ── Divider ── */
+.art-body .divider-line,.art-body hr{
+  border:none!important;height:1px;
+  background:var(--art-divider)!important;
+  margin:40px 0!important;
+}
+
+/* ── Citation superscripts ── */
+.art-body .cite{
+  display:inline;font-size:11px;vertical-align:super;line-height:0;
+  font-family:'JetBrains Mono',monospace;font-weight:700;
+}
+.art-body .cite a{
+  color:var(--art);text-decoration:none;
+  background:var(--art-divider);padding:0 3px;border-radius:2px;
+}
+.art-body .cite a:hover{opacity:0.7;}
+
+/* ── References - inside the article, master file style ── */
+.art-body .references-section{
+  margin:40px 0 0;padding:32px 0 0;
+  border-top:2px solid var(--art-divider);
+}
+.art-body .references-section h3{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--art-muted);margin-bottom:20px;
+}
+.art-body .ref-list{
+  list-style:none;padding:0;margin:0;
+  display:flex;flex-direction:column;gap:10px;
+}
+.art-body .ref-list li{
+  display:flex;gap:12px;align-items:flex-start;
+  font-family:'Source Serif 4',Georgia,serif;
+  font-size:13px;line-height:1.6;color:#444;
+}
+.art-body .ref-num{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;font-weight:700;color:var(--art);
+  flex-shrink:0;width:28px;padding-top:2px;
+}
+.art-body .ref-list a{
+  color:var(--art);text-decoration:none;
+  border-bottom:1px dotted var(--art);transition:opacity 0.15s;
+}
+.art-body .ref-list a:hover{opacity:0.7;}
+.art-body .ref-type{
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;letter-spacing:1px;text-transform:uppercase;
+  background:var(--art-divider);color:var(--art-muted);
+  padding:1px 6px;border-radius:3px;margin-left:6px;
+  flex-shrink:0;align-self:flex-start;margin-top:2px;
+}
+
+/* ── Prev/Next nav ── */
+.art-nav-link{transition:border-color 0.25s,transform 0.25s!important;}
+.art-nav-link:hover{border-color:var(--art)!important;transform:translateY(-2px)!important;}
+.art-nav-dir{color:var(--art)!important;}
+
+/* ── Responsive ── */
+@media(max-width:700px){
+  .art-body{padding:32px 24px 48px!important;}
+  .art-body h2{font-size:20px!important;}
+  body .art-body .rule-num{width:44px;font-size:18px;}
+  body .art-body .rule-body{padding:14px 16px;}
+  body .art-body .manifesto{padding:28px 24px!important;}
+}
+</style>
+</head>
+<body>
+<nav class="nav" id="nav">
+  <a href="../index.html" class="nav-logo"><em>ARTHA</em> Craft</a>
+  <div class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="../articles.html">Series</a>
+    <a href="../about.html">About</a>
+    <a href="https://substack.com" target="_blank" class="nav-follow">Subscribe</a>
+  </div>
+</nav>
+<div class="art-header">
+  <div class="art-header-bgnum">10</div>
+  <div class="art-header-inner">
+    <p class="art-series">Article 10 of 12 · ARTHA Craft</p>
+    <h1 class="art-title">Your AI Agent Isn't Undisciplined. You Haven't Given It Rules. Here Are the 10 That Took Me 25 Years to Earn.</h1>
+    <p class="art-subtitle">Every problem in this series had the same root cause. Not a bad model. A missing rule.</p>
+    <div class="art-meta">
+      <p class="art-meta-name">Jitander Singh Chauhan</p>
+      <div class="art-meta-sep"></div>
+      <p class="art-meta-role">Lead AI &amp; Data Technologist · Haystream</p>
+    </div>
+  </div>
+</div>
+<div class="art-body-bg">
+  <div class="art-body">
+    <p>Every problem I have described in this series, the re-built features, the cross-layer breakage, the lost decisions, the UI nobody could use, the production crisis, the codebase full of 80% complete work, had the same root cause.</p>
+    <p>Not a bad AI agent. Not a bad model. Not a bad tool.</p>
+    <p><strong>A missing rule.</strong></p>
+
+    <div class="callout">
+      Rules are not constraints on speed. They are the reason speed is sustainable.<br><br>
+      An AI agent without rules is not free. It is <strong>unanchored.</strong> <span class="cite"><a href="#ref-1">[1]</a></span> It builds confidently in any direction. It makes decisions nobody asked it to make. It expands past its scope because nothing told it where the scope ended.<br><br>
+      25 years of architecture, and then building with AI agents, produced 10 rules. Each one earned. Each one the direct result of something breaking without it.
+    </div>
+
+    <h2>The 10 Rules. Every Session. No Exceptions.</h2>
+
+    <div class="rules-stack">
+
+      <div class="rule-card">
+        <div class="rule-num">01</div>
+        <div class="rule-body">
+          <p class="rule-text">"An agent that hasn't read the brief will invent one. Always."</p>
+          <p class="rule-rationale">The first obligation of every coding session is reading, not building. Context seed, current state, session bridge, step sequence, task file. In that order. Before a single line of code. An agent that skips this step makes assumptions. Those assumptions are always expensive.</p>
+          <span class="rule-prevents">Prevents: invented context</span>
+        </div>
+      </div>
+
+      <div class="rule-card">
+        <div class="rule-num">02</div>
+        <div class="rule-body">
+          <p class="rule-text">"Go-ahead means execute, not design. If questions remain, go-ahead hasn't been earned."</p>
+          <p class="rule-rationale">Go-ahead is a confirmation: every gap resolved, every decision locked, every question answered. If anything remains open, the planning session continues. An agent that receives a go-ahead with open questions will answer them itself. Confidently. Wrongly.</p>
+          <span class="rule-prevents">Prevents: agent-invented design decisions</span>
+        </div>
+      </div>
+
+      <div class="rule-card">
+        <div class="rule-num">03</div>
+        <div class="rule-body">
+          <p class="rule-text">"Two features in one task file is the first domino. Scope creep starts here and nowhere else."</p>
+          <p class="rule-rationale">One task file. One feature. One step ID. One scope boundary. The moment two unrelated features share a file, the scope boundary becomes ambiguous and the coding agent has no clean definition of done. It builds until it runs out of obvious things to build, which is not done.</p>
+          <span class="rule-prevents">Prevents: scope drift</span>
+        </div>
+      </div>
+
+      <div class="rule-card">
+        <div class="rule-num">04</div>
+        <div class="rule-body">
+          <p class="rule-text">"Old code doesn't get deleted. It gets marked deprecated. Deleted code has a habit of being needed tomorrow."</p>
+          <p class="rule-rationale">Nothing is ever deleted from the codebase. Old implementations are marked deprecated and preserved. The agent that deletes things it thinks are no longer needed will eventually delete something that is needed: by a module it didn't know existed, by a future step that assumed the old code was still there.</p>
+          <span class="rule-prevents">Prevents: silent dependency breakage</span>
+        </div>
+      </div>
+
+      <div class="rule-card">
+        <div class="rule-num">05</div>
+        <div class="rule-body">
+          <p class="rule-text">"If the docs don't reflect the code, the docs are fiction. Fiction is expensive."</p>
+          <p class="rule-rationale">Every step that changes a file path, API route, module behaviour, or configuration key: the relevant documentation is updated in the same commit. Not later. Not in a follow-up. The same commit. The moment documentation falls behind the code, it starts actively misleading every agent and every developer who reads it.</p>
+          <span class="rule-prevents">Prevents: documentation drift</span>
+        </div>
+      </div>
+
+      <div class="rule-card">
+        <div class="rule-num">06</div>
+        <div class="rule-body">
+          <p class="rule-text">"The handoff is the last file touched. Not almost last. Last. No exceptions."</p>
+          <p class="rule-rationale">Before any session closes, CONTEXT-HANDOFF.MD is written. Exact stop point. Locked decisions. Open questions. Paste-ready prompt. A session that closes without a handoff has made the next session harder. A project without handoffs is one developer departure away from a production crisis. This rule exists because that crisis is real.</p>
+          <span class="rule-prevents">Prevents: blank-slate sessions and production crises</span>
+        </div>
+      </div>
+
+      <div class="rule-card">
+        <div class="rule-num">07</div>
+        <div class="rule-body">
+          <p class="rule-text">"If it's not in the step sequence, it hasn't been planned. Wanting to build something is not the same as planning to build it."</p>
+          <p class="rule-rationale">The step sequence is the single source of truth. If a feature has no step ID, it does not exist as a plan. It exists as a wish. Wishes do not get built correctly. Plans do. Add it to the sequence first, give it a task file, then build it.</p>
+          <span class="rule-prevents">Prevents: unplanned work entering the codebase</span>
+        </div>
+      </div>
+
+      <div class="rule-card">
+        <div class="rule-num">08</div>
+        <div class="rule-body">
+          <p class="rule-text">"The agent builds the mockup. The architect approves it. Then the code is written. Never the other way."</p>
+          <p class="rule-rationale">UI decisions made during coding are shaped by implementation logic, not user experience. The mockup is the checkpoint. The agent builds it. The architect reviews it. Changes happen before a single line of implementation code exists. This one rule eliminated an entire category of rework from every project I have run since.</p>
+          <span class="rule-prevents">Prevents: technically correct but unusable UI</span>
+        </div>
+      </div>
+
+      <div class="rule-card">
+        <div class="rule-num">09</div>
+        <div class="rule-body">
+          <p class="rule-text">"A bug fixed before it's logged is a bug that never officially existed. Unofficial fixes create official mysteries."</p>
+          <p class="rule-rationale">Every bug goes into BUGS.MD before it gets fixed. The entry takes thirty seconds. The triage it enables saves hours. The traceable history it creates saves days when the same bug reappears. A bug fixed without being logged cannot be tracked, triaged, or learned from. It becomes a gap in the record, and gaps compound.</p>
+          <span class="rule-prevents">Prevents: untraceable recurring bugs</span>
+        </div>
+      </div>
+
+      <div class="rule-card">
+        <div class="rule-num">10</div>
+        <div class="rule-body">
+          <p class="rule-text">"Frozen modules stay frozen. No agent reopens them without explicit product approval. Confidence is not go-ahead."</p>
+          <p class="rule-rationale">Some modules are intentionally stubbed. Some features are deliberately deferred. Some decisions are frozen by product direction, not engineering preference. The agent that reopens a frozen module because it seems logical has made a product decision it was not authorised to make. Confidently. Without knowing why the freeze existed.</p>
+          <span class="rule-prevents">Prevents: unauthorised product decisions</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="manifesto">
+      <p class="manifesto-label">The Rule Beneath the Rules</p>
+      <p>Every one of these ten exists because of something that broke without it. None of them is theoretical. Each one is the scar tissue of a real session, a real project, a real failure that was expensive enough to become permanent.</p>
+      <p>Rules are not the enemy of speed. Rules are what makes speed safe. <span class="cite"><a href="#ref-2">[2]</a></span></p>
+      <p>An AI agent with no rules is fast in any direction, including the wrong one.</p>
+      <p class="manifesto-final">An AI agent with these ten rules is fast in exactly the right direction. Precise. Bounded. Trustworthy. That is what 25 years of architecture, combined with the most capable coding tools ever built, actually produces.</p>
+    </div>
+
+    <div class="references-section" id="references">
+      <h3>Research &amp; Further Reading</h3>
+      <ul class="ref-list">
+        <li id="ref-1">
+          <span class="ref-num">[1]</span>
+          <span>Brooks, F.P., <a href="https://www.amazon.com/Mythical-Man-Month-Software-Engineering-Anniversary/dp/0201835959" target="_blank"><em>The Mythical Man-Month</em></a>, Addison-Wesley, 1995: Established that "conceptual integrity is the most important consideration in system design." Without explicit constraints governing agent behavior, AI systems exhibit the same coordination failure Brooks documented in human teams: each part optimizes locally while the whole degrades.</span>
+          <span class="ref-type">Book</span>
+        </li>
+        <li id="ref-2">
+          <span class="ref-num">[2]</span>
+          <span>Perrow, C., <a href="https://press.princeton.edu/books/paperback/9780691004129/normal-accidents" target="_blank"><em>Normal Accidents</em></a>, Princeton University Press, 1984: In high-complexity, tightly coupled systems, catastrophic failures are inevitable without deliberate structural constraints. Each of the 10 rules directly reduces either coupling or complexity, the two factors Perrow identified as the root cause of systemic failure.</span>
+          <span class="ref-type">Book</span>
+        </li>
+        <li id="ref-3">
+          <span class="ref-num">[3]</span>
+          <span>Anthropic, <a href="https://code.claude.com/docs/en/best-practices" target="_blank">"Best Practices for Claude Code"</a>, Anthropic, 2025: Anthropic's official documentation explicitly recommends the Writer/Reviewer pattern, structured planning before coding, and context management, validating that the rules described here reflect how the model itself is designed to be used effectively.</span>
+          <span class="ref-type">Official Docs</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="art-nav-bg">
+  <div class="art-nav">
+    <a href="article-9.html" class="art-nav-link"><p class="art-nav-dir">← Previous</p><p class="art-nav-title">Article 9</p></a>
+    <a href="article-11.html" class="art-nav-link right"><p class="art-nav-dir">Next →</p><p class="art-nav-title">Article 11: One Methodology That Finally Held</p></a>
+  </div>
+</div>
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <p class="footer-brand">ARTHA Craft</p>
+      <p class="footer-desc">A 12-part series on structured AI-assisted development.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Series</h5>
+      <a href="../articles.html">All 12 articles</a>
+      <a href="article-1.html">Start with Article 1</a>
+    </div>
+    <div class="footer-col">
+      <h5>Author</h5>
+      <a href="../about.html">Jitander Singh Chauhan</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Jitander Singh Chauhan. All rights reserved.</p>
+    <p class="footer-tag">ARTHA Craft</p>
+  </div>
+</footer>
+<script>
+  var nav=document.getElementById('nav');
+  window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>40);});
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
