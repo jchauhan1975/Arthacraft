@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Model Is Not the Product | ARTHA Craft</title>
+<meta name="description" content="Benefits, risks and what not to do when you put an LLM inside a commercial product.">
+<link rel="canonical" href="https://arthacraft.tech/notes/craft-note-01.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ARTHA Craft">
+<meta property="og:title" content="The Model Is Not the Product">
+<meta property="og:description" content="Benefits, risks and what not to do when you put an LLM inside something a regulated buyer will pay for.">
+<meta property="og:url" content="https://arthacraft.tech/notes/craft-note-01.html">
+<meta property="og:image" content="https://arthacraft.tech/images/share/cn01-share.png">
+<meta property="og:image:width" content="2400">
+<meta property="og:image:height" content="1254">
+<meta property="og:image:alt" content="Craft Notes No. 01: The model is not the product.">
+<meta property="article:author" content="Jitander Singh Chauhan">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Serif+Display:ital@0;1&family=Literata:ital,opsz,wght@0,7..72,300;0,7..72,400;0,7..72,500;1,7..72,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#0c0b09; --ink:#1a1916; --coal:#2a2924; --ash:#4a4944; --mist:#8a8880; --fog:#b8b6b0;
+  --paper:#f5f0e8; --cream:#faf7f2; --white:#fdfcfa;
+  --red:#8B1A1A; --red-warm:#b83020; --red-light:#d4472c; --gold:#b8912a;
+  --divider:rgba(255,255,255,0.07); --divider-l:rgba(26,25,22,0.1);
+  --display:'Cormorant Garamond','Times New Roman',serif;
+  --heading:'DM Serif Display',Georgia,serif;
+  --body:'Literata',Georgia,serif;
+  --mono:'JetBrains Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--void);color:var(--paper);font-family:var(--body);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;border-bottom:1px solid transparent;transition:background .4s,border-color .4s}
+.nav.scrolled{background:rgba(12,11,9,.96);border-color:var(--divider);backdrop-filter:blur(12px)}
+.nav-logo{font-family:var(--mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:300}
+.nav-logo em{font-style:normal;color:var(--red-light)}
+.nav-links{display:flex;gap:36px;align-items:center}
+.nav-links a{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mist);transition:color .2s}
+.nav-links a:hover{color:var(--paper)}
+.nav-links a.active{color:var(--fog)}
+.nav-follow{color:var(--red-light)!important;border:1px solid rgba(212,71,44,0.3);padding:6px 18px;border-radius:2px;transition:all 0.2s!important}
+.nav-follow:hover{background:var(--red)!important;color:var(--white)!important;border-color:var(--red)!important}
+
+/* HEADER */
+.art-head{position:relative;overflow:hidden;padding:150px 48px 90px;background:var(--void);border-bottom:1px solid var(--divider)}
+.art-num{position:absolute;right:-20px;top:30px;font-family:var(--display);font-weight:500;font-size:clamp(220px,34vw,460px);line-height:1;color:rgba(245,240,232,.035);pointer-events:none;user-select:none}
+.art-head-inner{position:relative;max-width:820px;margin:0 auto}
+.kicker{font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--red-light);margin-bottom:28px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.kicker span{color:var(--ash)}
+.art-title{font-family:var(--heading);font-weight:400;font-size:clamp(42px,6.4vw,76px);line-height:1.04;letter-spacing:-.5px;color:var(--white);margin-bottom:28px}
+.art-title em{font-style:italic;color:var(--red-light)}
+.art-dek{font-family:var(--display);font-style:italic;font-size:clamp(21px,2.4vw,27px);line-height:1.45;color:var(--fog);max-width:640px}
+.art-meta{margin-top:44px;font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mist);display:flex;gap:28px;flex-wrap:wrap}
+
+/* BODY */
+.art-body-wrap{background:var(--cream);color:var(--ink);padding:90px 48px 110px}
+.art-body{max-width:680px;margin:0 auto;font-size:18.5px;line-height:1.78;font-weight:300}
+.art-body p{margin-bottom:1.25em}
+.art-body strong{font-weight:500;color:var(--ink)}
+.art-body h2{font-family:var(--heading);font-weight:400;font-size:clamp(28px,3.4vw,36px);line-height:1.15;color:var(--ink);margin:2.6em 0 .9em}
+.art-body h2::before{content:"";display:block;width:36px;height:2px;background:var(--red);margin-bottom:22px}
+.art-body h2:first-child{margin-top:0}
+.stack p{margin-bottom:.2em}
+.stack{margin:1.4em 0 1.6em}
+.pull{margin:2.2em 0;padding:6px 0 6px 28px;border-left:2px solid var(--red)}
+.pull p{font-family:var(--display);font-style:italic;font-weight:500;font-size:clamp(27px,3.2vw,34px);line-height:1.3;color:var(--ink);margin:0}
+
+/* Benefit / risk entries */
+.entries{margin:1.6em 0 0}
+.entry{padding:22px 0;border-top:1px solid var(--divider-l)}
+.entry:last-child{border-bottom:1px solid var(--divider-l)}
+.entry h3{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:500;color:var(--red-warm);margin-bottom:8px}
+.entry p{margin:0}
+
+/* Do list */
+.dos{list-style:none;counter-reset:o;margin:1.6em 0 0}
+.dos li{counter-increment:o;position:relative;padding:22px 0 22px 64px;border-top:1px solid var(--divider-l)}
+.dos li:last-child{border-bottom:1px solid var(--divider-l)}
+.dos li::before{content:counter(o,decimal-leading-zero);position:absolute;left:0;top:18px;font-family:var(--display);font-size:34px;font-weight:500;color:var(--ink);line-height:1}
+.dos li strong{display:block;font-family:var(--heading);font-weight:400;font-size:21px;line-height:1.3;margin-bottom:6px}
+@media (max-width:720px){.dos li{padding-left:52px}.dos li::before{font-size:28px}}
+
+/* Don't list */
+.donts{list-style:none;counter-reset:d;margin:1.6em 0 0}
+.donts li{counter-increment:d;position:relative;padding:22px 0 22px 64px;border-top:1px solid var(--divider-l)}
+.donts li:last-child{border-bottom:1px solid var(--divider-l)}
+.donts li::before{content:counter(d,decimal-leading-zero);position:absolute;left:0;top:18px;font-family:var(--display);font-size:34px;font-weight:500;color:rgba(139,26,26,.55);line-height:1}
+.donts li strong{display:block;font-family:var(--heading);font-weight:400;font-size:21px;line-height:1.3;margin-bottom:6px}
+
+.note{font-family:var(--mono);font-size:11px;line-height:1.7;letter-spacing:.3px;color:var(--ash);margin-top:2.4em;padding-top:18px;border-top:1px solid var(--divider-l)}
+.sign{margin-top:3em;font-family:var(--display);font-style:italic;font-size:24px;color:var(--ink)}
+
+
+/* FIGURES */
+.fig{margin:2.6em -40px 2.8em;padding:0}
+.fig svg{background:var(--cream)}
+.fig figcaption{font-family:var(--mono);font-size:11px;line-height:1.7;letter-spacing:.3px;color:var(--ash);margin:14px 40px 0;padding-left:14px;border-left:2px solid var(--red)}
+.fig-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+@media (max-width:820px){.fig{margin-left:0;margin-right:0}.fig-scroll svg{min-width:720px}.fig figcaption{margin-left:0;margin-right:0}}
+
+
+/* REFERENCES */
+.ref{font-family:var(--mono);font-size:.62em;color:var(--red-warm);text-decoration:none;vertical-align:.35em;white-space:nowrap}
+.ref:hover,.ref:focus-visible{text-decoration:underline}
+.refs{margin-top:3.2em;padding-top:28px;border-top:1px solid var(--divider-l)}
+.refs h3{font-family:var(--heading);font-weight:400;font-size:26px;margin-bottom:18px}
+.refs ol{list-style:none;padding:0;margin:0}
+.refs li{display:grid;grid-template-columns:44px 1fr;gap:4px;font-size:14.5px;line-height:1.65;padding:12px 0;border-bottom:1px solid var(--divider-l);scroll-margin-top:80px}
+.refs li:target{background:rgba(139,26,26,.06)}
+.refs .rn{font-family:var(--mono);font-size:12px;color:var(--red-warm);padding-top:3px}
+.refs a{color:var(--ink);text-decoration:underline;text-decoration-color:rgba(139,26,26,.4);text-underline-offset:3px}
+.refs .rt{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mist);margin-left:6px}
+
+/* FOOT */
+.art-foot{background:var(--void);padding:70px 48px;border-top:1px solid var(--divider)}
+.art-foot-inner{max-width:820px;margin:0 auto;display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:flex-end}
+.foot-label{font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--ash);margin-bottom:12px}
+.foot-link{font-family:var(--heading);font-size:24px;color:var(--paper);transition:color .2s}
+.foot-link:hover{color:var(--red-light)}
+
+@media (max-width:720px){
+  .nav{padding:0 16px;gap:12px}
+  .nav-links{gap:12px}
+  .nav-links a{font-size:9px;letter-spacing:.5px;white-space:nowrap}
+  .nav-links .nav-home{display:none}
+  .nav-logo{letter-spacing:2px;white-space:nowrap}
+  .nav-follow{padding:5px 10px}
+  .art-head{padding:120px 16px 64px}
+  .art-body-wrap{padding:60px 16px 80px}
+  .art-body{font-size:17px}
+  .art-foot{padding:50px 16px}
+  .donts li{padding-left:52px}
+  .donts li::before{font-size:28px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="../index.html" class="nav-logo"><em>ARTHA</em> Craft</a>
+  <div class="nav-links">
+    <a href="../index.html" class="nav-home">Home</a>
+    <a href="../articles.html">Series</a>
+    <a href="../notes.html" class="active">Craft Notes</a>
+    <a href="../about.html">About</a>
+    <a href="https://substack.com/@jitanderchauhan" target="_blank" class="nav-follow">Subscribe</a>
+  </div>
+</nav>
+
+<header class="art-head">
+  <div class="art-num" aria-hidden="true">01</div>
+  <div class="art-head-inner">
+    <div class="kicker">Craft Notes <span>/</span> No. 01 <span>/</span> Governance</div>
+    <h1 class="art-title">The model is not <em>the product.</em></h1>
+    <p class="art-dek">Benefits, risks and what not to do when you put an LLM inside something a regulated buyer will pay for.</p>
+    <div class="art-meta"><span>Jitander Chauhan</span><span>October 2026</span><span>9 min read</span></div>
+  </div>
+</header>
+
+<main class="art-body-wrap">
+<article class="art-body">
+
+  <h2>The question I got</h2>
+  <p>Someone asked me last week: how do you actually use an LLM in a commercial product?</p>
+  <p>Not a demo. Not a chatbot bolted onto a website. A product a regulated buyer will pay for, audit and depend on.</p>
+  <p>It made me stop and think. Based on what we have actually delivered, what is the honest answer?</p>
+  <div class="pull"><p>The model is not the product. The system around the model is.</p></div>
+  <p>Looking back at what we built and shipped, every hard lesson pointed the same way. The LLM is one component inside a deterministic, governed system. It is powerful, replaceable and untrustworthy on its own.</p>
+  <p>Treat it like a database or a payment gateway. Wrap it in contracts. Verify what it returns. Put a human where the decision matters.</p>
+  
+  <figure class="fig"><div class="fig-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="40 196 1120 504" width="100%" role="img" aria-label="The model is one component. The system is the product." style="display:block;height:auto"><defs><marker id="cn01-system-ah-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1a1916"/></marker><marker id="cn01-system-ah-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8B1A1A"/></marker><marker id="cn01-system-ah-mist" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a8880"/></marker></defs><rect x="60" y="205" width="1080" height="400" rx="6" fill="none" stroke="rgba(26,25,22,0.28)" stroke-width="1" stroke-dasharray="6 5"/><text x="86" y="240" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" fill="#8B1A1A" text-anchor="start" font-weight="500" letter-spacing="2">THE PRODUCT: WHAT BUYERS PAY FOR</text><rect x="86" y="300" width="180" height="150" rx="4" fill="#fdfcfa" stroke="rgba(26,25,22,0.18)" stroke-width="1"/><text x="104" y="330" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#8a8880" text-anchor="start" font-weight="400" letter-spacing="1.5">01</text><text x="104" y="370" font-family="'DM Serif Display', Georgia, serif" font-size="24" fill="#1a1916" text-anchor="start" font-weight="400">Input</text><text x="104" y="402" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#4a4944" text-anchor="start" font-weight="400">requirement +</text><text x="104" y="420" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#4a4944" text-anchor="start" font-weight="400">verified context</text><rect x="298" y="300" width="180" height="150" rx="4" fill="#fdfcfa" stroke="rgba(26,25,22,0.18)" stroke-width="1"/><text x="316" y="330" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#8a8880" text-anchor="start" font-weight="400" letter-spacing="1.5">02</text><text x="316" y="370" font-family="'DM Serif Display', Georgia, serif" font-size="24" fill="#1a1916" text-anchor="start" font-weight="400">Contract</text><text x="316" y="402" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#4a4944" text-anchor="start" font-weight="400">shape · count</text><text x="316" y="420" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#4a4944" text-anchor="start" font-weight="400">naming · evidence</text><rect x="510" y="330" width="180" height="90" rx="4" fill="#0c0b09" stroke="none" stroke-width="1"/><text x="528" y="352" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#8a8880" text-anchor="start" font-weight="400" letter-spacing="1.5">03</text><text x="582" y="360" font-family="'DM Serif Display', Georgia, serif" font-size="24" fill="#f5f0e8" text-anchor="start" font-weight="400">LLM</text><text x="528" y="384" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#b8b6b0" text-anchor="start" font-weight="400">replaceable,</text><text x="528" y="400" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#b8b6b0" text-anchor="start" font-weight="400">routed by preset</text><text x="600" y="316" font-family="'Literata', Georgia, serif" font-size="15" fill="#8a8880" text-anchor="middle" font-weight="400" font-style="italic">the part everyone demos</text><rect x="722" y="300" width="180" height="150" rx="4" fill="#fdfcfa" stroke="rgba(26,25,22,0.18)" stroke-width="1"/><text x="740" y="330" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#8a8880" text-anchor="start" font-weight="400" letter-spacing="1.5">04</text><text x="740" y="370" font-family="'DM Serif Display', Georgia, serif" font-size="24" fill="#1a1916" text-anchor="start" font-weight="400">Verify</text><text x="740" y="402" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#4a4944" text-anchor="start" font-weight="400">contract + evidence</text><text x="740" y="420" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#4a4944" text-anchor="start" font-weight="400">checks · labelled</text><rect x="934" y="300" width="180" height="150" rx="4" fill="#fdfcfa" stroke="rgba(26,25,22,0.18)" stroke-width="1"/><rect x="934" y="300" width="180" height="4" rx="0" fill="#8B1A1A" stroke="none" stroke-width="1"/><text x="952" y="330" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#8a8880" text-anchor="start" font-weight="400" letter-spacing="1.5">05</text><text x="952" y="370" font-family="'DM Serif Display', Georgia, serif" font-size="24" fill="#1a1916" text-anchor="start" font-weight="400">Human gate</text><text x="952" y="402" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#4a4944" text-anchor="start" font-weight="400">a person approves</text><text x="952" y="420" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#4a4944" text-anchor="start" font-weight="400">or rejects</text><path d="M266,375 L294,375" fill="none" stroke="#1a1916" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#cn01-system-ah-ink)"/><path d="M478,375 L506,375" fill="none" stroke="#1a1916" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#cn01-system-ah-ink)"/><path d="M690,375 L718,375" fill="none" stroke="#1a1916" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#cn01-system-ah-ink)"/><path d="M902,375 L930,375" fill="none" stroke="#1a1916" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#cn01-system-ah-ink)"/><path d="M812,450 L812,492 L600,492 L600,424" fill="none" stroke="#8B1A1A" stroke-width="1.6" stroke-linejoin="round" stroke-dasharray="5 4" marker-end="url(#cn01-system-ah-red)"/><text x="706" y="514" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#8B1A1A" text-anchor="middle" font-weight="400">fails → regenerate or reject</text><path d="M1024,300 L1024,264 L388,264 L388,296" fill="none" stroke="#8B1A1A" stroke-width="1.6" stroke-linejoin="round" stroke-dasharray="5 4" marker-end="url(#cn01-system-ah-red)"/><text x="706" y="255" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#8B1A1A" text-anchor="middle" font-weight="400">rejected → revise contract or input</text><rect x="86" y="535" width="820" height="44" rx="3" fill="rgba(139,26,26,0.06)" stroke="none" stroke-width="1"/><rect x="86" y="535" width="3" height="44" rx="0" fill="#8B1A1A" stroke="none" stroke-width="1"/><text x="496" y="562" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#1a1916" text-anchor="middle" font-weight="400">AUDIT TRAIL · input · prompt version · model preset · output · reviewer · decision</text><path d="M1024,450 L1024,628" fill="none" stroke="#1a1916" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#cn01-system-ah-ink)"/><rect x="909" y="632" width="230" height="48" rx="24" fill="#0c0b09" stroke="none" stroke-width="1"/><text x="1024" y="662" font-family="'DM Serif Display', Georgia, serif" font-size="19" fill="#f5f0e8" text-anchor="middle" font-weight="400">Traceable artifact</text></svg></div><figcaption>The LLM is the smallest box in the system. Everything around it is what a regulated buyer pays for.</figcaption></figure>
+  <p>Here is what that buys you, what it costs you, and the mistakes I would not make again.</p>
+
+
+  <h2>What you gain when the model is governed</h2>
+  <p>Built this way, an LLM product earns things a raw model never will.</p>
+  <div class="entries">
+    <div class="entry"><h3>Consistency you can defend</h3><p>Give every step an explicit output contract. Tell the model exactly what shape to return and require evidence for each claim. When one provider added schema enforcement, adherence on its complex-schema tests went from under 40 percent to 100 percent. <a class="ref" href="#ref-1">[1]</a> That fixes the shape of an answer, not its truth. A perfectly formatted answer can still be wrong, which is why the contract also demands evidence.</p></div>
+    <div class="entry"><h3>Trust from regulated buyers</h3><p>Banks and insurers do not buy cleverness. They buy control. Human approval gates, end-to-end traceability and single-tenant isolation are what get you through procurement. Regulation is moving the same way: the EU AI Act requires high-risk AI systems to be overseen by people who can override or stop them. <a class="ref" href="#ref-2">[2]</a></p></div>
+    <div class="entry"><h3>Costs you can control</h3><p>Route routine work to a mid-tier model. Reserve the top-tier model for high-stakes reasoning. <a class="ref" href="#ref-3">[3]</a> Cache stable prompts. <a class="ref" href="#ref-4">[4]</a> In our cost model, inference came out at roughly 1 to 10 percent of cost-to-serve. <a class="ref" href="#ref-5">[5]</a> The price of a given level of capability keeps falling, by 10x or more a year. <a class="ref" href="#ref-6">[6]</a> <a class="ref" href="#ref-7">[7]</a> Volume is the catch. Agents and reasoning models use far more tokens per task, and Gartner expects inference cost per agentic workflow to rise more than fivefold through 2028. <a class="ref" href="#ref-8">[8]</a> Watch volume, not just price.</p></div>
+    <div class="entry"><h3>No hostage situation</h3><p>Route across more than one provider. Outages, price changes and policy shifts become operational events, not existential ones. Providers also retire models on a schedule, so a single-model product carries a built-in migration date. <a class="ref" href="#ref-9">[9]</a></p></div>
+    <div class="entry"><h3>A moat that survives the next model</h3><p>Your competitors can call the same API tomorrow. They cannot copy your workflow, your governance and your accumulated delivery knowledge overnight.</p></div>
+  </div>
+  <div class="pull"><p>If a better model makes your product obsolete, you built a wrapper. If it makes your product better, you built a system.</p></div>
+
+  <h2>The risks nobody puts in the pitch deck</h2>
+  <p>They fall into six groups. Each is manageable. None is optional.</p>
+  <div class="entries">
+    <div class="entry"><h3>Cost</h3><p>Humans are your biggest cost. In our model, expert review was about 56 percent of cost-to-serve and infrastructure about 4 percent. <a class="ref" href="#ref-5">[5]</a> Human-in-the-loop is the feature regulated buyers want, and the ceiling on your margin. Token volume is the other exposure: an agent stuck in a loop or an abusive user can burn a month of budget overnight, which is why unbounded consumption is on the industry's top-ten list of LLM risks. <a class="ref" href="#ref-10">[10]</a></p></div>
+    <div class="entry"><h3>Data</h3><p>Every call sends data to someone else. With a standard API key, prompts and outputs go to the provider, and what they keep is set by their terms. One major provider keeps API data for abuse monitoring for up to 30 days by default and offers zero retention only to approved customers. <a class="ref" href="#ref-11">[11]</a> Another offers zero retention per organization, with listed exclusions. <a class="ref" href="#ref-12">[12]</a> The key itself is a credential: leaked, it exposes data and runs up your bill. Ask early whether a buyer requires models to run through its own cloud account. For some, that decides the deal.</p></div>
+    <div class="entry"><h3>Security</h3><p>Treat the model as an untrusted party. Instructions hidden in any document it reads can steer its output. <a class="ref" href="#ref-13">[13]</a> Passing that output straight into SQL, a shell or a web page is a classic injection hole. Agents with broad write, send or spend permissions turn one bad output into an incident, and anything in a system prompt should be assumed extractable. <a class="ref" href="#ref-10">[10]</a> Our own version was quieter: one stale design file, carrying content from an unrelated system, was enough to send coding agents toward the wrong primitives.</p></div>
+    <div class="entry"><h3>Reliability</h3><p>The same input does not always give the same answer, even at temperature zero; one root cause is how servers batch requests under load. <a class="ref" href="#ref-14">[14]</a> Models behind moving aliases change without a code change, providers retire versions on a schedule, <a class="ref" href="#ref-9">[9]</a> and long inputs degrade: models use information at the start and end of a long context better than the middle. <a class="ref" href="#ref-15">[15]</a> Plan for rate limits, timeouts and outages as you would for any other dependency.</p></div>
+    <div class="entry"><h3>Quality</h3><p>Output can be confidently wrong. We once ran an AI-assisted gap analysis of our own codebase, and about 40 percent of its findings were wrong once checked against the code. <a class="ref" href="#ref-5">[5]</a> This is not unusual. In a study of 576,000 code samples, at least 5.2 percent of packages suggested by commercial models, and 21.7 percent by open-source ones, did not exist. <a class="ref" href="#ref-16">[16]</a> A 2026 re-test of five frontier models still found 4.6 to 6.1 percent. <a class="ref" href="#ref-17">[17]</a> NIST names the pattern confabulation: confidently stated but false content. <a class="ref" href="#ref-18">[18]</a> And prompting is the easy part. In our build, writing a prompt took days; wiring it into the engine, with context, parsing and failure handling, took far longer.</p></div>
+    <div class="entry"><h3>Compliance</h3><p>Not a later phase. US banking regulators state that using a third party does not reduce a bank's responsibility, and expect due diligence on a vendor's security controls, including SOC reports where available. <a class="ref" href="#ref-19">[19]</a> <a class="ref" href="#ref-20">[20]</a> No regulation names SOC 2, but it is what procurement will ask for. Budget for audit logs, MFA, SSO and that report from day one. Decide too what you show: prompts, methods and recorded demos all expose how you work.</p></div>
+  </div>
+  <figure class="fig"><div class="fig-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="40 200 1120 420" width="100%" role="img" aria-label="Humans, not tokens, drive the cost." style="display:block;height:auto"><defs><marker id="cn01-cost-ah-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1a1916"/></marker><marker id="cn01-cost-ah-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8B1A1A"/></marker><marker id="cn01-cost-ah-mist" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a8880"/></marker></defs><line x1="400.0" y1="222" x2="400.0" y2="480" stroke="rgba(26,25,22,0.08)" stroke-width="1"/><text x="400.0" y="502" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#8a8880" text-anchor="middle" font-weight="400">0%</text><line x1="630.0" y1="222" x2="630.0" y2="480" stroke="rgba(26,25,22,0.08)" stroke-width="1" stroke-dasharray="2 4"/><text x="630.0" y="502" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#8a8880" text-anchor="middle" font-weight="400">20%</text><line x1="860.0" y1="222" x2="860.0" y2="480" stroke="rgba(26,25,22,0.08)" stroke-width="1" stroke-dasharray="2 4"/><text x="860.0" y="502" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#8a8880" text-anchor="middle" font-weight="400">40%</text><line x1="1090.0" y1="222" x2="1090.0" y2="480" stroke="rgba(26,25,22,0.08)" stroke-width="1" stroke-dasharray="2 4"/><text x="1090.0" y="502" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#8a8880" text-anchor="middle" font-weight="400">60%</text><line x1="400" y1="480" x2="1090.0" y2="480" stroke="rgba(26,25,22,0.18)" stroke-width="1"/><text x="80" y="264" font-family="'DM Serif Display', Georgia, serif" font-size="21" fill="#1a1916" text-anchor="start" font-weight="400">Expert review</text><text x="80" y="284" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#8a8880" text-anchor="start" font-weight="400">architect time per project</text><text x="80" y="349" font-family="'DM Serif Display', Georgia, serif" font-size="21" fill="#1a1916" text-anchor="start" font-weight="400">Infrastructure</text><text x="80" y="369" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#8a8880" text-anchor="start" font-weight="400">cloud · storage · network</text><text x="80" y="434" font-family="'DM Serif Display', Georgia, serif" font-size="21" fill="#1a1916" text-anchor="start" font-weight="400">Model inference</text><text x="80" y="454" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#8a8880" text-anchor="start" font-weight="400">all LLM calls, tiered + cached</text><rect x="400" y="242" width="644.0" height="40" rx="2" fill="#8B1A1A" stroke="none" stroke-width="1"/><text x="1056.0" y="270" font-family="'DM Serif Display', Georgia, serif" font-size="22" fill="#8B1A1A" text-anchor="start" font-weight="400">~56%</text><rect x="400" y="327" width="46.0" height="40" rx="2" fill="#4a4944" stroke="none" stroke-width="1"/><text x="458.0" y="355" font-family="'DM Serif Display', Georgia, serif" font-size="22" fill="#4a4944" text-anchor="start" font-weight="400">~4%</text><rect x="400" y="412" width="115.0" height="40" rx="2" fill="rgba(184,145,42,0.22)" stroke="#b8912a" stroke-width="1" stroke-dasharray="3 3"/><rect x="400" y="412" width="11.5" height="40" rx="1" fill="#b8912a" stroke="none" stroke-width="1"/><text x="527.0" y="440" font-family="'DM Serif Display', Georgia, serif" font-size="22" fill="#b8912a" text-anchor="start" font-weight="400">1–10%</text><text x="605.0" y="440" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#8a8880" text-anchor="start" font-weight="400">range, by workload</text><text x="80" y="566" font-family="'DM Serif Display', Georgia, serif" font-size="23" fill="#1a1916" text-anchor="start" font-weight="400">Reviewer capacity moves margin more than any model price.</text><text x="80" y="598" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#8a8880" text-anchor="start" font-weight="400">Directional figures from an internal cost model, not audited data. Other cost categories not shown.</text></svg></div><figcaption>Expert review dominates cost-to-serve. Inference is a rounding error by comparison. Directional figures from an internal model.</figcaption></figure>
+
+  <h2>What to do</h2>
+  <p>Seven practices cover all six groups of risk.</p>
+  <ol class="dos">
+    <li><strong>Write a contract for every call, and validate against it.</strong>Shape, count, naming and required evidence. Check every response before anything downstream sees it.</li>
+    <li><strong>Treat model output as untrusted input.</strong>Escape it, parameterize it and validate it like anything a stranger typed. Never execute it directly.</li>
+    <li><strong>Give agents least privilege, with a human gate.</strong>Pre-approve a short list of safe actions. Everything else goes to a person, and the approval lives in your system of record, never in the tool doing the work. <a class="ref" href="#ref-2">[2]</a></li>
+    <li><strong>Vault the keys and cap the volume.</strong>Keys per environment, rotated, never in code. Token and job limits per tier. Choose the data path, including retention terms and zero retention where needed, before the first client document goes through.</li>
+    <li><strong>Pin model versions and test every change.</strong>Use dated versions, not aliases that move. Run a fixed set of real cases before switching, and change the model or the prompt, never both at once.</li>
+    <li><strong>Log every call.</strong>Input, context version, prompt version, model version, output, reviewer and decision. If you cannot replay an answer, you cannot defend it.</li>
+    <li><strong>Plan for failure.</strong>Retries with backoff, timeouts, a fallback model or provider, and a mode where work queues for a person instead of failing.</li>
+  </ol>
+  <figure class="fig"><div class="fig-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="40 200 1120 490" width="100%" role="img" aria-label="Seven practices, six risks." style="display:block;height:auto"><defs><marker id="cn01-matrix-ah-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1a1916"/></marker><marker id="cn01-matrix-ah-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8B1A1A"/></marker><marker id="cn01-matrix-ah-mist" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a8880"/></marker></defs><text x="130" y="226" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#8a8880" text-anchor="start" font-weight="400" letter-spacing="2">PRACTICE</text><text x="551" y="226" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#1a1916" text-anchor="middle" font-weight="500" letter-spacing="1.2">COST</text><text x="654" y="226" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#1a1916" text-anchor="middle" font-weight="500" letter-spacing="1.2">DATA</text><text x="757" y="226" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#1a1916" text-anchor="middle" font-weight="500" letter-spacing="1.2">SECURITY</text><text x="860" y="226" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#1a1916" text-anchor="middle" font-weight="500" letter-spacing="1.2">RELIABILITY</text><text x="963" y="226" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#1a1916" text-anchor="middle" font-weight="500" letter-spacing="1.2">QUALITY</text><text x="1066" y="226" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#1a1916" text-anchor="middle" font-weight="500" letter-spacing="1.2">COMPLIANCE</text><rect x="80" y="242" width="1040" height="58" rx="0" fill="#fdfcfa" stroke="none" stroke-width="1"/><line x1="80" y1="242" x2="1120" y2="242" stroke="rgba(26,25,22,0.08)" stroke-width="1"/><text x="80" y="280" font-family="'Cormorant Garamond', Georgia, serif" font-size="26" fill="#8B1A1A" text-anchor="start" font-weight="500">01</text><text x="130" y="269" font-family="'DM Serif Display', Georgia, serif" font-size="18" fill="#1a1916" text-anchor="start" font-weight="400">Write a contract, validate</text><text x="130" y="288" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#8a8880" text-anchor="start" font-weight="400">shape · count · evidence</text><circle cx="551" cy="271" r="3" fill="#b8b6b0"/><circle cx="654" cy="271" r="3" fill="#b8b6b0"/><circle cx="757" cy="271" r="3" fill="#b8b6b0"/><circle cx="860" cy="271" r="9" fill="#8B1A1A"/><circle cx="963" cy="271" r="9" fill="#8B1A1A"/><circle cx="1066" cy="271" r="3" fill="#b8b6b0"/><line x1="80" y1="300" x2="1120" y2="300" stroke="rgba(26,25,22,0.08)" stroke-width="1"/><text x="80" y="338" font-family="'Cormorant Garamond', Georgia, serif" font-size="26" fill="#8B1A1A" text-anchor="start" font-weight="500">02</text><text x="130" y="327" font-family="'DM Serif Display', Georgia, serif" font-size="18" fill="#1a1916" text-anchor="start" font-weight="400">Treat output as untrusted</text><text x="130" y="346" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#8a8880" text-anchor="start" font-weight="400">escape · parameterize · never execute</text><circle cx="551" cy="329" r="3" fill="#b8b6b0"/><circle cx="654" cy="329" r="3" fill="#b8b6b0"/><circle cx="757" cy="329" r="9" fill="#8B1A1A"/><circle cx="860" cy="329" r="3" fill="#b8b6b0"/><circle cx="963" cy="329" r="3" fill="#b8b6b0"/><circle cx="1066" cy="329" r="3" fill="#b8b6b0"/><rect x="80" y="358" width="1040" height="58" rx="0" fill="#fdfcfa" stroke="none" stroke-width="1"/><line x1="80" y1="358" x2="1120" y2="358" stroke="rgba(26,25,22,0.08)" stroke-width="1"/><text x="80" y="396" font-family="'Cormorant Garamond', Georgia, serif" font-size="26" fill="#8B1A1A" text-anchor="start" font-weight="500">03</text><text x="130" y="385" font-family="'DM Serif Display', Georgia, serif" font-size="18" fill="#1a1916" text-anchor="start" font-weight="400">Least privilege, human gate</text><text x="130" y="404" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#8a8880" text-anchor="start" font-weight="400">safe-action list · approvals on record</text><circle cx="551" cy="387" r="3" fill="#b8b6b0"/><circle cx="654" cy="387" r="9" fill="#8B1A1A"/><circle cx="757" cy="387" r="9" fill="#8B1A1A"/><circle cx="860" cy="387" r="3" fill="#b8b6b0"/><circle cx="963" cy="387" r="9" fill="#8B1A1A"/><circle cx="1066" cy="387" r="9" fill="#8B1A1A"/><line x1="80" y1="416" x2="1120" y2="416" stroke="rgba(26,25,22,0.08)" stroke-width="1"/><text x="80" y="454" font-family="'Cormorant Garamond', Georgia, serif" font-size="26" fill="#8B1A1A" text-anchor="start" font-weight="500">04</text><text x="130" y="443" font-family="'DM Serif Display', Georgia, serif" font-size="18" fill="#1a1916" text-anchor="start" font-weight="400">Vault the keys, cap the volume</text><text x="130" y="462" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#8a8880" text-anchor="start" font-weight="400">data path · retention · limits per tier</text><circle cx="551" cy="445" r="9" fill="#8B1A1A"/><circle cx="654" cy="445" r="9" fill="#8B1A1A"/><circle cx="757" cy="445" r="9" fill="#8B1A1A"/><circle cx="860" cy="445" r="3" fill="#b8b6b0"/><circle cx="963" cy="445" r="3" fill="#b8b6b0"/><circle cx="1066" cy="445" r="9" fill="#8B1A1A"/><rect x="80" y="474" width="1040" height="58" rx="0" fill="#fdfcfa" stroke="none" stroke-width="1"/><line x1="80" y1="474" x2="1120" y2="474" stroke="rgba(26,25,22,0.08)" stroke-width="1"/><text x="80" y="512" font-family="'Cormorant Garamond', Georgia, serif" font-size="26" fill="#8B1A1A" text-anchor="start" font-weight="500">05</text><text x="130" y="501" font-family="'DM Serif Display', Georgia, serif" font-size="18" fill="#1a1916" text-anchor="start" font-weight="400">Pin versions, test changes</text><text x="130" y="520" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#8a8880" text-anchor="start" font-weight="400">dated models · golden set</text><circle cx="551" cy="503" r="3" fill="#b8b6b0"/><circle cx="654" cy="503" r="3" fill="#b8b6b0"/><circle cx="757" cy="503" r="3" fill="#b8b6b0"/><circle cx="860" cy="503" r="9" fill="#8B1A1A"/><circle cx="963" cy="503" r="9" fill="#8B1A1A"/><circle cx="1066" cy="503" r="3" fill="#b8b6b0"/><line x1="80" y1="532" x2="1120" y2="532" stroke="rgba(26,25,22,0.08)" stroke-width="1"/><text x="80" y="570" font-family="'Cormorant Garamond', Georgia, serif" font-size="26" fill="#8B1A1A" text-anchor="start" font-weight="500">06</text><text x="130" y="559" font-family="'DM Serif Display', Georgia, serif" font-size="18" fill="#1a1916" text-anchor="start" font-weight="400">Log every call</text><text x="130" y="578" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#8a8880" text-anchor="start" font-weight="400">input · prompt · model · output · decision</text><circle cx="551" cy="561" r="9" fill="#8B1A1A"/><circle cx="654" cy="561" r="3" fill="#b8b6b0"/><circle cx="757" cy="561" r="3" fill="#b8b6b0"/><circle cx="860" cy="561" r="9" fill="#8B1A1A"/><circle cx="963" cy="561" r="9" fill="#8B1A1A"/><circle cx="1066" cy="561" r="9" fill="#8B1A1A"/><rect x="80" y="590" width="1040" height="58" rx="0" fill="#fdfcfa" stroke="none" stroke-width="1"/><line x1="80" y1="590" x2="1120" y2="590" stroke="rgba(26,25,22,0.08)" stroke-width="1"/><text x="80" y="628" font-family="'Cormorant Garamond', Georgia, serif" font-size="26" fill="#8B1A1A" text-anchor="start" font-weight="500">07</text><text x="130" y="617" font-family="'DM Serif Display', Georgia, serif" font-size="18" fill="#1a1916" text-anchor="start" font-weight="400">Plan for failure</text><text x="130" y="636" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#8a8880" text-anchor="start" font-weight="400">retries · timeouts · fallback · human queue</text><circle cx="551" cy="619" r="3" fill="#b8b6b0"/><circle cx="654" cy="619" r="3" fill="#b8b6b0"/><circle cx="757" cy="619" r="3" fill="#b8b6b0"/><circle cx="860" cy="619" r="9" fill="#8B1A1A"/><circle cx="963" cy="619" r="3" fill="#b8b6b0"/><circle cx="1066" cy="619" r="3" fill="#b8b6b0"/><line x1="80" y1="648" x2="1120" y2="648" stroke="rgba(26,25,22,0.18)" stroke-width="1"/><text x="80" y="680" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#4a4944" text-anchor="start" font-weight="400">Covered by: cost 2 · data 2 · security 3 · reliability 4 · quality 4 · compliance 3</text></svg></div><figcaption>Each row is a practice from the article; each dot marks a risk it reduces. No risk depends on a single practice.</figcaption></figure>
+
+  <h2>What not to do</h2>
+  <p>Five mistakes we made, nearly made, or caught just in time.</p>
+  <ol class="donts">
+    <li><strong>Do not ship the model as the product.</strong>A prompt and a UI is a feature someone else will ship next quarter. Build the workflow the model sits inside.</li>
+    <li><strong>Do not accept a negative claim without proof.</strong>If the model says something is missing, require a search or citation that shows it. Label every finding as verified, inferred, assumed or unknown.</li>
+    <li><strong>Do not control cost by removing features.</strong>Feature-gating does not cap spend. Capping token and job volume does. Strip features and you strip the reason customers pay.</li>
+    <li><strong>Do not let agents work from unverified context.</strong>Audit what agents read. Work from live project files, not stale summaries of them.</li>
+    <li><strong>Do not let the AI approve its own work.</strong>The human holds the decisions. The agent holds the keyboard.</li>
+  </ol>
+
+  <h2>Build it deliberately</h2>
+  <div class="stack">
+    <p>LLMs are the most capable component most of us have ever integrated.</p>
+    <p>They are also the least predictable.</p>
+  </div>
+  <p>The teams that win commercially will not be the ones with the best prompts. They will be the ones who treat the model as a governed component: contracted, verified, observed and overseen by a human where it matters.</p>
+  <div class="pull"><p>Speed comes from the model. Trust comes from the system.</p></div>
+  <p>Build the system.</p>
+
+  <p class="note">Figures marked <a class="ref" href="#ref-5">[5]</a> come from our internal cost-to-serve model and review records, not audited production data. Treat them as directional.</p>
+  <p class="sign">— Jitander Chauhan</p>
+
+  <section class="refs" aria-labelledby="refs-h">
+    <h3 id="refs-h">Research &amp; Further Reading</h3>
+    <ol>
+      <li id="ref-1"><span class="rn">[1]</span><div>OpenAI, “<a href="https://openai.com/index/introducing-structured-outputs-in-the-api/">Introducing Structured Outputs in the API</a>”, OpenAI, August 2024: With schema enforcement, gpt-4o-2024-08-06 scored 100% on complex JSON-schema evals, against under 40% for gpt-4-0613. <span class="rt">Official Docs</span></div></li>
+      <li id="ref-2"><span class="rn">[2]</span><div>European Parliament and Council, “<a href="https://artificialintelligenceact.eu/article/14/">Regulation (EU) 2024/1689 (AI Act), Article 14: Human Oversight</a>”, 2024: High-risk AI systems must be effectively overseen by natural persons, who must be able to disregard, override or reverse outputs and halt the system. <span class="rt">Regulation</span></div></li>
+      <li id="ref-3"><span class="rn">[3]</span><div>Ong, I., Almahairi, A., Wu, V., Chiang, W.-L., Wu, T., Gonzalez, J.E., Kadous, M.W., Stoica, I., “<a href="https://arxiv.org/abs/2406.18665">RouteLLM: Learning to Route LLMs with Preference Data</a>”, ICLR 2025: Routing queries between a strong and a weaker model cut costs by more than 2x without reducing response quality. <span class="rt">Research Paper</span></div></li>
+      <li id="ref-4"><span class="rn">[4]</span><div>Anthropic, “<a href="https://www.anthropic.com/news/prompt-caching">Prompt caching with Claude</a>”, August 2024: Caching repeated prompt context cut cost by up to 90% and latency by up to 85% for long prompts (as reported by <a href="https://www.maginative.com/article/anthropics-new-prompt-caching-feature-can-cut-costs-up-to-90/">Maginative</a>). <span class="rt">Official Docs</span></div></li>
+      <li id="ref-5"><span class="rn">[5]</span><div>Internal, “Cost-to-serve model and engineering review records”, 2026: Source of the ~56% expert review, ~4% infrastructure and 1–10% inference shares, and of the gap analysis in which about 40% of findings failed code-level checks. Directional, not audited. <span class="rt">Internal Data</span></div></li>
+      <li id="ref-6"><span class="rn">[6]</span><div>Appenzeller, G., “<a href="https://a16z.com/llmflation-llm-inference-cost/">Welcome to LLMflation: LLM inference cost is going down fast</a>”, Andreessen Horowitz, November 2024: For an LLM of equivalent performance, inference cost has been falling about 10x every year. <span class="rt">Industry Analysis</span></div></li>
+      <li id="ref-7"><span class="rn">[7]</span><div>Cottier, B., Snodin, B., Owen, D., Adamczewski, T., “<a href="https://epoch.ai/blog/llm-inference-price-trends">LLM inference prices have fallen rapidly but unequally across tasks</a>”, Epoch AI, March 2025: Price to reach a fixed performance level fell between 9x and 900x per year depending on the task; the authors caution the fastest rates may not continue. <span class="rt">Research</span></div></li>
+      <li id="ref-8"><span class="rn">[8]</span><div>Gartner, “<a href="https://www.gartner.com/en/newsroom/press-releases/2026-08-17-gartner-predicts-ai-inference-costs-per-agentic-workflow-will-increase-more-than-fivefold-through-2028">Gartner Predicts AI Inference Costs per Agentic Workflow Will Increase More Than Fivefold Through 2028</a>”, Gartner press release, August 2026: Token prices keep falling, but routing a task to an agentic reasoning model raises inference cost by at least five times over a basic chatbot interaction. <span class="rt">Industry Analysis</span></div></li>
+      <li id="ref-9"><span class="rn">[9]</span><div>OpenAI, “<a href="https://developers.openai.com/api/docs/deprecations">Deprecations</a>”, OpenAI API Documentation, accessed October 2026: Older models are retired on published schedules, and software relying on them "may need occasional updates to keep working." <span class="rt">Official Docs</span></div></li>
+      <li id="ref-10"><span class="rn">[10]</span><div>OWASP GenAI Security Project, “<a href="https://genai.owasp.org/2024/11/17/owasp-reveals-2025-top-10-risks-for-llms-new-sponsorship-program/">OWASP Top 10 for LLM Applications 2025</a>”, November 2024: The industry list of LLM application risks, including LLM02 Sensitive Information Disclosure, LLM05 Improper Output Handling, LLM06 Excessive Agency, LLM07 System Prompt Leakage and LLM10 Unbounded Consumption. <span class="rt">Industry Standard</span></div></li>
+      <li id="ref-11"><span class="rn">[11]</span><div>OpenAI, “<a href="https://developers.openai.com/api/docs/guides/your-data">Data controls in the OpenAI platform</a>”, OpenAI API Documentation, accessed October 2026: API data is not used for training unless you opt in; abuse-monitoring logs are kept for up to 30 days by default; zero data retention is available to approved customers. <span class="rt">Official Docs</span></div></li>
+      <li id="ref-12"><span class="rn">[12]</span><div>Anthropic, “<a href="https://platform.claude.com/docs/en/manage-claude/api-and-data-retention">API and data retention</a>”, Claude Platform Documentation, accessed October 2026: Zero data retention can be enabled per organization on request, with listed feature exclusions; flagged content may be retained regardless. <span class="rt">Official Docs</span></div></li>
+      <li id="ref-13"><span class="rn">[13]</span><div>OWASP, “<a href="https://genai.owasp.org/llm01/">LLM01: Prompt Injection</a>”, OWASP GenAI Security Project: Indirect prompt injection occurs when a model accepts input from external sources, such as websites or files, that can be controlled by an attacker. <span class="rt">Industry Standard</span></div></li>
+      <li id="ref-14"><span class="rn">[14]</span><div>Thinking Machines Lab, “<a href="https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/">Defeating Nondeterminism in LLM Inference</a>”, September 2025: Shows that outputs can differ at temperature zero because server batching changes with load; proposes batch-invariant kernels (as reported by <a href="https://www.eweek.com/de/news/ai-bug-fix-mira-murati-thinking-machine-lab/">eWeek</a>). <span class="rt">Research</span></div></li>
+      <li id="ref-15"><span class="rn">[15]</span><div>Liu, N.F., Lin, K., Hewitt, J., Paranjape, A., Bevilacqua, M., Petroni, F., Liang, P., “<a href="https://aclanthology.org/2024.tacl-1.9/">Lost in the Middle: How Language Models Use Long Contexts</a>”, Transactions of the ACL, 2024: Performance is often highest when relevant information sits at the beginning or end of a long input, and drops when it sits in the middle. <span class="rt">Research Paper</span></div></li>
+      <li id="ref-16"><span class="rn">[16]</span><div>Spracklen, J., Wijewickrama, R., Sakib, A.H.M.N., Maiti, A., Viswanath, B., Jadliwala, M., “<a href="https://www.usenix.org/conference/usenixsecurity25/presentation/spracklen">We Have a Package for You! A Comprehensive Analysis of Package Hallucinations by Code Generating LLMs</a>”, USENIX Security 2025: Across 16 models and 576,000 code samples, hallucinated packages averaged at least 5.2% for commercial models and 21.7% for open-source models. <span class="rt">Research Paper</span></div></li>
+      <li id="ref-17"><span class="rn">[17]</span><div>arXiv preprint 2605.17062, “<a href="https://arxiv.org/abs/2605.17062">The Range Shrinks, the Threat Remains: Re-evaluating LLM Package Hallucinations on the 2026 Frontier-Model Cohort</a>”, May 2026: Five 2026 frontier models hallucinated packages at 4.62% to 6.10% across 199,845 prompts. Not peer reviewed; figures taken from a <a href="https://fugumt.com/fugumt/paper_check/2605.17062v1">published summary</a>. <span class="rt">Preprint</span></div></li>
+      <li id="ref-18"><span class="rn">[18]</span><div>National Institute of Standards and Technology, “<a href="https://doi.org/10.6028/NIST.AI.600-1">Artificial Intelligence Risk Management Framework: Generative AI Profile (NIST AI 600-1)</a>”, July 2024: Lists confabulation, the confident production of erroneous or false content, as a core generative AI risk. <span class="rt">Standard</span></div></li>
+      <li id="ref-19"><span class="rn">[19]</span><div>Board of Governors of the Federal Reserve System, FDIC, OCC, “<a href="https://public-inspection.federalregister.gov/2023-12340.pdf">Interagency Guidance on Third-Party Relationships: Risk Management</a>”, June 2023: Use of third parties "does not diminish or remove" a bank's responsibilities; due diligence covers a vendor's information security program and may include SOC reports. <span class="rt">Regulatory Guidance</span></div></li>
+      <li id="ref-20"><span class="rn">[20]</span><div>AICPA, “<a href="https://www.aicpa-cima.com/resources/article/get-description-criteria-for-your-organizations-soc-2-r-report">Get description criteria for your organization's SOC 2 report</a>”, AICPA & CIMA, 2025: SOC 2 examinations report on a service organization's controls over security, availability, processing integrity, confidentiality and privacy. <span class="rt">Standard</span></div></li>
+    </ol>
+  </section>
+
+</article>
+</main>
+
+<footer class="art-foot">
+  <div class="art-foot-inner">
+    <div>
+      <div class="foot-label">Start with the method</div>
+      <a class="foot-link" href="../articles/article-1.html">Read the 12-part series &rarr;</a>
+    </div>
+    <div>
+      <div class="foot-label">Get the next Craft Note</div>
+      <a class="foot-link" href="https://substack.com/@jitanderchauhan">Subscribe on Substack &rarr;</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){var n=document.getElementById('nav');function f(){n.classList.toggle('scrolled',window.scrollY>40)}window.addEventListener('scroll',f,{passive:true});f();})();
+</script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Craft Notes | ARTHA Craft</title>
+<meta name="description" content="The series is the method. Craft Notes apply it to what keeps changing in AI.">
+<link rel="canonical" href="https://arthacraft.tech/notes.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ARTHA Craft">
+<meta property="og:title" content="Craft Notes | ARTHA Craft">
+<meta property="og:description" content="The series is the method. Craft Notes apply it to what keeps changing in AI.">
+<meta property="og:url" content="https://arthacraft.tech/notes.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+.series-header{background:var(--void);padding:120px 0 64px;border-bottom:1px solid var(--dv);}
+.series-header-inner{max-width:1200px;margin:0 auto;padding:0 52px;}
+.series-kicker{font-family:var(--mono);font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--red-light);margin-bottom:20px;display:flex;align-items:center;gap:14px;}
+.series-kicker::before{content:"";width:24px;height:1px;background:var(--red-light);}
+.series-h1{font-family:var(--display);font-size:58px;font-weight:600;line-height:1.05;color:var(--white);margin-bottom:20px;letter-spacing:-0.5px;}
+.series-sub{font-size:17px;font-style:italic;font-weight:300;color:var(--ash);max-width:560px;line-height:1.7;}
+.series-body{max-width:1200px;margin:0 auto;padding:0 52px 80px;}
+
+/* Topic filter chips */
+.cn-chips{display:flex;flex-wrap:wrap;gap:10px;padding:32px 0 24px;}
+.cn-chip{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--mist);background:transparent;border:1px solid rgba(255,255,255,0.12);border-radius:2px;padding:7px 14px;cursor:pointer;transition:all 0.2s;}
+.cn-chip:hover{color:var(--paper);border-color:rgba(255,255,255,0.3);}
+.cn-chip[aria-pressed="true"]{color:var(--white);background:var(--red);border-color:var(--red);}
+.cn-chip:focus-visible{outline:1px solid var(--red-light);outline-offset:2px;}
+.cn-row[hidden]{display:none;}
+.cn-row .series-row-num{font-size:34px;font-weight:500;color:rgba(255,255,255,0.12);}
+.cn-empty{padding:28px 0;font-size:14px;color:var(--ash);font-style:italic;}
+.cn-noscript{padding:28px 0;font-size:14px;color:var(--ash);}
+.cn-noscript a{color:var(--red-light);}
+
+.cn-back{border-top:1px solid var(--dv);margin-top:56px;padding-top:32px;}
+.cn-back-label{font-family:var(--mono);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--ash);margin-bottom:10px;}
+.cn-back a{font-family:var(--heading);font-size:22px;color:var(--paper);transition:color 0.2s;}
+.cn-back a:hover{color:var(--red-light);}
+@media(max-width:768px){.series-header-inner,.series-body{padding:0 24px;}  .series-h1{font-size:36px;} .cn-row .series-row-num{font-size:26px;}}
+</style>
+</head>
+<body>
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-logo"><em>ARTHA</em> Craft</a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-home">Home</a>
+    <a href="articles.html">Series</a>
+    <a href="notes.html" class="active">Craft Notes</a>
+    <a href="about.html">About</a>
+    <a href="https://substack.com/@jitanderchauhan" target="_blank" class="nav-follow">Subscribe</a>
+  </div>
+</nav>
+<div class="series-header">
+  <div class="series-header-inner">
+    <p class="series-kicker">Craft Notes &middot; Ongoing</p>
+    <h1 class="series-h1">Craft Notes</h1>
+    <p class="series-sub">The series is the method. Craft Notes apply it to what keeps changing in AI.</p>
+  </div>
+</div>
+<div class="series-body">
+  <div class="cn-chips" role="group" aria-label="Filter notes by topic">
+    <button type="button" class="cn-chip" data-filter="All" aria-pressed="true">All</button>
+    <button type="button" class="cn-chip" data-filter="Evaluation" aria-pressed="false">Evaluation</button>
+    <button type="button" class="cn-chip" data-filter="Governance" aria-pressed="false">Governance</button>
+    <button type="button" class="cn-chip" data-filter="Cost" aria-pressed="false">Cost</button>
+    <button type="button" class="cn-chip" data-filter="Agents" aria-pressed="false">Agents</button>
+    <button type="button" class="cn-chip" data-filter="Compliance" aria-pressed="false">Compliance</button>
+  </div>
+
+  <!-- Rows rendered from assets/notes-data.js, newest first -->
+  <div data-notes="all"></div>
+  <p class="cn-empty" id="cn-empty" hidden>No notes on this topic yet. More are on the way.</p>
+  <noscript><p class="cn-noscript">The notes list needs JavaScript. You can still <a href="notes/craft-note-01.html">read the first Craft Note</a>.</p></noscript>
+
+  <div class="cn-back">
+    <p class="cn-back-label">The method behind the notes</p>
+    <a href="articles/article-1.html">New here? Start with the 12-part series &rarr;</a>
+  </div>
+</div>
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <p class="footer-brand">ARTHA Craft</p>
+      <p class="footer-desc">A 12-part series on structured AI-assisted development, and the Craft Notes that apply it.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Read</h5>
+      <a href="articles.html">All 12 articles</a>
+      <a href="articles/article-1.html">Start with Article 1</a>
+      <a href="notes.html">Craft Notes</a>
+    </div>
+    <div class="footer-col">
+      <h5>Author</h5>
+      <a href="about.html">Jitander Singh Chauhan</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Jitander Singh Chauhan. All rights reserved.</p>
+    <p class="footer-tag">ARTHA Craft</p>
+  </div>
+</footer>
+<script src="assets/notes-data.js"></script>
+<script src="assets/notes.js"></script>
+<script>
+  var n=document.getElementById('nav');
+  window.addEventListener('scroll',function(){n.classList.toggle('scrolled',window.scrollY>40);});
+  var rs=document.querySelectorAll('.reveal');
+  var ob=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');ob.unobserve(e.target);}});},{threshold:0.08});
+  rs.forEach(function(r){ob.observe(r);});
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

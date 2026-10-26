@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ARTHA Craft | The Deliberate Alternative to Vibe Coding</title>
 <meta name="description" content="ARTHA Craft is a structured approach to building software with AI coding agents, where every session starts from a known state, every decision is documented before it is executed, and nothing is ever left to the agent's interpretation.">
+<link rel="canonical" href="https://arthacraft.tech/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ARTHA Craft">
+<meta property="og:title" content="ARTHA Craft | The Deliberate Alternative to Vibe Coding">
+<meta property="og:description" content="A 12-part series and an ongoing set of Craft Notes on building governed, traceable software with AI coding agents.">
+<meta property="og:url" content="https://arthacraft.tech/">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="assets/style.css">
 <style>
 
@@ -16,6 +23,28 @@
   pointer-events:none;}
 .hero::after{content:"ARTHA";position:absolute;right:-30px;top:50%;transform:translateY(-55%);font-family:var(--display);font-size:260px;font-weight:700;color:rgba(255,255,255,0.015);pointer-events:none;letter-spacing:-8px;user-select:none;}
 .hero-inner{max-width:1200px;margin:0 auto;padding:0 52px;position:relative;z-index:1;}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:56px;align-items:center;}
+
+/* Latest Craft Note card (rendered from assets/notes-data.js) */
+.hero-note{opacity:0;animation:fade-in 0.8s 0.75s ease forwards;}
+.cn-card{display:flex;flex-direction:column;gap:10px;background:rgba(26,25,22,0.82);border:1px solid var(--dv);border-left:2px solid var(--red-light);border-radius:2px;padding:26px 26px 22px;transition:border-color 0.25s,background 0.25s;}
+.cn-card:hover{border-color:rgba(212,71,44,0.35);border-left-color:var(--red-light);background:rgba(26,25,22,0.95);}
+.cn-card-label{font-family:var(--mono);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--red-light);}
+.cn-card-meta{font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--mist);}
+.cn-card-title{font-family:var(--heading);font-size:24px;line-height:1.25;color:var(--paper);margin-top:4px;}
+.cn-card-dek{font-size:14px;line-height:1.65;color:var(--mist);font-weight:300;}
+.cn-card-read{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--red-light);margin-top:6px;transition:letter-spacing 0.2s;}
+.cn-card:hover .cn-card-read{letter-spacing:3px;}
+.hero-note{display:flex;flex-direction:column;gap:12px;}
+
+/* Coming next teaser: deliberately secondary to the Latest card */
+.cn-next{display:flex;flex-direction:column;gap:8px;background:transparent;border:1px dashed var(--dv);border-radius:2px;padding:20px 26px 18px;transition:border-color 0.25s;}
+.cn-next:hover{border-color:rgba(255,255,255,0.18);}
+.cn-next-label{color:var(--mist);}
+.cn-next-title{font-family:var(--heading);font-size:19px;line-height:1.3;color:var(--fog);margin-top:2px;}
+.cn-next .cn-card-dek{font-size:13px;color:var(--ash);}
+.cn-next-read{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--mist);margin-top:4px;transition:color 0.2s;}
+.cn-next:hover .cn-next-read{color:var(--paper);}
 
 .hero-badge{display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(212,71,44,0.2);border-radius:100px;padding:6px 18px 6px 10px;margin-bottom:36px;background:rgba(212,71,44,0.05);}
 .hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--red-light);animation:pulse-dot 2s infinite;}
@@ -104,6 +133,10 @@
 .series-cta{margin-top:36px;display:flex;align-items:center;gap:20px;}
 .series-cta p{font-size:14px;color:var(--ash);font-weight:300;}
 
+/* ───────────────────────────── CRAFT NOTES ─────────────────────── */
+.notes-home{padding:100px 0;border-bottom:1px solid var(--dv);}
+.cn-row-dek{font-size:13px;color:var(--ash);line-height:1.5;margin-top:4px;font-weight:300;}
+
 /* ───────────────────────────── WHO IT'S FOR ────────────────────── */
 .audience{padding:80px 0;background:var(--ink);border-bottom:1px solid var(--dv);}
 .audience-inner{max-width:1200px;margin:0 auto;padding:0 52px;}
@@ -159,6 +192,9 @@
 @media(max-width:1024px){
   .audience-grid{grid-template-columns:repeat(2,1fr);}
 }
+@media(max-width:960px){
+  .hero-grid{grid-template-columns:1fr;gap:40px;}
+}
 @media(max-width:900px){
   .hero{padding:120px 0 80px;}
   .hero-headline{font-size:48px;}
@@ -190,8 +226,9 @@
 <nav class="nav" id="nav">
   <a href="index.html" class="nav-logo"><em>ARTHA</em> Craft</a>
   <div class="nav-links">
-    <a href="index.html" class="active">Home</a>
+    <a href="index.html" class="nav-home active">Home</a>
     <a href="articles.html">Series</a>
+    <a href="notes.html">Craft Notes</a>
     <a href="about.html">About</a>
     <a href="https://substack.com/@jitanderchauhan" target="_blank" class="nav-follow">Subscribe</a>
   </div>
@@ -201,10 +238,11 @@
 <!-- HERO                                                            -->
 <!-- ════════════════════════════════════════════════════════════════ -->
 <section class="hero">
-  <div class="hero-inner">
+  <div class="hero-inner hero-grid">
+    <div class="hero-text">
     <div class="hero-badge">
       <span class="hero-badge-dot"></span>
-      <span class="hero-badge-text">A Methodology &middot; 12-Part Series</span>
+      <span class="hero-badge-text">A Methodology &middot; 12-Part Series &middot; Craft Notes</span>
     </div>
     <h1 class="hero-headline">
       <span class="line"><span class="line-inner">Stop Vibe Coding.</span></span>
@@ -216,6 +254,8 @@
       <a href="#series" class="btn btn-red">Read the Series &rarr;</a>
       <a href="https://substack.com/@jitanderchauhan" target="_blank" class="btn btn-ghost">Subscribe on Substack</a>
     </div>
+    </div>
+    <aside class="hero-note" data-notes="hero" aria-label="Latest Craft Note"></aside>
   </div>
 </section>
 
@@ -420,6 +460,26 @@
 </section>
 
 <!-- ════════════════════════════════════════════════════════════════ -->
+<!-- CRAFT NOTES (rows rendered from assets/notes-data.js)           -->
+<!-- ════════════════════════════════════════════════════════════════ -->
+<section class="series notes-home" id="craft-notes">
+  <div class="series-inner">
+    <div class="series-header">
+      <p class="section-label">Craft Notes</p>
+      <div class="series-header-body">
+        <h2>The series is the method. Craft Notes apply it.</h2>
+        <p>Standalone notes that put the method to work on whatever is changing in AI right now.</p>
+      </div>
+    </div>
+    <div data-notes="home"></div>
+    <noscript><p class="cn-row-dek">Turn on JavaScript to see the latest notes, or <a href="notes.html" style="color:var(--red-light)">browse all Craft Notes</a>.</p></noscript>
+    <div class="series-cta">
+      <a href="notes.html" class="btn btn-ghost">All Craft Notes &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════ -->
 <!-- WHO IT'S FOR                                                    -->
 <!-- ════════════════════════════════════════════════════════════════ -->
 <section class="audience">
@@ -508,6 +568,7 @@
       </div>
       <div class="footer-links">
         <a href="articles.html" class="footer-link">Series</a>
+        <a href="notes.html" class="footer-link">Craft Notes</a>
         <a href="about.html" class="footer-link">About</a>
         <a href="https://www.linkedin.com/in/jitander-chauhan/" target="_blank" class="footer-link">LinkedIn</a>
         <a href="https://substack.com/@jitanderchauhan" target="_blank" class="footer-link">Substack</a>
@@ -519,6 +580,8 @@
   </div>
 </footer>
 
+<script src="assets/notes-data.js"></script>
+<script src="assets/notes.js"></script>
 <script>
   // Sticky nav
   var n=document.getElementById('nav');

@@ -126,8 +126,12 @@ img{max-width:100%;display:block;}
 .reveal.in{opacity:1;transform:none;}
 
 @media(max-width:768px){
-  .nav{padding:0 24px;}
-  .nav-links a:not(.nav-follow){display:none;}
+  .nav{padding:0 16px;gap:12px;}
+  .nav-logo{letter-spacing:2px;white-space:nowrap;}
+  .nav-links{gap:12px;}
+  .nav-links a{font-size:9px;letter-spacing:0.5px;white-space:nowrap;}
+  .nav-links .nav-home{display:none;}
+  .nav-follow{padding:5px 10px;}
   .w,.w-mid,.w-read{padding:0 24px;}
   .art-header-inner,.art-body,.refs,.art-nav{padding:0 24px;}
   .art-title{font-size:34px;}

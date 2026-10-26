@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coming Soon | Craft Notes | ARTHA Craft</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+.cs{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:40px 24px;position:relative;}
+.cs::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(139,26,26,0.06) 0%,transparent 60%);pointer-events:none;}
+.cs-inner{max-width:560px;position:relative;z-index:1;}
+.cs-brand{font-family:var(--mono);font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--red-light);margin-bottom:40px;display:flex;align-items:center;justify-content:center;gap:12px;}
+.cs-brand::before,.cs-brand::after{content:"";width:20px;height:1px;background:var(--red-light);}
+.cs-title{font-family:var(--display);font-size:52px;font-weight:600;color:var(--white);line-height:1.08;margin-bottom:20px;letter-spacing:-1px;}
+.cs-title em{color:var(--red-light);font-style:italic;font-weight:400;}
+.cs-next{font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--mist);margin-bottom:10px;}
+.cs-next-title{font-family:var(--heading);font-size:22px;line-height:1.3;color:var(--fog);margin-bottom:24px;}
+.cs-body{font-size:17px;line-height:1.8;color:var(--mist);font-weight:300;margin-bottom:36px;}
+.cs-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+.btn{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:14px 28px;border-radius:3px;transition:all 0.25s;display:inline-flex;align-items:center;gap:8px;}
+.btn-red{background:var(--red);color:var(--white);box-shadow:0 4px 24px rgba(139,26,26,0.3);}
+.btn-red:hover{background:var(--red-warm);transform:translateY(-1px);box-shadow:0 8px 32px rgba(139,26,26,0.4);}
+.btn-ghost{border:1px solid rgba(255,255,255,0.12);color:rgba(245,240,232,0.5);}
+.btn-ghost:hover{border-color:rgba(255,255,255,0.3);color:var(--paper);background:rgba(255,255,255,0.03);}
+.cs-sub{font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--ash);margin-top:48px;}
+.cs-sub a{color:var(--red-light);border-bottom:1px dotted rgba(212,71,44,0.4);transition:border-color 0.2s;}
+.cs-sub a:hover{border-color:var(--red-light);}
+@media(max-width:600px){.cs-title{font-size:38px;}}
+</style>
+</head>
+<body>
+<nav class="nav" id="nav">
+  <a href="../index.html" class="nav-logo"><em>ARTHA</em> Craft</a>
+  <div class="nav-links">
+    <a href="../index.html" class="nav-home">Home</a>
+    <a href="../articles.html">Series</a>
+    <a href="../notes.html" class="active">Craft Notes</a>
+    <a href="../about.html">About</a>
+    <a href="https://substack.com/@jitanderchauhan" target="_blank" class="nav-follow">Subscribe</a>
+  </div>
+</nav>
+<section class="cs">
+  <div class="cs-inner">
+    <p class="cs-brand">Craft Notes</p>
+    <h1 class="cs-title">The next note is<br><em>coming soon.</em></h1>
+    <!-- Filled from CRAFT_NOTES_UPCOMING in assets/notes-data.js; stays hidden if there is none -->
+    <p class="cs-next" id="cs-next" hidden></p>
+    <p class="cs-next-title" id="cs-next-title" hidden></p>
+    <p class="cs-body">Craft Notes publish one at a time. Subscribe on Substack to hear when this one goes live.</p>
+    <div class="cs-btns">
+      <a href="https://substack.com/@jitanderchauhan" target="_blank" class="btn btn-red">Subscribe on Substack &rarr;</a>
+      <a href="../index.html" class="btn btn-ghost">Back to home</a>
+    </div>
+    <p class="cs-sub">Or read what's already live: <a href="../notes.html">browse Craft Notes</a></p>
+  </div>
+</section>
+<script src="../assets/notes-data.js"></script>
+<script>
+  var n=document.getElementById('nav');
+  window.addEventListener('scroll',function(){n.classList.toggle('scrolled',window.scrollY>40);});
+  var u=window.CRAFT_NOTES_UPCOMING;
+  if(u&&u.title){
+    var meta=document.getElementById('cs-next'),title=document.getElementById('cs-next-title');
+    meta.textContent='No. '+u.number+' · '+u.topic;
+    title.textContent=u.title;
+    meta.hidden=false;title.hidden=false;
+  }
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
