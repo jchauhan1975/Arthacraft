@@ -67,13 +67,14 @@
     '</a>';
   }
 
-  // Second hero card: describes an arc and links to the Craft Notes page
+  // Highlighted hero card: announces an arc and links to the Craft Notes page
   function seriesCard(a){
-    return '<a class="cn-next" href="' + esc(a.url || "/notes.html") + '">' +
-      '<span class="cn-card-label cn-next-label">' + (a.isNew ? 'New series' : 'Series') + ' &middot; ' + esc(a.parts) + ' parts</span>' +
-      '<span class="cn-next-title">' + esc(a.title || a.name) + '</span>' +
-      '<span class="cn-card-dek">' + esc(a.dek) + '</span>' +
-      '<span class="cn-next-read">See all ' + esc(a.parts) + ' parts &rarr;</span>' +
+    return '<a class="cn-series" href="' + esc(a.url || "/notes.html") + '">' +
+      '<span class="cn-series-pill"><span class="cn-series-dot"></span>' + (a.isNew ? 'New series' : 'Series') + '</span>' +
+      '<span class="cn-card-meta cn-series-meta">' + esc(a.parts) + ' parts &middot; ' + esc(a.name) + '</span>' +
+      '<span class="cn-series-title">' + esc(a.title || a.name) + '</span>' +
+      '<span class="cn-series-dek">' + esc(a.dek) + '</span>' +
+      '<span class="cn-series-read">See all ' + esc(a.parts) + ' parts &rarr;</span>' +
     '</a>';
   }
 
@@ -109,10 +110,19 @@
   if (notes.length) {
     var featured = notes.filter(function(n){ return n.topic === hero.featureTopic; })[0];
     var series = hero.series && arcs[hero.series];
+    // The series announcement goes first so it is the first thing a visitor sees
     render('[data-notes="hero"]',
-      (featured ? heroCard(featured, "Latest on " + featured.topic) : heroCard(notes[0], "Latest Craft Note")) +
       (series ? seriesCard(series) : "") +
+      (featured ? heroCard(featured, "Latest on " + featured.topic) : heroCard(notes[0], "Latest Craft Note")) +
       (hasUpcoming ? upcomingCard(upcoming) : ""));
+    // Announcement link at the top of the hero, only while the series is new
+    document.querySelectorAll('[data-notes="announce"]').forEach(function(el){
+      if (!series || !series.isNew) return;
+      el.setAttribute("href", series.url || "/notes.html");
+      el.innerHTML = '<span class="hero-announce-tag">New</span>' +
+        '<span class="hero-announce-text">' + esc(series.name) + ' series &middot; ' + esc(series.parts) + ' parts &rarr;</span>';
+      el.hidden = false;
+    });
     render('[data-notes="home"]', ordered.map(homeRow).join(""));
     render('[data-notes="all"]', ordered.map(listRow).join(""));
   }
