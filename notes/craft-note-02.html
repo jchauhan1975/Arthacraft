@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>It Looked Right Is Not an Evaluation | ARTHA Craft</title>
+<meta name="description" content="Evaluation Part 1 of 9: why reading LLM output is not testing it, five things to measure, and four levels of evaluation.">
+<link rel="canonical" href="https://arthacraft.tech/notes/craft-note-02.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ARTHA Craft">
+<meta property="og:title" content="It Looked Right Is Not an Evaluation">
+<meta property="og:description" content="Evaluation Part 1 of 9: why reading LLM output is not testing it, five things to measure, and four levels of evaluation.">
+<meta property="og:url" content="https://arthacraft.tech/notes/craft-note-02.html">
+<meta property="og:image" content="https://arthacraft.tech/images/share/cn02-linkedin-hero.png">
+<meta property="og:image:width" content="2400">
+<meta property="og:image:height" content="1254">
+<meta property="og:image:alt" content="Craft Notes No. 02: It looked right is not an evaluation.">
+<meta property="article:author" content="Jitander Singh Chauhan">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Serif+Display:ital@0;1&family=Literata:ital,opsz,wght@0,7..72,300;0,7..72,400;0,7..72,500;1,7..72,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#0c0b09; --ink:#1a1916; --coal:#2a2924; --ash:#4a4944; --mist:#8a8880; --fog:#b8b6b0;
+  --paper:#f5f0e8; --cream:#faf7f2; --white:#fdfcfa;
+  --red:#8B1A1A; --red-warm:#b83020; --red-light:#d4472c; --gold:#b8912a;
+  --divider:rgba(255,255,255,0.07); --divider-l:rgba(26,25,22,0.1);
+  --display:'Cormorant Garamond','Times New Roman',serif;
+  --heading:'DM Serif Display',Georgia,serif;
+  --body:'Literata',Georgia,serif;
+  --mono:'JetBrains Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--void);color:var(--paper);font-family:var(--body);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;border-bottom:1px solid transparent;transition:background .4s,border-color .4s}
+.nav.scrolled{background:rgba(12,11,9,.96);border-color:var(--divider);backdrop-filter:blur(12px)}
+.nav-logo{font-family:var(--mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:300}
+.nav-logo em{font-style:normal;color:var(--red-light)}
+.nav-links{display:flex;gap:36px;align-items:center}
+.nav-links a{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mist);transition:color .2s}
+.nav-links a:hover{color:var(--paper)}
+.nav-links a.active{color:var(--fog)}
+.nav-follow{color:var(--red-light)!important;border:1px solid rgba(212,71,44,0.3);padding:6px 18px;border-radius:2px;transition:all 0.2s!important}
+.nav-follow:hover{background:var(--red)!important;color:var(--white)!important;border-color:var(--red)!important}
+
+/* HEADER */
+.art-head{position:relative;overflow:hidden;padding:150px 48px 90px;background:var(--void);border-bottom:1px solid var(--divider)}
+.art-num{position:absolute;right:-20px;top:30px;font-family:var(--display);font-weight:500;font-size:clamp(220px,34vw,460px);line-height:1;color:rgba(245,240,232,.035);pointer-events:none;user-select:none}
+.art-head-inner{position:relative;max-width:820px;margin:0 auto}
+.kicker{font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--red-light);margin-bottom:28px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.kicker span{color:var(--ash)}
+.art-title{font-family:var(--heading);font-weight:400;font-size:clamp(42px,6.4vw,76px);line-height:1.04;letter-spacing:-.5px;color:var(--white);margin-bottom:28px}
+.art-title em{font-style:italic;color:var(--red-light)}
+.art-dek{font-family:var(--display);font-style:italic;font-size:clamp(21px,2.4vw,27px);line-height:1.45;color:var(--fog);max-width:640px}
+.art-meta{margin-top:44px;font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mist);display:flex;gap:28px;flex-wrap:wrap}
+
+/* BODY */
+.art-body-wrap{background:var(--cream);color:var(--ink);padding:90px 48px 110px}
+.art-body{max-width:680px;margin:0 auto;font-size:18.5px;line-height:1.78;font-weight:300}
+.art-body p{margin-bottom:1.25em}
+.art-body strong{font-weight:500;color:var(--ink)}
+.art-body h2{font-family:var(--heading);font-weight:400;font-size:clamp(28px,3.4vw,36px);line-height:1.15;color:var(--ink);margin:2.6em 0 .9em}
+.art-body h2:first-child{margin-top:0}
+.stack p{margin-bottom:.2em}
+.stack{margin:1.4em 0 1.6em}
+.pull{margin:2.2em 0;padding:6px 0 6px 28px;border-left:2px solid var(--red)}
+.pull p{font-family:var(--display);font-style:italic;font-weight:500;font-size:clamp(27px,3.2vw,34px);line-height:1.3;color:var(--ink);margin:0}
+
+/* Benefit / risk entries */
+.entries{margin:1.6em 0 0}
+.entry{padding:22px 0;border-top:1px solid var(--divider-l)}
+.entry:last-child{border-bottom:1px solid var(--divider-l)}
+.entry h3{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:500;color:var(--red-warm);margin-bottom:8px}
+.entry p{margin:0}
+
+/* Do list */
+.dos{list-style:none;counter-reset:o;margin:1.6em 0 0}
+.dos li{counter-increment:o;position:relative;padding:22px 0 22px 64px;border-top:1px solid var(--divider-l)}
+.dos li:last-child{border-bottom:1px solid var(--divider-l)}
+.dos li::before{content:counter(o,decimal-leading-zero);position:absolute;left:0;top:18px;font-family:var(--display);font-size:34px;font-weight:500;color:var(--ink);line-height:1}
+.dos li strong{display:block;font-family:var(--heading);font-weight:400;font-size:21px;line-height:1.3;margin-bottom:6px}
+@media (max-width:720px){.dos li{padding-left:52px}.dos li::before{font-size:28px}}
+
+/* Don't list */
+.donts{list-style:none;counter-reset:d;margin:1.6em 0 0}
+.donts li{counter-increment:d;position:relative;padding:22px 0 22px 64px;border-top:1px solid var(--divider-l)}
+.donts li:last-child{border-bottom:1px solid var(--divider-l)}
+.donts li::before{content:counter(d,decimal-leading-zero);position:absolute;left:0;top:18px;font-family:var(--display);font-size:34px;font-weight:500;color:rgba(139,26,26,.55);line-height:1}
+.donts li strong{display:block;font-family:var(--heading);font-weight:400;font-size:21px;line-height:1.3;margin-bottom:6px}
+
+.note{font-family:var(--mono);font-size:11px;line-height:1.7;letter-spacing:.3px;color:var(--ash);margin-top:2.4em;padding-top:18px;border-top:1px solid var(--divider-l)}
+.sign{margin-top:3em;font-family:var(--display);font-style:italic;font-size:24px;color:var(--ink)}
+
+
+/* FIGURES */
+.fig{margin:2.6em -40px 2.8em;padding:0}
+.fig svg{background:var(--cream)}
+.fig figcaption{font-family:var(--mono);font-size:11px;line-height:1.7;letter-spacing:.3px;color:var(--ash);margin:14px 40px 0;padding-left:14px;border-left:2px solid var(--red)}
+.fig-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+@media (max-width:820px){.fig{margin-left:0;margin-right:0}.fig-scroll svg{min-width:720px}.fig figcaption{margin-left:0;margin-right:0}}
+
+
+/* REFERENCES */
+.ref{font-family:var(--mono);font-size:.62em;color:var(--red-warm);text-decoration:none;vertical-align:.35em;white-space:nowrap}
+.ref:hover,.ref:focus-visible{text-decoration:underline}
+.refs{margin-top:3.2em;padding-top:28px;border-top:1px solid var(--divider-l)}
+.refs h3{font-family:var(--heading);font-weight:400;font-size:26px;margin-bottom:18px}
+.refs ol{list-style:none;padding:0;margin:0}
+.refs li{display:grid;grid-template-columns:44px 1fr;gap:4px;font-size:14.5px;line-height:1.65;padding:12px 0;border-bottom:1px solid var(--divider-l);scroll-margin-top:80px}
+.refs li:target{background:rgba(139,26,26,.06)}
+.refs .rn{font-family:var(--mono);font-size:12px;color:var(--red-warm);padding-top:3px}
+.refs a{color:var(--ink);text-decoration:underline;text-decoration-color:rgba(139,26,26,.4);text-underline-offset:3px}
+.refs .rt{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mist);margin-left:6px}
+
+/* FOOT */
+.art-foot{background:var(--void);padding:70px 48px;border-top:1px solid var(--divider)}
+.art-foot-inner{max-width:820px;margin:0 auto;display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:flex-end}
+.foot-label{font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--ash);margin-bottom:12px}
+.foot-link{font-family:var(--heading);font-size:24px;color:var(--paper);transition:color .2s}
+.foot-link:hover{color:var(--red-light)}
+
+@media (max-width:720px){
+  .nav{padding:0 16px;gap:12px}
+  .nav-links{gap:12px}
+  .nav-links a{font-size:9px;letter-spacing:.5px;white-space:nowrap}
+  .nav-links .nav-home{display:none}
+  .nav-logo{letter-spacing:2px;white-space:nowrap}
+  .nav-follow{padding:5px 10px}
+  .art-head{padding:120px 16px 64px}
+  .art-body-wrap{padding:60px 16px 80px}
+  .art-body{font-size:17px}
+  .art-foot{padding:50px 16px}
+  .donts li{padding-left:52px}
+  .donts li::before{font-size:28px}
+}
+</style>
+<link rel="stylesheet" href="../assets/note-arc.css">
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="../index.html" class="nav-logo"><em>ARTHA</em> Craft</a>
+  <div class="nav-links">
+    <a href="../index.html" class="nav-home">Home</a>
+    <a href="../articles.html">Series</a>
+    <a href="../notes.html" class="active">Craft Notes</a>
+    <a href="../about.html">About</a>
+    <a href="https://substack.com/@jitanderchauhan" target="_blank" class="nav-follow">Subscribe</a>
+  </div>
+</nav>
+
+<header class="art-head">
+  <div class="art-num" aria-hidden="true">02</div>
+  <div class="art-head-inner">
+    <div class="kicker">Craft Notes <span>/</span> No. 02 <span>/</span> Evaluation · Part 1 of 9</div>
+    <h1 class="art-title">It looked right <em>is not an evaluation.</em></h1>
+    <p class="art-dek">Why reading the output is not testing it, what to measure instead, and the four levels where evaluation has to happen.</p>
+    <div class="art-meta"><span>Jitander Chauhan</span><span>November 2026</span><span>6 min read</span></div>
+  </div>
+</header>
+
+<main class="art-body-wrap">
+<article class="art-body">
+  <figure class="fig hero"><img src="../images/share/cn02-linkedin-hero.png" alt="Craft Notes No. 02: It looked right is not an evaluation." style="display:block;width:100%;height:auto;border-radius:6px"></figure>
+
+
+  <h2>The report that read perfectly</h2>
+  <p>We once asked an AI to review our own codebase and list what was missing. The report came back clear, well structured and confident.</p>
+  <p>About 40 percent of its findings were wrong once we checked them against the code. <a class="ref" href="#ref-1">[1]</a> It marked things as missing that already existed, and nothing in the report gave that away.</p>
+  <p>In the last Craft Note I wrote that you should verify what the model returns, which is easy to say and hides most of the work. How do you verify output you did not write, at a volume no person can read, from a component that may answer differently tomorrow?</p>
+  <p>Evaluation is how, and the subject is big enough to need its own arc. This is Part 1 of 9.</p>
+
+  <h2>Why looking is not testing</h2>
+  <p>Most teams evaluate an LLM feature the way they review a document. Someone reads a handful of outputs and decides they look right. That fails for three reasons.</p>
+  <div class="entries">
+    <div class="entry"><h3>Wrong reads as well as right</h3><p>Models produce confident, fluent, false content, and NIST lists it as a core generative AI risk. <a class="ref" href="#ref-2">[2]</a> The report above is a typical case: the errors carried the same tone and structure as the correct findings.</p></div>
+    <div class="entry"><h3>People trust what reads well</h3><p>Research on AI-assisted decisions describes overreliance: people accepting incorrect AI outputs. <a class="ref" href="#ref-3">[3]</a> A reviewer skimming twenty polished answers at the end of a long day is where it tends to happen.</p></div>
+    <div class="entry"><h3>A few samples say nothing about the next thousand</h3><p>The same input can produce a different answer on another run, even at temperature zero. <a class="ref" href="#ref-4">[4]</a> So five good answers today tell you very little about tomorrow.</p></div>
+  </div>
+  <div class="pull"><p>If you cannot run it again tomorrow and get a score, you did not evaluate it. You looked at it.</p></div>
+
+  <h2>What an evaluation actually is</h2>
+  <p>An evaluation is a repeatable test: a fixed set of inputs, a stated expectation for each, and a grader that scores every output the same way every time. Think of it as a test suite for behaviour you cannot assert line by line.</p>
+  <p>The expectation has to be specific and measurable: "every requirement cites the paragraph it came from" rather than "good answers". Practitioner guidance also favours many automatically graded cases over a few hand-graded ones, <a class="ref" href="#ref-5">[5]</a> because volume finds the failures that samples miss.</p>
+
+  <p>Practitioners have been writing down how to evaluate AI products for years: fast automated checks on every change, human and model review on a regular cadence, and expensive experiments only after major changes. <a class="ref" href="#ref-6">[6]</a> This series builds on that guidance rather than replacing it, and adds what happened when we applied it in commercial work for established companies, where the business decides what correct means, evidence has to survive an audit, and people make the final calls.</p>
+
+  <h2>Five things to measure</h2>
+  <p>Quality does not fit in one number, but five questions cover most of what can go wrong.</p>
+  <div class="entries">
+    <div class="entry"><h3>Contract</h3><p>Does the output have the right shape, the right number of items and the right names? Code checks this. Schema enforcement has largely solved formatting: one provider's adherence on complex schemas went from under 40 percent to 100 percent. <a class="ref" href="#ref-7">[7]</a> It did not solve truth.</p></div>
+    <div class="entry"><h3>Grounding</h3><p>Is every claim backed by evidence in the input? In retrieval systems this is called faithfulness, and it can be scored separately from whether the right context was found in the first place. <a class="ref" href="#ref-8">[8]</a></p></div>
+    <div class="entry"><h3>Consistency</h3><p>Does the same input get the same decision across runs and across days? Anything you audit has to pass this one.</p></div>
+    <div class="entry"><h3>Calibration</h3><p>When the model says it is confident, is it right? Models that state their confidence in words tend to be overconfident. <a class="ref" href="#ref-9">[9]</a> Until you have tested a confidence score against real outcomes, it tells you nothing you can act on.</p></div>
+    <div class="entry"><h3>Cost and latency</h3><p>Measure tokens and seconds per job. If a version scores slightly better and costs four times as much, adopting it is a trade-off for the business to weigh, which is different from an upgrade.</p></div>
+  </div>
+  <figure class="fig"><div class="fig-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="40 200 1120 460" width="100%" role="img" aria-label="Five things to measure on every output." style="display:block;height:auto"><defs><marker id="cn02-measure-ah-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1a1916"/></marker><marker id="cn02-measure-ah-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8B1A1A"/></marker><marker id="cn02-measure-ah-mist" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a8880"/></marker></defs><text x="130" y="226" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#8a8880" text-anchor="start" font-weight="400" letter-spacing="2">DIMENSION</text><text x="420" y="226" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#8a8880" text-anchor="start" font-weight="400" letter-spacing="2">THE QUESTION</text><text x="880" y="226" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#8a8880" text-anchor="start" font-weight="400" letter-spacing="2">HOW YOU CHECK IT</text><line x1="80" y1="240" x2="1120" y2="240" stroke="rgba(26,25,22,0.18)" stroke-width="1"/><text x="80" y="287" font-family="'Cormorant Garamond', Georgia, serif" font-size="30" fill="#8B1A1A" text-anchor="start" font-weight="500">01</text><text x="130" y="285" font-family="'DM Serif Display', Georgia, serif" font-size="22" fill="#1a1916" text-anchor="start" font-weight="400">Contract</text><text x="420" y="284" font-family="'Literata', Georgia, serif" font-size="16" fill="#1a1916" text-anchor="start" font-weight="400">Right shape, item count and names?</text><rect x="880" y="262" width="240" height="30" rx="15" fill="#1a1916" stroke="none" stroke-width="1"/><text x="1000" y="281" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#f5f0e8" text-anchor="middle" font-weight="400" letter-spacing="1">SCHEMA VALIDATOR</text><line x1="80" y1="312" x2="1120" y2="312" stroke="rgba(26,25,22,0.18)" stroke-width="1"/><text x="80" y="359" font-family="'Cormorant Garamond', Georgia, serif" font-size="30" fill="#8B1A1A" text-anchor="start" font-weight="500">02</text><text x="130" y="357" font-family="'DM Serif Display', Georgia, serif" font-size="22" fill="#1a1916" text-anchor="start" font-weight="400">Grounding</text><text x="420" y="356" font-family="'Literata', Georgia, serif" font-size="16" fill="#1a1916" text-anchor="start" font-weight="400">Is every claim backed by evidence it cites?</text><rect x="880" y="334" width="240" height="30" rx="15" fill="none" stroke="#1a1916" stroke-width="1"/><text x="1000" y="353" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#1a1916" text-anchor="middle" font-weight="400" letter-spacing="1">EVIDENCE CHECK + SAMPLE</text><line x1="80" y1="384" x2="1120" y2="384" stroke="rgba(26,25,22,0.18)" stroke-width="1"/><text x="80" y="431" font-family="'Cormorant Garamond', Georgia, serif" font-size="30" fill="#8B1A1A" text-anchor="start" font-weight="500">03</text><text x="130" y="429" font-family="'DM Serif Display', Georgia, serif" font-size="22" fill="#1a1916" text-anchor="start" font-weight="400">Consistency</text><text x="420" y="428" font-family="'Literata', Georgia, serif" font-size="16" fill="#1a1916" text-anchor="start" font-weight="400">Same input, same decision, run after run?</text><rect x="880" y="406" width="240" height="30" rx="15" fill="none" stroke="#1a1916" stroke-width="1"/><text x="1000" y="425" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#1a1916" text-anchor="middle" font-weight="400" letter-spacing="1">REPEAT RUNS · AGREEMENT</text><line x1="80" y1="456" x2="1120" y2="456" stroke="rgba(26,25,22,0.18)" stroke-width="1"/><text x="80" y="503" font-family="'Cormorant Garamond', Georgia, serif" font-size="30" fill="#8B1A1A" text-anchor="start" font-weight="500">04</text><text x="130" y="501" font-family="'DM Serif Display', Georgia, serif" font-size="22" fill="#1a1916" text-anchor="start" font-weight="400">Calibration</text><text x="420" y="500" font-family="'Literata', Georgia, serif" font-size="16" fill="#1a1916" text-anchor="start" font-weight="400">Does stated confidence match accuracy?</text><rect x="880" y="478" width="240" height="30" rx="15" fill="none" stroke="#8B1A1A" stroke-width="1"/><text x="1000" y="497" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#8B1A1A" text-anchor="middle" font-weight="400" letter-spacing="1">SCORED VS GOLDEN SET</text><line x1="80" y1="528" x2="1120" y2="528" stroke="rgba(26,25,22,0.18)" stroke-width="1"/><text x="80" y="575" font-family="'Cormorant Garamond', Georgia, serif" font-size="30" fill="#8B1A1A" text-anchor="start" font-weight="500">05</text><text x="130" y="573" font-family="'DM Serif Display', Georgia, serif" font-size="22" fill="#1a1916" text-anchor="start" font-weight="400">Cost + latency</text><text x="420" y="572" font-family="'Literata', Georgia, serif" font-size="16" fill="#1a1916" text-anchor="start" font-weight="400">Tokens and seconds per job, per preset?</text><rect x="880" y="550" width="240" height="30" rx="15" fill="#1a1916" stroke="none" stroke-width="1"/><text x="1000" y="569" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#f5f0e8" text-anchor="middle" font-weight="400" letter-spacing="1">TELEMETRY</text><line x1="80" y1="600" x2="1120" y2="600" stroke="rgba(26,25,22,0.18)" stroke-width="1"/><text x="80" y="640" font-family="'Literata', Georgia, serif" font-size="17" fill="#4a4944" text-anchor="start" font-weight="400" font-style="italic">The golden set is what makes rows 02 to 04 measurable at all.</text></svg></div><figcaption>Evaluation is five separate checks. Only the first is fully mechanical; the golden set makes the rest measurable.</figcaption></figure>
+
+  <h2>Four levels, not one</h2>
+  <p>A single check at a single level will miss things. A response can pass its contract and still be the wrong answer for the task, every step can pass while the journey as a whole fails, and something that passed everything in testing can still drift in production.</p>
+  <ol class="dos">
+    <li><strong>Call.</strong>Did this response meet its contract? Schema, assertions, citations that resolve. Runs on every call.</li>
+    <li><strong>Task.</strong>Is this step right for this input? Scored against a golden set of labelled cases. Runs on every change, for the cases that change could affect, and in full before release.</li>
+    <li><strong>Journey.</strong>Does the whole workflow hold together? End-to-end runs on fixed scenarios, nightly and before each release.</li>
+    <li><strong>Production.</strong>Is it still working on real traffic? Sampling, monitoring and human review, continuously.</li>
+  </ol>
+  <figure class="fig"><div class="fig-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="40 196 1120 480" width="100%" role="img" aria-label="Evaluate at four levels, not one." style="display:block;height:auto"><defs><marker id="cn02-levels-ah-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1a1916"/></marker><marker id="cn02-levels-ah-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8B1A1A"/></marker><marker id="cn02-levels-ah-mist" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a8880"/></marker></defs><rect x="80" y="210" width="1040" height="450" rx="6" fill="#fdfcfa" stroke="rgba(26,25,22,0.18)" stroke-width="1"/><text x="104" y="246" font-family="'DM Serif Display', Georgia, serif" font-size="22" fill="#1a1916" text-anchor="start" font-weight="400">Production</text><text x="242" y="245" font-family="'Literata', Georgia, serif" font-size="15" fill="#4a4944" text-anchor="start" font-weight="400" font-style="italic">Is it still working on real traffic?</text><text x="1096" y="243" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#b83020" text-anchor="end" font-weight="500" letter-spacing="1.5">CONTINUOUSLY</text><text x="104" y="268" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#8a8880" text-anchor="start" font-weight="400">sampling · monitoring · human review</text><rect x="120" y="290" width="960" height="350" rx="6" fill="#f6f2ea" stroke="rgba(26,25,22,0.18)" stroke-width="1"/><text x="144" y="326" font-family="'DM Serif Display', Georgia, serif" font-size="22" fill="#1a1916" text-anchor="start" font-weight="400">Journey</text><text x="246" y="325" font-family="'Literata', Georgia, serif" font-size="15" fill="#4a4944" text-anchor="start" font-weight="400" font-style="italic">Does the whole workflow hold together?</text><text x="1056" y="323" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#b83020" text-anchor="end" font-weight="500" letter-spacing="1.5">NIGHTLY · PRE-RELEASE</text><text x="144" y="348" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#8a8880" text-anchor="start" font-weight="400">end-to-end runs on fixed scenarios</text><rect x="160" y="370" width="880" height="250" rx="6" fill="#efe9de" stroke="rgba(26,25,22,0.18)" stroke-width="1"/><text x="184" y="406" font-family="'DM Serif Display', Georgia, serif" font-size="22" fill="#1a1916" text-anchor="start" font-weight="400">Task</text><text x="250" y="405" font-family="'Literata', Georgia, serif" font-size="15" fill="#4a4944" text-anchor="start" font-weight="400" font-style="italic">Is this step right for this input?</text><text x="1016" y="403" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#b83020" text-anchor="end" font-weight="500" letter-spacing="1.5">EVERY CHANGE</text><text x="184" y="428" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#8a8880" text-anchor="start" font-weight="400">golden set of labelled cases</text><rect x="200" y="450" width="800" height="150" rx="6" fill="#0c0b09" stroke="none" stroke-width="1"/><text x="224" y="486" font-family="'DM Serif Display', Georgia, serif" font-size="22" fill="#f5f0e8" text-anchor="start" font-weight="400">Call</text><text x="290" y="485" font-family="'Literata', Georgia, serif" font-size="15" fill="#b8b6b0" text-anchor="start" font-weight="400" font-style="italic">Did this response meet its contract?</text><text x="976" y="483" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#d4472c" text-anchor="end" font-weight="500" letter-spacing="1.5">EVERY CALL</text><text x="224" y="508" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#b8b6b0" text-anchor="start" font-weight="400">schema · assertions · citations resolve</text><text x="976" y="570" font-family="'Literata', Georgia, serif" font-size="13" fill="#b8b6b0" text-anchor="end" font-weight="400" font-style="italic">start here: the cheapest check you will ever run</text></svg></div><figcaption>A response can pass its contract and still fail the task; every step can pass and the journey still fail; everything can pass in testing and drift in production.</figcaption></figure>
+
+  <h2>How this changes by context</h2>
+  <p>The principle holds everywhere, but the cost of ignoring it varies with where you work.</p>
+  <div class="entries">
+    <div class="entry"><h3>Enterprise</h3><p>In an established company, evaluation results become evidence: for model risk review, for audit and for internal sign-off. "It looked right" does not survive a risk committee.</p></div>
+    <div class="entry"><h3>Commercial</h3><p>Clients will ask how you know it works. Scores per release, on cases they recognise, answer that question better than any demo.</p></div>
+    <div class="entry"><h3>Agentic</h3><p>An agent's final answer can look right while a step in the middle went wrong, and if you only evaluate the end state you will never see it.</p></div>
+  </div>
+
+  <h2>The rest of this arc</h2>
+  <div class="entries">
+    <div class="entry"><h3>Part 2 · It passed every test. Then a customer asked.</h3><p>The first golden set comes from the business: real inputs, approved answers, out-of-bounds cases.</p></div>
+    <div class="entry"><h3>Part 3 · Fix ten, lose one</h3><p>Growing the set on purpose: acceptable, not exact; a threshold the business sets; the full set before every release.</p></div>
+    <div class="entry"><h3>Part 4 · Check with code before you ask a model</h3><p>Evidence for every claim, checked against the source, and every output labelled.</p></div>
+    <div class="entry"><h3>Part 5 · LLM as a judge, and who judges the judge</h3><p>Guardrails for model judges, and calibration against the people who know the business.</p></div>
+    <div class="entry"><h3>Part 6 · Evaluating agents and retrieval</h3><p>Agents tend to fail in the middle, so evaluate the path as well as the result.</p></div>
+    <div class="entry"><h3>Part 7 · Correct is not the same as useful</h3><p>Value is in what the output carries for the next step.</p></div>
+    <div class="entry"><h3>Part 8 · Wiring evaluation into how you ship</h3><p>Layered checks, agents that recommend, people who decide.</p></div>
+    <div class="entry"><h3>Part 9 · Your prompt didn't change. Your output did.</h3><p>Prompts are per model. The intent is the constant.</p></div>
+  </div>
+
+  <h2>Start this week</h2>
+  <ol class="dos">
+    <li><strong>Write down what correct means.</strong>Pick one feature and describe a correct output in sentences a test could check.</li>
+    <li><strong>Collect real inputs.</strong>A few dozen real cases, including the awkward ones, beat a hundred invented ones.</li>
+    <li><strong>Grade with code first.</strong>Contract checks are cheap and fast, and they never change their mind.</li>
+    <li><strong>Record every score.</strong>Store the result with the model version and prompt version, so the next change has a baseline.</li>
+    <li><strong>Do not let the generator grade itself.</strong>Models can recognise their own output and score it more kindly. <a class="ref" href="#ref-10">[10]</a> More on this in Part 5.</li>
+  </ol>
+
+  <h2>Build it deliberately</h2>
+  <div class="stack">
+    <p>Every release changes something.</p>
+    <p>Not all of it on purpose.</p>
+  </div>
+  <p>Evaluation is how you find out what changed before your users do.</p>
+  <div class="pull"><p>Looking is an opinion. Evaluation is evidence.</p></div>
+
+  <p class="note">Figures marked <a class="ref" href="#ref-1">[1]</a> come from our internal review records, not audited data. Treat them as directional.</p>
+  <p class="sign">Jitander Chauhan</p>
+  <section class="refs" aria-labelledby="refs-h">
+    <h3 id="refs-h">Research &amp; Further Reading</h3>
+    <ol>
+      <li id="ref-1"><span class="rn">[1]</span><div>Internal, “Engineering review records”, 2026: An AI-assisted gap analysis in which about 40% of findings failed code-level checks. Directional, not audited. <span class="rt">Internal Data</span></div></li>
+      <li id="ref-2"><span class="rn">[2]</span><div>National Institute of Standards and Technology, “<a href="https://doi.org/10.6028/NIST.AI.600-1">Artificial Intelligence Risk Management Framework: Generative AI Profile (NIST AI 600-1)</a>”, July 2024: Lists confabulation, the confident production of erroneous or false content, as a core generative AI risk. <span class="rt">Standard</span></div></li>
+      <li id="ref-3"><span class="rn">[3]</span><div>Passi, S., Vorvoreanu, M., “<a href="https://www.microsoft.com/en-us/research/?p=854967">Overreliance on AI: Literature Review</a>”, Microsoft Research, MSR-TR-2022-12, 2022: Defines overreliance as users accepting incorrect AI outputs, which leads to errors and loss of trust. <span class="rt">Research Review</span></div></li>
+      <li id="ref-4"><span class="rn">[4]</span><div>Thinking Machines Lab, “<a href="https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/">Defeating Nondeterminism in LLM Inference</a>”, September 2025: Outputs can differ at temperature zero because server batching changes with load (as reported by <a href="https://www.eweek.com/de/news/ai-bug-fix-mira-murati-thinking-machine-lab/">eWeek</a>). <span class="rt">Research</span></div></li>
+      <li id="ref-5"><span class="rn">[5]</span><div>Anthropic, “<a href="https://platform.claude.com/docs/en/test-and-evaluate/develop-tests">Define success criteria and build evaluations</a>”, Claude Platform Documentation, accessed November 2026: Success criteria should be specific and measurable; automate grading where possible; more automatically graded cases beat fewer hand-graded ones; use a different model to grade than the one that generated. <span class="rt">Official Docs</span></div></li>
+      <li id="ref-6"><span class="rn">[6]</span><div>Husain, H., “<a href="https://hamel.dev/blog/posts/evals/">Your AI Product Needs Evals</a>”, 2024: Three levels of evaluation by cost: unit tests and assertions, often "on every code change"; human and model evaluation on a set cadence; A/B testing "only after significant product changes". Advises tracking how well an LLM judge agrees with human labels and using labellers' written reasons to refine it. <span class="rt">Practitioner Reference</span></div></li>
+      <li id="ref-7"><span class="rn">[7]</span><div>OpenAI, “<a href="https://openai.com/index/introducing-structured-outputs-in-the-api/">Introducing Structured Outputs in the API</a>”, OpenAI, August 2024: With schema enforcement, gpt-4o-2024-08-06 scored 100% on complex JSON-schema evals, against under 40% for gpt-4-0613. <span class="rt">Official Docs</span></div></li>
+      <li id="ref-8"><span class="rn">[8]</span><div>Es, S., James, J., Espinosa-Anke, L., Schockaert, S., “<a href="https://arxiv.org/abs/2309.15217">Ragas: Automated Evaluation of Retrieval Augmented Generation</a>”, 2023: Scores retrieval quality, faithfulness to retrieved context and generation quality separately, without human ground-truth labels. <span class="rt">Research Paper</span></div></li>
+      <li id="ref-9"><span class="rn">[9]</span><div>Xiong, M., Hu, Z., Lu, X., Li, Y., Fu, J., He, J., Hooi, B., “<a href="https://arxiv.org/abs/2306.13063">Can LLMs Express Their Uncertainty? An Empirical Evaluation of Confidence Elicitation in LLMs</a>”, ICLR 2024: When models state their confidence in words they tend to be overconfident; sampling consistency and better aggregation reduce this. <span class="rt">Research Paper</span></div></li>
+      <li id="ref-10"><span class="rn">[10]</span><div>Panickssery, A., Bowman, S.R., Feng, S., “<a href="https://papers.nips.cc/paper_files/paper/2024/hash/7f1f0218e45f5414c79c0679633e47bc-Abstract-Conference.html">LLM Evaluators Recognize and Favor Their Own Generations</a>”, NeurIPS 2024: Models can recognise their own outputs and score them more favourably, which undermines self-evaluation. <span class="rt">Research Paper</span></div></li>
+    </ol>
+  </section>
+</article>
+<nav class="arc-nav" data-arc="evaluation" data-part="1" aria-label="Evaluation series parts"></nav>
+</main>
+
+<footer class="art-foot">
+  <div class="art-foot-inner">
+    <div>
+      <div class="foot-label">Start with the method</div>
+      <a class="foot-link" href="../articles/article-1.html">Read the 12-part series &rarr;</a>
+    </div>
+    <div>
+      <div class="foot-label">Get the next Craft Note</div>
+      <a class="foot-link" href="https://substack.com/@jitanderchauhan">Subscribe on Substack &rarr;</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/notes-data.js"></script>
+<script src="../assets/notes.js"></script>
+<script>
+(function(){var n=document.getElementById('nav');function f(){n.classList.toggle('scrolled',window.scrollY>40)}window.addEventListener('scroll',f,{passive:true});f();})();
+</script>
+</body>
+</html>

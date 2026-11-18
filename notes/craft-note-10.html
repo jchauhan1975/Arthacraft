@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Prompt Didn&#8217;t Change. Your Output Did. | ARTHA Craft</title>
+<meta name="description" content="Evaluation Part 9 of 9: prompts do not travel between models, and models change anyway. Keep the intent as the constant, derive a prompt per model, and let the golden set decide.">
+<link rel="canonical" href="https://arthacraft.tech/notes/craft-note-10.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ARTHA Craft">
+<meta property="og:title" content="Your Prompt Didn&#8217;t Change. Your Output Did.">
+<meta property="og:description" content="Evaluation Part 9 of 9: prompts do not travel between models, and models change anyway. Keep the intent as the constant, derive a prompt per model, and let the golden set decide.">
+<meta property="og:url" content="https://arthacraft.tech/notes/craft-note-10.html">
+<meta property="og:image" content="https://arthacraft.tech/images/share/cn10-linkedin-hero.png">
+<meta property="og:image:width" content="1735">
+<meta property="og:image:height" content="906">
+<meta property="og:image:alt" content="Craft Notes No. 10: Your prompt didn&#8217;t change. Your output did.">
+<meta property="article:author" content="Jitander Singh Chauhan">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Serif+Display:ital@0;1&family=Literata:ital,opsz,wght@0,7..72,300;0,7..72,400;0,7..72,500;1,7..72,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#0c0b09; --ink:#1a1916; --coal:#2a2924; --ash:#4a4944; --mist:#8a8880; --fog:#b8b6b0;
+  --paper:#f5f0e8; --cream:#faf7f2; --white:#fdfcfa;
+  --red:#8B1A1A; --red-warm:#b83020; --red-light:#d4472c; --gold:#b8912a;
+  --divider:rgba(255,255,255,0.07); --divider-l:rgba(26,25,22,0.1);
+  --display:'Cormorant Garamond','Times New Roman',serif;
+  --heading:'DM Serif Display',Georgia,serif;
+  --body:'Literata',Georgia,serif;
+  --mono:'JetBrains Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--void);color:var(--paper);font-family:var(--body);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;border-bottom:1px solid transparent;transition:background .4s,border-color .4s}
+.nav.scrolled{background:rgba(12,11,9,.96);border-color:var(--divider);backdrop-filter:blur(12px)}
+.nav-logo{font-family:var(--mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:300}
+.nav-logo em{font-style:normal;color:var(--red-light)}
+.nav-links{display:flex;gap:36px;align-items:center}
+.nav-links a{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mist);transition:color .2s}
+.nav-links a:hover{color:var(--paper)}
+.nav-links a.active{color:var(--fog)}
+.nav-follow{color:var(--red-light)!important;border:1px solid rgba(212,71,44,0.3);padding:6px 18px;border-radius:2px;transition:all 0.2s!important}
+.nav-follow:hover{background:var(--red)!important;color:var(--white)!important;border-color:var(--red)!important}
+
+/* HEADER */
+.art-head{position:relative;overflow:hidden;padding:150px 48px 90px;background:var(--void);border-bottom:1px solid var(--divider)}
+.art-num{position:absolute;right:-20px;top:30px;font-family:var(--display);font-weight:500;font-size:clamp(220px,34vw,460px);line-height:1;color:rgba(245,240,232,.035);pointer-events:none;user-select:none}
+.art-head-inner{position:relative;max-width:820px;margin:0 auto}
+.kicker{font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--red-light);margin-bottom:28px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.kicker span{color:var(--ash)}
+.art-title{font-family:var(--heading);font-weight:400;font-size:clamp(42px,6.4vw,76px);line-height:1.04;letter-spacing:-.5px;color:var(--white);margin-bottom:28px}
+.art-title em{font-style:italic;color:var(--red-light)}
+.art-dek{font-family:var(--display);font-style:italic;font-size:clamp(21px,2.4vw,27px);line-height:1.45;color:var(--fog);max-width:640px}
+.art-meta{margin-top:44px;font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mist);display:flex;gap:28px;flex-wrap:wrap}
+
+/* BODY */
+.art-body-wrap{background:var(--cream);color:var(--ink);padding:90px 48px 110px}
+.art-body{max-width:680px;margin:0 auto;font-size:18.5px;line-height:1.78;font-weight:300}
+.art-body p{margin-bottom:1.25em}
+.art-body strong{font-weight:500;color:var(--ink)}
+.art-body h2{font-family:var(--heading);font-weight:400;font-size:clamp(28px,3.4vw,36px);line-height:1.15;color:var(--ink);margin:2.6em 0 .9em}
+.art-body h2:first-child{margin-top:0}
+.stack p{margin-bottom:.2em}
+.stack{margin:1.4em 0 1.6em}
+.pull{margin:2.2em 0;padding:6px 0 6px 28px;border-left:2px solid var(--red)}
+.pull p{font-family:var(--display);font-style:italic;font-weight:500;font-size:clamp(27px,3.2vw,34px);line-height:1.3;color:var(--ink);margin:0}
+
+/* Benefit / risk entries */
+.entries{margin:1.6em 0 0}
+.entry{padding:22px 0;border-top:1px solid var(--divider-l)}
+.entry:last-child{border-bottom:1px solid var(--divider-l)}
+.entry h3{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:500;color:var(--red-warm);margin-bottom:8px}
+.entry p{margin:0}
+
+/* Do list */
+.dos{list-style:none;counter-reset:o;margin:1.6em 0 0}
+.dos li{counter-increment:o;position:relative;padding:22px 0 22px 64px;border-top:1px solid var(--divider-l)}
+.dos li:last-child{border-bottom:1px solid var(--divider-l)}
+.dos li::before{content:counter(o,decimal-leading-zero);position:absolute;left:0;top:18px;font-family:var(--display);font-size:34px;font-weight:500;color:var(--ink);line-height:1}
+.dos li strong{display:block;font-family:var(--heading);font-weight:400;font-size:21px;line-height:1.3;margin-bottom:6px}
+@media (max-width:720px){.dos li{padding-left:52px}.dos li::before{font-size:28px}}
+
+/* Don't list */
+.donts{list-style:none;counter-reset:d;margin:1.6em 0 0}
+.donts li{counter-increment:d;position:relative;padding:22px 0 22px 64px;border-top:1px solid var(--divider-l)}
+.donts li:last-child{border-bottom:1px solid var(--divider-l)}
+.donts li::before{content:counter(d,decimal-leading-zero);position:absolute;left:0;top:18px;font-family:var(--display);font-size:34px;font-weight:500;color:rgba(139,26,26,.55);line-height:1}
+.donts li strong{display:block;font-family:var(--heading);font-weight:400;font-size:21px;line-height:1.3;margin-bottom:6px}
+
+.note{font-family:var(--mono);font-size:11px;line-height:1.7;letter-spacing:.3px;color:var(--ash);margin-top:2.4em;padding-top:18px;border-top:1px solid var(--divider-l)}
+.sign{margin-top:3em;font-family:var(--display);font-style:italic;font-size:24px;color:var(--ink)}
+
+
+/* FIGURES */
+.fig{margin:2.6em -40px 2.8em;padding:0}
+.fig svg{background:var(--cream)}
+.fig figcaption{font-family:var(--mono);font-size:11px;line-height:1.7;letter-spacing:.3px;color:var(--ash);margin:14px 40px 0;padding-left:14px;border-left:2px solid var(--red)}
+.fig-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+@media (max-width:820px){.fig{margin-left:0;margin-right:0}.fig-scroll svg{min-width:720px}.fig figcaption{margin-left:0;margin-right:0}}
+
+
+/* REFERENCES */
+.ref{font-family:var(--mono);font-size:.62em;color:var(--red-warm);text-decoration:none;vertical-align:.35em;white-space:nowrap}
+.ref:hover,.ref:focus-visible{text-decoration:underline}
+.refs{margin-top:3.2em;padding-top:28px;border-top:1px solid var(--divider-l)}
+.refs h3{font-family:var(--heading);font-weight:400;font-size:26px;margin-bottom:18px}
+.refs ol{list-style:none;padding:0;margin:0}
+.refs li{display:grid;grid-template-columns:44px 1fr;gap:4px;font-size:14.5px;line-height:1.65;padding:12px 0;border-bottom:1px solid var(--divider-l);scroll-margin-top:80px}
+.refs li:target{background:rgba(139,26,26,.06)}
+.refs .rn{font-family:var(--mono);font-size:12px;color:var(--red-warm);padding-top:3px}
+.refs a{color:var(--ink);text-decoration:underline;text-decoration-color:rgba(139,26,26,.4);text-underline-offset:3px}
+.refs .rt{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mist);margin-left:6px}
+
+/* FOOT */
+.art-foot{background:var(--void);padding:70px 48px;border-top:1px solid var(--divider)}
+.art-foot-inner{max-width:820px;margin:0 auto;display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:flex-end}
+.foot-label{font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--ash);margin-bottom:12px}
+.foot-link{font-family:var(--heading);font-size:24px;color:var(--paper);transition:color .2s}
+.foot-link:hover{color:var(--red-light)}
+
+@media (max-width:720px){
+  .nav{padding:0 16px;gap:12px}
+  .nav-links{gap:12px}
+  .nav-links a{font-size:9px;letter-spacing:.5px;white-space:nowrap}
+  .nav-links .nav-home{display:none}
+  .nav-logo{letter-spacing:2px;white-space:nowrap}
+  .nav-follow{padding:5px 10px}
+  .art-head{padding:120px 16px 64px}
+  .art-body-wrap{padding:60px 16px 80px}
+  .art-body{font-size:17px}
+  .art-foot{padding:50px 16px}
+  .donts li{padding-left:52px}
+  .donts li::before{font-size:28px}
+}
+</style>
+<link rel="stylesheet" href="../assets/note-arc.css">
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="../index.html" class="nav-logo"><em>ARTHA</em> Craft</a>
+  <div class="nav-links">
+    <a href="../index.html" class="nav-home">Home</a>
+    <a href="../articles.html">Series</a>
+    <a href="../notes.html" class="active">Craft Notes</a>
+    <a href="../about.html">About</a>
+    <a href="https://substack.com/@jitanderchauhan" target="_blank" class="nav-follow">Subscribe</a>
+  </div>
+</nav>
+
+<header class="art-head">
+  <div class="art-num" aria-hidden="true">10</div>
+  <div class="art-head-inner">
+    <div class="kicker">Craft Notes <span>/</span> No. 10 <span>/</span> Evaluation · Part 9 of 9</div>
+    <h1 class="art-title">Your prompt didn't change. <em>Your output did.</em></h1>
+    <p class="art-dek">Prompts do not travel between models, and models change whether or not you choose to change them. Keep the intent as the constant, translate it into a prompt for each model, and let the golden set decide.</p>
+    <div class="art-meta"><span>Jitander Chauhan</span><span>November 2026</span><span>6 min read</span></div>
+  </div>
+</header>
+
+<main class="art-body-wrap">
+<article class="art-body">
+  <figure class="fig hero"><img src="../images/share/cn10-linkedin-hero.png" alt="Craft Notes No. 10: Your prompt didn&#8217;t change. Your output did." style="display:block;width:100%;height:auto;border-radius:6px"></figure>
+
+
+  <h2>One prompt, eight models, one result</h2>
+  <p>The requirements prompt from Part 7, the one that reads a business requirements document and produces typed, linked requirements, took a long time to get right. Once it worked, we tried it on other models, at least eight of them. <a class="ref" href="#ref-1">[1]</a></p>
+  <p>It worked on one: the most capable model from one provider. On every other model the output was unusable. Not slightly worse. Unusable. The reverse was also true: prompts tuned on other models gave poor results when moved across.</p>
+  <p>That was when it became clear that a prompt is not a specification. It is a translation of a specification, written for one particular model. Move it to another model and you are not running the same thing any more.</p>
+
+  <h2>Why prompts do not travel</h2>
+  <p>Research has measured how fragile prompts are. One study found that widely used models were "extremely sensitive to subtle changes in prompt formatting," with accuracy differences of up to 76 points on one model from formatting alone. The sensitivity did not go away with larger models or instruction tuning, and the formats that worked best on one model correlated only weakly with those that worked best on another. <a class="ref" href="#ref-2">[2]</a></p>
+  <p>If spacing and punctuation can move results that much, a prompt full of carefully tuned instructions, examples and constraints has little reason to behave the same on a different model. Seen that way, our eight models were the expected result rather than an exception.</p>
+
+  <h2>Models change even when you do not</h2>
+  <p>Switching models is a choice. Model change is not. A study of one widely used commercial model found its accuracy at telling prime numbers from composite ones fell from 84 percent to 51 percent between March and June of 2023. The authors' conclusion: the "same" model service can change substantially in a short time, "highlighting the need for continuous monitoring." <a class="ref" href="#ref-3">[3]</a></p>
+  <p>Models are also retired. One provider's published policy gives "at least 60 days' notice before model retirement," notes that deprecated models "are likely to be less reliable than active models," and states plainly: "Requests to retired models fail." <a class="ref" href="#ref-4">[4]</a> Every model you depend on has an end date that someone else will set, so a function that only works on one model is a dependency with an expiry date.</p>
+  <div class="pull"><p>The model you tested is not guaranteed to be the model you are running next quarter.</p></div>
+
+  <h2>The intent is the constant</h2>
+  <p>Part 3 treated the prompt as the contract for the output, and Part 4 as the one input you control. Both hold for a single model, but across models the constant is the intent: what the functionality must do, for whom, with what evidence, what attributes, and how it should handle what is out of bounds. The prompt is how that intent is expressed to one model.</p>
+  <p>We are not the first to draw this line. Research frameworks such as DSPy separate a declarative description of what each step must do from the prompts that make a particular model do it, and generate those prompts automatically. <a class="ref" href="#ref-5">[5]</a> Our intent document applies the same separation and adds the controls a business needs: it is written in plain language, refined across models and approved by the business, and the golden set, rather than an optimiser, decides which prompt is accepted.</p>
+  <p>So we keep an intent document for every function, written in plain language and not tuned for any model. It goes through three rounds of review across several models, the same back-and-forth from Part 5, so that each model's questions and gaps sharpen it. The business approves it, and it is versioned like any other contract. Everything else in this series hangs off it: the golden set tests it, the code checks enforce it, the judge is calibrated against it.</p>
+  <p>When a commercial platform needs that function, the prompt is derived from the intent document for the model that will run it. Not copied from another model's prompt. Derived from the intent.</p>
+
+  <h2>When the model changes</h2>
+  <p>Whether the change is your choice or the provider's, the procedure is the same:</p>
+  <ol class="dos">
+    <li><strong>Give the new model the intent document.</strong>Not the old prompt.</li>
+    <li><strong>Ask it to write its own prompt.</strong>The model that will run the prompt is usually the best one to phrase it.</li>
+    <li><strong>Run the golden set on the new pairing.</strong>The generated prompt is only a candidate until the golden set has decided.</li>
+    <li><strong>Compare with the current model, case by case.</strong>Outputs, attributes from Part 7 and agent traces from Part 6, not only pass rates.</li>
+    <li><strong>Recalibrate anything that changed with it.</strong>If the judge's model changed, Part 5 applies again.</li>
+    <li><strong>Get business sign-off and label the release.</strong>New model version, new prompt version, same intent version.</li>
+  </ol>
+  <p>Keep the old pairing running until the new one has passed, and record which functions only pass on one model, because those are your exposure when that model is retired.</p>
+  <figure class="fig"><div class="fig-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="40 196 1120 548" width="100%" role="img" aria-label="The intent stays. The prompt is translated." style="display:block;height:auto"><defs><marker id="cn10-intent-ah-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1a1916"/></marker><marker id="cn10-intent-ah-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8B1A1A"/></marker><marker id="cn10-intent-ah-mist" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a8880"/></marker></defs><rect x="60" y="230" width="300" height="250" rx="6" fill="#0c0b09" stroke="none" stroke-width="1"/><text x="82" y="262" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#b8b6b0" text-anchor="start" font-weight="400" letter-spacing="1.5">THE CONSTANT</text><text x="82" y="302" font-family="'DM Serif Display', Georgia, serif" font-size="26" fill="#f5f0e8" text-anchor="start" font-weight="400">Intent</text><text x="82" y="332" font-family="'DM Serif Display', Georgia, serif" font-size="26" fill="#f5f0e8" text-anchor="start" font-weight="400">document</text><text x="82" y="384" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11.5" fill="#b8b6b0" text-anchor="start" font-weight="400">what it must do · for whom</text><text x="82" y="406" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11.5" fill="#b8b6b0" text-anchor="start" font-weight="400">evidence and attributes</text><text x="82" y="428" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11.5" fill="#b8b6b0" text-anchor="start" font-weight="400">out-of-bounds cases</text><text x="82" y="450" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11.5" fill="#b8b6b0" text-anchor="start" font-weight="400">versioned · business-approved</text><text x="60" y="214" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10" fill="#8a8880" text-anchor="start" font-weight="400" letter-spacing="1.2">REFINED IN THREE ROUNDS ACROSS MODELS</text><path d="M364,355 L420,266" fill="none" stroke="#8a8880" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#cn10-intent-ah-mist)"/><rect x="426" y="236" width="230" height="60" rx="5" fill="#fdfcfa" stroke="rgba(26,25,22,0.18)" stroke-width="1"/><text x="444" y="261" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="9.5" fill="#8a8880" text-anchor="start" font-weight="400" letter-spacing="1.2">WRITTEN BY MODEL A</text><text x="444" y="284" font-family="'DM Serif Display', Georgia, serif" font-size="16" fill="#1a1916" text-anchor="start" font-weight="400">prompt A</text><path d="M660,266 L712,266" fill="none" stroke="#1a1916" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#cn10-intent-ah-ink)"/><rect x="718" y="236" width="190" height="60" rx="5" fill="#fdfcfa" stroke="rgba(26,25,22,0.18)" stroke-width="1"/><text x="736" y="261" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="9.5" fill="#8a8880" text-anchor="start" font-weight="400" letter-spacing="1.2">GOLDEN SET</text><text x="736" y="284" font-family="'DM Serif Display', Georgia, serif" font-size="15" fill="#1a1916" text-anchor="start" font-weight="400">on Model A</text><path d="M912,266 L962,266" fill="none" stroke="#1a1916" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#cn10-intent-ah-ink)"/><rect x="968" y="236" width="172" height="60" rx="5" fill="#0c0b09" stroke="none" stroke-width="1"/><text x="986" y="273" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12.5" fill="#f5f0e8" text-anchor="start" font-weight="400">passes → sign-off</text><path d="M364,355 L420,350" fill="none" stroke="#8a8880" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#cn10-intent-ah-mist)"/><rect x="426" y="320" width="230" height="60" rx="5" fill="#fdfcfa" stroke="rgba(26,25,22,0.18)" stroke-width="1"/><text x="444" y="345" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="9.5" fill="#8a8880" text-anchor="start" font-weight="400" letter-spacing="1.2">WRITTEN BY MODEL B</text><text x="444" y="368" font-family="'DM Serif Display', Georgia, serif" font-size="16" fill="#1a1916" text-anchor="start" font-weight="400">prompt B</text><path d="M660,350 L712,350" fill="none" stroke="#1a1916" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#cn10-intent-ah-ink)"/><rect x="718" y="320" width="190" height="60" rx="5" fill="#fdfcfa" stroke="rgba(26,25,22,0.18)" stroke-width="1"/><text x="736" y="345" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="9.5" fill="#8a8880" text-anchor="start" font-weight="400" letter-spacing="1.2">GOLDEN SET</text><text x="736" y="368" font-family="'DM Serif Display', Georgia, serif" font-size="15" fill="#1a1916" text-anchor="start" font-weight="400">on Model B</text><path d="M912,350 L962,350" fill="none" stroke="#1a1916" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#cn10-intent-ah-ink)"/><rect x="968" y="320" width="172" height="60" rx="5" fill="#0c0b09" stroke="none" stroke-width="1"/><text x="986" y="357" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12.5" fill="#f5f0e8" text-anchor="start" font-weight="400">passes → sign-off</text><path d="M364,355 L420,434" fill="none" stroke="#8a8880" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#cn10-intent-ah-mist)"/><rect x="426" y="404" width="230" height="60" rx="5" fill="#fdfcfa" stroke="rgba(26,25,22,0.18)" stroke-width="1"/><text x="444" y="429" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="9.5" fill="#8a8880" text-anchor="start" font-weight="400" letter-spacing="1.2">WRITTEN BY MODEL C</text><text x="444" y="452" font-family="'DM Serif Display', Georgia, serif" font-size="16" fill="#1a1916" text-anchor="start" font-weight="400">prompt C</text><path d="M660,434 L712,434" fill="none" stroke="#1a1916" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#cn10-intent-ah-ink)"/><rect x="718" y="404" width="190" height="60" rx="5" fill="#fdfcfa" stroke="rgba(26,25,22,0.18)" stroke-width="1"/><text x="736" y="429" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="9.5" fill="#8a8880" text-anchor="start" font-weight="400" letter-spacing="1.2">GOLDEN SET</text><text x="736" y="452" font-family="'DM Serif Display', Georgia, serif" font-size="15" fill="#1a1916" text-anchor="start" font-weight="400">on Model C</text><path d="M912,434 L962,434" fill="none" stroke="#8B1A1A" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#cn10-intent-ah-red)"/><rect x="968" y="404" width="172" height="60" rx="5" fill="rgba(139,26,26,0.06)" stroke="none" stroke-width="1"/><text x="986" y="441" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12.5" fill="#8B1A1A" text-anchor="start" font-weight="400">fails → not used</text><rect x="60" y="520" width="1080" height="130" rx="6" fill="#fdfcfa" stroke="#1a1916" stroke-width="1"/><text x="84" y="550" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#8a8880" text-anchor="start" font-weight="400" letter-spacing="1.5">WHEN THE MODEL CHANGES</text><text x="84" y="594" font-family="'DM Serif Display', Georgia, serif" font-size="22" fill="#8B1A1A" text-anchor="start" font-weight="400">1</text><text x="110" y="586" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" fill="#1a1916" text-anchor="start" font-weight="400">intent document</text><text x="110" y="606" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" fill="#1a1916" text-anchor="start" font-weight="400">to the new model</text><text x="296" y="594" font-family="'DM Serif Display', Georgia, serif" font-size="22" fill="#8B1A1A" text-anchor="start" font-weight="400">2</text><text x="322" y="586" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" fill="#1a1916" text-anchor="start" font-weight="400">it writes</text><text x="322" y="606" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" fill="#1a1916" text-anchor="start" font-weight="400">its own prompt</text><text x="508" y="594" font-family="'DM Serif Display', Georgia, serif" font-size="22" fill="#8B1A1A" text-anchor="start" font-weight="400">3</text><text x="534" y="586" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" fill="#1a1916" text-anchor="start" font-weight="400">run the</text><text x="534" y="606" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" fill="#1a1916" text-anchor="start" font-weight="400">golden set</text><text x="720" y="594" font-family="'DM Serif Display', Georgia, serif" font-size="22" fill="#8B1A1A" text-anchor="start" font-weight="400">4</text><text x="746" y="586" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" fill="#1a1916" text-anchor="start" font-weight="400">compare with the</text><text x="746" y="606" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" fill="#1a1916" text-anchor="start" font-weight="400">current model</text><text x="932" y="594" font-family="'DM Serif Display', Georgia, serif" font-size="22" fill="#8B1A1A" text-anchor="start" font-weight="400">5</text><text x="958" y="586" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" fill="#1a1916" text-anchor="start" font-weight="400">business sign-off,</text><text x="958" y="606" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" fill="#1a1916" text-anchor="start" font-weight="400">version label</text><text x="60" y="700" font-family="'Literata', Georgia, serif" font-size="14" fill="#4a4944" text-anchor="start" font-weight="400" font-style="italic">Keep the old pairing until the new one has passed. Changes you did not choose are still changes.</text></svg></div><figcaption>The intent document is the constant, refined across models and approved by the business. Each model gets its own prompt derived from it, and no pairing is trusted until it passes the golden set.</figcaption></figure>
+
+  <h2>The whole arc on one page</h2>
+  <div class="entries">
+    <div class="entry"><h3>Part 1 · It looked right is not an evaluation</h3><p>Decide what you are measuring, at which level, before you trust anything.</p></div>
+    <div class="entry"><h3>Part 2 · The golden set comes from the business</h3><p>Real inputs, approved answers, out-of-bounds cases.</p></div>
+    <div class="entry"><h3>Part 3 · Fix ten, lose one</h3><p>Grow it on purpose, set the threshold with the business, re-run it before every release.</p></div>
+    <div class="entry"><h3>Part 4 · Check with code first</h3><p>Evidence for every claim, checked against the source, every output labelled.</p></div>
+    <div class="entry"><h3>Part 5 · Who judges the judge</h3><p>Calibrate model judges against the people who know the business.</p></div>
+    <div class="entry"><h3>Part 6 · Busy is not progress</h3><p>Evaluate the path agents take, on one visible record.</p></div>
+    <div class="entry"><h3>Part 7 · Correct is not useful</h3><p>Value is in what the output carries for the next step.</p></div>
+    <div class="entry"><h3>Part 8 · Wire it in</h3><p>Layer the checks, let agents recommend and people decide.</p></div>
+    <div class="entry"><h3>Part 9 · The intent is the constant</h3><p>Prompts are per model. Models change. The golden set decides.</p></div>
+  </div>
+
+  <h2>How this changes by context</h2>
+  <div class="entries">
+    <div class="entry"><h3>Enterprise</h3><p>Model retirement is a scheduled risk. Track every function's model dependency, and plan migrations before the notice arrives.</p></div>
+    <div class="entry"><h3>Commercial</h3><p>Clients may require a specific provider or region. The intent document lets the same function be delivered on the model the client allows.</p></div>
+    <div class="entry"><h3>Model drift</h3><p>Run the golden set on a schedule against the model you are already using. Drift does not wait for a release.</p></div>
+  </div>
+
+  <h2>What to do</h2>
+  <ol class="dos">
+    <li><strong>Write an intent document for every function.</strong>Plain language, versioned, refined across models, approved by the business.</li>
+    <li><strong>Derive each prompt from the intent.</strong>One prompt per model, never copied across. Let the new model write its own.</li>
+    <li><strong>Run the golden set on every new pairing.</strong>Compare case by case with the current one, and keep the old pairing until the new one passes.</li>
+    <li><strong>Track single-model functions.</strong>They are your exposure when a model retires.</li>
+    <li><strong>Re-run the golden set on a schedule.</strong>Even when you have changed nothing.</li>
+  </ol>
+
+  <h2>What not to do</h2>
+  <ol class="donts">
+    <li><strong>Do not treat a prompt as portable.</strong>It is a translation for one model.</li>
+    <li><strong>Do not trust a model-written prompt untested.</strong>It is a candidate.</li>
+    <li><strong>Do not change the intent to fit a weaker model.</strong>Change the model, or change the design, on purpose.</li>
+  </ol>
+
+  <h2>What stays the same</h2>
+  <div class="stack">
+    <p>The model will change.</p>
+    <p>The prompt will change with it.</p>
+    <p>The intent, and the cases that prove it, stay.</p>
+  </div>
+  <p>That is the whole series in one line: decide what right means, prove it with the business's own cases, and test everything else against them.</p>
+
+  <p class="sign">Jitander Chauhan</p>
+  <section class="refs" aria-labelledby="refs-h">
+    <h3 id="refs-h">Research &amp; Further Reading</h3>
+    <ol>
+      <li id="ref-1"><span class="rn">[1]</span><div>ARTHA Craft, “<a href="https://arthacraft.tech">Internal Data: one requirements prompt across eight models</a>”, 2026: A prompt that turned business requirements documents into structured requirements produced usable results on only one of at least eight models tried. <span class="rt">Internal Data</span></div></li>
+      <li id="ref-2"><span class="rn">[2]</span><div>Sclar, M., Choi, Y., Tsvetkov, Y., Suhr, A., “<a href="https://huggingface.co/papers/2310.11324">Quantifying Language Models' Sensitivity to Spurious Features in Prompt Design</a>”, ICLR 2024 (arXiv 2310.11324): Widely used open models are "extremely sensitive to subtle changes in prompt formatting," with differences of up to 76 accuracy points for one model; the sensitivity persists with larger models and instruction tuning, and format performance correlates only weakly between models. <span class="rt">Research Paper</span></div></li>
+      <li id="ref-3"><span class="rn">[3]</span><div>Chen, L., Zaharia, M., Zou, J., “<a href="https://huggingface.co/papers/2307.09009">How Is ChatGPT's Behavior Changing over Time?</a>”, arXiv 2307.09009, 2023: One commercial model's accuracy at identifying prime versus composite numbers fell from 84% in March 2023 to 51% in June 2023; the authors conclude the "same" LLM service can change substantially in a short time, "highlighting the need for continuous monitoring." <span class="rt">Research Paper</span></div></li>
+      <li id="ref-4"><span class="rn">[4]</span><div>Anthropic, “<a href="https://platform.claude.com/docs/en/about-claude/model-deprecations">Model deprecations</a>”, Claude documentation, accessed November 2026: Provides "at least 60 days' notice before model retirement for publicly released models"; deprecated models "are likely to be less reliable than active models"; "Requests to retired models fail." <span class="rt">Vendor Documentation</span></div></li>
+      <li id="ref-5"><span class="rn">[5]</span><div>Khattab, O., Singhvi, A., Maheshwari, P., et al., “<a href="https://ar5iv.labs.arxiv.org/html/2310.03714">DSPy: Compiling Declarative Language Model Calls into Self-Improving Pipelines</a>”, arXiv 2310.03714, 2023: Replaces hand-written prompts with "signatures", a declarative spec of what a step must do "rather than how a specific LM should be prompted," and compiles them into prompts for a given model; reports the approach is "better at adapting to different LMs." <span class="rt">Research Paper</span></div></li>
+    </ol>
+  </section>
+</article>
+<nav class="arc-nav" data-arc="evaluation" data-part="9" aria-label="Evaluation series parts"></nav>
+</main>
+
+<footer class="art-foot">
+  <div class="art-foot-inner">
+    <div>
+      <div class="foot-label">Start with the method</div>
+      <a class="foot-link" href="../articles/article-1.html">Read the 12-part series &rarr;</a>
+    </div>
+    <div>
+      <div class="foot-label">Get the next Craft Note</div>
+      <a class="foot-link" href="https://substack.com/@jitanderchauhan">Subscribe on Substack &rarr;</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/notes-data.js"></script>
+<script src="../assets/notes.js"></script>
+<script>
+(function(){var n=document.getElementById('nav');function f(){n.classList.toggle('scrolled',window.scrollY>40)}window.addEventListener('scroll',f,{passive:true});f();})();
+</script>
+</body>
+</html>

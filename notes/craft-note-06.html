@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LLM as a Judge, and Who Judges the Judge | ARTHA Craft</title>
+<meta name="description" content="Evaluation Part 5 of 9: a model judge is an instrument. Strengthen the contract, guard against known biases, and calibrate the judge against the people who know the business.">
+<link rel="canonical" href="https://arthacraft.tech/notes/craft-note-06.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ARTHA Craft">
+<meta property="og:title" content="LLM as a Judge, and Who Judges the Judge">
+<meta property="og:description" content="Evaluation Part 5 of 9: a model judge is an instrument. Strengthen the contract, guard against known biases, and calibrate the judge against the people who know the business.">
+<meta property="og:url" content="https://arthacraft.tech/notes/craft-note-06.html">
+<meta property="og:image" content="https://arthacraft.tech/images/share/cn06-linkedin-hero.png">
+<meta property="og:image:width" content="1735">
+<meta property="og:image:height" content="906">
+<meta property="og:image:alt" content="Craft Notes No. 06: LLM as a judge, and who judges the judge.">
+<meta property="article:author" content="Jitander Singh Chauhan">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Serif+Display:ital@0;1&family=Literata:ital,opsz,wght@0,7..72,300;0,7..72,400;0,7..72,500;1,7..72,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#0c0b09; --ink:#1a1916; --coal:#2a2924; --ash:#4a4944; --mist:#8a8880; --fog:#b8b6b0;
+  --paper:#f5f0e8; --cream:#faf7f2; --white:#fdfcfa;
+  --red:#8B1A1A; --red-warm:#b83020; --red-light:#d4472c; --gold:#b8912a;
+  --divider:rgba(255,255,255,0.07); --divider-l:rgba(26,25,22,0.1);
+  --display:'Cormorant Garamond','Times New Roman',serif;
+  --heading:'DM Serif Display',Georgia,serif;
+  --body:'Literata',Georgia,serif;
+  --mono:'JetBrains Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--void);color:var(--paper);font-family:var(--body);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;border-bottom:1px solid transparent;transition:background .4s,border-color .4s}
+.nav.scrolled{background:rgba(12,11,9,.96);border-color:var(--divider);backdrop-filter:blur(12px)}
+.nav-logo{font-family:var(--mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:300}
+.nav-logo em{font-style:normal;color:var(--red-light)}
+.nav-links{display:flex;gap:36px;align-items:center}
+.nav-links a{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mist);transition:color .2s}
+.nav-links a:hover{color:var(--paper)}
+.nav-links a.active{color:var(--fog)}
+.nav-follow{color:var(--red-light)!important;border:1px solid rgba(212,71,44,0.3);padding:6px 18px;border-radius:2px;transition:all 0.2s!important}
+.nav-follow:hover{background:var(--red)!important;color:var(--white)!important;border-color:var(--red)!important}
+
+/* HEADER */
+.art-head{position:relative;overflow:hidden;padding:150px 48px 90px;background:var(--void);border-bottom:1px solid var(--divider)}
+.art-num{position:absolute;right:-20px;top:30px;font-family:var(--display);font-weight:500;font-size:clamp(220px,34vw,460px);line-height:1;color:rgba(245,240,232,.035);pointer-events:none;user-select:none}
+.art-head-inner{position:relative;max-width:820px;margin:0 auto}
+.kicker{font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--red-light);margin-bottom:28px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.kicker span{color:var(--ash)}
+.art-title{font-family:var(--heading);font-weight:400;font-size:clamp(42px,6.4vw,76px);line-height:1.04;letter-spacing:-.5px;color:var(--white);margin-bottom:28px}
+.art-title em{font-style:italic;color:var(--red-light)}
+.art-dek{font-family:var(--display);font-style:italic;font-size:clamp(21px,2.4vw,27px);line-height:1.45;color:var(--fog);max-width:640px}
+.art-meta{margin-top:44px;font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mist);display:flex;gap:28px;flex-wrap:wrap}
+
+/* BODY */
+.art-body-wrap{background:var(--cream);color:var(--ink);padding:90px 48px 110px}
+.art-body{max-width:680px;margin:0 auto;font-size:18.5px;line-height:1.78;font-weight:300}
+.art-body p{margin-bottom:1.25em}
+.art-body strong{font-weight:500;color:var(--ink)}
+.art-body h2{font-family:var(--heading);font-weight:400;font-size:clamp(28px,3.4vw,36px);line-height:1.15;color:var(--ink);margin:2.6em 0 .9em}
+.art-body h2:first-child{margin-top:0}
+.stack p{margin-bottom:.2em}
+.stack{margin:1.4em 0 1.6em}
+.pull{margin:2.2em 0;padding:6px 0 6px 28px;border-left:2px solid var(--red)}
+.pull p{font-family:var(--display);font-style:italic;font-weight:500;font-size:clamp(27px,3.2vw,34px);line-height:1.3;color:var(--ink);margin:0}
+
+/* Benefit / risk entries */
+.entries{margin:1.6em 0 0}
+.entry{padding:22px 0;border-top:1px solid var(--divider-l)}
+.entry:last-child{border-bottom:1px solid var(--divider-l)}
+.entry h3{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:500;color:var(--red-warm);margin-bottom:8px}
+.entry p{margin:0}
+
+/* Do list */
+.dos{list-style:none;counter-reset:o;margin:1.6em 0 0}
+.dos li{counter-increment:o;position:relative;padding:22px 0 22px 64px;border-top:1px solid var(--divider-l)}
+.dos li:last-child{border-bottom:1px solid var(--divider-l)}
+.dos li::before{content:counter(o,decimal-leading-zero);position:absolute;left:0;top:18px;font-family:var(--display);font-size:34px;font-weight:500;color:var(--ink);line-height:1}
+.dos li strong{display:block;font-family:var(--heading);font-weight:400;font-size:21px;line-height:1.3;margin-bottom:6px}
+@media (max-width:720px){.dos li{padding-left:52px}.dos li::before{font-size:28px}}
+
+/* Don't list */
+.donts{list-style:none;counter-reset:d;margin:1.6em 0 0}
+.donts li{counter-increment:d;position:relative;padding:22px 0 22px 64px;border-top:1px solid var(--divider-l)}
+.donts li:last-child{border-bottom:1px solid var(--divider-l)}
+.donts li::before{content:counter(d,decimal-leading-zero);position:absolute;left:0;top:18px;font-family:var(--display);font-size:34px;font-weight:500;color:rgba(139,26,26,.55);line-height:1}
+.donts li strong{display:block;font-family:var(--heading);font-weight:400;font-size:21px;line-height:1.3;margin-bottom:6px}
+
+.note{font-family:var(--mono);font-size:11px;line-height:1.7;letter-spacing:.3px;color:var(--ash);margin-top:2.4em;padding-top:18px;border-top:1px solid var(--divider-l)}
+.sign{margin-top:3em;font-family:var(--display);font-style:italic;font-size:24px;color:var(--ink)}
+
+
+/* FIGURES */
+.fig{margin:2.6em -40px 2.8em;padding:0}
+.fig svg{background:var(--cream)}
+.fig figcaption{font-family:var(--mono);font-size:11px;line-height:1.7;letter-spacing:.3px;color:var(--ash);margin:14px 40px 0;padding-left:14px;border-left:2px solid var(--red)}
+.fig-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+@media (max-width:820px){.fig{margin-left:0;margin-right:0}.fig-scroll svg{min-width:720px}.fig figcaption{margin-left:0;margin-right:0}}
+
+
+/* REFERENCES */
+.ref{font-family:var(--mono);font-size:.62em;color:var(--red-warm);text-decoration:none;vertical-align:.35em;white-space:nowrap}
+.ref:hover,.ref:focus-visible{text-decoration:underline}
+.refs{margin-top:3.2em;padding-top:28px;border-top:1px solid var(--divider-l)}
+.refs h3{font-family:var(--heading);font-weight:400;font-size:26px;margin-bottom:18px}
+.refs ol{list-style:none;padding:0;margin:0}
+.refs li{display:grid;grid-template-columns:44px 1fr;gap:4px;font-size:14.5px;line-height:1.65;padding:12px 0;border-bottom:1px solid var(--divider-l);scroll-margin-top:80px}
+.refs li:target{background:rgba(139,26,26,.06)}
+.refs .rn{font-family:var(--mono);font-size:12px;color:var(--red-warm);padding-top:3px}
+.refs a{color:var(--ink);text-decoration:underline;text-decoration-color:rgba(139,26,26,.4);text-underline-offset:3px}
+.refs .rt{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mist);margin-left:6px}
+
+/* FOOT */
+.art-foot{background:var(--void);padding:70px 48px;border-top:1px solid var(--divider)}
+.art-foot-inner{max-width:820px;margin:0 auto;display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:flex-end}
+.foot-label{font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--ash);margin-bottom:12px}
+.foot-link{font-family:var(--heading);font-size:24px;color:var(--paper);transition:color .2s}
+.foot-link:hover{color:var(--red-light)}
+
+@media (max-width:720px){
+  .nav{padding:0 16px;gap:12px}
+  .nav-links{gap:12px}
+  .nav-links a{font-size:9px;letter-spacing:.5px;white-space:nowrap}
+  .nav-links .nav-home{display:none}
+  .nav-logo{letter-spacing:2px;white-space:nowrap}
+  .nav-follow{padding:5px 10px}
+  .art-head{padding:120px 16px 64px}
+  .art-body-wrap{padding:60px 16px 80px}
+  .art-body{font-size:17px}
+  .art-foot{padding:50px 16px}
+  .donts li{padding-left:52px}
+  .donts li::before{font-size:28px}
+}
+</style>
+<link rel="stylesheet" href="../assets/note-arc.css">
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="../index.html" class="nav-logo"><em>ARTHA</em> Craft</a>
+  <div class="nav-links">
+    <a href="../index.html" class="nav-home">Home</a>
+    <a href="../articles.html">Series</a>
+    <a href="../notes.html" class="active">Craft Notes</a>
+    <a href="../about.html">About</a>
+    <a href="https://substack.com/@jitanderchauhan" target="_blank" class="nav-follow">Subscribe</a>
+  </div>
+</nav>
+
+<header class="art-head">
+  <div class="art-num" aria-hidden="true">06</div>
+  <div class="art-head-inner">
+    <div class="kicker">Craft Notes <span>/</span> No. 06 <span>/</span> Evaluation · Part 5 of 9</div>
+    <h1 class="art-title">LLM as a judge, <em>and who judges the judge.</em></h1>
+    <p class="art-dek">A model judge is fast, cheap and often useful. It is also a model, with known habits. Treat it as an instrument: strengthen the contract it judges against, guard it, and calibrate it against the people who know the business.</p>
+    <div class="art-meta"><span>Jitander Chauhan</span><span>November 2026</span><span>8 min read</span></div>
+  </div>
+</header>
+
+<main class="art-body-wrap">
+<article class="art-body">
+  <figure class="fig hero"><img src="../images/share/cn06-linkedin-hero.png" alt="Craft Notes No. 06: LLM as a judge, and who judges the judge." style="display:block;width:100%;height:auto;border-radius:6px"></figure>
+
+
+  <h2>Same answers, same judge, different winner</h2>
+  <p>In 2023, a group of researchers asked one AI model to judge which of two other models gave better answers. Then they changed one thing, the order in which the two answers were shown, and kept the questions, the answers and the judge the same. That change alone let them make one model "beat" the other on 66 of 80 questions. In the authors' words, the ranking "can be easily hacked." <a class="ref" href="#ref-1">[1]</a></p>
+  <p>That same year, another team published the study that made "LLM as a judge" a standard practice. A strong model used as a judge agreed with human preferences more than 80 percent of the time, about the same rate at which humans agree with each other. It also showed position bias, verbosity bias, self-enhancement bias and limited reasoning. <a class="ref" href="#ref-2">[2]</a></p>
+  <p>Both findings are true at once. A model judge can be as consistent as a human panel and still be steered by things that have nothing to do with quality. A later study found that models recognise their own writing and score it higher than writing humans rated as equal. <a class="ref" href="#ref-3">[3]</a></p>
+  <p>So the judge is neither the problem nor the answer. It is a measuring instrument: useful, fast and cheap, and like any instrument it gives wrong readings until it is calibrated. The rest of this article covers that calibration, meaning what a judge must guard against and who checks the judge. Part 1 listed calibration as one of five things to measure (when a model says it is confident, is it right?), and a judge needs exactly that test.</p>
+
+  <h2>What only judgement can settle</h2>
+  <p>Part 4 ended at the limit of code, which can prove a quote exists in the source but cannot tell you:</p>
+  <div class="entries">
+    <div class="entry"><h3>Support</h3><p>Whether the quote actually backs the conclusion drawn from it.</p></div>
+    <div class="entry"><h3>Relevance</h3><p>Whether the answer addresses the question that was asked.</p></div>
+    <div class="entry"><h3>Reasoning</h3><p>Whether the steps from evidence to conclusion hold.</p></div>
+    <div class="entry"><h3>Completeness</h3><p>Whether something that should be there is missing.</p></div>
+  </div>
+  <p>All four need judgement. Human judgement is the standard, but it is slow and expensive and does not scale to every response, so a model judge fills the gap, as long as it is held to the same discipline as the system it judges.</p>
+
+  <h2>A better contract before a judge</h2>
+  <p>A judge can only be as sound as the contract it judges against. If the contract leaves out a data point, the judge will pass every answer that leaves it out too. So before trusting any judge, strengthen the contract.</p>
+  <p>We do this by having one model check another's work:</p>
+  <ol class="dos">
+    <li><strong>Ask the model that produced the output to reconstruct the prompt.</strong>What did the person want?</li>
+    <li><strong>Compare the reconstruction with the original.</strong>The point is not to see who writes better prompts (the model may well write a better one) but to see what it understood you to want. A better-written reconstruction that asks for something slightly different would quietly change the requirement.</li>
+    <li><strong>Give the reconstruction to a model from a different company.</strong>Ask it first what the prompt is missing, then what the output is missing.</li>
+    <li><strong>Pass the findings back and forth for two or three rounds, then stop.</strong></li>
+  </ol>
+  <p>It works the way a peer or a manager reviews the work of someone deep in the detail: a fresh reader catches what the person in the weeds missed. What comes out is a prompt with its reasoning made explicit, and an output that misses less.</p>
+  <p>Three cautions apply. The reviewer's findings are input rather than changes: a second model can invent "missing" points as easily as the first invents facts, so its suggestions go through the same approval as any contract change in Part 3, and the business decides. The loop converges on what two models agree on, which is not necessarily what the business needs. And a different provider is less independent than it looks: in a study of more than 350 models, when two models both got a question wrong, they gave the same wrong answer 60 percent of the time on one test set, even across providers. <a class="ref" href="#ref-4">[4]</a></p>
+  <div class="pull"><p>A second model's agreement is useful. Your experts' agreement is the standard.</p></div>
+
+  <h2>Guardrails for the judge</h2>
+  <ol class="dos">
+    <li><strong>Never let a model grade its own work.</strong>Use a different model, ideally from a different company. Judges score their own writing higher. <a class="ref" href="#ref-3">[3]</a></li>
+    <li><strong>Judge against the contract, one criterion at a time.</strong>Ask "Is the conclusion supported by the cited clause?" rather than "Is this a good answer?", and ask for pass or fail instead of a score out of ten, because a pass or fail can be checked against an expert's verdict and a seven versus a six cannot.</li>
+    <li><strong>Give the judge the source, and make it show its evidence.</strong>A verdict without a reason cannot be reviewed. If the judge cites evidence, Part 4's code checks apply to the judge too.</li>
+    <li><strong>Neutralise the known biases.</strong>When comparing two answers, judge them in both orders and count only a consistent verdict, as the researchers who found the order problem recommend. <a class="ref" href="#ref-1">[1]</a> Do not let length earn points.</li>
+    <li><strong>"Cannot judge" is a valid verdict.</strong>It goes to a person.</li>
+    <li><strong>Pin and label the judge.</strong>Its prompt and model are versioned like the generator's and recorded with every verdict. A judge prompt tuned on one model does not carry over to another; when the judge's model changes, the judge is recalibrated.</li>
+    <li><strong>On high-stakes decisions, the judge informs a person.</strong>It does not replace one.</li>
+  </ol>
+
+  <h2>Who judges the judge</h2>
+  <p>We apply the same principle in our own development work. One company's model writes the code and the unit tests; a model from a different company does the final testing and verifies the output, so no model signs off its own work. The next step is to run the two as one pipeline.</p>
+  <p>But a second model is still a model. Researchers who built tools for this problem put it plainly: LLM evaluators "simply inherit all the problems of the LLMs they evaluate, requiring further human validation." <a class="ref" href="#ref-5">[5]</a> The final judge of the judge is a person who knows the business.</p>
+  <p>Checking a judge against human labels is standard advice: measure how often its verdicts match people's before relying on it, use the reasons people give to refine it, and keep re-checking. <a class="ref" href="#ref-6">[6]</a> What our experience adds is where those human labels come from.</p>
+  <p>In our case they come from the business user in UAT. Once the judge has verified the output, the system goes to user acceptance testing. Testers grade the outputs and record why, and those graded cases feed the evaluation engine, which gives you everything you need to calibrate a judge:</p>
+  <div class="entries">
+    <div class="entry"><h3>Judge the same cases twice</h3><p>The judge's verdict and the tester's verdict, on the same cases, per criterion.</p></div>
+    <div class="entry"><h3>Measure agreement</h3><p>Look hardest at the cases the judge passed and the tester failed, because those are the ones that would reach a customer.</p></div>
+    <div class="entry"><h3>Trust it where it agrees</h3><p>Only on criteria where agreement meets a level the business sets, like the pass threshold in Part 3. The rest stay with people.</p></div>
+    <div class="entry"><h3>Feed back every disagreement</h3><p>Into the golden set, through the release process, so the judge is re-tested after every change.</p></div>
+  </div>
+  <figure class="fig"><div class="fig-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="40 196 1120 548" width="100%" role="img" aria-label="The judge is checked by the people it stands in for." style="display:block;height:auto"><defs><marker id="cn06-calibrate-ah-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1a1916"/></marker><marker id="cn06-calibrate-ah-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8B1A1A"/></marker><marker id="cn06-calibrate-ah-mist" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a8880"/></marker></defs><rect x="60" y="230" width="200" height="112" rx="6" fill="#fdfcfa" stroke="rgba(26,25,22,0.18)" stroke-width="1"/><text x="78" y="258" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#8a8880" text-anchor="start" font-weight="400" letter-spacing="1.5">ANSWER</text><text x="78" y="292" font-family="'DM Serif Display', Georgia, serif" font-size="18" fill="#1a1916" text-anchor="start" font-weight="400">Model from</text><text x="78" y="318" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" fill="#4a4944" text-anchor="start" font-weight="400">company A</text><rect x="300" y="230" width="200" height="112" rx="6" fill="#fdfcfa" stroke="rgba(26,25,22,0.18)" stroke-width="1"/><text x="318" y="258" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#8a8880" text-anchor="start" font-weight="400" letter-spacing="1.5">CODE CHECKS</text><text x="318" y="292" font-family="'DM Serif Display', Georgia, serif" font-size="18" fill="#1a1916" text-anchor="start" font-weight="400">Evidence exists?</text><text x="318" y="318" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" fill="#4a4944" text-anchor="start" font-weight="400">(Part 4)</text><rect x="540" y="230" width="200" height="112" rx="6" fill="#0c0b09" stroke="None" stroke-width="1"/><text x="558" y="258" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#b8b6b0" text-anchor="start" font-weight="400" letter-spacing="1.5">AI JUDGE</text><text x="558" y="292" font-family="'DM Serif Display', Georgia, serif" font-size="18" fill="#f5f0e8" text-anchor="start" font-weight="400">Model from</text><text x="558" y="318" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" fill="#b8b6b0" text-anchor="start" font-weight="400">company B</text><rect x="870" y="230" width="270" height="112" rx="6" fill="#fdfcfa" stroke="rgba(26,25,22,0.18)" stroke-width="1"/><text x="888" y="258" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#8a8880" text-anchor="start" font-weight="400" letter-spacing="1.5">BUSINESS USER</text><text x="888" y="292" font-family="'DM Serif Display', Georgia, serif" font-size="18" fill="#1a1916" text-anchor="start" font-weight="400">Verdict + reason</text><text x="888" y="318" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" fill="#4a4944" text-anchor="start" font-weight="400">in UAT</text><path d="M264,286 L294,286" fill="none" stroke="#1a1916" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#cn06-calibrate-ah-ink)"/><path d="M504,286 L534,286" fill="none" stroke="#1a1916" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#cn06-calibrate-ah-ink)"/><path d="M744,286 L864,286" fill="none" stroke="#1a1916" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#cn06-calibrate-ah-ink)"/><text x="804" y="274" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10" fill="#8a8880" text-anchor="middle" font-weight="400">verdicts</text><text x="600" y="372" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10" fill="#8a8880" text-anchor="start" font-weight="400" letter-spacing="1.5">PER CRITERION</text><text x="600" y="396" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" fill="#1a1916" text-anchor="start" font-weight="400">• PASS</text><text x="600" y="416" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" fill="#1a1916" text-anchor="start" font-weight="400">• FAIL</text><text x="600" y="436" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" fill="#8B1A1A" text-anchor="start" font-weight="400">• CANNOT JUDGE</text><path d="M745,431 L790,431" fill="none" stroke="#8B1A1A" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#cn06-calibrate-ah-red)"/><rect x="796" y="412" width="140" height="38" rx="4" fill="rgba(139,26,26,0.06)" stroke="none" stroke-width="1"/><text x="866" y="436" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12.5" fill="#8B1A1A" text-anchor="middle" font-weight="400">a person</text><rect x="60" y="560" width="600" height="120" rx="6" fill="#fdfcfa" stroke="#1a1916" stroke-width="1"/><text x="80" y="588" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#8a8880" text-anchor="start" font-weight="400" letter-spacing="1.5">COMPARE · SAME CASES · EACH CRITERION</text><text x="80" y="622" font-family="'DM Serif Display', Georgia, serif" font-size="19" fill="#1a1916" text-anchor="start" font-weight="400">Judge and business user agree</text><text x="80" y="650" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" fill="#4a4944" text-anchor="start" font-weight="400">≥ the level the business set → trust the judge there</text><text x="80" y="670" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="12" fill="#4a4944" text-anchor="start" font-weight="400">below it → that criterion stays with people</text><path d="M560,346 L560,554" fill="none" stroke="#8a8880" stroke-width="1.6" stroke-linejoin="round" stroke-dasharray="5 4" marker-end="url(#cn06-calibrate-ah-mist)"/><path d="M1005,346 L1005,520 L630,520 L630,554" fill="none" stroke="#8a8880" stroke-width="1.6" stroke-linejoin="round" stroke-dasharray="5 4" marker-end="url(#cn06-calibrate-ah-mist)"/><rect x="760" y="580" width="380" height="100" rx="6" fill="rgba(139,26,26,0.06)" stroke="none" stroke-width="1"/><rect x="760" y="580" width="3" height="100" rx="0" fill="#8B1A1A" stroke="none" stroke-width="1"/><text x="780" y="608" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#8B1A1A" text-anchor="start" font-weight="500" letter-spacing="1.5">EVERY DISAGREEMENT</text><text x="780" y="640" font-family="'DM Serif Display', Georgia, serif" font-size="19" fill="#1a1916" text-anchor="start" font-weight="400">joins the golden set</text><text x="780" y="664" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11.5" fill="#4a4944" text-anchor="start" font-weight="400">the judge is re-run after every change</text><path d="M664,640 L754,640" fill="none" stroke="#8B1A1A" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#cn06-calibrate-ah-red)"/><text x="60" y="724" font-family="'Literata', Georgia, serif" font-size="15" fill="#4a4944" text-anchor="start" font-weight="400" font-style="italic">Never let a model grade its own work. Calibrate against the people who know the business.</text></svg></div><figcaption>The judge comes from a different company from the generator. Business users grade the same cases with a reason. Agreement is measured per criterion, and every disagreement goes back into the golden set.</figcaption></figure>
+  <p>Practitioners describe the same pattern: an expert's pass or fail with a written critique becomes "the seed of your evaluation harness." <a class="ref" href="#ref-7">[7]</a> Expect the criteria to move at first, too. People need criteria to grade outputs, but grading outputs is what helps them define the criteria; the Validators researchers call it "criteria drift." <a class="ref" href="#ref-5">[5]</a> Version every change.</p>
+  <p>Two alternatives can reduce the human load, though neither removes it. A <strong>panel of judges</strong>, several smaller models from different families voting, beat a single large judge in one study, with less bias from any one model, at over seven times lower cost. <a class="ref" href="#ref-8">[8]</a> Given correlated errors, a panel still needs your graded cases to calibrate against. <strong>Trust or escalate</strong> has the judge estimate its own confidence and decide only when it is confident; one method guaranteed over 80 percent human agreement while covering almost 80 percent of cases. <a class="ref" href="#ref-9">[9]</a> The paper escalates to a stronger model; we adapted it so that, in a business setting, the escalation goes to a person. For reporting quality at scale, statistical methods can combine a small human-graded set with the judge's verdicts into an honest figure with error bars. <a class="ref" href="#ref-10">[10]</a></p>
+  <p>Calibration is never finished, because the judge is a model and models change. Re-run it against the expert-graded cases whenever its prompt or model changes, and on a schedule even when nothing seems to have. A judge that drifts silently is worse than no judge, because it keeps producing confidence.</p>
+
+  <h2>How this changes by context</h2>
+  <div class="entries">
+    <div class="entry"><h3>Enterprise</h3><p>The judge's verdicts are part of the audit record: which model and prompt version judged, the verdict, the reason, and any human override.</p></div>
+    <div class="entry"><h3>Agentic</h3><p>In development, one company's agent builds and another's verifies, so no agent signs off its own work. For agents in production, judge each step, not only the final answer.</p></div>
+    <div class="entry"><h3>Model drift</h3><p>The judge drifts too. Recalibrate when its model or prompt changes, and on a schedule when nothing has.</p></div>
+  </div>
+
+  <h2>What to do</h2>
+  <ol class="dos">
+    <li><strong>Strengthen the contract before you judge against it.</strong>Cross-model review finds the gaps; the business approves the changes.</li>
+    <li><strong>Use a different company's model as the judge.</strong>No model grades its own work.</li>
+    <li><strong>Judge one criterion at a time.</strong>Pass or fail, with the evidence for the verdict, in both orders when comparing.</li>
+    <li><strong>Have business users grade with reasons.</strong>And trust the judge only where it agrees with them.</li>
+    <li><strong>Version, label and recalibrate the judge.</strong>On every change, and on a schedule.</li>
+  </ol>
+
+  <h2>What not to do</h2>
+  <ol class="donts">
+    <li><strong>Do not treat two models agreeing as proof.</strong>They share many of the same mistakes.</li>
+    <li><strong>Do not let UAT collapse into one overall pass.</strong>Per-case verdicts with reasons are what calibrate the judge.</li>
+    <li><strong>Do not calibrate once and forget.</strong>The judge is a model, and models change.</li>
+  </ol>
+
+  <h2>An instrument, not an oracle</h2>
+  <div class="stack">
+    <p>The judge is fast.</p>
+    <p>The judge is cheap.</p>
+    <p>The judge is a model.</p>
+  </div>
+  <p>Calibrate it against the people who know the business, and keep doing it.</p>
+
+  <p class="sign">Jitander Chauhan</p>
+  <section class="refs" aria-labelledby="refs-h">
+    <h3 id="refs-h">Research &amp; Further Reading</h3>
+    <ol>
+      <li id="ref-1"><span class="rn">[1]</span><div>Wang, P., Li, L., Chen, L., et al., “<a href="https://huggingface.co/papers/2305.17926">Large Language Models are not Fair Evaluators</a>”, ACL 2024 (arXiv 2305.17926): By changing only the order of candidate answers, a 13B open model could "beat" a commercial chat model on 66 of 80 queries with that commercial model as evaluator; ranking "can be easily hacked". Proposes multiple-evidence, balanced-position and human-in-the-loop calibration. <span class="rt">Research Paper</span></div></li>
+      <li id="ref-2"><span class="rn">[2]</span><div>Zheng, L., Chiang, W.-L., Sheng, Y., et al., “<a href="https://neurips.cc/virtual/2023/poster/73434">Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena</a>”, NeurIPS 2023: Strong LLM judges reach "over 80% agreement" with human preferences, "the same level of agreement between humans"; documents position, verbosity and self-enhancement biases and limited reasoning ability. <span class="rt">Research Paper</span></div></li>
+      <li id="ref-3"><span class="rn">[3]</span><div>Panickssery, A., Bowman, S.R., Feng, S., “<a href="https://papers.nips.cc/paper_files/paper/2024/hash/7f1f0218e45f5414c79c0679633e47bc-Abstract-Conference.html">LLM Evaluators Recognize and Favor Their Own Generations</a>”, NeurIPS 2024: LLM evaluators score their own outputs higher than others' that human annotators rate as equal; self-recognition correlates linearly with the strength of self-preference. <span class="rt">Research Paper</span></div></li>
+      <li id="ref-4"><span class="rn">[4]</span><div>Kim, E.M., Garg, A., Peng, K., Garg, N., “<a href="https://proceedings.mlr.press/v267/kim25e.html">Correlated Errors in Large Language Models</a>”, ICML 2025, PMLR 267: Across 350+ LLMs, on one leaderboard dataset models agree 60% of the time when both err; larger, more accurate models have highly correlated errors even across architectures and providers. <span class="rt">Research Paper</span></div></li>
+      <li id="ref-5"><span class="rn">[5]</span><div>Shankar, S., Zamfirescu-Pereira, J.D., Hartmann, B., Parameswaran, A.G., Arawjo, I., “<a href="https://huggingface.co/papers/2404.12272">Who Validates the Validators? Aligning LLM-Assisted Evaluation of LLM Outputs with Human Preferences</a>”, UIST 2024 (arXiv 2404.12272): LLM evaluators "simply inherit all the problems of the LLMs they evaluate, requiring further human validation." Names "criteria drift": users need criteria to grade outputs, but grading outputs helps users define criteria. <span class="rt">Research Paper</span></div></li>
+      <li id="ref-6"><span class="rn">[6]</span><div>Husain, H., “<a href="https://hamel.dev/blog/posts/evals/">Your AI Product Needs Evals</a>”, 2024: Three levels of evaluation by cost: unit tests and assertions, often "on every code change"; human and model evaluation on a set cadence; A/B testing "only after significant product changes". Advises tracking how well an LLM judge agrees with human labels and using labellers' written reasons to refine it. <span class="rt">Practitioner Reference</span></div></li>
+      <li id="ref-7"><span class="rn">[7]</span><div>O'Neill, C., Jayasekara, M., Kirkby, M. (Baseten), “<a href="https://www.baseten.co/resources/research/the-bitter-lesson-of-llm-evals/">The bitter lesson of LLM evals</a>”, 13 July 2025: Describes "critique shadowing": a principal domain expert makes binary Pass/Fail decisions on representative traces with written critiques, which become "the seed of your evaluation harness." <span class="rt">Industry Article</span></div></li>
+      <li id="ref-8"><span class="rn">[8]</span><div>Verga, P., Hofstätter, S., Althammer, S., et al. (Cohere), “<a href="https://cohere.com/research/papers/replacing-judges-with-juries-evaluating-llm-generations-with-a-panel-of-diverse-models-2024-04-29">Replacing Judges with Juries: Evaluating LLM Generations with a Panel of Diverse Models</a>”, April 2024 (arXiv 2404.18796): A panel of smaller models from disjoint families outperformed a single large judge across three settings and six datasets, with less intra-model bias, and was "over seven times less expensive." <span class="rt">Research Paper</span></div></li>
+      <li id="ref-9"><span class="rn">[9]</span><div>Jung, J., Brahman, F., Choi, Y., “<a href="https://proceedings.iclr.cc/paper_files/paper/2025/hash/08dabd5345b37fffcbe335bd578b15a0-Abstract-Conference.html">Trust or Escalate: LLM Judges with Provable Guarantees for Human Agreement</a>”, ICLR 2025: Selective evaluation: the judge estimates its confidence and escalates to a stronger model when unsure; guarantees over 80% human agreement with almost 80% coverage, where a strong single judge "almost never" reached 80% on the same subset. <span class="rt">Research Paper</span></div></li>
+      <li id="ref-10"><span class="rn">[10]</span><div>Angelopoulos, A.N., Bates, S., Fannjiang, C., Jordan, M.I., Zrnic, T., “<a href="https://ar5iv.labs.arxiv.org/html/2301.09633">Prediction-Powered Inference</a>”, arXiv 2301.09633: A framework for valid statistical inference that combines a small gold-standard labelled set with abundant machine predictions, producing valid confidence intervals without assumptions about the predictor. <span class="rt">Research Paper</span></div></li>
+    </ol>
+  </section>
+</article>
+<nav class="arc-nav" data-arc="evaluation" data-part="5" aria-label="Evaluation series parts"></nav>
+</main>
+
+<footer class="art-foot">
+  <div class="art-foot-inner">
+    <div>
+      <div class="foot-label">Start with the method</div>
+      <a class="foot-link" href="../articles/article-1.html">Read the 12-part series &rarr;</a>
+    </div>
+    <div>
+      <div class="foot-label">Get the next Craft Note</div>
+      <a class="foot-link" href="https://substack.com/@jitanderchauhan">Subscribe on Substack &rarr;</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/notes-data.js"></script>
+<script src="../assets/notes.js"></script>
+<script>
+(function(){var n=document.getElementById('nav');function f(){n.classList.toggle('scrolled',window.scrollY>40)}window.addEventListener('scroll',f,{passive:true});f();})();
+</script>
+</body>
+</html>

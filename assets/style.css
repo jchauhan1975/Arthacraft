@@ -142,3 +142,6 @@ img{max-width:100%;display:block;}
   .series-row{grid-template-columns:52px 1fr;}
   .series-row-act{display:none;}
 }
+
+/* "New" label on recently published Craft Notes (rendered by assets/notes.js) */
+.cn-new{display:inline-block;vertical-align:middle;margin-left:10px;font-family:var(--mono);font-size:8px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--red-light);border:1px solid rgba(212,71,44,0.4);background:rgba(212,71,44,0.08);padding:3px 7px;border-radius:2px;line-height:1;}

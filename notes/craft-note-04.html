@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fix Ten, Lose One | ARTHA Craft</title>
+<meta name="description" content="Evaluation Part 3 of 9: growing a golden set without fooling yourself. Acceptable instead of exact, business-held thresholds, and full regression on every change.">
+<link rel="canonical" href="https://arthacraft.tech/notes/craft-note-04.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ARTHA Craft">
+<meta property="og:title" content="Fix Ten, Lose One">
+<meta property="og:description" content="Evaluation Part 3 of 9: growing a golden set without fooling yourself. Acceptable instead of exact, business-held thresholds, and full regression on every change.">
+<meta property="og:url" content="https://arthacraft.tech/notes/craft-note-04.html">
+<meta property="og:image" content="https://arthacraft.tech/images/share/cn04-linkedin-hero.png">
+<meta property="og:image:width" content="1672">
+<meta property="og:image:height" content="941">
+<meta property="og:image:alt" content="Craft Notes No. 04: Fix ten, lose one.">
+<meta property="article:author" content="Jitander Singh Chauhan">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Serif+Display:ital@0;1&family=Literata:ital,opsz,wght@0,7..72,300;0,7..72,400;0,7..72,500;1,7..72,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#0c0b09; --ink:#1a1916; --coal:#2a2924; --ash:#4a4944; --mist:#8a8880; --fog:#b8b6b0;
+  --paper:#f5f0e8; --cream:#faf7f2; --white:#fdfcfa;
+  --red:#8B1A1A; --red-warm:#b83020; --red-light:#d4472c; --gold:#b8912a;
+  --divider:rgba(255,255,255,0.07); --divider-l:rgba(26,25,22,0.1);
+  --display:'Cormorant Garamond','Times New Roman',serif;
+  --heading:'DM Serif Display',Georgia,serif;
+  --body:'Literata',Georgia,serif;
+  --mono:'JetBrains Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--void);color:var(--paper);font-family:var(--body);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;border-bottom:1px solid transparent;transition:background .4s,border-color .4s}
+.nav.scrolled{background:rgba(12,11,9,.96);border-color:var(--divider);backdrop-filter:blur(12px)}
+.nav-logo{font-family:var(--mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:300}
+.nav-logo em{font-style:normal;color:var(--red-light)}
+.nav-links{display:flex;gap:36px;align-items:center}
+.nav-links a{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mist);transition:color .2s}
+.nav-links a:hover{color:var(--paper)}
+.nav-links a.active{color:var(--fog)}
+.nav-follow{color:var(--red-light)!important;border:1px solid rgba(212,71,44,0.3);padding:6px 18px;border-radius:2px;transition:all 0.2s!important}
+.nav-follow:hover{background:var(--red)!important;color:var(--white)!important;border-color:var(--red)!important}
+
+/* HEADER */
+.art-head{position:relative;overflow:hidden;padding:150px 48px 90px;background:var(--void);border-bottom:1px solid var(--divider)}
+.art-num{position:absolute;right:-20px;top:30px;font-family:var(--display);font-weight:500;font-size:clamp(220px,34vw,460px);line-height:1;color:rgba(245,240,232,.035);pointer-events:none;user-select:none}
+.art-head-inner{position:relative;max-width:820px;margin:0 auto}
+.kicker{font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--red-light);margin-bottom:28px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.kicker span{color:var(--ash)}
+.art-title{font-family:var(--heading);font-weight:400;font-size:clamp(42px,6.4vw,76px);line-height:1.04;letter-spacing:-.5px;color:var(--white);margin-bottom:28px}
+.art-title em{font-style:italic;color:var(--red-light)}
+.art-dek{font-family:var(--display);font-style:italic;font-size:clamp(21px,2.4vw,27px);line-height:1.45;color:var(--fog);max-width:640px}
+.art-meta{margin-top:44px;font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mist);display:flex;gap:28px;flex-wrap:wrap}
+
+/* BODY */
+.art-body-wrap{background:var(--cream);color:var(--ink);padding:90px 48px 110px}
+.art-body{max-width:680px;margin:0 auto;font-size:18.5px;line-height:1.78;font-weight:300}
+.art-body p{margin-bottom:1.25em}
+.art-body strong{font-weight:500;color:var(--ink)}
+.art-body h2{font-family:var(--heading);font-weight:400;font-size:clamp(28px,3.4vw,36px);line-height:1.15;color:var(--ink);margin:2.6em 0 .9em}
+.art-body h2:first-child{margin-top:0}
+.stack p{margin-bottom:.2em}
+.stack{margin:1.4em 0 1.6em}
+.pull{margin:2.2em 0;padding:6px 0 6px 28px;border-left:2px solid var(--red)}
+.pull p{font-family:var(--display);font-style:italic;font-weight:500;font-size:clamp(27px,3.2vw,34px);line-height:1.3;color:var(--ink);margin:0}
+
+/* Benefit / risk entries */
+.entries{margin:1.6em 0 0}
+.entry{padding:22px 0;border-top:1px solid var(--divider-l)}
+.entry:last-child{border-bottom:1px solid var(--divider-l)}
+.entry h3{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:500;color:var(--red-warm);margin-bottom:8px}
+.entry p{margin:0}
+
+/* Do list */
+.dos{list-style:none;counter-reset:o;margin:1.6em 0 0}
+.dos li{counter-increment:o;position:relative;padding:22px 0 22px 64px;border-top:1px solid var(--divider-l)}
+.dos li:last-child{border-bottom:1px solid var(--divider-l)}
+.dos li::before{content:counter(o,decimal-leading-zero);position:absolute;left:0;top:18px;font-family:var(--display);font-size:34px;font-weight:500;color:var(--ink);line-height:1}
+.dos li strong{display:block;font-family:var(--heading);font-weight:400;font-size:21px;line-height:1.3;margin-bottom:6px}
+@media (max-width:720px){.dos li{padding-left:52px}.dos li::before{font-size:28px}}
+
+/* Don't list */
+.donts{list-style:none;counter-reset:d;margin:1.6em 0 0}
+.donts li{counter-increment:d;position:relative;padding:22px 0 22px 64px;border-top:1px solid var(--divider-l)}
+.donts li:last-child{border-bottom:1px solid var(--divider-l)}
+.donts li::before{content:counter(d,decimal-leading-zero);position:absolute;left:0;top:18px;font-family:var(--display);font-size:34px;font-weight:500;color:rgba(139,26,26,.55);line-height:1}
+.donts li strong{display:block;font-family:var(--heading);font-weight:400;font-size:21px;line-height:1.3;margin-bottom:6px}
+
+.note{font-family:var(--mono);font-size:11px;line-height:1.7;letter-spacing:.3px;color:var(--ash);margin-top:2.4em;padding-top:18px;border-top:1px solid var(--divider-l)}
+.sign{margin-top:3em;font-family:var(--display);font-style:italic;font-size:24px;color:var(--ink)}
+
+
+/* FIGURES */
+.fig{margin:2.6em -40px 2.8em;padding:0}
+.fig svg{background:var(--cream)}
+.fig figcaption{font-family:var(--mono);font-size:11px;line-height:1.7;letter-spacing:.3px;color:var(--ash);margin:14px 40px 0;padding-left:14px;border-left:2px solid var(--red)}
+.fig-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+@media (max-width:820px){.fig{margin-left:0;margin-right:0}.fig-scroll svg{min-width:720px}.fig figcaption{margin-left:0;margin-right:0}}
+
+
+/* REFERENCES */
+.ref{font-family:var(--mono);font-size:.62em;color:var(--red-warm);text-decoration:none;vertical-align:.35em;white-space:nowrap}
+.ref:hover,.ref:focus-visible{text-decoration:underline}
+.refs{margin-top:3.2em;padding-top:28px;border-top:1px solid var(--divider-l)}
+.refs h3{font-family:var(--heading);font-weight:400;font-size:26px;margin-bottom:18px}
+.refs ol{list-style:none;padding:0;margin:0}
+.refs li{display:grid;grid-template-columns:44px 1fr;gap:4px;font-size:14.5px;line-height:1.65;padding:12px 0;border-bottom:1px solid var(--divider-l);scroll-margin-top:80px}
+.refs li:target{background:rgba(139,26,26,.06)}
+.refs .rn{font-family:var(--mono);font-size:12px;color:var(--red-warm);padding-top:3px}
+.refs a{color:var(--ink);text-decoration:underline;text-decoration-color:rgba(139,26,26,.4);text-underline-offset:3px}
+.refs .rt{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mist);margin-left:6px}
+
+/* FOOT */
+.art-foot{background:var(--void);padding:70px 48px;border-top:1px solid var(--divider)}
+.art-foot-inner{max-width:820px;margin:0 auto;display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:flex-end}
+.foot-label{font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--ash);margin-bottom:12px}
+.foot-link{font-family:var(--heading);font-size:24px;color:var(--paper);transition:color .2s}
+.foot-link:hover{color:var(--red-light)}
+
+@media (max-width:720px){
+  .nav{padding:0 16px;gap:12px}
+  .nav-links{gap:12px}
+  .nav-links a{font-size:9px;letter-spacing:.5px;white-space:nowrap}
+  .nav-links .nav-home{display:none}
+  .nav-logo{letter-spacing:2px;white-space:nowrap}
+  .nav-follow{padding:5px 10px}
+  .art-head{padding:120px 16px 64px}
+  .art-body-wrap{padding:60px 16px 80px}
+  .art-body{font-size:17px}
+  .art-foot{padding:50px 16px}
+  .donts li{padding-left:52px}
+  .donts li::before{font-size:28px}
+}
+</style>
+<link rel="stylesheet" href="../assets/note-arc.css">
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="../index.html" class="nav-logo"><em>ARTHA</em> Craft</a>
+  <div class="nav-links">
+    <a href="../index.html" class="nav-home">Home</a>
+    <a href="../articles.html">Series</a>
+    <a href="../notes.html" class="active">Craft Notes</a>
+    <a href="../about.html">About</a>
+    <a href="https://substack.com/@jitanderchauhan" target="_blank" class="nav-follow">Subscribe</a>
+  </div>
+</nav>
+
+<header class="art-head">
+  <div class="art-num" aria-hidden="true">04</div>
+  <div class="art-head-inner">
+    <div class="kicker">Craft Notes <span>/</span> No. 04 <span>/</span> Evaluation · Part 3 of 9</div>
+    <h1 class="art-title">Fix ten, <em>lose one.</em></h1>
+    <p class="art-dek">Growing a golden set without fooling yourself: acceptable instead of exact, the business holding the bar, and re-running everything on every change.</p>
+    <div class="art-meta"><span>Jitander Chauhan</span><span>November 2026</span><span>8 min read</span></div>
+  </div>
+</header>
+
+<main class="art-body-wrap">
+<article class="art-body">
+  <figure class="fig hero"><img src="../images/share/cn04-linkedin-hero.png" alt="Craft Notes No. 04: Fix ten, lose one." style="display:block;width:100%;height:auto;border-radius:6px"></figure>
+
+
+  <h2>Fix ten, lose one</h2>
+  <p>We had a system that would not leave testing. Nothing failed loudly; things just kept quietly coming undone.</p>
+  <p>We would work through a list of issues, fixing the second, then the third, then the fourth, and by the time we had fixed ten, the first one had drifted. When we fixed it again, something else slipped, and we were going in circles.</p>
+  <p>Two things were wrong, and neither of them was the model. First, we were only re-checking what we had just changed, when any change can move answers that were already right. If the whole set is not re-run before every release, you will not see the drift until a user does.</p>
+  <p>Second, we were checking for the wrong thing. Our expected answers were exact answers, and the same input does not produce the same wording every time, even with randomness turned down to zero. <a class="ref" href="#ref-1">[1]</a> What got us out was asking a different question: instead of "does it match?", we asked "is it close enough to what we need, and do the facts behind it hold up?"</p>
+  <div class="pull"><p>The wording could vary. The evidence could not.</p></div>
+  <figure class="fig"><div class="fig-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="40 196 1120 444" width="100%" role="img" aria-label="Fix ten, lose one." style="display:block;height:auto"><defs><marker id="cn04-drift-ah-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1a1916"/></marker><marker id="cn04-drift-ah-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8B1A1A"/></marker><marker id="cn04-drift-ah-mist" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a8880"/></marker></defs><rect x="80" y="214" width="490" height="360" rx="6" fill="#fdfcfa" stroke="rgba(26,25,22,0.18)" stroke-width="1"/><text x="104" y="248" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11.5" fill="#8B1A1A" text-anchor="start" font-weight="500" letter-spacing="2">RE-CHECK ONLY WHAT CHANGED</text><text x="104" y="302" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#8a8880" text-anchor="start" font-weight="400">change 1</text><rect x="180" y="280" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="218" y="280" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="256" y="280" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="294" y="280" width="32" height="32" rx="4" fill="#f2e4e1" stroke="#e0b8b0" stroke-width="1"/><rect x="332" y="280" width="32" height="32" rx="4" fill="#f2e4e1" stroke="#e0b8b0" stroke-width="1"/><rect x="370" y="280" width="32" height="32" rx="4" fill="#f2e4e1" stroke="#e0b8b0" stroke-width="1"/><rect x="408" y="280" width="32" height="32" rx="4" fill="#f2e4e1" stroke="#e0b8b0" stroke-width="1"/><rect x="446" y="280" width="32" height="32" rx="4" fill="#f2e4e1" stroke="#e0b8b0" stroke-width="1"/><rect x="484" y="280" width="32" height="32" rx="4" fill="#f2e4e1" stroke="#e0b8b0" stroke-width="1"/><rect x="522" y="280" width="32" height="32" rx="4" fill="#f2e4e1" stroke="#e0b8b0" stroke-width="1"/><text x="104" y="364" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#8a8880" text-anchor="start" font-weight="400">change 2</text><rect x="180" y="342" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="218" y="342" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="256" y="342" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="294" y="342" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="332" y="342" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="370" y="342" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="408" y="342" width="32" height="32" rx="4" fill="#f2e4e1" stroke="#e0b8b0" stroke-width="1"/><rect x="446" y="342" width="32" height="32" rx="4" fill="#f2e4e1" stroke="#e0b8b0" stroke-width="1"/><rect x="484" y="342" width="32" height="32" rx="4" fill="#f2e4e1" stroke="#e0b8b0" stroke-width="1"/><rect x="522" y="342" width="32" height="32" rx="4" fill="#f2e4e1" stroke="#e0b8b0" stroke-width="1"/><text x="104" y="426" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#8a8880" text-anchor="start" font-weight="400">change 3</text><rect x="180" y="404" width="32" height="32" rx="4" fill="#fdf6f4" stroke="#8B1A1A" stroke-width="2" stroke-dasharray="4 3"/><text x="196" y="426" font-family="'DM Serif Display', Georgia, serif" font-size="15" fill="#8B1A1A" text-anchor="middle" font-weight="400">?</text><rect x="218" y="404" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="256" y="404" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="294" y="404" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="332" y="404" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="370" y="404" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="408" y="404" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="446" y="404" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="484" y="404" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="522" y="404" width="32" height="32" rx="4" fill="#f2e4e1" stroke="#e0b8b0" stroke-width="1"/><text x="104" y="488" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#8a8880" text-anchor="start" font-weight="400">change 4</text><rect x="180" y="466" width="32" height="32" rx="4" fill="#fdf6f4" stroke="#8B1A1A" stroke-width="2" stroke-dasharray="4 3"/><text x="196" y="488" font-family="'DM Serif Display', Georgia, serif" font-size="15" fill="#8B1A1A" text-anchor="middle" font-weight="400">?</text><rect x="218" y="466" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="256" y="466" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="294" y="466" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="332" y="466" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="370" y="466" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="408" y="466" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="446" y="466" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="484" y="466" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="522" y="466" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><text x="180" y="556" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11.5" fill="#8B1A1A" text-anchor="start" font-weight="400">case 1 drifted in round 3 · still unseen in round 4</text><rect x="630" y="214" width="490" height="360" rx="6" fill="#fdfcfa" stroke="rgba(26,25,22,0.18)" stroke-width="1"/><text x="654" y="248" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11.5" fill="#1a1916" text-anchor="start" font-weight="500" letter-spacing="2">RE-RUN THE WHOLE SET</text><text x="654" y="302" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#8a8880" text-anchor="start" font-weight="400">change 1</text><rect x="730" y="280" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="768" y="280" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="806" y="280" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="844" y="280" width="32" height="32" rx="4" fill="#f2e4e1" stroke="#e0b8b0" stroke-width="1"/><rect x="882" y="280" width="32" height="32" rx="4" fill="#f2e4e1" stroke="#e0b8b0" stroke-width="1"/><rect x="920" y="280" width="32" height="32" rx="4" fill="#f2e4e1" stroke="#e0b8b0" stroke-width="1"/><rect x="958" y="280" width="32" height="32" rx="4" fill="#f2e4e1" stroke="#e0b8b0" stroke-width="1"/><rect x="996" y="280" width="32" height="32" rx="4" fill="#f2e4e1" stroke="#e0b8b0" stroke-width="1"/><rect x="1034" y="280" width="32" height="32" rx="4" fill="#f2e4e1" stroke="#e0b8b0" stroke-width="1"/><rect x="1072" y="280" width="32" height="32" rx="4" fill="#f2e4e1" stroke="#e0b8b0" stroke-width="1"/><text x="654" y="364" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#8a8880" text-anchor="start" font-weight="400">change 2</text><rect x="730" y="342" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="768" y="342" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="806" y="342" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="844" y="342" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="882" y="342" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="920" y="342" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="958" y="342" width="32" height="32" rx="4" fill="#f2e4e1" stroke="#e0b8b0" stroke-width="1"/><rect x="996" y="342" width="32" height="32" rx="4" fill="#f2e4e1" stroke="#e0b8b0" stroke-width="1"/><rect x="1034" y="342" width="32" height="32" rx="4" fill="#f2e4e1" stroke="#e0b8b0" stroke-width="1"/><rect x="1072" y="342" width="32" height="32" rx="4" fill="#f2e4e1" stroke="#e0b8b0" stroke-width="1"/><text x="654" y="426" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#8a8880" text-anchor="start" font-weight="400">change 3</text><rect x="730" y="404" width="32" height="32" rx="4" fill="#8B1A1A" stroke="none" stroke-width="1"/><text x="746" y="426" font-family="'DM Serif Display', Georgia, serif" font-size="15" fill="#f5f0e8" text-anchor="middle" font-weight="400">!</text><rect x="768" y="404" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="806" y="404" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="844" y="404" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="882" y="404" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="920" y="404" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="958" y="404" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="996" y="404" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="1034" y="404" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="1072" y="404" width="32" height="32" rx="4" fill="#f2e4e1" stroke="#e0b8b0" stroke-width="1"/><text x="654" y="488" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#8a8880" text-anchor="start" font-weight="400">change 4</text><rect x="730" y="466" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="768" y="466" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="806" y="466" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="844" y="466" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="882" y="466" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="920" y="466" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="958" y="466" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="996" y="466" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="1034" y="466" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><rect x="1072" y="466" width="32" height="32" rx="4" fill="#1a1916" stroke="none" stroke-width="1"/><text x="730" y="556" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11.5" fill="#1a1916" text-anchor="start" font-weight="400">case 1 caught in round 3 · fixed in round 4</text><rect x="80" y="596" width="14" height="14" rx="3" fill="#1a1916" stroke="none" stroke-width="1"/><text x="102" y="608" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#4a4944" text-anchor="start" font-weight="400">passing</text><rect x="190" y="596" width="14" height="14" rx="3" fill="#f2e4e1" stroke="#e0b8b0" stroke-width="1"/><text x="212" y="608" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#4a4944" text-anchor="start" font-weight="400">known failing</text><rect x="340" y="596" width="14" height="14" rx="3" fill="#8B1A1A" stroke="none" stroke-width="1"/><text x="362" y="608" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#4a4944" text-anchor="start" font-weight="400">regression caught</text><rect x="520" y="596" width="14" height="14" rx="3" fill="#fdf6f4" stroke="#8B1A1A" stroke-width="1.5" stroke-dasharray="3 2"/><text x="542" y="608" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11" fill="#4a4944" text-anchor="start" font-weight="400">regression unseen</text></svg></div><figcaption>Ten cases, four rounds of changes. Checking only the latest change hides the drift; re-running the whole set catches it the same round.</figcaption></figure>
+
+  <p>In the terms of Part 1, this is consistency: the same input getting the same decision, release after release. Regression suites, held-back cases and the warning against tuning to a metric are all long-established practice. What follows is what applying them actually took, on a system that would not leave testing.</p>
+
+  <h2>Acceptable, not exact</h2>
+  <p>An LLM will not give you the same sentence twice. A golden set that stores exact answers will fail a good system forever, and a team chasing exact matches will keep re-tuning prompts that were never broken.</p>
+  <p>So each case has to describe what makes an answer acceptable, leaving the exact words open.</p>
+  <div class="entries">
+    <div class="entry"><h3>Facts that must be present</h3><p>The figures, names, rules or conditions the answer cannot do without.</p></div>
+    <div class="entry"><h3>Facts that must not appear</h3><p>The wrong policy, another client's terms, the invented number.</p></div>
+    <div class="entry"><h3>The evidence behind it</h3><p>Where each fact comes from, so a check can confirm it rather than trust it.</p></div>
+    <div class="entry"><h3>What can vary</h3><p>Wording, order, length and tone are all allowed to move.</p></div>
+  </div>
+  <p>Then decide how close is close enough. That is not an engineering decision. It is a business one, and it should be set per feature, according to what a wrong answer would cost. A draft summary can tolerate more variation than a coverage decision or a compliance check. In our case the bar was 90 percent, set with the business.</p>
+  <p>Treat the threshold as a setting that can change. Write it down, agree it with the business owner, and change it only on purpose.</p>
+
+  <h2>The people who asked for it check it</h2>
+  <p>The verdict on whether an answer is acceptable belongs to the same people who defined correct in the first place: the domain expert or business user who gave the requirement. They check it in two places.</p>
+  <div class="entries">
+    <div class="entry"><h3>In QA, before release</h3><p>The business user runs real cases in a test environment and judges each answer against the agreed bar. What passes moves forward, and what does not goes back to the developers with the reason.</p></div>
+    <div class="entry"><h3>In production, after release</h3><p>Users get a simple way to flag an answer that is wrong, incomplete or out of bounds, right where they see it, without a ticket system to learn or an email to write.</p></div>
+  </div>
+  <p>Both streams feed continuous improvement. The developers build the system and the business decides whether it works, and the golden set is where the two meet.</p>
+
+  <h2>Growing in two directions, on purpose</h2>
+  <p>A golden set grows in two directions.</p>
+  <div class="entries">
+    <div class="entry"><h3>New functionality</h3><p>Every new capability needs its own approved cases before it ships, built the same way as the first set: real inputs, expert approval, out-of-bounds cases included.</p></div>
+    <div class="entry"><h3>New questions on existing topics</h3><p>Users will ask what you already cover in ways you did not anticipate. The answers to those should land close to an already-approved answer, and they are checked against it rather than given a new definition of correct.</p></div>
+  </div>
+  <p>The set should not change every time someone comments, though, because what comes back from users is not all the same kind of thing.</p>
+  <div class="entries">
+    <div class="entry"><h3>A defect</h3><p>An answer that fails the agreed bar: wrong facts, missing facts, an out-of-bounds question handled badly. It needs a fix, and a case that will catch it again.</p></div>
+    <div class="entry"><h3>Feedback</h3><p>An answer that passes but could be better. "This is close, but if X were Y it would be more useful." That is valuable, but it is a change request rather than a failure.</p></div>
+  </div>
+  <p>Both go through the same process of being logged, reviewed and scheduled for a release, and nothing in the golden set changes on the spot. If expected answers shift every time someone has an opinion, the set stops measuring anything, and you are back to going in circles.</p>
+
+  <h2>Re-run everything before every release</h2>
+  <p>The cure for "fix ten, lose one" takes discipline more than cleverness: before anything is released, run the whole set. Regression testing matters more for LLM systems than for ordinary software, because a change in one place can move answers anywhere. Any of these means the next release runs the full set:</p>
+  <ol class="dos">
+    <li><strong>A code change</strong>However small.</li>
+    <li><strong>A model change</strong>A new version, a new provider, or a provider update you did not ask for.</li>
+    <li><strong>A prompt change</strong>With one extra step, below.</li>
+  </ol>
+  <p>Between releases, run what each change could affect, as often as you like. Running the full set on every small change sounds safe and quickly becomes the biggest cost you have; Part 6 shows how that happened to us, when agents re-ran the full test suite after every small commit. Part 8 sets out which checks run when.</p>
+  <p>Sometimes the prompt changes because the expected behaviour changed: a new format, a new rule, a different level of detail. Then the test cases have to change too, and this is the dangerous moment, because if you change the prompt and the tests together, a failing test can quietly become a passing one just because you edited it.</p>
+  <p>Change them deliberately instead. Say why the expected answer moved, get the business owner to approve it, and save it as a new version of the set. The old version stays, so you can see exactly what changed and why.</p>
+
+  <h2>Don't tune to the test</h2>
+  <p>There is a quiet way to fool yourself: adjust the prompt again and again until every case in the golden set passes. The trap is old enough to have a name: when a measure becomes a target, it ceases to be a good measure. <a class="ref" href="#ref-2">[2]</a> In model evaluation it shows up as scores that rise sharply once the test cases leak into what was tuned, and stop meaning anything. <a class="ref" href="#ref-3">[3]</a></p>
+  <p>Two habits prevent it.</p>
+  <p><strong>Treat the prompt as a contract for the output, not a dial for the answer.</strong> You can change the structure of what comes back (a table instead of a paragraph, new fields, a different order), but that must not change the reasoning. Only a change to the processing logic, the rules and evidence the answer is built on, should change the answer.</p>
+  <p>That gives you a test you can run on purpose. Ask the same question with different wording, or ask for a different output format, and check that the facts and the decision hold. Researchers call these invariance tests, and they find failures in systems that have already passed extensive testing. <a class="ref" href="#ref-4">[4]</a> If the facts move, the system is reacting to how the question was presented rather than reasoning about it.</p>
+  <p><strong>Keep some cases back.</strong> Developers should not see every case they are graded on, so hold some back for the final check before release, and let the business users bring their own fresh questions in QA. Cases nobody tuned against are the only honest measure of whether the system works beyond the test.</p>
+  <div class="pull"><p>A test you tuned against is no longer a test. It is a rehearsal.</p></div>
+
+  <h2>Versioning and retiring cases</h2>
+  <p>Treat a golden set as a controlled asset, the way you treat code, with every change versioned: what changed, why, and who approved it.</p>
+  <p>The set should shrink as well as grow. When a case no longer makes logical business sense, because a rule was retired, a product was withdrawn or a process changed, remove it. Keeping it means the system is tested against a business that no longer exists, and every failure on it is noise. Removal goes through the same approval as addition, and the old version stays on record.</p>
+
+  <h2>How this changes by context</h2>
+  <div class="entries">
+    <div class="entry"><h3>Enterprise</h3><p>Versioned golden sets and recorded approvals are audit evidence, because they show what "working" meant on the day a release went out, and who agreed it.</p></div>
+    <div class="entry"><h3>Commercial</h3><p>Each client's acceptance bar can differ. Keep their threshold and their cases with their own version history, so a change for one client never moves another.</p></div>
+    <div class="entry"><h3>Agentic</h3><p>For agents, regression means checking the steps as well as the final answer. A format change that alters which tool the agent calls is the same defect as one that alters a fact.</p></div>
+  </div>
+
+  <h2>What to do</h2>
+  <ol class="dos">
+    <li><strong>Store what makes an answer acceptable.</strong>Required facts, forbidden facts and evidence, not exact wording.</li>
+    <li><strong>Let the business set the threshold.</strong>Per feature, according to the cost of a wrong answer.</li>
+    <li><strong>Separate defects from feedback.</strong>Route both through a release process, not straight into the set.</li>
+    <li><strong>Re-run the whole set before every release.</strong>After any code, model or prompt change.</li>
+    <li><strong>Test that wording and format don't move the reasoning.</strong>Same question, different shape, same facts.</li>
+    <li><strong>Keep some cases back.</strong>For the final check, untouched by tuning.</li>
+  </ol>
+
+  <h2>What not to do</h2>
+  <ol class="donts">
+    <li><strong>Do not re-check only what you just changed.</strong>That is how the first fix drifts while you make the tenth.</li>
+    <li><strong>Do not change prompts and expected answers together without approval.</strong>That is how a failing test turns green.</li>
+    <li><strong>Do not let every comment change the set.</strong>A moving target measures nothing.</li>
+  </ol>
+
+  <h2>Growing on purpose</h2>
+  <div class="stack">
+    <p>The questions will change.</p>
+    <p>The business will change its mind.</p>
+  </div>
+  <p>A golden set that grows on purpose, under the business's control, is how you keep up with both, and with the model underneath, without going in circles.</p>
+
+  <p class="sign">Jitander Chauhan</p>
+  <section class="refs" aria-labelledby="refs-h">
+    <h3 id="refs-h">Research &amp; Further Reading</h3>
+    <ol>
+      <li id="ref-1"><span class="rn">[1]</span><div>Thinking Machines Lab, “<a href="https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/">Defeating Nondeterminism in LLM Inference</a>”, September 2025: Outputs can differ even at temperature zero because server batching changes with load (as reported by <a href="https://www.eweek.com/de/news/ai-bug-fix-mira-murati-thinking-machine-lab/">eWeek</a>). <span class="rt">Research</span></div></li>
+      <li id="ref-2"><span class="rn">[2]</span><div>Strathern, M., “<a href="https://econpapers.repec.org/RePEc:cup:eurrev:v:5:y:1997:i:03:p:305-321_00">‘Improving ratings’: audit in the British University system</a>”, European Review 5(3), 1997, pp. 305–321: States the common form of Goodhart's law (p. 308): "When a measure becomes a target, it ceases to be a good measure." <span class="rt">Research Paper</span></div></li>
+      <li id="ref-3"><span class="rn">[3]</span><div>Zhou, K., Zhu, Y., Chen, Z., Chen, W., Zhao, W.X., Chen, X., Lin, Y., Wen, J.-R., Han, J., “<a href="https://arxiv.org/abs/2311.01964">Don't Make Your LLM an Evaluation Benchmark Cheater</a>”, arXiv preprint, 2023: When evaluation data leaks into what a model is tuned on, scores rise sharply and no longer give a trustworthy picture of real performance. <span class="rt">Preprint</span></div></li>
+      <li id="ref-4"><span class="rn">[4]</span><div>Ribeiro, M.T., Wu, T., Guestrin, C., Singh, S., “<a href="https://aclanthology.org/2020.acl-main.442/">Beyond Accuracy: Behavioral Testing of NLP Models with CheckList</a>”, ACL 2020: Introduces invariance tests: label-preserving changes to the input after which the model's prediction should stay the same. Found critical failures in commercial models that had already been extensively tested. <span class="rt">Research Paper</span></div></li>
+    </ol>
+  </section>
+</article>
+<nav class="arc-nav" data-arc="evaluation" data-part="3" aria-label="Evaluation series parts"></nav>
+</main>
+
+<footer class="art-foot">
+  <div class="art-foot-inner">
+    <div>
+      <div class="foot-label">Start with the method</div>
+      <a class="foot-link" href="../articles/article-1.html">Read the 12-part series &rarr;</a>
+    </div>
+    <div>
+      <div class="foot-label">Get the next Craft Note</div>
+      <a class="foot-link" href="https://substack.com/@jitanderchauhan">Subscribe on Substack &rarr;</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/notes-data.js"></script>
+<script src="../assets/notes.js"></script>
+<script>
+(function(){var n=document.getElementById('nav');function f(){n.classList.toggle('scrolled',window.scrollY>40)}window.addEventListener('scroll',f,{passive:true});f();})();
+</script>
+</body>
+</html>

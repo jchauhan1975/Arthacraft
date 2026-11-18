@@ -1,0 +1,16 @@
+/* Part-to-part navigation on Craft Note pages that belong to an arc.
+   Markup is rendered by assets/notes.js into <nav class="arc-nav" data-arc data-part>.
+   Uses the custom properties every note page defines in its own :root. */
+.arc-nav{max-width:680px;margin:64px auto 0;display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.arc-nav:empty{display:none}
+.arc-link{display:block;background:#fff;border:1px solid var(--divider-l);border-radius:2px;padding:18px 20px;transition:border-color .2s}
+.arc-link:hover{border-color:var(--red)}
+.arc-link.right{text-align:right;grid-column:2}
+.arc-link.soon{background:transparent}
+.arc-dir{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--mist);margin-bottom:6px}
+.arc-title{font-family:var(--heading);font-size:16px;line-height:1.35;color:var(--ink)}
+.arc-link.soon .arc-title{color:var(--ash)}
+@media (max-width:720px){
+  .arc-nav{grid-template-columns:1fr;margin-top:48px}
+  .arc-link.right{grid-column:1}
+}

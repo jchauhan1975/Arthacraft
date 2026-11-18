@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wiring Evaluation Into How You Ship | ARTHA Craft</title>
+<meta name="description" content="Evaluation Part 8 of 9: layer the checks by cost and timing, let agents review and people decide, and keep a record of every release.">
+<link rel="canonical" href="https://arthacraft.tech/notes/craft-note-09.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ARTHA Craft">
+<meta property="og:title" content="Wiring Evaluation Into How You Ship">
+<meta property="og:description" content="Evaluation Part 8 of 9: layer the checks by cost and timing, let agents review and people decide, and keep a record of every release.">
+<meta property="og:url" content="https://arthacraft.tech/notes/craft-note-09.html">
+<meta property="og:image" content="https://arthacraft.tech/images/share/cn09-linkedin-hero.png">
+<meta property="og:image:width" content="2400">
+<meta property="og:image:height" content="1254">
+<meta property="og:image:alt" content="Craft Notes No. 09: Wiring evaluation into how you ship.">
+<meta property="article:author" content="Jitander Singh Chauhan">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Serif+Display:ital@0;1&family=Literata:ital,opsz,wght@0,7..72,300;0,7..72,400;0,7..72,500;1,7..72,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#0c0b09; --ink:#1a1916; --coal:#2a2924; --ash:#4a4944; --mist:#8a8880; --fog:#b8b6b0;
+  --paper:#f5f0e8; --cream:#faf7f2; --white:#fdfcfa;
+  --red:#8B1A1A; --red-warm:#b83020; --red-light:#d4472c; --gold:#b8912a;
+  --divider:rgba(255,255,255,0.07); --divider-l:rgba(26,25,22,0.1);
+  --display:'Cormorant Garamond','Times New Roman',serif;
+  --heading:'DM Serif Display',Georgia,serif;
+  --body:'Literata',Georgia,serif;
+  --mono:'JetBrains Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--void);color:var(--paper);font-family:var(--body);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;border-bottom:1px solid transparent;transition:background .4s,border-color .4s}
+.nav.scrolled{background:rgba(12,11,9,.96);border-color:var(--divider);backdrop-filter:blur(12px)}
+.nav-logo{font-family:var(--mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:300}
+.nav-logo em{font-style:normal;color:var(--red-light)}
+.nav-links{display:flex;gap:36px;align-items:center}
+.nav-links a{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mist);transition:color .2s}
+.nav-links a:hover{color:var(--paper)}
+.nav-links a.active{color:var(--fog)}
+.nav-follow{color:var(--red-light)!important;border:1px solid rgba(212,71,44,0.3);padding:6px 18px;border-radius:2px;transition:all 0.2s!important}
+.nav-follow:hover{background:var(--red)!important;color:var(--white)!important;border-color:var(--red)!important}
+
+/* HEADER */
+.art-head{position:relative;overflow:hidden;padding:150px 48px 90px;background:var(--void);border-bottom:1px solid var(--divider)}
+.art-num{position:absolute;right:-20px;top:30px;font-family:var(--display);font-weight:500;font-size:clamp(220px,34vw,460px);line-height:1;color:rgba(245,240,232,.035);pointer-events:none;user-select:none}
+.art-head-inner{position:relative;max-width:820px;margin:0 auto}
+.kicker{font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--red-light);margin-bottom:28px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.kicker span{color:var(--ash)}
+.art-title{font-family:var(--heading);font-weight:400;font-size:clamp(42px,6.4vw,76px);line-height:1.04;letter-spacing:-.5px;color:var(--white);margin-bottom:28px}
+.art-title em{font-style:italic;color:var(--red-light)}
+.art-dek{font-family:var(--display);font-style:italic;font-size:clamp(21px,2.4vw,27px);line-height:1.45;color:var(--fog);max-width:640px}
+.art-meta{margin-top:44px;font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mist);display:flex;gap:28px;flex-wrap:wrap}
+
+/* BODY */
+.art-body-wrap{background:var(--cream);color:var(--ink);padding:90px 48px 110px}
+.art-body{max-width:680px;margin:0 auto;font-size:18.5px;line-height:1.78;font-weight:300}
+.art-body p{margin-bottom:1.25em}
+.art-body strong{font-weight:500;color:var(--ink)}
+.art-body h2{font-family:var(--heading);font-weight:400;font-size:clamp(28px,3.4vw,36px);line-height:1.15;color:var(--ink);margin:2.6em 0 .9em}
+.art-body h2:first-child{margin-top:0}
+.stack p{margin-bottom:.2em}
+.stack{margin:1.4em 0 1.6em}
+.pull{margin:2.2em 0;padding:6px 0 6px 28px;border-left:2px solid var(--red)}
+.pull p{font-family:var(--display);font-style:italic;font-weight:500;font-size:clamp(27px,3.2vw,34px);line-height:1.3;color:var(--ink);margin:0}
+
+/* Benefit / risk entries */
+.entries{margin:1.6em 0 0}
+.entry{padding:22px 0;border-top:1px solid var(--divider-l)}
+.entry:last-child{border-bottom:1px solid var(--divider-l)}
+.entry h3{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:500;color:var(--red-warm);margin-bottom:8px}
+.entry p{margin:0}
+
+/* Do list */
+.dos{list-style:none;counter-reset:o;margin:1.6em 0 0}
+.dos li{counter-increment:o;position:relative;padding:22px 0 22px 64px;border-top:1px solid var(--divider-l)}
+.dos li:last-child{border-bottom:1px solid var(--divider-l)}
+.dos li::before{content:counter(o,decimal-leading-zero);position:absolute;left:0;top:18px;font-family:var(--display);font-size:34px;font-weight:500;color:var(--ink);line-height:1}
+.dos li strong{display:block;font-family:var(--heading);font-weight:400;font-size:21px;line-height:1.3;margin-bottom:6px}
+@media (max-width:720px){.dos li{padding-left:52px}.dos li::before{font-size:28px}}
+
+/* Don't list */
+.donts{list-style:none;counter-reset:d;margin:1.6em 0 0}
+.donts li{counter-increment:d;position:relative;padding:22px 0 22px 64px;border-top:1px solid var(--divider-l)}
+.donts li:last-child{border-bottom:1px solid var(--divider-l)}
+.donts li::before{content:counter(d,decimal-leading-zero);position:absolute;left:0;top:18px;font-family:var(--display);font-size:34px;font-weight:500;color:rgba(139,26,26,.55);line-height:1}
+.donts li strong{display:block;font-family:var(--heading);font-weight:400;font-size:21px;line-height:1.3;margin-bottom:6px}
+
+.note{font-family:var(--mono);font-size:11px;line-height:1.7;letter-spacing:.3px;color:var(--ash);margin-top:2.4em;padding-top:18px;border-top:1px solid var(--divider-l)}
+.sign{margin-top:3em;font-family:var(--display);font-style:italic;font-size:24px;color:var(--ink)}
+
+
+/* FIGURES */
+.fig{margin:2.6em -40px 2.8em;padding:0}
+.fig svg{background:var(--cream)}
+.fig figcaption{font-family:var(--mono);font-size:11px;line-height:1.7;letter-spacing:.3px;color:var(--ash);margin:14px 40px 0;padding-left:14px;border-left:2px solid var(--red)}
+.fig-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+@media (max-width:820px){.fig{margin-left:0;margin-right:0}.fig-scroll svg{min-width:720px}.fig figcaption{margin-left:0;margin-right:0}}
+
+
+/* REFERENCES */
+.ref{font-family:var(--mono);font-size:.62em;color:var(--red-warm);text-decoration:none;vertical-align:.35em;white-space:nowrap}
+.ref:hover,.ref:focus-visible{text-decoration:underline}
+.refs{margin-top:3.2em;padding-top:28px;border-top:1px solid var(--divider-l)}
+.refs h3{font-family:var(--heading);font-weight:400;font-size:26px;margin-bottom:18px}
+.refs ol{list-style:none;padding:0;margin:0}
+.refs li{display:grid;grid-template-columns:44px 1fr;gap:4px;font-size:14.5px;line-height:1.65;padding:12px 0;border-bottom:1px solid var(--divider-l);scroll-margin-top:80px}
+.refs li:target{background:rgba(139,26,26,.06)}
+.refs .rn{font-family:var(--mono);font-size:12px;color:var(--red-warm);padding-top:3px}
+.refs a{color:var(--ink);text-decoration:underline;text-decoration-color:rgba(139,26,26,.4);text-underline-offset:3px}
+.refs .rt{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mist);margin-left:6px}
+
+/* FOOT */
+.art-foot{background:var(--void);padding:70px 48px;border-top:1px solid var(--divider)}
+.art-foot-inner{max-width:820px;margin:0 auto;display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:flex-end}
+.foot-label{font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--ash);margin-bottom:12px}
+.foot-link{font-family:var(--heading);font-size:24px;color:var(--paper);transition:color .2s}
+.foot-link:hover{color:var(--red-light)}
+
+@media (max-width:720px){
+  .nav{padding:0 16px;gap:12px}
+  .nav-links{gap:12px}
+  .nav-links a{font-size:9px;letter-spacing:.5px;white-space:nowrap}
+  .nav-links .nav-home{display:none}
+  .nav-logo{letter-spacing:2px;white-space:nowrap}
+  .nav-follow{padding:5px 10px}
+  .art-head{padding:120px 16px 64px}
+  .art-body-wrap{padding:60px 16px 80px}
+  .art-body{font-size:17px}
+  .art-foot{padding:50px 16px}
+  .donts li{padding-left:52px}
+  .donts li::before{font-size:28px}
+}
+</style>
+<link rel="stylesheet" href="../assets/note-arc.css">
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="../index.html" class="nav-logo"><em>ARTHA</em> Craft</a>
+  <div class="nav-links">
+    <a href="../index.html" class="nav-home">Home</a>
+    <a href="../articles.html">Series</a>
+    <a href="../notes.html" class="active">Craft Notes</a>
+    <a href="../about.html">About</a>
+    <a href="https://substack.com/@jitanderchauhan" target="_blank" class="nav-follow">Subscribe</a>
+  </div>
+</nav>
+
+<header class="art-head">
+  <div class="art-num" aria-hidden="true">09</div>
+  <div class="art-head-inner">
+    <div class="kicker">Craft Notes <span>/</span> No. 09 <span>/</span> Evaluation · Part 8 of 9</div>
+    <h1 class="art-title">Wiring evaluation <em>into how you ship.</em></h1>
+    <p class="art-dek">A check you have to remember to run is a check that eventually does not run. Layer the checks by cost and timing, let agents review and people decide, and keep a record of every release.</p>
+    <div class="art-meta"><span>Jitander Chauhan</span><span>November 2026</span><span>7 min read</span></div>
+  </div>
+</header>
+
+<main class="art-body-wrap">
+<article class="art-body">
+  <figure class="fig hero"><img src="../images/share/cn09-linkedin-hero.png" alt="Craft Notes No. 09: Wiring evaluation into how you ship." style="display:block;width:100%;height:auto;border-radius:6px"></figure>
+
+
+  <h2>Checks that only run when someone remembers</h2>
+  <p>Parts 1 to 7 of this series each describe a check: a golden set, a regression run, an evidence check, a judge, a trace, a usefulness test. Left on their own, each is a good intention, and good intentions get run when there is time, by whoever remembers, and skipped the week before a deadline.</p>
+  <p>We have also seen the opposite failure. In Part 6, agents left to run on their own re-ran the entire test suite after every small commit and burned most of a usage allowance in three days. Running nothing is a failure, and so is running everything all the time.</p>
+  <p>Wiring evaluation into how you ship means deciding, once, which checks run when, what each one costs, what happens when one fails, and who decides. Then the pipeline remembers so that people do not have to.</p>
+
+  <h2>Layer the checks by cost and timing</h2>
+  <p>Software teams have long arranged tests by cost: many fast, cheap tests at the bottom, few slow end-to-end tests at the top, because tests that run through the full interface are "brittle, expensive to write, and time consuming to run." <a class="ref" href="#ref-1">[1]</a> The same logic applies to evaluating AI output. Each check from this series has a natural moment:</p>
+  <div class="entries">
+    <div class="entry"><h3>On every change</h3><p>The code checks from Part 4: structure, required fields, evidence that resolves. Milliseconds, every time.</p></div>
+    <div class="entry"><h3>On every merge</h3><p>The golden cases the change could affect. Minutes, not hours.</p></div>
+    <div class="entry"><h3>On a schedule</h3><p>The full golden set, the judge from Part 5, the agent runs traced and compared from Part 6, the review cycle below. Hours, while nobody is waiting.</p></div>
+    <div class="entry"><h3>Before release</h3><p>Everything, plus business sign-off from Part 3. This is where "re-run everything" belongs.</p></div>
+    <div class="entry"><h3>In production</h3><p>The Part 4 checks on every call, sampled judging, and the failure rates watched for drift. Part 9 picks this up.</p></div>
+  </div>
+  <p>Guides to evaluating AI products use the same shape: fast assertions on every change, human and model review on a cadence, experiments only after significant changes. <a class="ref" href="#ref-2">[2]</a> Where our cycle differs is in who acts on the results, which is the subject of the next two sections.</p>
+  <p>These moments are Part 1's four levels put on a timetable: the call level on every change, the task and journey levels on merges and on a schedule, and the production level on real traffic.</p>
+
+  <h2>Our review cycle</h2>
+  <p>Our version of the scheduled layer is a cycle of six agents that run in strict order: <a class="ref" href="#ref-3">[3]</a></p>
+  <ol class="dos">
+    <li><strong>A code reviewer.</strong>It reviews; it never modifies source.</li>
+    <li><strong>A non-functional requirements agent.</strong>It checks the system against the requirements that are not features.</li>
+    <li><strong>Three agents in parallel, all read-only.</strong>One runs the real screens, one runs the real services, and one reviews usability and returns suggestions only.</li>
+    <li><strong>An advocate.</strong>It reads all five reports and challenges every finding and every pass, because a clean result is not trusted either. Then it runs its own independent sweep and compiles what it believes needs fixing, with its reasoning.</li>
+  </ol>
+  <p>Two more agents are called in when needed. When the screen runner finds a user flow that no test covers, a test-writing agent writes one, and touches nothing else. When the architect approves a usability suggestion, it becomes a task for a coding agent. And the user journeys are handed to an agent from a different company as the starting point for journey testing, so no single provider's model has the last word; models from different providers still share many of the same mistakes. <a class="ref" href="#ref-4">[4]</a></p>
+  <figure class="fig"><div class="fig-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="40 196 1120 548" width="100%" role="img" aria-label="Agents recommend. A person decides." style="display:block;height:auto"><defs><marker id="cn09-cycle-ah-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1a1916"/></marker><marker id="cn09-cycle-ah-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8B1A1A"/></marker><marker id="cn09-cycle-ah-mist" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a8880"/></marker></defs><text x="60" y="214" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10" fill="#8a8880" text-anchor="start" font-weight="400" letter-spacing="1.5">EVERY STEP READ-ONLY</text><rect x="60" y="226" width="170" height="86" rx="5" fill="#fdfcfa" stroke="rgba(26,25,22,0.18)" stroke-width="1"/><text x="74" y="250" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#8a8880" text-anchor="start" font-weight="400" letter-spacing="1.2">01</text><text x="74" y="278" font-family="'DM Serif Display', Georgia, serif" font-size="16" fill="#1a1916" text-anchor="start" font-weight="400">Code reviewer</text><text x="74" y="298" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#4a4944" text-anchor="start" font-weight="400">reviews, never edits</text><path d="M234,269 L256,269" fill="none" stroke="#1a1916" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#cn09-cycle-ah-ink)"/><rect x="262" y="226" width="170" height="86" rx="5" fill="#fdfcfa" stroke="rgba(26,25,22,0.18)" stroke-width="1"/><text x="276" y="250" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#8a8880" text-anchor="start" font-weight="400" letter-spacing="1.2">02</text><text x="276" y="278" font-family="'DM Serif Display', Georgia, serif" font-size="16" fill="#1a1916" text-anchor="start" font-weight="400">NFR agent</text><text x="276" y="298" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#4a4944" text-anchor="start" font-weight="400">non-functional checks</text><path d="M436,269 L462,269" fill="none" stroke="#1a1916" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#cn09-cycle-ah-ink)"/><rect x="468" y="214" width="252" height="316" rx="6" fill="none" stroke="rgba(26,25,22,0.08)" stroke-width="1" stroke-dasharray="5 4"/><text x="484" y="234" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10" fill="#8a8880" text-anchor="start" font-weight="400" letter-spacing="1.5">IN PARALLEL</text><rect x="484" y="246" width="220" height="86" rx="5" fill="#fdfcfa" stroke="rgba(26,25,22,0.18)" stroke-width="1"/><text x="498" y="270" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#8a8880" text-anchor="start" font-weight="400" letter-spacing="1.2">03</text><text x="498" y="298" font-family="'DM Serif Display', Georgia, serif" font-size="16" fill="#1a1916" text-anchor="start" font-weight="400">UI runtime</text><text x="498" y="318" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#4a4944" text-anchor="start" font-weight="400">runs the real screens</text><rect x="484" y="340" width="220" height="86" rx="5" fill="#fdfcfa" stroke="rgba(26,25,22,0.18)" stroke-width="1"/><text x="498" y="364" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#8a8880" text-anchor="start" font-weight="400" letter-spacing="1.2">04</text><text x="498" y="392" font-family="'DM Serif Display', Georgia, serif" font-size="16" fill="#1a1916" text-anchor="start" font-weight="400">API runtime</text><text x="498" y="412" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#4a4944" text-anchor="start" font-weight="400">runs the real services</text><rect x="484" y="434" width="220" height="86" rx="5" fill="#fdfcfa" stroke="rgba(26,25,22,0.18)" stroke-width="1"/><text x="498" y="458" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#8a8880" text-anchor="start" font-weight="400" letter-spacing="1.2">05</text><text x="498" y="486" font-family="'DM Serif Display', Georgia, serif" font-size="16" fill="#1a1916" text-anchor="start" font-weight="400">Usability</text><text x="498" y="506" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#4a4944" text-anchor="start" font-weight="400">suggestions only</text><path d="M724,372 L752,372" fill="none" stroke="#1a1916" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#cn09-cycle-ah-ink)"/><rect x="758" y="318" width="180" height="86" rx="5" fill="#fdfcfa" stroke="rgba(26,25,22,0.18)" stroke-width="1"/><text x="772" y="342" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#8a8880" text-anchor="start" font-weight="400" letter-spacing="1.2">06</text><text x="772" y="370" font-family="'DM Serif Display', Georgia, serif" font-size="16" fill="#1a1916" text-anchor="start" font-weight="400">Advocate</text><text x="772" y="390" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#4a4944" text-anchor="start" font-weight="400">challenges every result</text><path d="M942,361 L968,361" fill="none" stroke="#1a1916" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#cn09-cycle-ah-ink)"/><rect x="974" y="318" width="166" height="86" rx="5" fill="#0c0b09" stroke="None" stroke-width="1"/><text x="988" y="342" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#b8b6b0" text-anchor="start" font-weight="400" letter-spacing="1.2">DECIDES</text><text x="988" y="370" font-family="'DM Serif Display', Georgia, serif" font-size="16" fill="#f5f0e8" text-anchor="start" font-weight="400">Architect</text><text x="988" y="390" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#b8b6b0" text-anchor="start" font-weight="400">what gets fixed</text><text x="974" y="428" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11.5" fill="#1a1916" text-anchor="start" font-weight="400">→ coder agent fixes</text><text x="974" y="448" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="11.5" fill="#4a4944" text-anchor="start" font-weight="400">  only what was approved</text><rect x="60" y="560" width="520" height="70" rx="5" fill="#fdfcfa" stroke="rgba(26,25,22,0.18)" stroke-width="1"/><text x="78" y="588" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#8a8880" text-anchor="start" font-weight="400" letter-spacing="1.5">A FLOW WITH NO TEST</text><text x="78" y="614" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" fill="#1a1916" text-anchor="start" font-weight="400">→ test author writes one. The test set grows itself.</text><rect x="620" y="560" width="520" height="70" rx="5" fill="rgba(139,26,26,0.06)" stroke="none" stroke-width="1"/><rect x="620" y="560" width="3" height="70" rx="0" fill="#8B1A1A" stroke="none" stroke-width="1"/><text x="638" y="588" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="10.5" fill="#8B1A1A" text-anchor="start" font-weight="500" letter-spacing="1.5">USER JOURNEYS</text><text x="638" y="614" font-family="'JetBrains Mono', 'DejaVu Sans Mono', monospace" font-size="13" fill="#1a1916" text-anchor="start" font-weight="400">→ tested by another company&#x27;s agent</text><text x="60" y="676" font-family="'DM Serif Display', Georgia, serif" font-size="16" fill="#1a1916" text-anchor="start" font-weight="400">Usability suggestions and deferred bugs: a person approves each one.</text><text x="60" y="712" font-family="'Literata', Georgia, serif" font-size="14" fill="#4a4944" text-anchor="start" font-weight="400" font-style="italic">Agents review, run, challenge and compile. Fixing is decided by the architect.</text></svg></div><figcaption>Read-only reviewers run in a fixed order, an advocate challenges every finding and every pass, and the architect decides what gets fixed. Gaps in coverage create new tests; another company&#x27;s agent tests the user journeys.</figcaption></figure>
+  <p>Today we run this cycle on demand; in another engagement, the same design runs every night.</p>
+  <p>The cycle itself changes over time, and the list of agents grows or shrinks based on what the checks find. When a run shows a kind of problem nothing is looking for, a check is added for it. When a check stops finding anything, or another already covers it, it is retired; our earlier fixing agent was folded into the advocate this way. The pipeline is evaluated the same way as the product: by what it catches and what it misses.</p>
+
+  <h2>Agents recommend, people decide</h2>
+  <p>The most important change we made was to the advocate. In its first version it was judge and fixer at once: it challenged the findings, then fixed the critical and high-severity ones itself, with a written argument for each change. That is close to the self-review Part 5 warns against: the agent that decides something is wrong also decides how to make it right, and nothing independent checks the fix.</p>
+  <p>Now the advocate fixes nothing; it compiles and recommends. The architect decides what gets fixed, and a coding agent fixes only what was approved. Two rules are absolute: usability suggestions always come to a person, and a bug that was deliberately deferred is never patched without approval for that specific item.</p>
+  <div class="pull"><p>Agents review, run, challenge and compile. People decide what changes.</p></div>
+  <p>That is what we mean by a gate: a point the work cannot pass without a decision, as opposed to a report that someone may read. Write down which findings stop a release, which only warn, and who can override them. Record every override with its reason. A gate everyone ignores is worse than no gate, because it looks like control.</p>
+
+  <h2>The release record</h2>
+  <p>Every run of the pipeline leaves a record: the labels from Part 4, the check results, the judge's verdicts and their calibration from Part 5, the traces from Part 6, the advocate's findings and the decisions made on each. Together that is the evidence of how a release was evaluated and who approved it.</p>
+  <p>Published rubrics can help decide what belongs in it. One widely cited rubric for machine-learning systems lists "28 specific tests and monitoring needs" for production readiness. <a class="ref" href="#ref-5">[5]</a> Few teams need all of them, so the useful exercise is to go through the list and decide, on purpose, which ones you are not doing.</p>
+
+  <h2>Someone has to own it</h2>
+  <p>Evaluation decays if nobody tends it: golden cases go stale, thresholds stop matching the business, the judge drifts, and the pipeline gets slower until people start skipping it. Researchers at one large technology company warned years ago that "it is common to incur massive ongoing maintenance costs in real-world ML systems." <a class="ref" href="#ref-6">[6]</a> An evaluation pipeline is part of that system, and it has the same cost.</p>
+  <p>Name an owner for each part: who maintains the golden set and approves new cases, who owns each threshold, who recalibrates the judge, and who watches what the pipeline itself costs to run. Part 1 listed cost and latency as things to measure; the pipeline's own cost belongs on that list. Without owners, the pipeline keeps running long after it has stopped telling you anything.</p>
+
+  <h2>How this changes by context</h2>
+  <div class="entries">
+    <div class="entry"><h3>Enterprise</h3><p>The release record is audit evidence. Gates and overrides need named owners and written reasons.</p></div>
+    <div class="entry"><h3>Commercial</h3><p>Pipeline cost is a product cost, and layering by cost is what keeps evaluation affordable as usage grows.</p></div>
+    <div class="entry"><h3>Agentic</h3><p>Evaluating agents are read-only, and fixing is a separate step that a person approves.</p></div>
+  </div>
+
+  <h2>Start this week</h2>
+  <ol class="dos">
+    <li><strong>Write down which check runs when.</strong>Every change, every merge, on a schedule, before release, in production.</li>
+    <li><strong>Make your evaluating agents read-only.</strong>Reviewing and fixing are separate jobs, and a person decides what gets fixed.</li>
+    <li><strong>Challenge passes as well as failures.</strong>A clean report is a claim too.</li>
+    <li><strong>Write down the gates.</strong>What blocks, what warns, who overrides, and why.</li>
+    <li><strong>Put a name next to every part.</strong>Golden set, thresholds, judge, pipeline cost.</li>
+  </ol>
+
+  <h2>Let the pipeline remember</h2>
+  <div class="stack">
+    <p>Checks that depend on memory get skipped.</p>
+    <p>Checks that run on everything get expensive.</p>
+    <p>Checks that nobody owns go stale.</p>
+  </div>
+  <p>Layer them, gate them, record them, and put a name next to each one.</p>
+
+  <p class="sign">Jitander Chauhan</p>
+  <section class="refs" aria-labelledby="refs-h">
+    <h3 id="refs-h">Research &amp; Further Reading</h3>
+    <ol>
+      <li id="ref-1"><span class="rn">[1]</span><div>Fowler, M., “<a href="https://www.martinfowler.com/bliki/TestPyramid.html">TestPyramid</a>”, 1 May 2012: "You should have many more low-level UnitTests than high level BroadStackTests running through a GUI"; UI-driven end-to-end tests are "brittle, expensive to write, and time consuming to run." <span class="rt">Practitioner Reference</span></div></li>
+      <li id="ref-2"><span class="rn">[2]</span><div>Husain, H., “<a href="https://hamel.dev/blog/posts/evals/">Your AI Product Needs Evals</a>”, 2024: Three levels of evaluation by cost: unit tests and assertions, often "on every code change"; human and model evaluation on a set cadence; A/B testing "only after significant product changes". Advises tracking how well an LLM judge agrees with human labels and using labellers' written reasons to refine it. <span class="rt">Practitioner Reference</span></div></li>
+      <li id="ref-3"><span class="rn">[3]</span><div>ARTHA Craft, “<a href="https://arthacraft.tech">Internal Data: a six-agent review cycle</a>”, 2026: Six agents in strict order (code reviewer, NFR agent, UI runtime, API runtime and usability in parallel, advocate); reviewers read-only; the advocate compiles findings and the architect decides what is fixed. Currently run on demand; the same design runs nightly in another engagement. <span class="rt">Internal Data</span></div></li>
+      <li id="ref-4"><span class="rn">[4]</span><div>Kim, E.M., Garg, A., Peng, K., Garg, N., “<a href="https://proceedings.mlr.press/v267/kim25e.html">Correlated Errors in Large Language Models</a>”, ICML 2025, PMLR 267: Across 350+ LLMs, models agree 60% of the time when both err on one leaderboard dataset; errors correlate even across providers. <span class="rt">Research Paper</span></div></li>
+      <li id="ref-5"><span class="rn">[5]</span><div>Breck, E., Cai, S., Nielsen, E., Salib, M., Sculley, D., “<a href="https://research.google/pubs/the-ml-test-score-a-rubric-for-ml-production-readiness-and-technical-debt-reduction/">The ML Test Score: A Rubric for ML Production Readiness and Technical Debt Reduction</a>”, IEEE Big Data 2017: Presents "28 specific tests and monitoring needs" as a rubric for production readiness of ML systems. <span class="rt">Research Paper</span></div></li>
+      <li id="ref-6"><span class="rn">[6]</span><div>Sculley, D., Holt, G., Golovin, D., et al., “<a href="https://neurips.cc/virtual/2015/poster/5680">Hidden Technical Debt in Machine Learning Systems</a>”, NeurIPS 2015: Finds "it is common to incur massive ongoing maintenance costs in real-world ML systems," and warns it is "dangerous to think of these quick wins as coming for free." <span class="rt">Research Paper</span></div></li>
+    </ol>
+  </section>
+</article>
+<nav class="arc-nav" data-arc="evaluation" data-part="8" aria-label="Evaluation series parts"></nav>
+</main>
+
+<footer class="art-foot">
+  <div class="art-foot-inner">
+    <div>
+      <div class="foot-label">Start with the method</div>
+      <a class="foot-link" href="../articles/article-1.html">Read the 12-part series &rarr;</a>
+    </div>
+    <div>
+      <div class="foot-label">Get the next Craft Note</div>
+      <a class="foot-link" href="https://substack.com/@jitanderchauhan">Subscribe on Substack &rarr;</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/notes-data.js"></script>
+<script src="../assets/notes.js"></script>
+<script>
+(function(){var n=document.getElementById('nav');function f(){n.classList.toggle('scrolled',window.scrollY>40)}window.addEventListener('scroll',f,{passive:true});f();})();
+</script>
+</body>
+</html>
